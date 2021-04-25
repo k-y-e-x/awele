@@ -3,7 +3,9 @@
 **Un peu d'histoire perso...**
 
 Il y a (très, très...) longtemps, j'ai écrit un programme d'awele-kalaha pour un TP à la Fac
+
 Puis j'ai fait une version pour mon amiga .
+
 Fin 2020, j'ai retrouvé les sources en transférant mes anciennes disquettes en ADF pour utilisation via gotek et émulateur
 
 
@@ -19,13 +21,13 @@ __Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standar
 
 
 __Reste À Faire :__
-_- Rendre variables certaines constantes qui sont sous forme de define
--Ajouter un menu d'option pour gérer des variantes des règles (avec les nouvelles variables)
+- Rendre variables certaines constantes qui sont sous forme de define
+- Ajouter un menu d'option pour gérer des variantes des règles (avec les nouvelles variables)
 - Nettoyage du code !!!!! (après pas mal d'ajout, une cohérence est à faire)- 
 - Ajouter les règles dans la documentation sur Github Pages
 
 
-Lien vers la documentation (Sur Github Pages et créée par doxygen) :  
+Lien vers la documentation (sur Github Pages et créée avec doxygen) :  
 
  https://k-y-e-x.github.io/awele/doc/html/index.html
  
