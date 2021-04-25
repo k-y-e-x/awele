@@ -1,4 +1,4 @@
-PRG = awele-c64.prg
+PRG = build/awele-c64.prg
 
 # Unix or Windows
 ifeq ($(shell echo),)
@@ -12,5 +12,5 @@ REMOVES += $(PRG)
 .PHONY: prg
 prg: $(PRG)
 
-$(PRG): awele.c64
+$(PRG): build/awele.c64
 	$(call CP, $< $@)

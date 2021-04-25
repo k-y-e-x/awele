@@ -13,7 +13,7 @@ TARGETS := atmos gb c64
 
 # Name of the final, single-file executable.
 # Default: name of the current dir with target name appended
-PROGRAM :=
+PROGRAM := build/awele
 
 # Path(s) to additional libraries required for linking the program
 # Use only if you don't want to place copies of the libraries in SRCDIR
@@ -311,6 +311,7 @@ $(TARGETOBJDIR)/%.o: %.s | $(TARGETOBJDIR)
 
 $(PROGRAM): $(CONFIG) $(OBJECTS) $(LIBS)
 	$(CC) -o $@  $(patsubst %.cfg,-C %.cfg,$^)
+	$(call RMFILES,build/*ihx build/*.map build/*.noi)
 else
 
 vpath %.c $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
@@ -349,8 +350,7 @@ clean:
 	$(call RMFILES,$(DEPENDS))
 	$(call RMFILES,$(REMOVES))
 	$(call RMFILES,$(PROGRAM))
-#spécifique gameboy gbdk 
-	$(call RMFILES,$(PROGRAM))
+	$(call RMFILES,build/*ihx build/*.map build/*.noi)
 
 else # $(words $(TARGETLIST)),1
 

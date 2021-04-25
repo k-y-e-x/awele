@@ -1,9 +1,9 @@
-EDSK = awele-oric_edsk.dsk
+EDSK = build/awele-oric_edsk.dsk
 
 REMOVES += $(EDSK)
 
 .PHONY: edsk
 edsk: $(EDSK)
 
-$(EDSK): aweloric.tap
+$(EDSK): build/aweloric.tap
 	tap2edsk -nAWELE-KALAHA -iCLS:AWELE $< $@

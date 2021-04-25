@@ -1,4 +1,4 @@
-TAP = aweloric.tap
+TAP = build/aweloric.tap
 
 # Unix or Windows
 ifeq ($(shell echo),)
@@ -12,5 +12,5 @@ REMOVES += $(TAP)
 .PHONY: tap
 tap: $(TAP)
 
-$(TAP): awele.atmos
+$(TAP): build/awele.atmos
 	$(call CP, $< $@)
