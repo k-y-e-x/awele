@@ -1,4 +1,10 @@
 .DS_Store
 awele.dox
 doc
+obj
+tgt
 *.html
+*.noi
+*.map
+*.ihx
+*.sym
