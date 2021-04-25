@@ -1,0 +1,89 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+  0 ___str_0                                                       000742 R
+  0 ___str_1                                                       000749 R
+  0 ___str_2                                                       00074C R
+  0 ___str_3                                                       00077F R
+  0 ___str_4                                                       000896 R
+  0 ___str_5                                                       0008A3 R
+  0 ___str_6                                                       0008A9 R
+  0 ___str_7                                                       000BF1 R
+  0 ___str_8                                                       000C36 R
+    __modsint                                                      ****** GX
+    __muluschar                                                    ****** GX
+  0 _afficherAttente                                               000785 GR
+  0 _afficherPlateau                                               00040A GR
+  0 _afficherPosEval                                               00075D GR
+  0 _afficherRegles                                                000C1D GR
+  0 _afficherResultats                                             00065C GR
+  0 _boitePlateau                                                  0000F8 GR
+    _box                                                           ****** GX
+  0 _choixJoueur                                                   0008CB GR
+  0 _clrscr                                                        0000BD GR
+    _color                                                         ****** GX
+  0 _dbgprint                                                      000BF5 GR
+  0 _effaceChr                                                     00008B GR
+  0 _effaceLigne                                                   00005E GR
+  0 _effacerAttente                                                0008BA GR
+    _exit                                                          ****** GX
+    _gEgalite                                                      ****** GX
+    _gJ1commence                                                   ****** GX
+    _gJ2ordi                                                       ****** GX
+    _gJoueur                                                       ****** GX
+    _gMoi                                                          ****** GX
+    _gOption1Joueur                                                ****** GX
+    _gOption2Joueurs                                               ****** GX
+    _gOption2Ordinateurs                                           ****** GX
+    _gOptionProfondeur                                             ****** GX
+    _gOptionQuiCommence                                            ****** GX
+    _gPositionsEvaluees                                            ****** GX
+    _gQuelleCase                                                   ****** GX
+    _gVainqueur                                                    ****** GX
+    _gVous                                                         ****** GX
+    _gbglobals                                                     ****** GX
+  0 _gbtbcar                                                       0000CA GR
+  0 _getkj                                                         00013F GR
+    _gotogxy                                                       ****** GX
+    _gprint                                                        ****** GX
+    _gprintf                                                       ****** GX
+    _gprintln                                                      ****** GX
+  0 _initJoystick                                                  00013B GR
+  0 _initPlateau                                                   00013C GR
+    _j                                                             ****** GX
+    _jeu                                                           ****** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    _joypad                                                        ****** GX
+  0 _menuOptions                                                   00016E GR
+    _posEval                                                       ****** GX
+  0 _printxy                                                       000000 GR
+    _prof                                                          ****** GX
+  0 _revers                                                        00003C GR
+    _waitpad                                                       ****** GX
+    _waitpadup                                                     ****** GX
+    _wrtchr                                                        ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size   10F7   flags    0
+   1 _DATA                                      size      0   flags    0
+   2 _DABS                                      size      0   flags    8
+   3 _HOME                                      size      0   flags    0
+   4 _GSINIT                                    size      0   flags    0
+   5 _GSFINAL                                   size      0   flags    0
+   6 _CABS                                      size      0   flags    8
+

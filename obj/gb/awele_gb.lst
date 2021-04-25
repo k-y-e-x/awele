@@ -1,0 +1,2739 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.7 #12016 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module awele_gb
+                                      6 	.optsdcc -mgbz80
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _boitePlateau
+                                     12 	.globl _gbtbcar
+                                     13 	.globl _clrscr
+                                     14 	.globl _effaceChr
+                                     15 	.globl _effaceLigne
+                                     16 	.globl _revers
+                                     17 	.globl _printxy
+                                     18 	.globl _gbglobals
+                                     19 	.globl _color
+                                     20 	.globl _gotogxy
+                                     21 	.globl _wrtchr
+                                     22 	.globl _box
+                                     23 	.globl _gprintf
+                                     24 	.globl _gprintln
+                                     25 	.globl _gprint
+                                     26 	.globl _waitpadup
+                                     27 	.globl _waitpad
+                                     28 	.globl _joypad
+                                     29 	.globl _exit
+                                     30 	.globl _initJoystick
+                                     31 	.globl _initPlateau
+                                     32 	.globl _getkj
+                                     33 	.globl _menuOptions
+                                     34 	.globl _afficherPlateau
+                                     35 	.globl _afficherResultats
+                                     36 	.globl _afficherPosEval
+                                     37 	.globl _afficherAttente
+                                     38 	.globl _effacerAttente
+                                     39 	.globl _choixJoueur
+                                     40 	.globl _dbgprint
+                                     41 	.globl _afficherRegles
+                                     42 ;--------------------------------------------------------
+                                     43 ; special function registers
+                                     44 ;--------------------------------------------------------
+                                     45 ;--------------------------------------------------------
+                                     46 ; ram data
+                                     47 ;--------------------------------------------------------
+                                     48 	.area _DATA
+                                     49 ;--------------------------------------------------------
+                                     50 ; absolute external ram data
+                                     51 ;--------------------------------------------------------
+                                     52 	.area _DABS (ABS)
+                                     53 ;--------------------------------------------------------
+                                     54 ; global & static initialisations
+                                     55 ;--------------------------------------------------------
+                                     56 	.area _HOME
+                                     57 	.area _GSINIT
+                                     58 	.area _GSFINAL
+                                     59 	.area _GSINIT
+                                     60 ;--------------------------------------------------------
+                                     61 ; Home
+                                     62 ;--------------------------------------------------------
+                                     63 	.area _HOME
+                                     64 	.area _HOME
+                                     65 ;--------------------------------------------------------
+                                     66 ; code
+                                     67 ;--------------------------------------------------------
+                                     68 	.area _CODE
+                                     69 ;src/gb/awele_gb.c:36: void printxy(UBYTE x, UBYTE y, BOOLEAN rv, STRPTR s)
+                                     70 ;	---------------------------------
+                                     71 ; Function printxy
+                                     72 ; ---------------------------------
+      000000                         73 _printxy::
+                                     74 ;src/gb/awele_gb.c:38: gotogxy(x,y);
+      000000 F8 03                   75 	ldhl	sp,	#3
+      000002 7E                      76 	ld	a, (hl)
+      000003 F5                      77 	push	af
+      000004 33                      78 	inc	sp
+      000005 2B                      79 	dec	hl
+      000006 7E                      80 	ld	a, (hl)
+      000007 F5                      81 	push	af
+      000008 33                      82 	inc	sp
+      000009 CDr00r00                83 	call	_gotogxy
+      00000C E8 02                   84 	add	sp, #2
+                                     85 ;src/gb/awele_gb.c:39: if(rv)	color(WHITE, DKGREY, SOLID);
+      00000E F8 04                   86 	ldhl	sp,	#4
+      000010 7E                      87 	ld	a, (hl)
+      000011 B7                      88 	or	a, a
+      000012 28 0F                   89 	jr	Z, 00102$
+      000014 AF                      90 	xor	a, a
+      000015 57                      91 	ld	d,a
+      000016 1E 02                   92 	ld	e,#0x02
+      000018 D5                      93 	push	de
+      000019 AF                      94 	xor	a, a
+      00001A F5                      95 	push	af
+      00001B 33                      96 	inc	sp
+      00001C CDr00r00                97 	call	_color
+      00001F E8 03                   98 	add	sp, #3
+      000021 18 0D                   99 	jr	00103$
+      000023                        100 00102$:
+                                    101 ;src/gb/awele_gb.c:40: else	color(BLACK, WHITE, SOLID);
+      000023 AF                     102 	xor	a, a
+      000024 F5                     103 	push	af
+      000025 33                     104 	inc	sp
+      000026 AF                     105 	xor	a, a
+      000027 57                     106 	ld	d,a
+      000028 1E 03                  107 	ld	e,#0x03
+      00002A D5                     108 	push	de
+      00002B CDr00r00               109 	call	_color
+      00002E E8 03                  110 	add	sp, #3
+      000030                        111 00103$:
+                                    112 ;src/gb/awele_gb.c:41: gprintf(s);
+      000030 F8 05                  113 	ldhl	sp,	#5
+      000032 2A                     114 	ld	a, (hl+)
+      000033 66                     115 	ld	h, (hl)
+      000034 6F                     116 	ld	l, a
+      000035 E5                     117 	push	hl
+      000036 CDr00r00               118 	call	_gprintf
+      000039 E8 02                  119 	add	sp, #2
+                                    120 ;src/gb/awele_gb.c:43: }
+      00003B C9                     121 	ret
+                                    122 ;src/gb/awele_gb.c:45: void revers(BOOLEAN b)
+                                    123 ;	---------------------------------
+                                    124 ; Function revers
+                                    125 ; ---------------------------------
+      00003C                        126 _revers::
+                                    127 ;src/gb/awele_gb.c:47: if(b)	color(WHITE, DKGREY, SOLID);
+      00003C F8 02                  128 	ldhl	sp,	#2
+      00003E 7E                     129 	ld	a, (hl)
+      00003F B7                     130 	or	a, a
+      000040 28 0E                  131 	jr	Z, 00102$
+      000042 AF                     132 	xor	a, a
+      000043 57                     133 	ld	d,a
+      000044 1E 02                  134 	ld	e,#0x02
+      000046 D5                     135 	push	de
+      000047 AF                     136 	xor	a, a
+      000048 F5                     137 	push	af
+      000049 33                     138 	inc	sp
+      00004A CDr00r00               139 	call	_color
+      00004D E8 03                  140 	add	sp, #3
+      00004F C9                     141 	ret
+      000050                        142 00102$:
+                                    143 ;src/gb/awele_gb.c:48: else	color(BLACK, WHITE, SOLID);
+      000050 AF                     144 	xor	a, a
+      000051 F5                     145 	push	af
+      000052 33                     146 	inc	sp
+      000053 AF                     147 	xor	a, a
+      000054 57                     148 	ld	d,a
+      000055 1E 03                  149 	ld	e,#0x03
+      000057 D5                     150 	push	de
+      000058 CDr00r00               151 	call	_color
+      00005B E8 03                  152 	add	sp, #3
+                                    153 ;src/gb/awele_gb.c:49: }
+      00005D C9                     154 	ret
+                                    155 ;src/gb/awele_gb.c:51: void effaceLigne(UINT8 l)
+                                    156 ;	---------------------------------
+                                    157 ; Function effaceLigne
+                                    158 ; ---------------------------------
+      00005E                        159 _effaceLigne::
+                                    160 ;src/gb/awele_gb.c:54: color(BLACK, WHITE, SOLID);
+      00005E AF                     161 	xor	a, a
+      00005F F5                     162 	push	af
+      000060 33                     163 	inc	sp
+      000061 AF                     164 	xor	a, a
+      000062 57                     165 	ld	d,a
+      000063 1E 03                  166 	ld	e,#0x03
+      000065 D5                     167 	push	de
+      000066 CDr00r00               168 	call	_color
+      000069 E8 03                  169 	add	sp, #3
+                                    170 ;src/gb/awele_gb.c:55: gotogxy(0,l);
+      00006B F8 02                  171 	ldhl	sp,	#2
+      00006D 7E                     172 	ld	a, (hl)
+      00006E F5                     173 	push	af
+      00006F 33                     174 	inc	sp
+      000070 AF                     175 	xor	a, a
+      000071 F5                     176 	push	af
+      000072 33                     177 	inc	sp
+      000073 CDr00r00               178 	call	_gotogxy
+      000076 E8 02                  179 	add	sp, #2
+                                    180 ;src/gb/awele_gb.c:56: for(i=0;i<20;i++) wrtchr(' ');
+      000078 0E 00                  181 	ld	c, #0x00
+      00007A                        182 00102$:
+      00007A C5                     183 	push	bc
+      00007B 3E 20                  184 	ld	a, #0x20
+      00007D F5                     185 	push	af
+      00007E 33                     186 	inc	sp
+      00007F CDr00r00               187 	call	_wrtchr
+      000082 33                     188 	inc	sp
+      000083 C1                     189 	pop	bc
+      000084 0C                     190 	inc	c
+      000085 79                     191 	ld	a, c
+      000086 D6 14                  192 	sub	a, #0x14
+      000088 38 F0                  193 	jr	C, 00102$
+                                    194 ;src/gb/awele_gb.c:57: }
+      00008A C9                     195 	ret
+                                    196 ;src/gb/awele_gb.c:59: void effaceChr(UINT8 l, UINT16 n)
+                                    197 ;	---------------------------------
+                                    198 ; Function effaceChr
+                                    199 ; ---------------------------------
+      00008B                        200 _effaceChr::
+                                    201 ;src/gb/awele_gb.c:62: color(BLACK, WHITE, SOLID);
+      00008B AF                     202 	xor	a, a
+      00008C F5                     203 	push	af
+      00008D 33                     204 	inc	sp
+      00008E AF                     205 	xor	a, a
+      00008F 57                     206 	ld	d,a
+      000090 1E 03                  207 	ld	e,#0x03
+      000092 D5                     208 	push	de
+      000093 CDr00r00               209 	call	_color
+      000096 E8 03                  210 	add	sp, #3
+                                    211 ;src/gb/awele_gb.c:63: gotogxy(0,l);
+      000098 F8 02                  212 	ldhl	sp,	#2
+      00009A 7E                     213 	ld	a, (hl)
+      00009B F5                     214 	push	af
+      00009C 33                     215 	inc	sp
+      00009D AF                     216 	xor	a, a
+      00009E F5                     217 	push	af
+      00009F 33                     218 	inc	sp
+      0000A0 CDr00r00               219 	call	_gotogxy
+      0000A3 E8 02                  220 	add	sp, #2
+                                    221 ;src/gb/awele_gb.c:64: for(i=0;i<n;i++) wrtchr(' ');
+      0000A5 01 00 00               222 	ld	bc, #0x0000
+      0000A8                        223 00103$:
+      0000A8 F8 03                  224 	ldhl	sp,	#3
+      0000AA 79                     225 	ld	a, c
+      0000AB 96                     226 	sub	a, (hl)
+      0000AC 23                     227 	inc	hl
+      0000AD 78                     228 	ld	a, b
+      0000AE 9E                     229 	sbc	a, (hl)
+      0000AF D0                     230 	ret	NC
+      0000B0 C5                     231 	push	bc
+      0000B1 3E 20                  232 	ld	a, #0x20
+      0000B3 F5                     233 	push	af
+      0000B4 33                     234 	inc	sp
+      0000B5 CDr00r00               235 	call	_wrtchr
+      0000B8 33                     236 	inc	sp
+      0000B9 C1                     237 	pop	bc
+      0000BA 03                     238 	inc	bc
+                                    239 ;src/gb/awele_gb.c:65: }
+      0000BB 18 EB                  240 	jr	00103$
+                                    241 ;src/gb/awele_gb.c:66: void clrscr()
+                                    242 ;	---------------------------------
+                                    243 ; Function clrscr
+                                    244 ; ---------------------------------
+      0000BD                        245 _clrscr::
+                                    246 ;src/gb/awele_gb.c:68: effaceChr(0,360);
+      0000BD 21 68 01               247 	ld	hl, #0x0168
+      0000C0 E5                     248 	push	hl
+      0000C1 AF                     249 	xor	a, a
+      0000C2 F5                     250 	push	af
+      0000C3 33                     251 	inc	sp
+      0000C4 CDr8Br00               252 	call	_effaceChr
+      0000C7 E8 03                  253 	add	sp, #3
+                                    254 ;src/gb/awele_gb.c:69: }
+      0000C9 C9                     255 	ret
+                                    256 ;src/gb/awele_gb.c:70: void gbtbcar()
+                                    257 ;	---------------------------------
+                                    258 ; Function gbtbcar
+                                    259 ; ---------------------------------
+      0000CA                        260 _gbtbcar::
+                                    261 ;src/gb/awele_gb.c:73: for(y=0;y<20;y++)
+      0000CA 0E 00                  262 	ld	c, #0x00
+                                    263 ;src/gb/awele_gb.c:75: for(x=0;x<20;x++)
+      0000CC                        264 00109$:
+      0000CC 06 00                  265 	ld	b, #0x00
+      0000CE                        266 00103$:
+                                    267 ;src/gb/awele_gb.c:77: gotogxy(x,y);
+      0000CE C5                     268 	push	bc
+      0000CF 79                     269 	ld	a, c
+      0000D0 F5                     270 	push	af
+      0000D1 33                     271 	inc	sp
+      0000D2 C5                     272 	push	bc
+      0000D3 33                     273 	inc	sp
+      0000D4 CDr00r00               274 	call	_gotogxy
+      0000D7 E8 02                  275 	add	sp, #2
+      0000D9 C1                     276 	pop	bc
+                                    277 ;src/gb/awele_gb.c:78: wrtchr(y*20+x);
+      0000DA 79                     278 	ld	a, c
+      0000DB 5F                     279 	ld	e, a
+      0000DC 87                     280 	add	a, a
+      0000DD 87                     281 	add	a, a
+      0000DE 83                     282 	add	a, e
+      0000DF 87                     283 	add	a, a
+      0000E0 87                     284 	add	a, a
+      0000E1 58                     285 	ld	e, b
+      0000E2 83                     286 	add	a, e
+      0000E3 C5                     287 	push	bc
+      0000E4 F5                     288 	push	af
+      0000E5 33                     289 	inc	sp
+      0000E6 CDr00r00               290 	call	_wrtchr
+      0000E9 33                     291 	inc	sp
+      0000EA C1                     292 	pop	bc
+                                    293 ;src/gb/awele_gb.c:75: for(x=0;x<20;x++)
+      0000EB 04                     294 	inc	b
+      0000EC 78                     295 	ld	a, b
+      0000ED D6 14                  296 	sub	a, #0x14
+      0000EF 38 DD                  297 	jr	C, 00103$
+                                    298 ;src/gb/awele_gb.c:73: for(y=0;y<20;y++)
+      0000F1 0C                     299 	inc	c
+      0000F2 79                     300 	ld	a, c
+      0000F3 D6 14                  301 	sub	a, #0x14
+      0000F5 38 D5                  302 	jr	C, 00109$
+                                    303 ;src/gb/awele_gb.c:81: }
+      0000F7 C9                     304 	ret
+                                    305 ;src/gb/awele_gb.c:83: void boitePlateau()
+                                    306 ;	---------------------------------
+                                    307 ; Function boitePlateau
+                                    308 ; ---------------------------------
+      0000F8                        309 _boitePlateau::
+                                    310 ;src/gb/awele_gb.c:85: color(BLACK, WHITE, SOLID);
+      0000F8 AF                     311 	xor	a, a
+      0000F9 F5                     312 	push	af
+      0000FA 33                     313 	inc	sp
+      0000FB AF                     314 	xor	a, a
+      0000FC 57                     315 	ld	d,a
+      0000FD 1E 03                  316 	ld	e,#0x03
+      0000FF D5                     317 	push	de
+      000100 CDr00r00               318 	call	_color
+      000103 E8 03                  319 	add	sp, #3
+                                    320 ;src/gb/awele_gb.c:86: box(16,23,144,48,M_NOFILL);
+      000105 AF                     321 	xor	a, a
+      000106 57                     322 	ld	d,a
+      000107 1E 30                  323 	ld	e,#0x30
+      000109 D5                     324 	push	de
+      00010A 11 17 90               325 	ld	de, #0x9017
+      00010D D5                     326 	push	de
+      00010E 3E 10                  327 	ld	a, #0x10
+      000110 F5                     328 	push	af
+      000111 33                     329 	inc	sp
+      000112 CDr00r00               330 	call	_box
+      000115 E8 05                  331 	add	sp, #5
+                                    332 ;src/gb/awele_gb.c:87: box(0,23,16,40,M_NOFILL);
+      000117 AF                     333 	xor	a, a
+      000118 57                     334 	ld	d,a
+      000119 1E 28                  335 	ld	e,#0x28
+      00011B D5                     336 	push	de
+      00011C 11 17 10               337 	ld	de, #0x1017
+      00011F D5                     338 	push	de
+      000120 AF                     339 	xor	a, a
+      000121 F5                     340 	push	af
+      000122 33                     341 	inc	sp
+      000123 CDr00r00               342 	call	_box
+      000126 E8 05                  343 	add	sp, #5
+                                    344 ;src/gb/awele_gb.c:88: box(144,31,159,48,M_NOFILL);
+      000128 AF                     345 	xor	a, a
+      000129 57                     346 	ld	d,a
+      00012A 1E 30                  347 	ld	e,#0x30
+      00012C D5                     348 	push	de
+      00012D 11 1F 9F               349 	ld	de, #0x9f1f
+      000130 D5                     350 	push	de
+      000131 3E 90                  351 	ld	a, #0x90
+      000133 F5                     352 	push	af
+      000134 33                     353 	inc	sp
+      000135 CDr00r00               354 	call	_box
+      000138 E8 05                  355 	add	sp, #5
+                                    356 ;src/gb/awele_gb.c:89: }
+      00013A C9                     357 	ret
+                                    358 ;src/gb/awele_gb.c:91: void initJoystick(){}
+                                    359 ;	---------------------------------
+                                    360 ; Function initJoystick
+                                    361 ; ---------------------------------
+      00013B                        362 _initJoystick::
+      00013B C9                     363 	ret
+                                    364 ;src/gb/awele_gb.c:92: void initPlateau()
+                                    365 ;	---------------------------------
+                                    366 ; Function initPlateau
+                                    367 ; ---------------------------------
+      00013C                        368 _initPlateau::
+                                    369 ;src/gb/awele_gb.c:94: gbglobals();
+                                    370 ;src/gb/awele_gb.c:96: }
+      00013C C3r00r00               371 	jp  _gbglobals
+                                    372 ;src/gb/awele_gb.c:98: UBYTE getkj()
+                                    373 ;	---------------------------------
+                                    374 ; Function getkj
+                                    375 ; ---------------------------------
+      00013F                        376 _getkj::
+                                    377 ;src/gb/awele_gb.c:100: UBYTE c=0,j=0;
+      00013F 0E 00                  378 	ld	c, #0x00
+                                    379 ;src/gb/awele_gb.c:102: while(!(pad=joypad()));
+      000141                        380 00101$:
+      000141 CDr00r00               381 	call	_joypad
+      000144 16 00                  382 	ld	d, #0x00
+      000146 6B                     383 	ld	l, e
+      000147 7A                     384 	ld	a, d
+      000148 B3                     385 	or	a, e
+      000149 28 F6                  386 	jr	Z, 00101$
+                                    387 ;src/gb/awele_gb.c:105: if(pad &  J_UP) c = KEY_UP;
+      00014B CB 55                  388 	bit	2, l
+      00014D 28 02                  389 	jr	Z, 00105$
+      00014F 0E 0B                  390 	ld	c, #0x0b
+      000151                        391 00105$:
+                                    392 ;src/gb/awele_gb.c:106: if(pad &  J_DOWN) c = KEY_DOWN;
+      000151 CB 5D                  393 	bit	3, l
+      000153 28 02                  394 	jr	Z, 00107$
+      000155 0E 0A                  395 	ld	c, #0x0a
+      000157                        396 00107$:
+                                    397 ;src/gb/awele_gb.c:107: if(pad &  J_LEFT) c = KEY_LEFT;
+      000157 CB 4D                  398 	bit	1, l
+      000159 28 02                  399 	jr	Z, 00109$
+      00015B 0E 08                  400 	ld	c, #0x08
+      00015D                        401 00109$:
+                                    402 ;src/gb/awele_gb.c:108: if(pad &  J_RIGHT) c = KEY_RIGHT;
+      00015D CB 45                  403 	bit	0, l
+      00015F 28 02                  404 	jr	Z, 00111$
+      000161 0E 09                  405 	ld	c, #0x09
+      000163                        406 00111$:
+                                    407 ;src/gb/awele_gb.c:109: if(pad &  J_A) c = KEY_RETURN;
+      000163 CB 65                  408 	bit	4, l
+      000165 28 02                  409 	jr	Z, 00113$
+      000167 0E 0D                  410 	ld	c, #0x0d
+      000169                        411 00113$:
+                                    412 ;src/gb/awele_gb.c:112: waitpadup();
+      000169 CDr00r00               413 	call	_waitpadup
+                                    414 ;src/gb/awele_gb.c:113: return c;
+      00016C 59                     415 	ld	e, c
+                                    416 ;src/gb/awele_gb.c:114: }
+      00016D C9                     417 	ret
+                                    418 ;src/gb/awele_gb.c:116: UBYTE menuOptions(UBYTE n)
+                                    419 ;	---------------------------------
+                                    420 ; Function menuOptions
+                                    421 ; ---------------------------------
+      00016E                        422 _menuOptions::
+      00016E E8 FA                  423 	add	sp, #-6
+                                    424 ;src/gb/awele_gb.c:121: clrscr();
+      000170 CDrBDr00               425 	call	_clrscr
+                                    426 ;src/gb/awele_gb.c:122: i=2; // par défaut PvC
+      000173 F8 05                  427 	ldhl	sp,	#5
+      000175 36 02                  428 	ld	(hl), #0x02
+                                    429 ;src/gb/awele_gb.c:123: revers(FALSE);
+      000177 AF                     430 	xor	a, a
+      000178 F5                     431 	push	af
+      000179 33                     432 	inc	sp
+      00017A CDr3Cr00               433 	call	_revers
+      00017D 33                     434 	inc	sp
+                                    435 ;src/gb/awele_gb.c:124: if(n == 0)
+      00017E F8 08                  436 	ldhl	sp,	#8
+      000180 7E                     437 	ld	a, (hl)
+      000181 B7                     438 	or	a, a
+      000182 C2r1Dr02               439 	jp	NZ, 00111$
+                                    440 ;src/gb/awele_gb.c:125: do
+      000185                        441 00107$:
+                                    442 ;src/gb/awele_gb.c:127: gotogxy(0,1);revers(i==1);gprint(gOption2Joueurs);
+      000185 3E 01                  443 	ld	a, #0x01
+      000187 F5                     444 	push	af
+      000188 33                     445 	inc	sp
+      000189 AF                     446 	xor	a, a
+      00018A F5                     447 	push	af
+      00018B 33                     448 	inc	sp
+      00018C CDr00r00               449 	call	_gotogxy
+      00018F E8 02                  450 	add	sp, #2
+      000191 F8 05                  451 	ldhl	sp,	#5
+      000193 7E                     452 	ld	a, (hl)
+      000194 3D                     453 	dec	a
+      000195 3E 01                  454 	ld	a, #0x01
+      000197 28 01                  455 	jr	Z, 00291$
+      000199 AF                     456 	xor	a, a
+      00019A                        457 00291$:
+      00019A F5                     458 	push	af
+      00019B 33                     459 	inc	sp
+      00019C CDr3Cr00               460 	call	_revers
+      00019F 33                     461 	inc	sp
+      0001A0 21r00r00               462 	ld	hl, #_gOption2Joueurs
+      0001A3 E5                     463 	push	hl
+      0001A4 CDr00r00               464 	call	_gprint
+      0001A7 E8 02                  465 	add	sp, #2
+                                    466 ;src/gb/awele_gb.c:128: gotogxy(0,2);revers(i==2);gprint(gOption1Joueur);
+      0001A9 3E 02                  467 	ld	a, #0x02
+      0001AB F5                     468 	push	af
+      0001AC 33                     469 	inc	sp
+      0001AD AF                     470 	xor	a, a
+      0001AE F5                     471 	push	af
+      0001AF 33                     472 	inc	sp
+      0001B0 CDr00r00               473 	call	_gotogxy
+      0001B3 E8 02                  474 	add	sp, #2
+      0001B5 F8 05                  475 	ldhl	sp,	#5
+      0001B7 7E                     476 	ld	a, (hl)
+      0001B8 D6 02                  477 	sub	a, #0x02
+      0001BA 3E 01                  478 	ld	a, #0x01
+      0001BC 28 01                  479 	jr	Z, 00293$
+      0001BE AF                     480 	xor	a, a
+      0001BF                        481 00293$:
+      0001BF F5                     482 	push	af
+      0001C0 33                     483 	inc	sp
+      0001C1 CDr3Cr00               484 	call	_revers
+      0001C4 33                     485 	inc	sp
+      0001C5 21r00r00               486 	ld	hl, #_gOption1Joueur
+      0001C8 E5                     487 	push	hl
+      0001C9 CDr00r00               488 	call	_gprint
+      0001CC E8 02                  489 	add	sp, #2
+                                    490 ;src/gb/awele_gb.c:129: gotogxy(0,3);revers(i==3);gprint(gOption2Ordinateurs);
+      0001CE 3E 03                  491 	ld	a, #0x03
+      0001D0 F5                     492 	push	af
+      0001D1 33                     493 	inc	sp
+      0001D2 AF                     494 	xor	a, a
+      0001D3 F5                     495 	push	af
+      0001D4 33                     496 	inc	sp
+      0001D5 CDr00r00               497 	call	_gotogxy
+      0001D8 E8 02                  498 	add	sp, #2
+      0001DA F8 05                  499 	ldhl	sp,	#5
+      0001DC 7E                     500 	ld	a, (hl)
+      0001DD D6 03                  501 	sub	a, #0x03
+      0001DF 3E 01                  502 	ld	a, #0x01
+      0001E1 28 01                  503 	jr	Z, 00295$
+      0001E3 AF                     504 	xor	a, a
+      0001E4                        505 00295$:
+      0001E4 F5                     506 	push	af
+      0001E5 33                     507 	inc	sp
+      0001E6 CDr3Cr00               508 	call	_revers
+      0001E9 33                     509 	inc	sp
+      0001EA 21r00r00               510 	ld	hl, #_gOption2Ordinateurs
+      0001ED E5                     511 	push	hl
+      0001EE CDr00r00               512 	call	_gprint
+      0001F1 E8 02                  513 	add	sp, #2
+                                    514 ;src/gb/awele_gb.c:130: revers(FALSE);
+      0001F3 AF                     515 	xor	a, a
+      0001F4 F5                     516 	push	af
+      0001F5 33                     517 	inc	sp
+      0001F6 CDr3Cr00               518 	call	_revers
+      0001F9 33                     519 	inc	sp
+                                    520 ;src/gb/awele_gb.c:131: c = getkj();
+      0001FA CDr3Fr01               521 	call	_getkj
+                                    522 ;src/gb/awele_gb.c:132: if(c == KEY_UP && i>1) i--;
+      0001FD 7B                     523 	ld	a, e
+      0001FE D6 0B                  524 	sub	a, #0x0b
+      000200 20 08                  525 	jr	NZ, 00102$
+      000202 3E 01                  526 	ld	a, #0x01
+      000204 F8 05                  527 	ldhl	sp,	#5
+      000206 96                     528 	sub	a, (hl)
+      000207 30 01                  529 	jr	NC, 00102$
+      000209 35                     530 	dec	(hl)
+      00020A                        531 00102$:
+                                    532 ;src/gb/awele_gb.c:133: if(c == KEY_DOWN && i<3) i++;
+      00020A 7B                     533 	ld	a, e
+      00020B D6 0A                  534 	sub	a, #0x0a
+      00020D 20 08                  535 	jr	NZ, 00108$
+      00020F F8 05                  536 	ldhl	sp,	#5
+      000211 7E                     537 	ld	a, (hl)
+      000212 D6 03                  538 	sub	a, #0x03
+      000214 30 01                  539 	jr	NC, 00108$
+      000216 34                     540 	inc	(hl)
+      000217                        541 00108$:
+                                    542 ;src/gb/awele_gb.c:134: } while(c != KEY_RETURN);
+      000217 7B                     543 	ld	a, e
+      000218 D6 0D                  544 	sub	a, #0x0d
+      00021A C2r85r01               545 	jp	NZ,00107$
+      00021D                        546 00111$:
+                                    547 ;src/gb/awele_gb.c:137: switch(i)
+      00021D F8 05                  548 	ldhl	sp,	#5
+      00021F 7E                     549 	ld	a, (hl)
+      000220 3D                     550 	dec	a
+      000221 28 12                  551 	jr	Z, 00112$
+      000223 F8 05                  552 	ldhl	sp,	#5
+      000225 7E                     553 	ld	a, (hl)
+      000226 D6 02                  554 	sub	a, #0x02
+      000228 28 2D                  555 	jr	Z, 00113$
+      00022A F8 05                  556 	ldhl	sp,	#5
+      00022C 7E                     557 	ld	a, (hl)
+      00022D D6 03                  558 	sub	a, #0x03
+      00022F CAr15r03               559 	jp	Z,00133$
+      000232 C3rE4r03               560 	jp	00144$
+                                    561 ;src/gb/awele_gb.c:139: case 1:
+      000235                        562 00112$:
+                                    563 ;src/gb/awele_gb.c:140: printxy(0,l,FALSE,gJ1commence);
+      000235 21r00r00               564 	ld	hl, #_gJ1commence
+      000238 E5                     565 	push	hl
+      000239 AF                     566 	xor	a, a
+      00023A 57                     567 	ld	d,a
+      00023B 1E 04                  568 	ld	e,#0x04
+      00023D D5                     569 	push	de
+      00023E AF                     570 	xor	a, a
+      00023F F5                     571 	push	af
+      000240 33                     572 	inc	sp
+      000241 CDr00r00               573 	call	_printxy
+      000244 E8 05                  574 	add	sp, #5
+                                    575 ;src/gb/awele_gb.c:141: j[0] = j[1] = 0;
+      000246 21r01r00               576 	ld	hl, #(_j + 0x0001)
+      000249 36 00                  577 	ld	(hl), #0x00
+      00024B 21r00r00               578 	ld	hl, #_j
+      00024E 36 00                  579 	ld	(hl), #0x00
+                                    580 ;src/gb/awele_gb.c:142: i = 0;
+      000250 AF                     581 	xor	a, a
+      000251 F8 05                  582 	ldhl	sp,	#5
+      000253 77                     583 	ld	(hl), a
+                                    584 ;src/gb/awele_gb.c:143: break;
+      000254 C3rEDr03               585 	jp	00145$
+                                    586 ;src/gb/awele_gb.c:144: case 2:
+      000257                        587 00113$:
+                                    588 ;src/gb/awele_gb.c:145: printxy(0,l,FALSE,gJ2ordi);
+      000257 21r00r00               589 	ld	hl, #_gJ2ordi
+      00025A E5                     590 	push	hl
+      00025B AF                     591 	xor	a, a
+      00025C 57                     592 	ld	d,a
+      00025D 1E 04                  593 	ld	e,#0x04
+      00025F D5                     594 	push	de
+      000260 AF                     595 	xor	a, a
+      000261 F5                     596 	push	af
+      000262 33                     597 	inc	sp
+      000263 CDr00r00               598 	call	_printxy
+      000266 E8 05                  599 	add	sp, #5
+                                    600 ;src/gb/awele_gb.c:147: j[i]=1;
+      000268 21r01r00               601 	ld	hl, #(_j + 0x0001)
+      00026B 36 01                  602 	ld	(hl), #0x01
+                                    603 ;src/gb/awele_gb.c:148: j[1-i]=0;
+      00026D 21r00r00               604 	ld	hl, #_j
+      000270 36 00                  605 	ld	(hl), #0x00
+                                    606 ;src/gb/awele_gb.c:149: printxy(0,++l,FALSE,gOptionProfondeur);
+      000272 21r00r00               607 	ld	hl, #_gOptionProfondeur
+      000275 E5                     608 	push	hl
+      000276 AF                     609 	xor	a, a
+      000277 57                     610 	ld	d,a
+      000278 1E 05                  611 	ld	e,#0x05
+      00027A D5                     612 	push	de
+      00027B AF                     613 	xor	a, a
+      00027C F5                     614 	push	af
+      00027D 33                     615 	inc	sp
+      00027E CDr00r00               616 	call	_printxy
+      000281 E8 05                  617 	add	sp, #5
+                                    618 ;src/gb/awele_gb.c:150: i=1;
+      000283 0E 01                  619 	ld	c, #0x01
+                                    620 ;src/gb/awele_gb.c:151: do
+      000285                        621 00120$:
+                                    622 ;src/gb/awele_gb.c:153: gotogxy(17,l);
+      000285 C5                     623 	push	bc
+      000286 11 11 05               624 	ld	de, #0x0511
+      000289 D5                     625 	push	de
+      00028A CDr00r00               626 	call	_gotogxy
+      00028D E8 02                  627 	add	sp, #2
+      00028F C1                     628 	pop	bc
+                                    629 ;src/gb/awele_gb.c:154: wrtchr((char)(i+48));
+      000290 79                     630 	ld	a, c
+      000291 C6 30                  631 	add	a, #0x30
+      000293 C5                     632 	push	bc
+      000294 F5                     633 	push	af
+      000295 33                     634 	inc	sp
+      000296 CDr00r00               635 	call	_wrtchr
+      000299 33                     636 	inc	sp
+      00029A CDr3Fr01               637 	call	_getkj
+      00029D C1                     638 	pop	bc
+                                    639 ;src/gb/awele_gb.c:156: if(c == KEY_UP && i<6) i++;
+      00029E 7B                     640 	ld	a, e
+      00029F D6 0B                  641 	sub	a, #0x0b
+      0002A1 20 06                  642 	jr	NZ, 00115$
+      0002A3 79                     643 	ld	a, c
+      0002A4 D6 06                  644 	sub	a, #0x06
+      0002A6 30 01                  645 	jr	NC, 00115$
+      0002A8 0C                     646 	inc	c
+      0002A9                        647 00115$:
+                                    648 ;src/gb/awele_gb.c:157: if(c == KEY_DOWN && i>1) i--;
+      0002A9 7B                     649 	ld	a, e
+      0002AA D6 0A                  650 	sub	a, #0x0a
+      0002AC 20 06                  651 	jr	NZ, 00121$
+      0002AE 3E 01                  652 	ld	a, #0x01
+      0002B0 91                     653 	sub	a, c
+      0002B1 30 01                  654 	jr	NC, 00121$
+      0002B3 0D                     655 	dec	c
+      0002B4                        656 00121$:
+                                    657 ;src/gb/awele_gb.c:158: } while(c != KEY_RETURN);
+      0002B4 7B                     658 	ld	a, e
+      0002B5 D6 0D                  659 	sub	a, #0x0d
+      0002B7 20 CC                  660 	jr	NZ, 00120$
+                                    661 ;src/gb/awele_gb.c:159: prof[1]=i;
+      0002B9 21r01r00               662 	ld	hl, #(_prof + 0x0001)
+      0002BC 71                     663 	ld	(hl), c
+                                    664 ;src/gb/awele_gb.c:160: i=1;
+      0002BD F8 05                  665 	ldhl	sp,	#5
+      0002BF 36 01                  666 	ld	(hl), #0x01
+                                    667 ;src/gb/awele_gb.c:162: printxy(0,++l,FALSE,gOptionQuiCommence);
+      0002C1 21r00r00               668 	ld	hl, #_gOptionQuiCommence
+      0002C4 E5                     669 	push	hl
+      0002C5 AF                     670 	xor	a, a
+      0002C6 57                     671 	ld	d,a
+      0002C7 1E 06                  672 	ld	e,#0x06
+      0002C9 D5                     673 	push	de
+      0002CA AF                     674 	xor	a, a
+      0002CB F5                     675 	push	af
+      0002CC 33                     676 	inc	sp
+      0002CD CDr00r00               677 	call	_printxy
+      0002D0 E8 05                  678 	add	sp, #5
+                                    679 ;src/gb/awele_gb.c:163: do
+      0002D2                        680 00130$:
+                                    681 ;src/gb/awele_gb.c:165: gotogxy(15,l);
+      0002D2 11 0F 06               682 	ld	de, #0x060f
+      0002D5 D5                     683 	push	de
+      0002D6 CDr00r00               684 	call	_gotogxy
+      0002D9 E8 02                  685 	add	sp, #2
+                                    686 ;src/gb/awele_gb.c:167: if(i==1) gprint(gVous); else gprint(gMoi);
+      0002DB F8 05                  687 	ldhl	sp,	#5
+      0002DD 7E                     688 	ld	a, (hl)
+      0002DE 3D                     689 	dec	a
+      0002DF 20 0B                  690 	jr	NZ, 00124$
+      0002E1 21r00r00               691 	ld	hl, #_gVous
+      0002E4 E5                     692 	push	hl
+      0002E5 CDr00r00               693 	call	_gprint
+      0002E8 E8 02                  694 	add	sp, #2
+      0002EA 18 09                  695 	jr	00125$
+      0002EC                        696 00124$:
+      0002EC 21r00r00               697 	ld	hl, #_gMoi
+      0002EF E5                     698 	push	hl
+      0002F0 CDr00r00               699 	call	_gprint
+      0002F3 E8 02                  700 	add	sp, #2
+      0002F5                        701 00125$:
+                                    702 ;src/gb/awele_gb.c:168: c = getkj();
+      0002F5 CDr3Fr01               703 	call	_getkj
+                                    704 ;src/gb/awele_gb.c:169: if(c == KEY_UP) i=2;
+      0002F8 7B                     705 	ld	a, e
+      0002F9 D6 0B                  706 	sub	a, #0x0b
+      0002FB 20 04                  707 	jr	NZ, 00127$
+      0002FD F8 05                  708 	ldhl	sp,	#5
+      0002FF 36 02                  709 	ld	(hl), #0x02
+      000301                        710 00127$:
+                                    711 ;src/gb/awele_gb.c:170: if(c == KEY_DOWN) i=1;
+      000301 7B                     712 	ld	a, e
+      000302 D6 0A                  713 	sub	a, #0x0a
+      000304 20 04                  714 	jr	NZ, 00131$
+      000306 F8 05                  715 	ldhl	sp,	#5
+      000308 36 01                  716 	ld	(hl), #0x01
+      00030A                        717 00131$:
+                                    718 ;src/gb/awele_gb.c:171: } while(c != KEY_RETURN);
+      00030A 7B                     719 	ld	a, e
+      00030B D6 0D                  720 	sub	a, #0x0d
+      00030D 20 C3                  721 	jr	NZ, 00130$
+                                    722 ;src/gb/awele_gb.c:173: --i;
+      00030F F8 05                  723 	ldhl	sp,	#5
+      000311 35                     724 	dec	(hl)
+                                    725 ;src/gb/awele_gb.c:174: break;
+      000312 C3rEDr03               726 	jp	00145$
+                                    727 ;src/gb/awele_gb.c:176: case 3:
+      000315                        728 00133$:
+                                    729 ;src/gb/awele_gb.c:177: j[0] = j[1] = 1;
+      000315 21r01r00               730 	ld	hl, #(_j + 0x0001)
+      000318 36 01                  731 	ld	(hl), #0x01
+      00031A 21r00r00               732 	ld	hl, #_j
+      00031D 36 01                  733 	ld	(hl), #0x01
+                                    734 ;src/gb/awele_gb.c:178: gotogxy(0,l);
+      00031F 3E 04                  735 	ld	a, #0x04
+      000321 F5                     736 	push	af
+      000322 33                     737 	inc	sp
+      000323 AF                     738 	xor	a, a
+      000324 F5                     739 	push	af
+      000325 33                     740 	inc	sp
+      000326 CDr00r00               741 	call	_gotogxy
+      000329 E8 02                  742 	add	sp, #2
+                                    743 ;src/gb/awele_gb.c:179: printxy(0,l,FALSE,gJ1commence);
+      00032B 21r00r00               744 	ld	hl, #_gJ1commence
+      00032E E5                     745 	push	hl
+      00032F AF                     746 	xor	a, a
+      000330 57                     747 	ld	d,a
+      000331 1E 04                  748 	ld	e,#0x04
+      000333 D5                     749 	push	de
+      000334 AF                     750 	xor	a, a
+      000335 F5                     751 	push	af
+      000336 33                     752 	inc	sp
+      000337 CDr00r00               753 	call	_printxy
+      00033A E8 05                  754 	add	sp, #5
+                                    755 ;src/gb/awele_gb.c:180: for( i=0; i<2; i++)
+      00033C AF                     756 	xor	a, a
+      00033D F8 04                  757 	ldhl	sp,	#4
+      00033F 22                     758 	ld	(hl+), a
+      000340 36 04                  759 	ld	(hl), #0x04
+      000342                        760 00146$:
+                                    761 ;src/gb/awele_gb.c:182: gotogxy(0,++l);
+      000342 F8 05                  762 	ldhl	sp,	#5
+      000344 34                     763 	inc	(hl)
+      000345 7E                     764 	ld	a, (hl)
+      000346 F5                     765 	push	af
+      000347 33                     766 	inc	sp
+      000348 AF                     767 	xor	a, a
+      000349 F5                     768 	push	af
+      00034A 33                     769 	inc	sp
+      00034B CDr00r00               770 	call	_gotogxy
+      00034E E8 02                  771 	add	sp, #2
+                                    772 ;src/gb/awele_gb.c:183: gprint(gJoueur[i]);
+      000350 F8 04                  773 	ldhl	sp,	#4
+      000352 3A                     774 	ld	a, (hl-)
+      000353 2B                     775 	dec	hl
+      000354 77                     776 	ld	(hl), a
+      000355 AF                     777 	xor	a, a
+      000356 23                     778 	inc	hl
+      000357 32                     779 	ld	(hl-), a
+      000358 3A                     780 	ld	a, (hl-)
+      000359 2B                     781 	dec	hl
+      00035A 77                     782 	ld	(hl), a
+      00035B F8 03                  783 	ldhl	sp,	#3
+      00035D 3A                     784 	ld	a, (hl-)
+      00035E 2B                     785 	dec	hl
+      00035F 32                     786 	ld	(hl-), a
+      000360 CB 26                  787 	sla	(hl)
+      000362 23                     788 	inc	hl
+      000363 CB 16                  789 	rl	(hl)
+                                    790 ;c
+      000365 D1                     791 	pop	de
+      000366 D5                     792 	push	de
+      000367 21r00r00               793 	ld	hl, #_gJoueur
+      00036A 19                     794 	add	hl, de
+      00036B E5                     795 	push	hl
+      00036C 7D                     796 	ld	a, l
+      00036D F8 04                  797 	ldhl	sp,	#4
+      00036F 77                     798 	ld	(hl), a
+      000370 E1                     799 	pop	hl
+      000371 7C                     800 	ld	a, h
+      000372 F8 03                  801 	ldhl	sp,	#3
+      000374 32                     802 	ld	(hl-), a
+      000375 2A                     803 	ld	a, (hl+)
+      000376 5F                     804 	ld	e, a
+      000377 56                     805 	ld	d, (hl)
+      000378 1A                     806 	ld	a, (de)
+      000379 2B                     807 	dec	hl
+      00037A 22                     808 	ld	(hl+), a
+      00037B 13                     809 	inc	de
+      00037C 1A                     810 	ld	a, (de)
+      00037D 77                     811 	ld	(hl), a
+      00037E C1                     812 	pop	bc
+      00037F E1                     813 	pop	hl
+      000380 E5                     814 	push	hl
+      000381 C5                     815 	push	bc
+      000382 E5                     816 	push	hl
+      000383 CDr00r00               817 	call	_gprint
+      000386 E8 02                  818 	add	sp, #2
+                                    819 ;src/gb/awele_gb.c:184: gprint(gOptionProfondeur);
+      000388 21r00r00               820 	ld	hl, #_gOptionProfondeur
+      00038B E5                     821 	push	hl
+      00038C CDr00r00               822 	call	_gprint
+      00038F E8 02                  823 	add	sp, #2
+                                    824 ;src/gb/awele_gb.c:185: k = 1;
+      000391 0E 01                  825 	ld	c, #0x01
+                                    826 ;src/gb/awele_gb.c:186: do
+      000393                        827 00140$:
+                                    828 ;src/gb/awele_gb.c:188: gotogxy(18,l);
+      000393 C5                     829 	push	bc
+      000394 F8 07                  830 	ldhl	sp,	#7
+      000396 56                     831 	ld	d, (hl)
+      000397 1E 12                  832 	ld	e,#0x12
+      000399 D5                     833 	push	de
+      00039A CDr00r00               834 	call	_gotogxy
+      00039D E8 02                  835 	add	sp, #2
+      00039F C1                     836 	pop	bc
+                                    837 ;src/gb/awele_gb.c:189: wrtchr((char)(k+48));
+      0003A0 79                     838 	ld	a, c
+      0003A1 C6 30                  839 	add	a, #0x30
+      0003A3 C5                     840 	push	bc
+      0003A4 F5                     841 	push	af
+      0003A5 33                     842 	inc	sp
+      0003A6 CDr00r00               843 	call	_wrtchr
+      0003A9 33                     844 	inc	sp
+      0003AA CDr3Fr01               845 	call	_getkj
+      0003AD C1                     846 	pop	bc
+                                    847 ;src/gb/awele_gb.c:191: if(c == KEY_UP && k<6) k++;
+      0003AE 7B                     848 	ld	a, e
+      0003AF D6 0B                  849 	sub	a, #0x0b
+      0003B1 20 06                  850 	jr	NZ, 00135$
+      0003B3 79                     851 	ld	a, c
+      0003B4 D6 06                  852 	sub	a, #0x06
+      0003B6 30 01                  853 	jr	NC, 00135$
+      0003B8 0C                     854 	inc	c
+      0003B9                        855 00135$:
+                                    856 ;src/gb/awele_gb.c:192: if(c == KEY_DOWN && k>1) k--;
+      0003B9 7B                     857 	ld	a, e
+      0003BA D6 0A                  858 	sub	a, #0x0a
+      0003BC 20 06                  859 	jr	NZ, 00141$
+      0003BE 3E 01                  860 	ld	a, #0x01
+      0003C0 91                     861 	sub	a, c
+      0003C1 30 01                  862 	jr	NC, 00141$
+      0003C3 0D                     863 	dec	c
+      0003C4                        864 00141$:
+                                    865 ;src/gb/awele_gb.c:193: } while(c != KEY_RETURN);
+      0003C4 7B                     866 	ld	a, e
+      0003C5 D6 0D                  867 	sub	a, #0x0d
+      0003C7 20 CA                  868 	jr	NZ, 00140$
+                                    869 ;src/gb/awele_gb.c:194: prof[i]=k;
+                                    870 ;c
+      0003C9 11r00r00               871 	ld	de, #_prof
+      0003CC F8 04                  872 	ldhl	sp,	#4
+      0003CE 6E                     873 	ld	l, (hl)
+      0003CF 26 00                  874 	ld	h, #0x00
+      0003D1 19                     875 	add	hl, de
+      0003D2 5D                     876 	ld	e, l
+      0003D3 54                     877 	ld	d, h
+      0003D4 79                     878 	ld	a, c
+      0003D5 12                     879 	ld	(de), a
+                                    880 ;src/gb/awele_gb.c:180: for( i=0; i<2; i++)
+      0003D6 F8 04                  881 	ldhl	sp,	#4
+      0003D8 34                     882 	inc	(hl)
+      0003D9 7E                     883 	ld	a, (hl)
+      0003DA D6 02                  884 	sub	a, #0x02
+      0003DC DAr42r03               885 	jp	C, 00146$
+                                    886 ;src/gb/awele_gb.c:196: i=0;
+      0003DF AF                     887 	xor	a, a
+      0003E0 23                     888 	inc	hl
+      0003E1 77                     889 	ld	(hl), a
+                                    890 ;src/gb/awele_gb.c:197: break;
+      0003E2 18 09                  891 	jr	00145$
+                                    892 ;src/gb/awele_gb.c:198: default:
+      0003E4                        893 00144$:
+                                    894 ;src/gb/awele_gb.c:202: exit(5);
+      0003E4 21 05 00               895 	ld	hl, #0x0005
+      0003E7 E5                     896 	push	hl
+      0003E8 CDr00r00               897 	call	_exit
+      0003EB E8 02                  898 	add	sp, #2
+                                    899 ;src/gb/awele_gb.c:203: }
+      0003ED                        900 00145$:
+                                    901 ;src/gb/awele_gb.c:204: clrscr();
+      0003ED CDrBDr00               902 	call	_clrscr
+                                    903 ;src/gb/awele_gb.c:205: gotogxy(0,0);gprint(gPositionsEvaluees);
+      0003F0 AF                     904 	xor	a, a
+      0003F1 F5                     905 	push	af
+      0003F2 33                     906 	inc	sp
+      0003F3 AF                     907 	xor	a, a
+      0003F4 F5                     908 	push	af
+      0003F5 33                     909 	inc	sp
+      0003F6 CDr00r00               910 	call	_gotogxy
+      0003F9 E8 02                  911 	add	sp, #2
+      0003FB 21r00r00               912 	ld	hl, #_gPositionsEvaluees
+      0003FE E5                     913 	push	hl
+      0003FF CDr00r00               914 	call	_gprint
+      000402 E8 02                  915 	add	sp, #2
+                                    916 ;src/gb/awele_gb.c:206: return(i);
+      000404 F8 05                  917 	ldhl	sp,	#5
+      000406 5E                     918 	ld	e, (hl)
+                                    919 ;src/gb/awele_gb.c:208: }
+      000407 E8 06                  920 	add	sp, #6
+      000409 C9                     921 	ret
+                                    922 ;src/gb/awele_gb.c:210: void afficherPlateau(UBYTE *p)
+                                    923 ;	---------------------------------
+                                    924 ; Function afficherPlateau
+                                    925 ; ---------------------------------
+      00040A                        926 _afficherPlateau::
+                                    927 ;src/gb/awele_gb.c:213: gotogxy(0,1);
+      00040A 3E 01                  928 	ld	a, #0x01
+      00040C F5                     929 	push	af
+      00040D 33                     930 	inc	sp
+      00040E AF                     931 	xor	a, a
+      00040F F5                     932 	push	af
+      000410 33                     933 	inc	sp
+      000411 CDr00r00               934 	call	_gotogxy
+      000414 E8 02                  935 	add	sp, #2
+                                    936 ;src/gb/awele_gb.c:215: for( i=2*NCASES; i>NCASES; i--)
+      000416 01 10 00               937 	ld	bc, #0x0010
+      000419                        938 00125$:
+                                    939 ;src/gb/awele_gb.c:217: gotogxy(2*(2*NCASES-i+1),1);
+      000419 59                     940 	ld	e, c
+      00041A 3E 11                  941 	ld	a, #0x11
+      00041C 93                     942 	sub	a, e
+      00041D 87                     943 	add	a, a
+      00041E C5                     944 	push	bc
+      00041F 26 01                  945 	ld	h, #0x01
+      000421 E5                     946 	push	hl
+      000422 33                     947 	inc	sp
+      000423 F5                     948 	push	af
+      000424 33                     949 	inc	sp
+      000425 CDr00r00               950 	call	_gotogxy
+      000428 E8 02                  951 	add	sp, #2
+      00042A C1                     952 	pop	bc
+                                    953 ;src/gb/awele_gb.c:218: if(i%2)  color(BLACK, WHITE, SOLID);
+      00042B C5                     954 	push	bc
+      00042C 21 02 00               955 	ld	hl, #0x0002
+      00042F E5                     956 	push	hl
+      000430 C5                     957 	push	bc
+      000431 CDr00r00               958 	call	__modsint
+      000434 E8 04                  959 	add	sp, #4
+      000436 C1                     960 	pop	bc
+      000437 7A                     961 	ld	a, d
+      000438 B3                     962 	or	a, e
+      000439 28 11                  963 	jr	Z, 00102$
+      00043B C5                     964 	push	bc
+      00043C AF                     965 	xor	a, a
+      00043D F5                     966 	push	af
+      00043E 33                     967 	inc	sp
+      00043F AF                     968 	xor	a, a
+      000440 57                     969 	ld	d,a
+      000441 1E 03                  970 	ld	e,#0x03
+      000443 D5                     971 	push	de
+      000444 CDr00r00               972 	call	_color
+      000447 E8 03                  973 	add	sp, #3
+      000449 C1                     974 	pop	bc
+      00044A 18 0F                  975 	jr	00103$
+      00044C                        976 00102$:
+                                    977 ;src/gb/awele_gb.c:219: else     color(WHITE, DKGREY, SOLID);
+      00044C C5                     978 	push	bc
+      00044D AF                     979 	xor	a, a
+      00044E 57                     980 	ld	d,a
+      00044F 1E 02                  981 	ld	e,#0x02
+      000451 D5                     982 	push	de
+      000452 AF                     983 	xor	a, a
+      000453 F5                     984 	push	af
+      000454 33                     985 	inc	sp
+      000455 CDr00r00               986 	call	_color
+      000458 E8 03                  987 	add	sp, #3
+      00045A C1                     988 	pop	bc
+      00045B                        989 00103$:
+                                    990 ;src/gb/awele_gb.c:220: gprintln(i,10,UNSIGNED);
+      00045B C5                     991 	push	bc
+      00045C AF                     992 	xor	a, a
+      00045D 57                     993 	ld	d,a
+      00045E 1E 0A                  994 	ld	e,#0x0a
+      000460 D5                     995 	push	de
+      000461 C5                     996 	push	bc
+      000462 CDr00r00               997 	call	_gprintln
+      000465 E8 04                  998 	add	sp, #4
+      000467 C1                     999 	pop	bc
+                                   1000 ;src/gb/awele_gb.c:215: for( i=2*NCASES; i>NCASES; i--)
+      000468 0B                    1001 	dec	bc
+      000469 58                    1002 	ld	e, b
+      00046A 16 00                 1003 	ld	d, #0x00
+      00046C 3E 08                 1004 	ld	a, #0x08
+      00046E B9                    1005 	cp	a, c
+      00046F 3E 00                 1006 	ld	a, #0x00
+      000471 98                    1007 	sbc	a, b
+      000472 CB 7B                 1008 	bit	7, e
+      000474 28 07                 1009 	jr	Z, 00214$
+      000476 CB 7A                 1010 	bit	7, d
+      000478 20 08                 1011 	jr	NZ, 00215$
+      00047A BF                    1012 	cp	a, a
+      00047B 18 05                 1013 	jr	00215$
+      00047D                       1014 00214$:
+      00047D CB 7A                 1015 	bit	7, d
+      00047F 28 01                 1016 	jr	Z, 00215$
+      000481 37                    1017 	scf
+      000482                       1018 00215$:
+      000482 38 95                 1019 	jr	C, 00125$
+                                   1020 ;src/gb/awele_gb.c:224: for( i=2*NCASES; i>NCASES; i--)
+      000484 01 10 00              1021 	ld	bc, #0x0010
+      000487                       1022 00127$:
+                                   1023 ;src/gb/awele_gb.c:226: gotogxy(2*(2*NCASES-i+1),3);//+i%2);
+      000487 59                    1024 	ld	e, c
+      000488 3E 11                 1025 	ld	a, #0x11
+      00048A 93                    1026 	sub	a, e
+      00048B 87                    1027 	add	a, a
+      00048C C5                    1028 	push	bc
+      00048D 26 03                 1029 	ld	h, #0x03
+      00048F E5                    1030 	push	hl
+      000490 33                    1031 	inc	sp
+      000491 F5                    1032 	push	af
+      000492 33                    1033 	inc	sp
+      000493 CDr00r00              1034 	call	_gotogxy
+      000496 E8 02                 1035 	add	sp, #2
+      000498 C1                    1036 	pop	bc
+                                   1037 ;src/gb/awele_gb.c:227: if(i%2)  color(BLACK, WHITE, SOLID);
+      000499 C5                    1038 	push	bc
+      00049A 21 02 00              1039 	ld	hl, #0x0002
+      00049D E5                    1040 	push	hl
+      00049E C5                    1041 	push	bc
+      00049F CDr00r00              1042 	call	__modsint
+      0004A2 E8 04                 1043 	add	sp, #4
+      0004A4 C1                    1044 	pop	bc
+      0004A5 7A                    1045 	ld	a, d
+      0004A6 B3                    1046 	or	a, e
+      0004A7 28 11                 1047 	jr	Z, 00106$
+      0004A9 C5                    1048 	push	bc
+      0004AA AF                    1049 	xor	a, a
+      0004AB F5                    1050 	push	af
+      0004AC 33                    1051 	inc	sp
+      0004AD AF                    1052 	xor	a, a
+      0004AE 57                    1053 	ld	d,a
+      0004AF 1E 03                 1054 	ld	e,#0x03
+      0004B1 D5                    1055 	push	de
+      0004B2 CDr00r00              1056 	call	_color
+      0004B5 E8 03                 1057 	add	sp, #3
+      0004B7 C1                    1058 	pop	bc
+      0004B8 18 0F                 1059 	jr	00107$
+      0004BA                       1060 00106$:
+                                   1061 ;src/gb/awele_gb.c:228: else     color(WHITE, DKGREY, SOLID);
+      0004BA C5                    1062 	push	bc
+      0004BB AF                    1063 	xor	a, a
+      0004BC 57                    1064 	ld	d,a
+      0004BD 1E 02                 1065 	ld	e,#0x02
+      0004BF D5                    1066 	push	de
+      0004C0 AF                    1067 	xor	a, a
+      0004C1 F5                    1068 	push	af
+      0004C2 33                    1069 	inc	sp
+      0004C3 CDr00r00              1070 	call	_color
+      0004C6 E8 03                 1071 	add	sp, #3
+      0004C8 C1                    1072 	pop	bc
+      0004C9                       1073 00107$:
+                                   1074 ;src/gb/awele_gb.c:229: gprintln(p[i],10,UNSIGNED);
+      0004C9 F8 02                 1075 	ldhl	sp,	#2
+      0004CB 2A                    1076 	ld	a, (hl+)
+      0004CC 66                    1077 	ld	h, (hl)
+      0004CD 6F                    1078 	ld	l, a
+      0004CE 09                    1079 	add	hl, bc
+      0004CF 5D                    1080 	ld	e, l
+      0004D0 54                    1081 	ld	d, h
+      0004D1 1A                    1082 	ld	a, (de)
+      0004D2 6F                    1083 	ld	l, a
+      0004D3 26 00                 1084 	ld	h, #0x00
+      0004D5 C5                    1085 	push	bc
+      0004D6 D5                    1086 	push	de
+      0004D7 AF                    1087 	xor	a, a
+      0004D8 57                    1088 	ld	d,a
+      0004D9 1E 0A                 1089 	ld	e,#0x0a
+      0004DB D5                    1090 	push	de
+      0004DC E5                    1091 	push	hl
+      0004DD CDr00r00              1092 	call	_gprintln
+      0004E0 E8 04                 1093 	add	sp, #4
+      0004E2 D1                    1094 	pop	de
+      0004E3 C1                    1095 	pop	bc
+                                   1096 ;src/gb/awele_gb.c:230: if(p[i]<10) wrtchr(' ');
+      0004E4 1A                    1097 	ld	a, (de)
+      0004E5 D6 0A                 1098 	sub	a, #0x0a
+      0004E7 30 0A                 1099 	jr	NC, 00128$
+      0004E9 C5                    1100 	push	bc
+      0004EA 3E 20                 1101 	ld	a, #0x20
+      0004EC F5                    1102 	push	af
+      0004ED 33                    1103 	inc	sp
+      0004EE CDr00r00              1104 	call	_wrtchr
+      0004F1 33                    1105 	inc	sp
+      0004F2 C1                    1106 	pop	bc
+      0004F3                       1107 00128$:
+                                   1108 ;src/gb/awele_gb.c:224: for( i=2*NCASES; i>NCASES; i--)
+      0004F3 0B                    1109 	dec	bc
+      0004F4 58                    1110 	ld	e, b
+      0004F5 16 00                 1111 	ld	d, #0x00
+      0004F7 3E 08                 1112 	ld	a, #0x08
+      0004F9 B9                    1113 	cp	a, c
+      0004FA 3E 00                 1114 	ld	a, #0x00
+      0004FC 98                    1115 	sbc	a, b
+      0004FD CB 7B                 1116 	bit	7, e
+      0004FF 28 07                 1117 	jr	Z, 00216$
+      000501 CB 7A                 1118 	bit	7, d
+      000503 20 08                 1119 	jr	NZ, 00217$
+      000505 BF                    1120 	cp	a, a
+      000506 18 05                 1121 	jr	00217$
+      000508                       1122 00216$:
+      000508 CB 7A                 1123 	bit	7, d
+      00050A 28 01                 1124 	jr	Z, 00217$
+      00050C 37                    1125 	scf
+      00050D                       1126 00217$:
+      00050D DAr87r04              1127 	jp	C, 00127$
+                                   1128 ;src/gb/awele_gb.c:235: color(WHITE, DKGREY, SOLID);
+      000510 AF                    1129 	xor	a, a
+      000511 57                    1130 	ld	d,a
+      000512 1E 02                 1131 	ld	e,#0x02
+      000514 D5                    1132 	push	de
+      000515 AF                    1133 	xor	a, a
+      000516 F5                    1134 	push	af
+      000517 33                    1135 	inc	sp
+      000518 CDr00r00              1136 	call	_color
+      00051B E8 03                 1137 	add	sp, #3
+                                   1138 ;src/gb/awele_gb.c:236: gotogxy(0,4);
+      00051D 3E 04                 1139 	ld	a, #0x04
+      00051F F5                    1140 	push	af
+      000520 33                    1141 	inc	sp
+      000521 AF                    1142 	xor	a, a
+      000522 F5                    1143 	push	af
+      000523 33                    1144 	inc	sp
+      000524 CDr00r00              1145 	call	_gotogxy
+      000527 E8 02                 1146 	add	sp, #2
+                                   1147 ;src/gb/awele_gb.c:237: gprintln(p[KALAH2],10,UNSIGNED);
+                                   1148 ;c
+      000529 F8 02                 1149 	ldhl	sp,#2
+      00052B 2A                    1150 	ld	a, (hl+)
+      00052C 5F                    1151 	ld	e, a
+      00052D 56                    1152 	ld	d, (hl)
+      00052E 21 11 00              1153 	ld	hl, #0x0011
+      000531 19                    1154 	add	hl, de
+      000532 4D                    1155 	ld	c, l
+      000533 44                    1156 	ld	b, h
+      000534 0A                    1157 	ld	a, (bc)
+      000535 5F                    1158 	ld	e, a
+      000536 16 00                 1159 	ld	d, #0x00
+      000538 C5                    1160 	push	bc
+      000539 AF                    1161 	xor	a, a
+      00053A 67                    1162 	ld	h, a
+      00053B 2E 0A                 1163 	ld	l, #0x0a
+      00053D E5                    1164 	push	hl
+      00053E D5                    1165 	push	de
+      00053F CDr00r00              1166 	call	_gprintln
+      000542 E8 04                 1167 	add	sp, #4
+      000544 C1                    1168 	pop	bc
+                                   1169 ;src/gb/awele_gb.c:238: if(p[KALAH2]<10) wrtchr(' ');
+      000545 0A                    1170 	ld	a, (bc)
+      000546 D6 0A                 1171 	sub	a, #0x0a
+      000548 30 08                 1172 	jr	NC, 00112$
+      00054A 3E 20                 1173 	ld	a, #0x20
+      00054C F5                    1174 	push	af
+      00054D 33                    1175 	inc	sp
+      00054E CDr00r00              1176 	call	_wrtchr
+      000551 33                    1177 	inc	sp
+      000552                       1178 00112$:
+                                   1179 ;src/gb/awele_gb.c:239: gotogxy(2*NCASES+2,4);
+      000552 11 12 04              1180 	ld	de, #0x0412
+      000555 D5                    1181 	push	de
+      000556 CDr00r00              1182 	call	_gotogxy
+      000559 E8 02                 1183 	add	sp, #2
+                                   1184 ;src/gb/awele_gb.c:240: gprintln(p[KALAH1],10,UNSIGNED);
+                                   1185 ;c
+      00055B F8 02                 1186 	ldhl	sp,#2
+      00055D 2A                    1187 	ld	a, (hl+)
+      00055E 5F                    1188 	ld	e, a
+      00055F 56                    1189 	ld	d, (hl)
+      000560 21 08 00              1190 	ld	hl, #0x0008
+      000563 19                    1191 	add	hl, de
+      000564 4D                    1192 	ld	c, l
+      000565 44                    1193 	ld	b, h
+      000566 0A                    1194 	ld	a, (bc)
+      000567 5F                    1195 	ld	e, a
+      000568 16 00                 1196 	ld	d, #0x00
+      00056A C5                    1197 	push	bc
+      00056B AF                    1198 	xor	a, a
+      00056C 67                    1199 	ld	h, a
+      00056D 2E 0A                 1200 	ld	l, #0x0a
+      00056F E5                    1201 	push	hl
+      000570 D5                    1202 	push	de
+      000571 CDr00r00              1203 	call	_gprintln
+      000574 E8 04                 1204 	add	sp, #4
+      000576 C1                    1205 	pop	bc
+                                   1206 ;src/gb/awele_gb.c:241: if(p[KALAH1]<10) wrtchr(' ');
+      000577 0A                    1207 	ld	a, (bc)
+      000578 D6 0A                 1208 	sub	a, #0x0a
+      00057A 30 08                 1209 	jr	NC, 00146$
+      00057C 3E 20                 1210 	ld	a, #0x20
+      00057E F5                    1211 	push	af
+      00057F 33                    1212 	inc	sp
+      000580 CDr00r00              1213 	call	_wrtchr
+      000583 33                    1214 	inc	sp
+                                   1215 ;src/gb/awele_gb.c:244: for( i=0; i<NCASES; i++)
+      000584                       1216 00146$:
+      000584 01 00 00              1217 	ld	bc, #0x0000
+      000587                       1218 00129$:
+                                   1219 ;src/gb/awele_gb.c:246: gotogxy(2*i+2,5);//+i%2);
+      000587 79                    1220 	ld	a, c
+      000588 87                    1221 	add	a, a
+      000589 C6 02                 1222 	add	a, #0x02
+      00058B C5                    1223 	push	bc
+      00058C 26 05                 1224 	ld	h, #0x05
+      00058E E5                    1225 	push	hl
+      00058F 33                    1226 	inc	sp
+      000590 F5                    1227 	push	af
+      000591 33                    1228 	inc	sp
+      000592 CDr00r00              1229 	call	_gotogxy
+      000595 E8 02                 1230 	add	sp, #2
+      000597 C1                    1231 	pop	bc
+                                   1232 ;src/gb/awele_gb.c:247: if(i%2)     color(WHITE, DKGREY, SOLID);
+      000598 C5                    1233 	push	bc
+      000599 21 02 00              1234 	ld	hl, #0x0002
+      00059C E5                    1235 	push	hl
+      00059D C5                    1236 	push	bc
+      00059E CDr00r00              1237 	call	__modsint
+      0005A1 E8 04                 1238 	add	sp, #4
+      0005A3 C1                    1239 	pop	bc
+      0005A4 7A                    1240 	ld	a, d
+      0005A5 B3                    1241 	or	a, e
+      0005A6 28 11                 1242 	jr	Z, 00116$
+      0005A8 C5                    1243 	push	bc
+      0005A9 AF                    1244 	xor	a, a
+      0005AA 57                    1245 	ld	d,a
+      0005AB 1E 02                 1246 	ld	e,#0x02
+      0005AD D5                    1247 	push	de
+      0005AE AF                    1248 	xor	a, a
+      0005AF F5                    1249 	push	af
+      0005B0 33                    1250 	inc	sp
+      0005B1 CDr00r00              1251 	call	_color
+      0005B4 E8 03                 1252 	add	sp, #3
+      0005B6 C1                    1253 	pop	bc
+      0005B7 18 0F                 1254 	jr	00117$
+      0005B9                       1255 00116$:
+                                   1256 ;src/gb/awele_gb.c:248: else     color(BLACK, WHITE, SOLID);
+      0005B9 C5                    1257 	push	bc
+      0005BA AF                    1258 	xor	a, a
+      0005BB F5                    1259 	push	af
+      0005BC 33                    1260 	inc	sp
+      0005BD AF                    1261 	xor	a, a
+      0005BE 57                    1262 	ld	d,a
+      0005BF 1E 03                 1263 	ld	e,#0x03
+      0005C1 D5                    1264 	push	de
+      0005C2 CDr00r00              1265 	call	_color
+      0005C5 E8 03                 1266 	add	sp, #3
+      0005C7 C1                    1267 	pop	bc
+      0005C8                       1268 00117$:
+                                   1269 ;src/gb/awele_gb.c:249: gprintln(p[i],10,UNSIGNED);
+      0005C8 F8 02                 1270 	ldhl	sp,	#2
+      0005CA 2A                    1271 	ld	a, (hl+)
+      0005CB 66                    1272 	ld	h, (hl)
+      0005CC 6F                    1273 	ld	l, a
+      0005CD 09                    1274 	add	hl, bc
+      0005CE 5D                    1275 	ld	e, l
+      0005CF 54                    1276 	ld	d, h
+      0005D0 1A                    1277 	ld	a, (de)
+      0005D1 6F                    1278 	ld	l, a
+      0005D2 26 00                 1279 	ld	h, #0x00
+      0005D4 C5                    1280 	push	bc
+      0005D5 D5                    1281 	push	de
+      0005D6 AF                    1282 	xor	a, a
+      0005D7 57                    1283 	ld	d,a
+      0005D8 1E 0A                 1284 	ld	e,#0x0a
+      0005DA D5                    1285 	push	de
+      0005DB E5                    1286 	push	hl
+      0005DC CDr00r00              1287 	call	_gprintln
+      0005DF E8 04                 1288 	add	sp, #4
+      0005E1 D1                    1289 	pop	de
+      0005E2 C1                    1290 	pop	bc
+                                   1291 ;src/gb/awele_gb.c:250: if(p[i]<10) wrtchr(' ');
+      0005E3 1A                    1292 	ld	a, (de)
+      0005E4 D6 0A                 1293 	sub	a, #0x0a
+      0005E6 30 0A                 1294 	jr	NC, 00130$
+      0005E8 C5                    1295 	push	bc
+      0005E9 3E 20                 1296 	ld	a, #0x20
+      0005EB F5                    1297 	push	af
+      0005EC 33                    1298 	inc	sp
+      0005ED CDr00r00              1299 	call	_wrtchr
+      0005F0 33                    1300 	inc	sp
+      0005F1 C1                    1301 	pop	bc
+      0005F2                       1302 00130$:
+                                   1303 ;src/gb/awele_gb.c:244: for( i=0; i<NCASES; i++)
+      0005F2 03                    1304 	inc	bc
+      0005F3 79                    1305 	ld	a, c
+      0005F4 D6 08                 1306 	sub	a, #0x08
+      0005F6 78                    1307 	ld	a, b
+      0005F7 17                    1308 	rla
+      0005F8 3F                    1309 	ccf
+      0005F9 1F                    1310 	rra
+      0005FA DE 80                 1311 	sbc	a, #0x80
+      0005FC 38 89                 1312 	jr	C, 00129$
+                                   1313 ;src/gb/awele_gb.c:254: for( i=0; i<NCASES; i++)
+      0005FE 01 00 00              1314 	ld	bc, #0x0000
+      000601                       1315 00131$:
+                                   1316 ;src/gb/awele_gb.c:256: gotogxy(2*i+2,7);
+      000601 79                    1317 	ld	a, c
+      000602 87                    1318 	add	a, a
+      000603 C6 02                 1319 	add	a, #0x02
+      000605 C5                    1320 	push	bc
+      000606 26 07                 1321 	ld	h, #0x07
+      000608 E5                    1322 	push	hl
+      000609 33                    1323 	inc	sp
+      00060A F5                    1324 	push	af
+      00060B 33                    1325 	inc	sp
+      00060C CDr00r00              1326 	call	_gotogxy
+      00060F E8 02                 1327 	add	sp, #2
+      000611 C1                    1328 	pop	bc
+                                   1329 ;src/gb/awele_gb.c:257: if(i%2)     color(WHITE, DKGREY, SOLID);
+      000612 C5                    1330 	push	bc
+      000613 21 02 00              1331 	ld	hl, #0x0002
+      000616 E5                    1332 	push	hl
+      000617 C5                    1333 	push	bc
+      000618 CDr00r00              1334 	call	__modsint
+      00061B E8 04                 1335 	add	sp, #4
+      00061D C1                    1336 	pop	bc
+      00061E 7A                    1337 	ld	a, d
+      00061F B3                    1338 	or	a, e
+      000620 28 11                 1339 	jr	Z, 00122$
+      000622 C5                    1340 	push	bc
+      000623 AF                    1341 	xor	a, a
+      000624 57                    1342 	ld	d,a
+      000625 1E 02                 1343 	ld	e,#0x02
+      000627 D5                    1344 	push	de
+      000628 AF                    1345 	xor	a, a
+      000629 F5                    1346 	push	af
+      00062A 33                    1347 	inc	sp
+      00062B CDr00r00              1348 	call	_color
+      00062E E8 03                 1349 	add	sp, #3
+      000630 C1                    1350 	pop	bc
+      000631 18 0F                 1351 	jr	00123$
+      000633                       1352 00122$:
+                                   1353 ;src/gb/awele_gb.c:258: else     color(BLACK, WHITE, SOLID);
+      000633 C5                    1354 	push	bc
+      000634 AF                    1355 	xor	a, a
+      000635 F5                    1356 	push	af
+      000636 33                    1357 	inc	sp
+      000637 AF                    1358 	xor	a, a
+      000638 57                    1359 	ld	d,a
+      000639 1E 03                 1360 	ld	e,#0x03
+      00063B D5                    1361 	push	de
+      00063C CDr00r00              1362 	call	_color
+      00063F E8 03                 1363 	add	sp, #3
+      000641 C1                    1364 	pop	bc
+      000642                       1365 00123$:
+                                   1366 ;src/gb/awele_gb.c:259: gprintln(i,10,UNSIGNED);
+      000642 C5                    1367 	push	bc
+      000643 AF                    1368 	xor	a, a
+      000644 57                    1369 	ld	d,a
+      000645 1E 0A                 1370 	ld	e,#0x0a
+      000647 D5                    1371 	push	de
+      000648 C5                    1372 	push	bc
+      000649 CDr00r00              1373 	call	_gprintln
+      00064C E8 04                 1374 	add	sp, #4
+      00064E C1                    1375 	pop	bc
+                                   1376 ;src/gb/awele_gb.c:254: for( i=0; i<NCASES; i++)
+      00064F 03                    1377 	inc	bc
+      000650 79                    1378 	ld	a, c
+      000651 D6 08                 1379 	sub	a, #0x08
+      000653 78                    1380 	ld	a, b
+      000654 17                    1381 	rla
+      000655 3F                    1382 	ccf
+      000656 1F                    1383 	rra
+      000657 DE 80                 1384 	sbc	a, #0x80
+      000659 38 A6                 1385 	jr	C, 00131$
+                                   1386 ;src/gb/awele_gb.c:261: }
+      00065B C9                    1387 	ret
+                                   1388 ;src/gb/awele_gb.c:265: BOOLEAN afficherResultats(UBYTE k1, UBYTE k2)
+                                   1389 ;	---------------------------------
+                                   1390 ; Function afficherResultats
+                                   1391 ; ---------------------------------
+      00065C                       1392 _afficherResultats::
+      00065C 3B                    1393 	dec	sp
+                                   1394 ;src/gb/awele_gb.c:267: gotogxy(0,12);
+      00065D 3E 0C                 1395 	ld	a, #0x0c
+      00065F F5                    1396 	push	af
+      000660 33                    1397 	inc	sp
+      000661 AF                    1398 	xor	a, a
+      000662 F5                    1399 	push	af
+      000663 33                    1400 	inc	sp
+      000664 CDr00r00              1401 	call	_gotogxy
+      000667 E8 02                 1402 	add	sp, #2
+                                   1403 ;src/gb/awele_gb.c:268: color(WHITE, DKGREY, SOLID);
+      000669 AF                    1404 	xor	a, a
+      00066A 57                    1405 	ld	d,a
+      00066B 1E 02                 1406 	ld	e,#0x02
+      00066D D5                    1407 	push	de
+      00066E AF                    1408 	xor	a, a
+      00066F F5                    1409 	push	af
+      000670 33                    1410 	inc	sp
+      000671 CDr00r00              1411 	call	_color
+      000674 E8 03                 1412 	add	sp, #3
+                                   1413 ;src/gb/awele_gb.c:269: if( k1>k2 )
+      000676 F8 04                 1414 	ldhl	sp,	#4
+      000678 3A                    1415 	ld	a, (hl-)
+      000679 96                    1416 	sub	a, (hl)
+      00067A 30 17                 1417 	jr	NC, 00105$
+                                   1418 ;src/gb/awele_gb.c:271: gprint(gJoueur[0]);
+      00067C 21r00r00              1419 	ld	hl, #_gJoueur
+      00067F 2A                    1420 	ld	a, (hl+)
+      000680 4F                    1421 	ld	c, a
+      000681 46                    1422 	ld	b, (hl)
+      000682 C5                    1423 	push	bc
+      000683 CDr00r00              1424 	call	_gprint
+      000686 E8 02                 1425 	add	sp, #2
+                                   1426 ;src/gb/awele_gb.c:272: gprint(gVainqueur);
+      000688 21r00r00              1427 	ld	hl, #_gVainqueur
+      00068B E5                    1428 	push	hl
+      00068C CDr00r00              1429 	call	_gprint
+      00068F E8 02                 1430 	add	sp, #2
+      000691 18 26                 1431 	jr	00106$
+      000693                       1432 00105$:
+                                   1433 ;src/gb/awele_gb.c:274: else if( k1==k2 )
+      000693 F8 03                 1434 	ldhl	sp,	#3
+      000695 2A                    1435 	ld	a, (hl+)
+      000696 96                    1436 	sub	a, (hl)
+      000697 20 0B                 1437 	jr	NZ, 00102$
+                                   1438 ;src/gb/awele_gb.c:275: gprint(gEgalite);
+      000699 21r00r00              1439 	ld	hl, #_gEgalite
+      00069C E5                    1440 	push	hl
+      00069D CDr00r00              1441 	call	_gprint
+      0006A0 E8 02                 1442 	add	sp, #2
+      0006A2 18 15                 1443 	jr	00106$
+      0006A4                       1444 00102$:
+                                   1445 ;src/gb/awele_gb.c:278: gprint(gJoueur[1]);
+      0006A4 21r02r00              1446 	ld	hl, #(_gJoueur + 0x0002)
+      0006A7 2A                    1447 	ld	a, (hl+)
+      0006A8 4F                    1448 	ld	c, a
+      0006A9 46                    1449 	ld	b, (hl)
+      0006AA C5                    1450 	push	bc
+      0006AB CDr00r00              1451 	call	_gprint
+      0006AE E8 02                 1452 	add	sp, #2
+                                   1453 ;src/gb/awele_gb.c:279: gprint(gVainqueur);
+      0006B0 21r00r00              1454 	ld	hl, #_gVainqueur
+      0006B3 E5                    1455 	push	hl
+      0006B4 CDr00r00              1456 	call	_gprint
+      0006B7 E8 02                 1457 	add	sp, #2
+      0006B9                       1458 00106$:
+                                   1459 ;src/gb/awele_gb.c:281: revers(FALSE);
+      0006B9 AF                    1460 	xor	a, a
+      0006BA F5                    1461 	push	af
+      0006BB 33                    1462 	inc	sp
+      0006BC CDr3Cr00              1463 	call	_revers
+      0006BF 33                    1464 	inc	sp
+                                   1465 ;src/gb/awele_gb.c:282: gotogxy(2,13);gprintf(" %d : ",(k1<k2)?k2:k1);gprintf("%d",(k1<k2)?k1:k2);
+      0006C0 11 02 0D              1466 	ld	de, #0x0d02
+      0006C3 D5                    1467 	push	de
+      0006C4 CDr00r00              1468 	call	_gotogxy
+      0006C7 E8 02                 1469 	add	sp, #2
+      0006C9 F8 03                 1470 	ldhl	sp,	#3
+      0006CB 2A                    1471 	ld	a, (hl+)
+      0006CC 96                    1472 	sub	a, (hl)
+      0006CD 3E 00                 1473 	ld	a, #0x00
+      0006CF 17                    1474 	rla
+      0006D0 4F                    1475 	ld	c, a
+      0006D1 3A                    1476 	ld	a, (hl-)
+      0006D2 47                    1477 	ld	b, a
+      0006D3 7E                    1478 	ld	a, (hl)
+      0006D4 F8 00                 1479 	ldhl	sp,	#0
+      0006D6 77                    1480 	ld	(hl), a
+      0006D7 79                    1481 	ld	a, c
+      0006D8 B7                    1482 	or	a, a
+      0006D9 28 03                 1483 	jr	Z, 00109$
+      0006DB 78                    1484 	ld	a, b
+      0006DC 18 03                 1485 	jr	00110$
+      0006DE                       1486 00109$:
+      0006DE F8 00                 1487 	ldhl	sp,	#0
+      0006E0 7E                    1488 	ld	a, (hl)
+      0006E1                       1489 00110$:
+      0006E1 5F                    1490 	ld	e, a
+      0006E2 16 00                 1491 	ld	d, #0x00
+      0006E4 C5                    1492 	push	bc
+      0006E5 D5                    1493 	push	de
+      0006E6 21r42r07              1494 	ld	hl, #___str_0
+      0006E9 E5                    1495 	push	hl
+      0006EA CDr00r00              1496 	call	_gprintf
+      0006ED E8 04                 1497 	add	sp, #4
+      0006EF C1                    1498 	pop	bc
+      0006F0 79                    1499 	ld	a, c
+      0006F1 B7                    1500 	or	a, a
+      0006F2 28 03                 1501 	jr	Z, 00111$
+      0006F4 F8 00                 1502 	ldhl	sp,	#0
+      0006F6 46                    1503 	ld	b, (hl)
+      0006F7                       1504 00111$:
+      0006F7 16 00                 1505 	ld	d, #0x00
+      0006F9 58                    1506 	ld	e, b
+      0006FA D5                    1507 	push	de
+      0006FB 21r49r07              1508 	ld	hl, #___str_1
+      0006FE E5                    1509 	push	hl
+      0006FF CDr00r00              1510 	call	_gprintf
+      000702 E8 04                 1511 	add	sp, #4
+                                   1512 ;src/gb/awele_gb.c:283: effaceLigne(14);
+      000704 3E 0E                 1513 	ld	a, #0x0e
+      000706 F5                    1514 	push	af
+      000707 33                    1515 	inc	sp
+      000708 CDr5Er00              1516 	call	_effaceLigne
+      00070B 33                    1517 	inc	sp
+                                   1518 ;src/gb/awele_gb.c:285: gotogxy(2,15);
+      00070C 11 02 0F              1519 	ld	de, #0x0f02
+      00070F D5                    1520 	push	de
+      000710 CDr00r00              1521 	call	_gotogxy
+      000713 E8 02                 1522 	add	sp, #2
+                                   1523 ;src/gb/awele_gb.c:286: color(WHITE, DKGREY, SOLID);
+      000715 AF                    1524 	xor	a, a
+      000716 57                    1525 	ld	d,a
+      000717 1E 02                 1526 	ld	e,#0x02
+      000719 D5                    1527 	push	de
+      00071A AF                    1528 	xor	a, a
+      00071B F5                    1529 	push	af
+      00071C 33                    1530 	inc	sp
+      00071D CDr00r00              1531 	call	_color
+      000720 E8 03                 1532 	add	sp, #3
+                                   1533 ;src/gb/awele_gb.c:287: gprint("B pour continuer");
+      000722 21r4Cr07              1534 	ld	hl, #___str_2
+      000725 E5                    1535 	push	hl
+      000726 CDr00r00              1536 	call	_gprint
+      000729 E8 02                 1537 	add	sp, #2
+                                   1538 ;src/gb/awele_gb.c:288: waitpad(J_B);
+      00072B 3E 20                 1539 	ld	a, #0x20
+      00072D F5                    1540 	push	af
+      00072E 33                    1541 	inc	sp
+      00072F CDr00r00              1542 	call	_waitpad
+      000732 33                    1543 	inc	sp
+                                   1544 ;src/gb/awele_gb.c:289: waitpadup();
+      000733 CDr00r00              1545 	call	_waitpadup
+                                   1546 ;src/gb/awele_gb.c:290: effaceLigne(15);
+      000736 3E 0F                 1547 	ld	a, #0x0f
+      000738 F5                    1548 	push	af
+      000739 33                    1549 	inc	sp
+      00073A CDr5Er00              1550 	call	_effaceLigne
+      00073D 33                    1551 	inc	sp
+                                   1552 ;src/gb/awele_gb.c:292: return(TRUE);
+      00073E 1E 01                 1553 	ld	e, #0x01
+                                   1554 ;src/gb/awele_gb.c:293: }
+      000740 33                    1555 	inc	sp
+      000741 C9                    1556 	ret
+      000742                       1557 ___str_0:
+      000742 20 25 64 20 3A 20     1558 	.ascii " %d : "
+      000748 00                    1559 	.db 0x00
+      000749                       1560 ___str_1:
+      000749 25 64                 1561 	.ascii "%d"
+      00074B 00                    1562 	.db 0x00
+      00074C                       1563 ___str_2:
+      00074C 42 20 70 6F 75 72 20  1564 	.ascii "B pour continuer"
+             63 6F 6E 74 69 6E 75
+             65 72
+      00075C 00                    1565 	.db 0x00
+                                   1566 ;src/gb/awele_gb.c:295: void afficherPosEval()
+                                   1567 ;	---------------------------------
+                                   1568 ; Function afficherPosEval
+                                   1569 ; ---------------------------------
+      00075D                       1570 _afficherPosEval::
+                                   1571 ;src/gb/awele_gb.c:297: gotogxy(10,0);
+      00075D AF                    1572 	xor	a, a
+      00075E 57                    1573 	ld	d,a
+      00075F 1E 0A                 1574 	ld	e,#0x0a
+      000761 D5                    1575 	push	de
+      000762 CDr00r00              1576 	call	_gotogxy
+      000765 E8 02                 1577 	add	sp, #2
+                                   1578 ;src/gb/awele_gb.c:298: revers(FALSE);
+      000767 AF                    1579 	xor	a, a
+      000768 F5                    1580 	push	af
+      000769 33                    1581 	inc	sp
+      00076A CDr3Cr00              1582 	call	_revers
+      00076D 33                    1583 	inc	sp
+                                   1584 ;src/gb/awele_gb.c:299: gprintf("%d   ",posEval);
+      00076E 21r00r00              1585 	ld	hl, #_posEval
+      000771 2A                    1586 	ld	a, (hl+)
+      000772 66                    1587 	ld	h, (hl)
+      000773 6F                    1588 	ld	l, a
+      000774 E5                    1589 	push	hl
+      000775 21r7Fr07              1590 	ld	hl, #___str_3
+      000778 E5                    1591 	push	hl
+      000779 CDr00r00              1592 	call	_gprintf
+      00077C E8 04                 1593 	add	sp, #4
+                                   1594 ;src/gb/awele_gb.c:300: }
+      00077E C9                    1595 	ret
+      00077F                       1596 ___str_3:
+      00077F 25 64 20 20 20        1597 	.ascii "%d   "
+      000784 00                    1598 	.db 0x00
+                                   1599 ;src/gb/awele_gb.c:302: void afficherAttente(UBYTE joueur, UBYTE casejouee)
+                                   1600 ;	---------------------------------
+                                   1601 ; Function afficherAttente
+                                   1602 ; ---------------------------------
+      000785                       1603 _afficherAttente::
+      000785 3B                    1604 	dec	sp
+                                   1605 ;src/gb/awele_gb.c:306: gotogxy(0,14);
+      000786 3E 0E                 1606 	ld	a, #0x0e
+      000788 F5                    1607 	push	af
+      000789 33                    1608 	inc	sp
+      00078A AF                    1609 	xor	a, a
+      00078B F5                    1610 	push	af
+      00078C 33                    1611 	inc	sp
+      00078D CDr00r00              1612 	call	_gotogxy
+      000790 E8 02                 1613 	add	sp, #2
+                                   1614 ;src/gb/awele_gb.c:307: color(BLACK, WHITE, SOLID);
+      000792 AF                    1615 	xor	a, a
+      000793 F5                    1616 	push	af
+      000794 33                    1617 	inc	sp
+      000795 AF                    1618 	xor	a, a
+      000796 57                    1619 	ld	d,a
+      000797 1E 03                 1620 	ld	e,#0x03
+      000799 D5                    1621 	push	de
+      00079A CDr00r00              1622 	call	_color
+      00079D E8 03                 1623 	add	sp, #3
+                                   1624 ;src/gb/awele_gb.c:308: gprintf("J%d joue en ", joueur);
+      00079F F8 03                 1625 	ldhl	sp,	#3
+      0007A1 4E                    1626 	ld	c, (hl)
+      0007A2 06 00                 1627 	ld	b, #0x00
+      0007A4 C5                    1628 	push	bc
+      0007A5 21r96r08              1629 	ld	hl, #___str_4
+      0007A8 E5                    1630 	push	hl
+      0007A9 CDr00r00              1631 	call	_gprintf
+      0007AC E8 04                 1632 	add	sp, #4
+                                   1633 ;src/gb/awele_gb.c:309: gprintf("%d   ", casejouee);
+      0007AE F8 04                 1634 	ldhl	sp,	#4
+      0007B0 4E                    1635 	ld	c, (hl)
+      0007B1 06 00                 1636 	ld	b, #0x00
+      0007B3 C5                    1637 	push	bc
+      0007B4 21rA3r08              1638 	ld	hl, #___str_5
+      0007B7 E5                    1639 	push	hl
+      0007B8 CDr00r00              1640 	call	_gprintf
+      0007BB E8 04                 1641 	add	sp, #4
+                                   1642 ;src/gb/awele_gb.c:310: gotogxy(2,15);
+      0007BD 11 02 0F              1643 	ld	de, #0x0f02
+      0007C0 D5                    1644 	push	de
+      0007C1 CDr00r00              1645 	call	_gotogxy
+      0007C4 E8 02                 1646 	add	sp, #2
+                                   1647 ;src/gb/awele_gb.c:311: color(WHITE, DKGREY, SOLID);
+      0007C6 AF                    1648 	xor	a, a
+      0007C7 57                    1649 	ld	d,a
+      0007C8 1E 02                 1650 	ld	e,#0x02
+      0007CA D5                    1651 	push	de
+      0007CB AF                    1652 	xor	a, a
+      0007CC F5                    1653 	push	af
+      0007CD 33                    1654 	inc	sp
+      0007CE CDr00r00              1655 	call	_color
+      0007D1 E8 03                 1656 	add	sp, #3
+                                   1657 ;src/gb/awele_gb.c:312: gprint("B pour continuer");
+      0007D3 21rA9r08              1658 	ld	hl, #___str_6
+      0007D6 E5                    1659 	push	hl
+      0007D7 CDr00r00              1660 	call	_gprint
+      0007DA E8 02                 1661 	add	sp, #2
+                                   1662 ;src/gb/awele_gb.c:313: revers(FALSE);
+      0007DC AF                    1663 	xor	a, a
+      0007DD F5                    1664 	push	af
+      0007DE 33                    1665 	inc	sp
+      0007DF CDr3Cr00              1666 	call	_revers
+      0007E2 33                    1667 	inc	sp
+                                   1668 ;src/gb/awele_gb.c:315: joueur--;
+      0007E3 F8 03                 1669 	ldhl	sp,	#3
+      0007E5 35                    1670 	dec	(hl)
+                                   1671 ;src/gb/awele_gb.c:316: y= 6-joueur*4;
+      0007E6 4E                    1672 	ld	c, (hl)
+      0007E7 79                    1673 	ld	a, c
+      0007E8 87                    1674 	add	a, a
+      0007E9 87                    1675 	add	a, a
+      0007EA 47                    1676 	ld	b, a
+      0007EB 3E 06                 1677 	ld	a, #0x06
+      0007ED 90                    1678 	sub	a, b
+      0007EE 47                    1679 	ld	b, a
+                                   1680 ;src/gb/awele_gb.c:318: color(WHITE,WHITE,SOLID);
+      0007EF C5                    1681 	push	bc
+      0007F0 AF                    1682 	xor	a, a
+      0007F1 F5                    1683 	push	af
+      0007F2 33                    1684 	inc	sp
+      0007F3 AF                    1685 	xor	a, a
+      0007F4 F5                    1686 	push	af
+      0007F5 33                    1687 	inc	sp
+      0007F6 AF                    1688 	xor	a, a
+      0007F7 F5                    1689 	push	af
+      0007F8 33                    1690 	inc	sp
+      0007F9 CDr00r00              1691 	call	_color
+      0007FC E8 03                 1692 	add	sp, #3
+      0007FE C1                    1693 	pop	bc
+                                   1694 ;src/gb/awele_gb.c:319: (joueur==0)?box(16,49,144,55,M_FILL):box(16,16,144,22,M_FILL);
+      0007FF F8 03                 1695 	ldhl	sp,	#3
+      000801 7E                    1696 	ld	a, (hl)
+      000802 B7                    1697 	or	a, a
+      000803 20 15                 1698 	jr	NZ, 00103$
+      000805 C5                    1699 	push	bc
+      000806 11 37 01              1700 	ld	de, #0x0137
+      000809 D5                    1701 	push	de
+      00080A 11 31 90              1702 	ld	de, #0x9031
+      00080D D5                    1703 	push	de
+      00080E 3E 10                 1704 	ld	a, #0x10
+      000810 F5                    1705 	push	af
+      000811 33                    1706 	inc	sp
+      000812 CDr00r00              1707 	call	_box
+      000815 E8 05                 1708 	add	sp, #5
+      000817 C1                    1709 	pop	bc
+      000818 18 13                 1710 	jr	00104$
+      00081A                       1711 00103$:
+      00081A C5                    1712 	push	bc
+      00081B 11 16 01              1713 	ld	de, #0x0116
+      00081E D5                    1714 	push	de
+      00081F 11 10 90              1715 	ld	de, #0x9010
+      000822 D5                    1716 	push	de
+      000823 3E 10                 1717 	ld	a, #0x10
+      000825 F5                    1718 	push	af
+      000826 33                    1719 	inc	sp
+      000827 CDr00r00              1720 	call	_box
+      00082A E8 05                 1721 	add	sp, #5
+      00082C C1                    1722 	pop	bc
+      00082D                       1723 00104$:
+                                   1724 ;src/gb/awele_gb.c:321: x=(casejouee-joueur*(NCASES+1));
+      00082D F8 03                 1725 	ldhl	sp,	#3
+      00082F 7E                    1726 	ld	a, (hl)
+      000830 5F                    1727 	ld	e, a
+      000831 87                    1728 	add	a, a
+      000832 87                    1729 	add	a, a
+      000833 87                    1730 	add	a, a
+      000834 83                    1731 	add	a, e
+      000835 F8 00                 1732 	ldhl	sp,	#0
+      000837 77                    1733 	ld	(hl), a
+      000838 F8 04                 1734 	ldhl	sp,	#4
+      00083A 7E                    1735 	ld	a, (hl)
+      00083B F8 00                 1736 	ldhl	sp,	#0
+      00083D 96                    1737 	sub	a, (hl)
+      00083E 57                    1738 	ld	d, a
+                                   1739 ;src/gb/awele_gb.c:322: x = (1-2*joueur)*x;
+      00083F 79                    1740 	ld	a, c
+      000840 87                    1741 	add	a, a
+      000841 5F                    1742 	ld	e, a
+      000842 3E 01                 1743 	ld	a, #0x01
+      000844 93                    1744 	sub	a, e
+      000845 C5                    1745 	push	bc
+      000846 D5                    1746 	push	de
+      000847 33                    1747 	inc	sp
+      000848 F5                    1748 	push	af
+      000849 33                    1749 	inc	sp
+      00084A CDr00r00              1750 	call	__muluschar
+      00084D E8 02                 1751 	add	sp, #2
+      00084F C1                    1752 	pop	bc
+      000850 F8 00                 1753 	ldhl	sp,	#0
+      000852 73                    1754 	ld	(hl), e
+                                   1755 ;src/gb/awele_gb.c:323: x+=7*joueur;
+      000853 79                    1756 	ld	a, c
+      000854 87                    1757 	add	a, a
+      000855 81                    1758 	add	a, c
+      000856 87                    1759 	add	a, a
+      000857 81                    1760 	add	a, c
+      000858 F8 00                 1761 	ldhl	sp,	#0
+      00085A 4E                    1762 	ld	c, (hl)
+      00085B 81                    1763 	add	a, c
+                                   1764 ;src/gb/awele_gb.c:324: x = x*2;
+      00085C 87                    1765 	add	a, a
+                                   1766 ;src/gb/awele_gb.c:325: x+=2;
+      00085D C6 02                 1767 	add	a, #0x02
+                                   1768 ;src/gb/awele_gb.c:326: gotogxy(x,y);revers(FALSE);wrtchr(1+(char)joueur);
+      00085F C5                    1769 	push	bc
+      000860 33                    1770 	inc	sp
+      000861 F5                    1771 	push	af
+      000862 33                    1772 	inc	sp
+      000863 CDr00r00              1773 	call	_gotogxy
+      000866 E8 02                 1774 	add	sp, #2
+      000868 AF                    1775 	xor	a, a
+      000869 F5                    1776 	push	af
+      00086A 33                    1777 	inc	sp
+      00086B CDr3Cr00              1778 	call	_revers
+      00086E 33                    1779 	inc	sp
+      00086F F8 03                 1780 	ldhl	sp,	#3
+      000871 7E                    1781 	ld	a, (hl)
+      000872 3C                    1782 	inc	a
+      000873 F5                    1783 	push	af
+      000874 33                    1784 	inc	sp
+      000875 CDr00r00              1785 	call	_wrtchr
+      000878 33                    1786 	inc	sp
+                                   1787 ;src/gb/awele_gb.c:328: boitePlateau();
+      000879 CDrF8r00              1788 	call	_boitePlateau
+                                   1789 ;src/gb/awele_gb.c:330: waitpad(J_B);
+      00087C 3E 20                 1790 	ld	a, #0x20
+      00087E F5                    1791 	push	af
+      00087F 33                    1792 	inc	sp
+      000880 CDr00r00              1793 	call	_waitpad
+      000883 33                    1794 	inc	sp
+                                   1795 ;src/gb/awele_gb.c:331: effaceLigne(15);
+      000884 3E 0F                 1796 	ld	a, #0x0f
+      000886 F5                    1797 	push	af
+      000887 33                    1798 	inc	sp
+      000888 CDr5Er00              1799 	call	_effaceLigne
+      00088B 33                    1800 	inc	sp
+                                   1801 ;src/gb/awele_gb.c:332: effaceLigne(16);
+      00088C 3E 10                 1802 	ld	a, #0x10
+      00088E F5                    1803 	push	af
+      00088F 33                    1804 	inc	sp
+      000890 CDr5Er00              1805 	call	_effaceLigne
+      000893 33                    1806 	inc	sp
+                                   1807 ;src/gb/awele_gb.c:333: }
+      000894 33                    1808 	inc	sp
+      000895 C9                    1809 	ret
+      000896                       1810 ___str_4:
+      000896 4A 25 64 20 6A 6F 75  1811 	.ascii "J%d joue en "
+             65 20 65 6E 20
+      0008A2 00                    1812 	.db 0x00
+      0008A3                       1813 ___str_5:
+      0008A3 25 64 20 20 20        1814 	.ascii "%d   "
+      0008A8 00                    1815 	.db 0x00
+      0008A9                       1816 ___str_6:
+      0008A9 42 20 70 6F 75 72 20  1817 	.ascii "B pour continuer"
+             63 6F 6E 74 69 6E 75
+             65 72
+      0008B9 00                    1818 	.db 0x00
+                                   1819 ;src/gb/awele_gb.c:335: void effacerAttente()
+                                   1820 ;	---------------------------------
+                                   1821 ; Function effacerAttente
+                                   1822 ; ---------------------------------
+      0008BA                       1823 _effacerAttente::
+                                   1824 ;src/gb/awele_gb.c:337: effaceLigne(12);
+      0008BA 3E 0C                 1825 	ld	a, #0x0c
+      0008BC F5                    1826 	push	af
+      0008BD 33                    1827 	inc	sp
+      0008BE CDr5Er00              1828 	call	_effaceLigne
+      0008C1 33                    1829 	inc	sp
+                                   1830 ;src/gb/awele_gb.c:338: effaceLigne(13);
+      0008C2 3E 0D                 1831 	ld	a, #0x0d
+      0008C4 F5                    1832 	push	af
+      0008C5 33                    1833 	inc	sp
+      0008C6 CDr5Er00              1834 	call	_effaceLigne
+      0008C9 33                    1835 	inc	sp
+                                   1836 ;src/gb/awele_gb.c:339: }
+      0008CA C9                    1837 	ret
+                                   1838 ;src/gb/awele_gb.c:341: UBYTE choixJoueur(UBYTE joueur)
+                                   1839 ;	---------------------------------
+                                   1840 ; Function choixJoueur
+                                   1841 ; ---------------------------------
+      0008CB                       1842 _choixJoueur::
+      0008CB E8 EC                 1843 	add	sp, #-20
+                                   1844 ;src/gb/awele_gb.c:348: revers(FALSE);
+      0008CD AF                    1845 	xor	a, a
+      0008CE F5                    1846 	push	af
+      0008CF 33                    1847 	inc	sp
+      0008D0 CDr3Cr00              1848 	call	_revers
+      0008D3 33                    1849 	inc	sp
+                                   1850 ;src/gb/awele_gb.c:349: gotogxy(0,10);
+      0008D4 3E 0A                 1851 	ld	a, #0x0a
+      0008D6 F5                    1852 	push	af
+      0008D7 33                    1853 	inc	sp
+      0008D8 AF                    1854 	xor	a, a
+      0008D9 F5                    1855 	push	af
+      0008DA 33                    1856 	inc	sp
+      0008DB CDr00r00              1857 	call	_gotogxy
+      0008DE E8 02                 1858 	add	sp, #2
+                                   1859 ;src/gb/awele_gb.c:350: gprint(gJoueur[joueur]);
+      0008E0 F8 16                 1860 	ldhl	sp,	#22
+      0008E2 7E                    1861 	ld	a, (hl)
+      0008E3 F8 00                 1862 	ldhl	sp,	#0
+      0008E5 77                    1863 	ld	(hl), a
+      0008E6 AF                    1864 	xor	a, a
+      0008E7 23                    1865 	inc	hl
+      0008E8 77                    1866 	ld	(hl), a
+      0008E9 C1                    1867 	pop	bc
+      0008EA C5                    1868 	push	bc
+      0008EB CB 21                 1869 	sla	c
+      0008ED CB 10                 1870 	rl	b
+      0008EF 21r00r00              1871 	ld	hl, #_gJoueur
+      0008F2 09                    1872 	add	hl, bc
+      0008F3 2A                    1873 	ld	a, (hl+)
+      0008F4 4F                    1874 	ld	c, a
+      0008F5 46                    1875 	ld	b, (hl)
+      0008F6 C5                    1876 	push	bc
+      0008F7 CDr00r00              1877 	call	_gprint
+      0008FA E8 02                 1878 	add	sp, #2
+                                   1879 ;src/gb/awele_gb.c:351: gotogxy(0,11);
+      0008FC 3E 0B                 1880 	ld	a, #0x0b
+      0008FE F5                    1881 	push	af
+      0008FF 33                    1882 	inc	sp
+      000900 AF                    1883 	xor	a, a
+      000901 F5                    1884 	push	af
+      000902 33                    1885 	inc	sp
+      000903 CDr00r00              1886 	call	_gotogxy
+      000906 E8 02                 1887 	add	sp, #2
+                                   1888 ;src/gb/awele_gb.c:352: gprint(gQuelleCase); 
+      000908 21r00r00              1889 	ld	hl, #_gQuelleCase
+      00090B E5                    1890 	push	hl
+      00090C CDr00r00              1891 	call	_gprint
+      00090F E8 02                 1892 	add	sp, #2
+                                   1893 ;src/gb/awele_gb.c:355: color(WHITE,WHITE,SOLID);
+      000911 AF                    1894 	xor	a, a
+      000912 F5                    1895 	push	af
+      000913 33                    1896 	inc	sp
+      000914 AF                    1897 	xor	a, a
+      000915 F5                    1898 	push	af
+      000916 33                    1899 	inc	sp
+      000917 AF                    1900 	xor	a, a
+      000918 F5                    1901 	push	af
+      000919 33                    1902 	inc	sp
+      00091A CDr00r00              1903 	call	_color
+      00091D E8 03                 1904 	add	sp, #3
+                                   1905 ;src/gb/awele_gb.c:356: box(16,16,144,22,M_FILL);
+      00091F 11 16 01              1906 	ld	de, #0x0116
+      000922 D5                    1907 	push	de
+      000923 11 10 90              1908 	ld	de, #0x9010
+      000926 D5                    1909 	push	de
+      000927 3E 10                 1910 	ld	a, #0x10
+      000929 F5                    1911 	push	af
+      00092A 33                    1912 	inc	sp
+      00092B CDr00r00              1913 	call	_box
+      00092E E8 05                 1914 	add	sp, #5
+                                   1915 ;src/gb/awele_gb.c:357: box(16,49,144,55,M_FILL);
+      000930 11 37 01              1916 	ld	de, #0x0137
+      000933 D5                    1917 	push	de
+      000934 11 31 90              1918 	ld	de, #0x9031
+      000937 D5                    1919 	push	de
+      000938 3E 10                 1920 	ld	a, #0x10
+      00093A F5                    1921 	push	af
+      00093B 33                    1922 	inc	sp
+      00093C CDr00r00              1923 	call	_box
+      00093F E8 05                 1924 	add	sp, #5
+                                   1925 ;src/gb/awele_gb.c:359: for(c=joueur*(NCASES+1);!jeu[c];c++);
+      000941 F8 16                 1926 	ldhl	sp,	#22
+      000943 7E                    1927 	ld	a, (hl)
+      000944 4F                    1928 	ld	c, a
+      000945 87                    1929 	add	a, a
+      000946 87                    1930 	add	a, a
+      000947 87                    1931 	add	a, a
+      000948 81                    1932 	add	a, c
+      000949 F8 12                 1933 	ldhl	sp,	#18
+      00094B 77                    1934 	ld	(hl), a
+      00094C F8 02                 1935 	ldhl	sp,	#2
+      00094E 77                    1936 	ld	(hl), a
+      00094F F8 12                 1937 	ldhl	sp,	#18
+      000951 5E                    1938 	ld	e, (hl)
+      000952                       1939 00124$:
+      000952 7B                    1940 	ld	a, e
+      000953 4F                    1941 	ld	c, a
+      000954 17                    1942 	rla
+      000955 9F                    1943 	sbc	a, a
+      000956 47                    1944 	ld	b, a
+      000957 21r00r00              1945 	ld	hl, #_jeu
+      00095A 09                    1946 	add	hl, bc
+      00095B 7E                    1947 	ld	a, (hl)
+      00095C B7                    1948 	or	a, a
+      00095D 20 03                 1949 	jr	NZ, 00144$
+      00095F 1C                    1950 	inc	e
+      000960 18 F0                 1951 	jr	00124$
+      000962                       1952 00144$:
+      000962 F8 13                 1953 	ldhl	sp,	#19
+      000964 73                    1954 	ld	(hl), e
+                                   1955 ;src/gb/awele_gb.c:360: y= 6-joueur*4;
+      000965 F8 16                 1956 	ldhl	sp,	#22
+      000967 4E                    1957 	ld	c, (hl)
+      000968 79                    1958 	ld	a, c
+      000969 87                    1959 	add	a, a
+      00096A 87                    1960 	add	a, a
+      00096B 47                    1961 	ld	b, a
+      00096C 3E 06                 1962 	ld	a, #0x06
+      00096E 90                    1963 	sub	a, b
+      00096F F8 03                 1964 	ldhl	sp,	#3
+      000971 77                    1965 	ld	(hl), a
+                                   1966 ;src/gb/awele_gb.c:361: revers(FALSE);
+      000972 C5                    1967 	push	bc
+      000973 AF                    1968 	xor	a, a
+      000974 F5                    1969 	push	af
+      000975 33                    1970 	inc	sp
+      000976 CDr3Cr00              1971 	call	_revers
+      000979 33                    1972 	inc	sp
+      00097A C1                    1973 	pop	bc
+                                   1974 ;src/gb/awele_gb.c:362: do
+      00097B 79                    1975 	ld	a, c
+      00097C 87                    1976 	add	a, a
+      00097D 47                    1977 	ld	b, a
+      00097E 3E 01                 1978 	ld	a, #0x01
+      000980 90                    1979 	sub	a, b
+      000981 F8 04                 1980 	ldhl	sp,	#4
+      000983 77                    1981 	ld	(hl), a
+      000984 79                    1982 	ld	a, c
+      000985 87                    1983 	add	a, a
+      000986 81                    1984 	add	a, c
+      000987 87                    1985 	add	a, a
+      000988 81                    1986 	add	a, c
+      000989 F8 05                 1987 	ldhl	sp,	#5
+      00098B 77                    1988 	ld	(hl), a
+      00098C F8 16                 1989 	ldhl	sp,	#22
+      00098E 4E                    1990 	ld	c, (hl)
+      00098F 06 00                 1991 	ld	b, #0x00
+      000991 69                    1992 	ld	l, c
+      000992 60                    1993 	ld	h, b
+      000993 29                    1994 	add	hl, hl
+      000994 29                    1995 	add	hl, hl
+      000995 29                    1996 	add	hl, hl
+      000996 09                    1997 	add	hl, bc
+      000997 4D                    1998 	ld	c, l
+      000998 44                    1999 	ld	b, h
+      000999 F8 06                 2000 	ldhl	sp,	#6
+      00099B 79                    2001 	ld	a, c
+      00099C 22                    2002 	ld	(hl+), a
+      00099D 70                    2003 	ld	(hl), b
+      00099E F8 12                 2004 	ldhl	sp,	#18
+      0009A0 7E                    2005 	ld	a, (hl)
+      0009A1 F8 08                 2006 	ldhl	sp,	#8
+      0009A3 22                    2007 	ld	(hl+), a
+      0009A4 79                    2008 	ld	a, c
+      0009A5 22                    2009 	ld	(hl+), a
+      0009A6 70                    2010 	ld	(hl), b
+      0009A7                       2011 00120$:
+                                   2012 ;src/gb/awele_gb.c:365: color(WHITE,WHITE,SOLID);
+      0009A7 AF                    2013 	xor	a, a
+      0009A8 F5                    2014 	push	af
+      0009A9 33                    2015 	inc	sp
+      0009AA AF                    2016 	xor	a, a
+      0009AB F5                    2017 	push	af
+      0009AC 33                    2018 	inc	sp
+      0009AD AF                    2019 	xor	a, a
+      0009AE F5                    2020 	push	af
+      0009AF 33                    2021 	inc	sp
+      0009B0 CDr00r00              2022 	call	_color
+      0009B3 E8 03                 2023 	add	sp, #3
+                                   2024 ;src/gb/awele_gb.c:366: (joueur==0)?box(16,49,144,55,M_FILL):box(16,16,144,22,M_FILL);
+      0009B5 F8 16                 2025 	ldhl	sp,	#22
+      0009B7 7E                    2026 	ld	a, (hl)
+      0009B8 B7                    2027 	or	a, a
+      0009B9 20 13                 2028 	jr	NZ, 00128$
+      0009BB 11 37 01              2029 	ld	de, #0x0137
+      0009BE D5                    2030 	push	de
+      0009BF 11 31 90              2031 	ld	de, #0x9031
+      0009C2 D5                    2032 	push	de
+      0009C3 3E 10                 2033 	ld	a, #0x10
+      0009C5 F5                    2034 	push	af
+      0009C6 33                    2035 	inc	sp
+      0009C7 CDr00r00              2036 	call	_box
+      0009CA E8 05                 2037 	add	sp, #5
+      0009CC 18 11                 2038 	jr	00129$
+      0009CE                       2039 00128$:
+      0009CE 11 16 01              2040 	ld	de, #0x0116
+      0009D1 D5                    2041 	push	de
+      0009D2 11 10 90              2042 	ld	de, #0x9010
+      0009D5 D5                    2043 	push	de
+      0009D6 3E 10                 2044 	ld	a, #0x10
+      0009D8 F5                    2045 	push	af
+      0009D9 33                    2046 	inc	sp
+      0009DA CDr00r00              2047 	call	_box
+      0009DD E8 05                 2048 	add	sp, #5
+      0009DF                       2049 00129$:
+                                   2050 ;src/gb/awele_gb.c:368: x=(c-joueur*(NCASES+1));
+      0009DF F8 13                 2051 	ldhl	sp,	#19
+      0009E1 7E                    2052 	ld	a, (hl)
+      0009E2 F8 02                 2053 	ldhl	sp,	#2
+      0009E4 96                    2054 	sub	a, (hl)
+                                   2055 ;src/gb/awele_gb.c:369: x = (1-2*joueur)*x;
+      0009E5 F5                    2056 	push	af
+      0009E6 33                    2057 	inc	sp
+      0009E7 23                    2058 	inc	hl
+      0009E8 23                    2059 	inc	hl
+      0009E9 7E                    2060 	ld	a, (hl)
+      0009EA F5                    2061 	push	af
+      0009EB 33                    2062 	inc	sp
+      0009EC CDr00r00              2063 	call	__muluschar
+      0009EF E8 02                 2064 	add	sp, #2
+      0009F1 7B                    2065 	ld	a, e
+                                   2066 ;src/gb/awele_gb.c:370: x+=7*joueur;
+      0009F2 F8 05                 2067 	ldhl	sp,	#5
+      0009F4 86                    2068 	add	a, (hl)
+                                   2069 ;src/gb/awele_gb.c:371: x = x*2;
+      0009F5 87                    2070 	add	a, a
+                                   2071 ;src/gb/awele_gb.c:372: x+=2;
+      0009F6 C6 02                 2072 	add	a, #0x02
+      0009F8 F8 0B                 2073 	ldhl	sp,	#11
+      0009FA 77                    2074 	ld	(hl), a
+                                   2075 ;src/gb/awele_gb.c:373: gotogxy(x,y);revers(FALSE);wrtchr(1+(char)joueur);
+      0009FB F8 03                 2076 	ldhl	sp,	#3
+      0009FD 7E                    2077 	ld	a, (hl)
+      0009FE F5                    2078 	push	af
+      0009FF 33                    2079 	inc	sp
+      000A00 F8 0C                 2080 	ldhl	sp,	#12
+      000A02 7E                    2081 	ld	a, (hl)
+      000A03 F5                    2082 	push	af
+      000A04 33                    2083 	inc	sp
+      000A05 CDr00r00              2084 	call	_gotogxy
+      000A08 E8 02                 2085 	add	sp, #2
+      000A0A AF                    2086 	xor	a, a
+      000A0B F5                    2087 	push	af
+      000A0C 33                    2088 	inc	sp
+      000A0D CDr3Cr00              2089 	call	_revers
+      000A10 33                    2090 	inc	sp
+      000A11 F8 16                 2091 	ldhl	sp,	#22
+      000A13 4E                    2092 	ld	c, (hl)
+      000A14 79                    2093 	ld	a, c
+      000A15 3C                    2094 	inc	a
+      000A16 F8 0C                 2095 	ldhl	sp,	#12
+      000A18 77                    2096 	ld	(hl), a
+      000A19 C5                    2097 	push	bc
+      000A1A 7E                    2098 	ld	a, (hl)
+      000A1B F5                    2099 	push	af
+      000A1C 33                    2100 	inc	sp
+      000A1D CDr00r00              2101 	call	_wrtchr
+      000A20 33                    2102 	inc	sp
+      000A21 CDrF8r00              2103 	call	_boitePlateau
+      000A24 C1                    2104 	pop	bc
+                                   2105 ;src/gb/awele_gb.c:378: do k = getkj(); while(!k);
+      000A25 F8 0C                 2106 	ldhl	sp,	#12
+      000A27 7E                    2107 	ld	a, (hl)
+      000A28 87                    2108 	add	a, a
+      000A29 87                    2109 	add	a, a
+      000A2A 87                    2110 	add	a, a
+      000A2B 81                    2111 	add	a, c
+      000A2C C6 FF                 2112 	add	a, #0xff
+      000A2E 23                    2113 	inc	hl
+      000A2F 77                    2114 	ld	(hl), a
+      000A30                       2115 00102$:
+      000A30 CDr3Fr01              2116 	call	_getkj
+      000A33 F8 0E                 2117 	ldhl	sp,	#14
+      000A35 73                    2118 	ld	(hl), e
+      000A36 7E                    2119 	ld	a, (hl)
+      000A37 B7                    2120 	or	a, a
+      000A38 28 F6                 2121 	jr	Z, 00102$
+                                   2122 ;src/gb/awele_gb.c:379: if(k == KEY_LEFT)
+      000A3A 7E                    2123 	ld	a, (hl)
+      000A3B D6 08                 2124 	sub	a, #0x08
+      000A3D 20 29                 2125 	jr	NZ, 00108$
+                                   2126 ;src/gb/awele_gb.c:381: gotogxy(x,y);revers(FALSE);wrtchr(32);
+      000A3F F8 03                 2127 	ldhl	sp,	#3
+      000A41 7E                    2128 	ld	a, (hl)
+      000A42 F5                    2129 	push	af
+      000A43 33                    2130 	inc	sp
+      000A44 F8 0C                 2131 	ldhl	sp,	#12
+      000A46 7E                    2132 	ld	a, (hl)
+      000A47 F5                    2133 	push	af
+      000A48 33                    2134 	inc	sp
+      000A49 CDr00r00              2135 	call	_gotogxy
+      000A4C E8 02                 2136 	add	sp, #2
+      000A4E AF                    2137 	xor	a, a
+      000A4F F5                    2138 	push	af
+      000A50 33                    2139 	inc	sp
+      000A51 CDr3Cr00              2140 	call	_revers
+      000A54 33                    2141 	inc	sp
+      000A55 3E 20                 2142 	ld	a, #0x20
+      000A57 F5                    2143 	push	af
+      000A58 33                    2144 	inc	sp
+      000A59 CDr00r00              2145 	call	_wrtchr
+      000A5C 33                    2146 	inc	sp
+                                   2147 ;src/gb/awele_gb.c:382: c-=(1-2*joueur);
+      000A5D F8 13                 2148 	ldhl	sp,	#19
+      000A5F 7E                    2149 	ld	a, (hl)
+      000A60 F8 04                 2150 	ldhl	sp,	#4
+      000A62 96                    2151 	sub	a, (hl)
+      000A63 F8 13                 2152 	ldhl	sp,	#19
+      000A65 77                    2153 	ld	(hl), a
+      000A66 18 2E                 2154 	jr	00109$
+      000A68                       2155 00108$:
+                                   2156 ;src/gb/awele_gb.c:385: else if(k == KEY_RIGHT)
+      000A68 F8 0E                 2157 	ldhl	sp,	#14
+      000A6A 7E                    2158 	ld	a, (hl)
+      000A6B D6 09                 2159 	sub	a, #0x09
+      000A6D 20 27                 2160 	jr	NZ, 00109$
+                                   2161 ;src/gb/awele_gb.c:387: gotogxy(x,y);revers(FALSE);wrtchr(32);
+      000A6F F8 03                 2162 	ldhl	sp,	#3
+      000A71 7E                    2163 	ld	a, (hl)
+      000A72 F5                    2164 	push	af
+      000A73 33                    2165 	inc	sp
+      000A74 F8 0C                 2166 	ldhl	sp,	#12
+      000A76 7E                    2167 	ld	a, (hl)
+      000A77 F5                    2168 	push	af
+      000A78 33                    2169 	inc	sp
+      000A79 CDr00r00              2170 	call	_gotogxy
+      000A7C E8 02                 2171 	add	sp, #2
+      000A7E AF                    2172 	xor	a, a
+      000A7F F5                    2173 	push	af
+      000A80 33                    2174 	inc	sp
+      000A81 CDr3Cr00              2175 	call	_revers
+      000A84 33                    2176 	inc	sp
+      000A85 3E 20                 2177 	ld	a, #0x20
+      000A87 F5                    2178 	push	af
+      000A88 33                    2179 	inc	sp
+      000A89 CDr00r00              2180 	call	_wrtchr
+      000A8C 33                    2181 	inc	sp
+                                   2182 ;src/gb/awele_gb.c:388: c+=(1-2*joueur);
+      000A8D F8 13                 2183 	ldhl	sp,	#19
+      000A8F 7E                    2184 	ld	a, (hl)
+      000A90 F8 04                 2185 	ldhl	sp,	#4
+      000A92 86                    2186 	add	a, (hl)
+      000A93 F8 13                 2187 	ldhl	sp,	#19
+      000A95 77                    2188 	ld	(hl), a
+      000A96                       2189 00109$:
+                                   2190 ;src/gb/awele_gb.c:391: if(c<joueur*(NCASES+1)) c=joueur*(NCASES+1);
+      000A96 F8 13                 2191 	ldhl	sp,	#19
+      000A98 3A                    2192 	ld	a, (hl-)
+      000A99 2B                    2193 	dec	hl
+      000A9A 77                    2194 	ld	(hl), a
+      000A9B 17                    2195 	rla
+      000A9C 9F                    2196 	sbc	a, a
+      000A9D 23                    2197 	inc	hl
+      000A9E 77                    2198 	ld	(hl), a
+                                   2199 ;src/gb/awele_gb.c:392: else if(c>=(joueur+1)*NCASES+joueur) c=(joueur+1)*NCASES+joueur-1;
+      000A9F E1                    2200 	pop	hl
+      000AA0 E5                    2201 	push	hl
+      000AA1 23                    2202 	inc	hl
+      000AA2 29                    2203 	add	hl, hl
+      000AA3 29                    2204 	add	hl, hl
+      000AA4 29                    2205 	add	hl, hl
+      000AA5 4D                    2206 	ld	c, l
+      000AA6 44                    2207 	ld	b, h
+      000AA7 E1                    2208 	pop	hl
+      000AA8 E5                    2209 	push	hl
+      000AA9 09                    2210 	add	hl, bc
+      000AAA E5                    2211 	push	hl
+      000AAB 7D                    2212 	ld	a, l
+      000AAC F8 11                 2213 	ldhl	sp,	#17
+      000AAE 77                    2214 	ld	(hl), a
+      000AAF E1                    2215 	pop	hl
+      000AB0 7C                    2216 	ld	a, h
+      000AB1 F8 10                 2217 	ldhl	sp,	#16
+      000AB3 77                    2218 	ld	(hl), a
+                                   2219 ;src/gb/awele_gb.c:391: if(c<joueur*(NCASES+1)) c=joueur*(NCASES+1);
+      000AB4 F8 11                 2220 	ldhl	sp,	#17
+      000AB6 5D                    2221 	ld	e, l
+      000AB7 54                    2222 	ld	d, h
+      000AB8 F8 06                 2223 	ldhl	sp,	#6
+      000ABA 1A                    2224 	ld	a, (de)
+      000ABB 96                    2225 	sub	a, (hl)
+      000ABC 23                    2226 	inc	hl
+      000ABD 13                    2227 	inc	de
+      000ABE 1A                    2228 	ld	a, (de)
+      000ABF 9E                    2229 	sbc	a, (hl)
+      000AC0 1A                    2230 	ld	a, (de)
+      000AC1 57                    2231 	ld	d, a
+      000AC2 CB 7E                 2232 	bit	7, (hl)
+      000AC4 28 07                 2233 	jr	Z, 00206$
+      000AC6 CB 7A                 2234 	bit	7, d
+      000AC8 20 08                 2235 	jr	NZ, 00207$
+      000ACA BF                    2236 	cp	a, a
+      000ACB 18 05                 2237 	jr	00207$
+      000ACD                       2238 00206$:
+      000ACD CB 7A                 2239 	bit	7, d
+      000ACF 28 01                 2240 	jr	Z, 00207$
+      000AD1 37                    2241 	scf
+      000AD2                       2242 00207$:
+      000AD2 30 08                 2243 	jr	NC, 00113$
+      000AD4 F8 08                 2244 	ldhl	sp,	#8
+      000AD6 7E                    2245 	ld	a, (hl)
+      000AD7 F8 13                 2246 	ldhl	sp,	#19
+      000AD9 77                    2247 	ld	(hl), a
+      000ADA 18 26                 2248 	jr	00114$
+      000ADC                       2249 00113$:
+                                   2250 ;src/gb/awele_gb.c:392: else if(c>=(joueur+1)*NCASES+joueur) c=(joueur+1)*NCASES+joueur-1;
+      000ADC F8 11                 2251 	ldhl	sp,	#17
+      000ADE 5D                    2252 	ld	e, l
+      000ADF 54                    2253 	ld	d, h
+      000AE0 F8 0F                 2254 	ldhl	sp,	#15
+      000AE2 1A                    2255 	ld	a, (de)
+      000AE3 96                    2256 	sub	a, (hl)
+      000AE4 23                    2257 	inc	hl
+      000AE5 13                    2258 	inc	de
+      000AE6 1A                    2259 	ld	a, (de)
+      000AE7 9E                    2260 	sbc	a, (hl)
+      000AE8 1A                    2261 	ld	a, (de)
+      000AE9 57                    2262 	ld	d, a
+      000AEA CB 7E                 2263 	bit	7, (hl)
+      000AEC 28 07                 2264 	jr	Z, 00208$
+      000AEE CB 7A                 2265 	bit	7, d
+      000AF0 20 08                 2266 	jr	NZ, 00209$
+      000AF2 BF                    2267 	cp	a, a
+      000AF3 18 05                 2268 	jr	00209$
+      000AF5                       2269 00208$:
+      000AF5 CB 7A                 2270 	bit	7, d
+      000AF7 28 01                 2271 	jr	Z, 00209$
+      000AF9 37                    2272 	scf
+      000AFA                       2273 00209$:
+      000AFA 38 06                 2274 	jr	C, 00114$
+      000AFC F8 0D                 2275 	ldhl	sp,	#13
+      000AFE 7E                    2276 	ld	a, (hl)
+      000AFF F8 13                 2277 	ldhl	sp,	#19
+      000B01 77                    2278 	ld	(hl), a
+      000B02                       2279 00114$:
+                                   2280 ;src/gb/awele_gb.c:394: x=(c-joueur*(NCASES+1));
+      000B02 F8 13                 2281 	ldhl	sp,	#19
+      000B04 7E                    2282 	ld	a, (hl)
+      000B05 F8 08                 2283 	ldhl	sp,	#8
+      000B07 96                    2284 	sub	a, (hl)
+                                   2285 ;src/gb/awele_gb.c:395: x = (1-2*joueur)*x;
+      000B08 F5                    2286 	push	af
+      000B09 33                    2287 	inc	sp
+      000B0A F8 05                 2288 	ldhl	sp,	#5
+      000B0C 7E                    2289 	ld	a, (hl)
+      000B0D F5                    2290 	push	af
+      000B0E 33                    2291 	inc	sp
+      000B0F CDr00r00              2292 	call	__muluschar
+      000B12 E8 02                 2293 	add	sp, #2
+      000B14 7B                    2294 	ld	a, e
+                                   2295 ;src/gb/awele_gb.c:396: x+=7*joueur;
+      000B15 F8 05                 2296 	ldhl	sp,	#5
+      000B17 86                    2297 	add	a, (hl)
+                                   2298 ;src/gb/awele_gb.c:397: x = x*2;
+      000B18 87                    2299 	add	a, a
+                                   2300 ;src/gb/awele_gb.c:398: x+=2;
+      000B19 C6 02                 2301 	add	a, #0x02
+      000B1B F8 0B                 2302 	ldhl	sp,	#11
+      000B1D 77                    2303 	ld	(hl), a
+                                   2304 ;src/gb/awele_gb.c:399: gotogxy(x,y);revers(FALSE);wrtchr(1+(char)joueur);
+      000B1E F8 03                 2305 	ldhl	sp,	#3
+      000B20 7E                    2306 	ld	a, (hl)
+      000B21 F5                    2307 	push	af
+      000B22 33                    2308 	inc	sp
+      000B23 F8 0C                 2309 	ldhl	sp,	#12
+      000B25 7E                    2310 	ld	a, (hl)
+      000B26 F5                    2311 	push	af
+      000B27 33                    2312 	inc	sp
+      000B28 CDr00r00              2313 	call	_gotogxy
+      000B2B E8 02                 2314 	add	sp, #2
+      000B2D AF                    2315 	xor	a, a
+      000B2E F5                    2316 	push	af
+      000B2F 33                    2317 	inc	sp
+      000B30 CDr3Cr00              2318 	call	_revers
+      000B33 33                    2319 	inc	sp
+      000B34 F8 0C                 2320 	ldhl	sp,	#12
+      000B36 7E                    2321 	ld	a, (hl)
+      000B37 F5                    2322 	push	af
+      000B38 33                    2323 	inc	sp
+      000B39 CDr00r00              2324 	call	_wrtchr
+      000B3C 33                    2325 	inc	sp
+                                   2326 ;src/gb/awele_gb.c:400: gotogxy(16,11);
+      000B3D 11 10 0B              2327 	ld	de, #0x0b10
+      000B40 D5                    2328 	push	de
+      000B41 CDr00r00              2329 	call	_gotogxy
+      000B44 E8 02                 2330 	add	sp, #2
+                                   2331 ;src/gb/awele_gb.c:401: gprintf("%d ",c);
+      000B46 F8 13                 2332 	ldhl	sp,	#19
+      000B48 3A                    2333 	ld	a, (hl-)
+      000B49 2B                    2334 	dec	hl
+      000B4A 77                    2335 	ld	(hl), a
+      000B4B 17                    2336 	rla
+      000B4C 9F                    2337 	sbc	a, a
+      000B4D 23                    2338 	inc	hl
+      000B4E 32                    2339 	ld	(hl-), a
+      000B4F 2A                    2340 	ld	a, (hl+)
+      000B50 66                    2341 	ld	h, (hl)
+      000B51 6F                    2342 	ld	l, a
+      000B52 E5                    2343 	push	hl
+      000B53 21rF1r0B              2344 	ld	hl, #___str_7
+      000B56 E5                    2345 	push	hl
+      000B57 CDr00r00              2346 	call	_gprintf
+      000B5A E8 04                 2347 	add	sp, #4
+                                   2348 ;src/gb/awele_gb.c:402: boitePlateau();		
+      000B5C CDrF8r00              2349 	call	_boitePlateau
+                                   2350 ;src/gb/awele_gb.c:403: } while(k != KEY_RETURN);
+      000B5F F8 0E                 2351 	ldhl	sp,	#14
+      000B61 7E                    2352 	ld	a, (hl)
+      000B62 D6 0D                 2353 	sub	a, #0x0d
+      000B64 C2r30r0A              2354 	jp	NZ,00102$
+                                   2355 ;src/gb/awele_gb.c:404: waitpadup();
+      000B67 CDr00r00              2356 	call	_waitpadup
+                                   2357 ;src/gb/awele_gb.c:406: gotogxy(x,y);revers(FALSE);wrtchr(1+(char)joueur);
+      000B6A F8 03                 2358 	ldhl	sp,	#3
+      000B6C 7E                    2359 	ld	a, (hl)
+      000B6D F5                    2360 	push	af
+      000B6E 33                    2361 	inc	sp
+      000B6F F8 0C                 2362 	ldhl	sp,	#12
+      000B71 7E                    2363 	ld	a, (hl)
+      000B72 F5                    2364 	push	af
+      000B73 33                    2365 	inc	sp
+      000B74 CDr00r00              2366 	call	_gotogxy
+      000B77 E8 02                 2367 	add	sp, #2
+      000B79 AF                    2368 	xor	a, a
+      000B7A F5                    2369 	push	af
+      000B7B 33                    2370 	inc	sp
+      000B7C CDr3Cr00              2371 	call	_revers
+      000B7F 33                    2372 	inc	sp
+      000B80 F8 0C                 2373 	ldhl	sp,	#12
+      000B82 7E                    2374 	ld	a, (hl)
+      000B83 F5                    2375 	push	af
+      000B84 33                    2376 	inc	sp
+      000B85 CDr00r00              2377 	call	_wrtchr
+      000B88 33                    2378 	inc	sp
+                                   2379 ;src/gb/awele_gb.c:408: } while(c<joueur*(NCASES+1) || c>=(joueur+1)*NCASES+joueur || !jeu[c]);
+      000B89 F8 11                 2380 	ldhl	sp,	#17
+      000B8B 5D                    2381 	ld	e, l
+      000B8C 54                    2382 	ld	d, h
+      000B8D F8 09                 2383 	ldhl	sp,	#9
+      000B8F 1A                    2384 	ld	a, (de)
+      000B90 96                    2385 	sub	a, (hl)
+      000B91 23                    2386 	inc	hl
+      000B92 13                    2387 	inc	de
+      000B93 1A                    2388 	ld	a, (de)
+      000B94 9E                    2389 	sbc	a, (hl)
+      000B95 1A                    2390 	ld	a, (de)
+      000B96 57                    2391 	ld	d, a
+      000B97 CB 7E                 2392 	bit	7, (hl)
+      000B99 28 07                 2393 	jr	Z, 00212$
+      000B9B CB 7A                 2394 	bit	7, d
+      000B9D 20 08                 2395 	jr	NZ, 00213$
+      000B9F BF                    2396 	cp	a, a
+      000BA0 18 05                 2397 	jr	00213$
+      000BA2                       2398 00212$:
+      000BA2 CB 7A                 2399 	bit	7, d
+      000BA4 28 01                 2400 	jr	Z, 00213$
+      000BA6 37                    2401 	scf
+      000BA7                       2402 00213$:
+      000BA7 DArA7r09              2403 	jp	C, 00120$
+      000BAA F8 11                 2404 	ldhl	sp,	#17
+      000BAC 5D                    2405 	ld	e, l
+      000BAD 54                    2406 	ld	d, h
+      000BAE F8 0F                 2407 	ldhl	sp,	#15
+      000BB0 1A                    2408 	ld	a, (de)
+      000BB1 96                    2409 	sub	a, (hl)
+      000BB2 23                    2410 	inc	hl
+      000BB3 13                    2411 	inc	de
+      000BB4 1A                    2412 	ld	a, (de)
+      000BB5 9E                    2413 	sbc	a, (hl)
+      000BB6 1A                    2414 	ld	a, (de)
+      000BB7 57                    2415 	ld	d, a
+      000BB8 CB 7E                 2416 	bit	7, (hl)
+      000BBA 28 07                 2417 	jr	Z, 00214$
+      000BBC CB 7A                 2418 	bit	7, d
+      000BBE 20 08                 2419 	jr	NZ, 00215$
+      000BC0 BF                    2420 	cp	a, a
+      000BC1 18 05                 2421 	jr	00215$
+      000BC3                       2422 00214$:
+      000BC3 CB 7A                 2423 	bit	7, d
+      000BC5 28 01                 2424 	jr	Z, 00215$
+      000BC7 37                    2425 	scf
+      000BC8                       2426 00215$:
+      000BC8 D2rA7r09              2427 	jp	NC, 00120$
+                                   2428 ;c
+      000BCB F8 11                 2429 	ldhl	sp,#17
+      000BCD 2A                    2430 	ld	a, (hl+)
+      000BCE 5F                    2431 	ld	e, a
+      000BCF 56                    2432 	ld	d, (hl)
+      000BD0 21r00r00              2433 	ld	hl, #_jeu
+      000BD3 19                    2434 	add	hl, de
+      000BD4 4D                    2435 	ld	c, l
+      000BD5 44                    2436 	ld	b, h
+      000BD6 0A                    2437 	ld	a, (bc)
+      000BD7 B7                    2438 	or	a, a
+      000BD8 CArA7r09              2439 	jp	Z, 00120$
+                                   2440 ;src/gb/awele_gb.c:409: effaceLigne(10);
+      000BDB 3E 0A                 2441 	ld	a, #0x0a
+      000BDD F5                    2442 	push	af
+      000BDE 33                    2443 	inc	sp
+      000BDF CDr5Er00              2444 	call	_effaceLigne
+      000BE2 33                    2445 	inc	sp
+                                   2446 ;src/gb/awele_gb.c:410: effaceLigne(11);
+      000BE3 3E 0B                 2447 	ld	a, #0x0b
+      000BE5 F5                    2448 	push	af
+      000BE6 33                    2449 	inc	sp
+      000BE7 CDr5Er00              2450 	call	_effaceLigne
+      000BEA 33                    2451 	inc	sp
+                                   2452 ;src/gb/awele_gb.c:411: return(c);
+      000BEB F8 13                 2453 	ldhl	sp,	#19
+      000BED 5E                    2454 	ld	e, (hl)
+                                   2455 ;src/gb/awele_gb.c:412: }
+      000BEE E8 14                 2456 	add	sp, #20
+      000BF0 C9                    2457 	ret
+      000BF1                       2458 ___str_7:
+      000BF1 25 64 20              2459 	.ascii "%d "
+      000BF4 00                    2460 	.db 0x00
+                                   2461 ;src/gb/awele_gb.c:414: void dbgprint(STRPTR s)
+                                   2462 ;	---------------------------------
+                                   2463 ; Function dbgprint
+                                   2464 ; ---------------------------------
+      000BF5                       2465 _dbgprint::
+                                   2466 ;src/gb/awele_gb.c:417: gotogxy(0,15);
+      000BF5 3E 0F                 2467 	ld	a, #0x0f
+      000BF7 F5                    2468 	push	af
+      000BF8 33                    2469 	inc	sp
+      000BF9 AF                    2470 	xor	a, a
+      000BFA F5                    2471 	push	af
+      000BFB 33                    2472 	inc	sp
+      000BFC CDr00r00              2473 	call	_gotogxy
+      000BFF E8 02                 2474 	add	sp, #2
+                                   2475 ;src/gb/awele_gb.c:418: revers(FALSE);
+      000C01 AF                    2476 	xor	a, a
+      000C02 F5                    2477 	push	af
+      000C03 33                    2478 	inc	sp
+      000C04 CDr3Cr00              2479 	call	_revers
+      000C07 33                    2480 	inc	sp
+                                   2481 ;src/gb/awele_gb.c:419: gprint(s);	
+      000C08 C1                    2482 	pop	bc
+      000C09 E1                    2483 	pop	hl
+      000C0A E5                    2484 	push	hl
+      000C0B C5                    2485 	push	bc
+      000C0C E5                    2486 	push	hl
+      000C0D CDr00r00              2487 	call	_gprint
+      000C10 E8 02                 2488 	add	sp, #2
+                                   2489 ;src/gb/awele_gb.c:420: waitpad(J_B);
+      000C12 3E 20                 2490 	ld	a, #0x20
+      000C14 F5                    2491 	push	af
+      000C15 33                    2492 	inc	sp
+      000C16 CDr00r00              2493 	call	_waitpad
+      000C19 33                    2494 	inc	sp
+                                   2495 ;src/gb/awele_gb.c:421: waitpadup();
+                                   2496 ;src/gb/awele_gb.c:422: }
+      000C1A C3r00r00              2497 	jp  _waitpadup
+                                   2498 ;src/gb/awele_gb.c:424: void afficherRegles()
+                                   2499 ;	---------------------------------
+                                   2500 ; Function afficherRegles
+                                   2501 ; ---------------------------------
+      000C1D                       2502 _afficherRegles::
+                                   2503 ;src/gb/awele_gb.c:426: clrscr();
+      000C1D CDrBDr00              2504 	call	_clrscr
+                                   2505 ;src/gb/awele_gb.c:427: gotogxy(0,1);
+      000C20 3E 01                 2506 	ld	a, #0x01
+      000C22 F5                    2507 	push	af
+      000C23 33                    2508 	inc	sp
+      000C24 AF                    2509 	xor	a, a
+      000C25 F5                    2510 	push	af
+      000C26 33                    2511 	inc	sp
+      000C27 CDr00r00              2512 	call	_gotogxy
+      000C2A E8 02                 2513 	add	sp, #2
+                                   2514 ;src/gb/awele_gb.c:428: gprint("ACTION: Au début de la partie, les joueurs placent leurs graines, par groupes de 6,\
+      000C2C 21r36r0C              2515 	ld	hl, #___str_8
+      000C2F E5                    2516 	push	hl
+      000C30 CDr00r00              2517 	call	_gprint
+      000C33 E8 02                 2518 	add	sp, #2
+                                   2519 ;src/gb/awele_gb.c:447: }
+      000C35 C9                    2520 	ret
+      000C36                       2521 ___str_8:
+      000C36 41 43 54 49 4F 4E 3A  2522 	.ascii "ACTION: Au d"
+             20 41 75 20 64
+      000C42 E9                    2523 	.db 0xe9
+      000C43 62 75 74 20 64 65 20  2524 	.ascii "but de la partie, les joueurs placent leurs graines, par gro"
+             6C 61 20 70 61 72 74
+             69 65 2C 20 6C 65 73
+             20 6A 6F 75 65 75 72
+             73 20 70 6C 61 63 65
+             6E 74 20 6C 65 75 72
+             73 20 67 72 61 69 6E
+             65 73 2C 20 70 61 72
+             20 67 72 6F
+      000C7F 75 70 65 73 20 64 65  2525 	.ascii "upes de 6,dans les troues de leur rang"
+             20 36 2C 64 61 6E 73
+             20 6C 65 73 20 74 72
+             6F 75 65 73 20 64 65
+             20 6C 65 75 72 20 72
+             61 6E 67
+      000CA5 E9                    2526 	.db 0xe9
+      000CA6 65 20 28 6F 6E 20 6E  2527 	.ascii "e (on ne place aucune graines dans le Kalaha). L'und'entre e"
+             65 20 70 6C 61 63 65
+             20 61 75 63 75 6E 65
+             20 67 72 61 69 6E 65
+             73 20 64 61 6E 73 20
+             6C 65 20 4B 61 6C 61
+             68 61 29 2E 20 4C 27
+             75 6E 64 27 65 6E 74
+             72 65 20 65
+      000CE2 75 78 20 28 74 69 72  2528 	.ascii "ux (tir"
+      000CE9 E9                    2529 	.db 0xe9
+      000CEA 20 61 75 20 73 6F 72  2530 	.ascii " au sort) commence la partie.A son tour de jeu, un joueur pr"
+             74 29 20 63 6F 6D 6D
+             65 6E 63 65 20 6C 61
+             20 70 61 72 74 69 65
+             2E 41 20 73 6F 6E 20
+             74 6F 75 72 20 64 65
+             20 6A 65 75 2C 20 75
+             6E 20 6A 6F 75 65 75
+             72 20 70 72
+      000D26 65 6E 64 20 6C 65 73  2531 	.ascii "end les graines dans un trou des trous la rang"
+             20 67 72 61 69 6E 65
+             73 20 64 61 6E 73 20
+             75 6E 20 74 72 6F 75
+             20 64 65 73 20 74 72
+             6F 75 73 20 6C 61 20
+             72 61 6E 67
+      000D54 E9                    2532 	.db 0xe9
+      000D55 65 20 70 72 6F 63 68  2533 	.ascii "e prochede lui et les s"
+             65 64 65 20 6C 75 69
+             20 65 74 20 6C 65 73
+             20 73
+      000D6C E8                    2534 	.db 0xe8
+      000D6D 6D 65 20 75 6E 65 20  2535 	.ascii "me une par une dans chacun des trous qui suivent ainsi que d"
+             70 61 72 20 75 6E 65
+             20 64 61 6E 73 20 63
+             68 61 63 75 6E 20 64
+             65 73 20 74 72 6F 75
+             73 20 71 75 69 20 73
+             75 69 76 65 6E 74 20
+             61 69 6E 73 69 20 71
+             75 65 20 64
+      000DA9 61 6E 73 20 73 6F 6E  2536 	.ascii "ans sonKalaha en suivant le sens anti-horaire. Le joueur ne "
+             4B 61 6C 61 68 61 20
+             65 6E 20 73 75 69 76
+             61 6E 74 20 6C 65 20
+             73 65 6E 73 20 61 6E
+             74 69 2D 68 6F 72 61
+             69 72 65 2E 20 4C 65
+             20 6A 6F 75 65 75 72
+             20 6E 65 20
+      000DE5 73                    2537 	.ascii "s"
+      000DE6 E8                    2538 	.db 0xe8
+      000DE7 6D 65 20 6A 61 6D 61  2539 	.ascii "me jamais de graines dans leKalaha de son adversaire.- Si le"
+             69 73 20 64 65 20 67
+             72 61 69 6E 65 73 20
+             64 61 6E 73 20 6C 65
+             4B 61 6C 61 68 61 20
+             64 65 20 73 6F 6E 20
+             61 64 76 65 72 73 61
+             69 72 65 2E 2D 20 53
+             69 20 6C 65
+      000E23 20 6A 6F 75 65 75 72  2540 	.ascii " joueur s"
+             20 73
+      000E2C E8                    2541 	.db 0xe8
+      000E2D 6D 65 20 73 61 20 64  2542 	.ascii "me sa derni"
+             65 72 6E 69
+      000E38 E8                    2543 	.db 0xe8
+      000E39 72 65 20 67 72 61 69  2544 	.ascii "re graine dans son Kalaha, il peut rejouer. On peut ainsienc"
+             6E 65 20 64 61 6E 73
+             20 73 6F 6E 20 4B 61
+             6C 61 68 61 2C 20 69
+             6C 20 70 65 75 74 20
+             72 65 6A 6F 75 65 72
+             2E 20 4F 6E 20 70 65
+             75 74 20 61 69 6E 73
+             69 65 6E 63
+      000E75 68 61                 2545 	.ascii "ha"
+      000E77 EE                    2546 	.db 0xee
+      000E78 6E 65 72 20 70 6C 75  2547 	.ascii "ner plusieurs tous de jeu.- Si le joueur s"
+             73 69 65 75 72 73 20
+             74 6F 75 73 20 64 65
+             20 6A 65 75 2E 2D 20
+             53 69 20 6C 65 20 6A
+             6F 75 65 75 72 20 73
+      000EA2 E8                    2548 	.db 0xe8
+      000EA3 6D 65 20 73 61 20 64  2549 	.ascii "me sa derni"
+             65 72 6E 69
+      000EAE E8                    2550 	.db 0xe8
+      000EAF 72 65 20 67 72 61 69  2551 	.ascii "re graine dans un trou vide de sa propre rang"
+             6E 65 20 64 61 6E 73
+             20 75 6E 20 74 72 6F
+             75 20 76 69 64 65 20
+             64 65 20 73 61 20 70
+             72 6F 70 72 65 20 72
+             61 6E 67
+      000EDC E9                    2552 	.db 0xe9
+      000EDD 65 2C 20 69 6C 20 63  2553 	.ascii "e, il captureles graines situ"
+             61 70 74 75 72 65 6C
+             65 73 20 67 72 61 69
+             6E 65 73 20 73 69 74
+             75
+      000EFA E9                    2554 	.db 0xe9
+      000EFB 65 73 20 64 61 6E 73  2555 	.ascii "es dans le trou en vis "
+             20 6C 65 20 74 72 6F
+             75 20 65 6E 20 76 69
+             73 20
+      000F12 E0                    2556 	.db 0xe0
+      000F13 20 76 69 73 20 65 74  2557 	.ascii " vis et les place dans son Kalaha. Puis c'est ason adversair"
+             20 6C 65 73 20 70 6C
+             61 63 65 20 64 61 6E
+             73 20 73 6F 6E 20 4B
+             61 6C 61 68 61 2E 20
+             50 75 69 73 20 63 27
+             65 73 74 20 61 73 6F
+             6E 20 61 64 76 65 72
+             73 61 69 72
+      000F4F 65 20 64 65 20 6A 6F  2558 	.ascii "e de jouer.- Si le joueur s"
+             75 65 72 2E 2D 20 53
+             69 20 6C 65 20 6A 6F
+             75 65 75 72 20 73
+      000F6A E8                    2559 	.db 0xe8
+      000F6B 6D 65 20 73 61 20 64  2560 	.ascii "me sa derni"
+             65 72 6E 69
+      000F76 E8                    2561 	.db 0xe8
+      000F77 72 65 20 67 72 61 69  2562 	.ascii "re graine dans un trou qui n'"
+             6E 65 20 64 61 6E 73
+             20 75 6E 20 74 72 6F
+             75 20 71 75 69 20 6E
+             27
+      000F94 E9                    2563 	.db 0xe9
+      000F95 74 61 69 74 20 70 61  2564 	.ascii "tait pas vide, son tour de jeuse termine et c'est "
+             73 20 76 69 64 65 2C
+             20 73 6F 6E 20 74 6F
+             75 72 20 64 65 20 6A
+             65 75 73 65 20 74 65
+             72 6D 69 6E 65 20 65
+             74 20 63 27 65 73 74
+             20
+      000FC7 E0                    2565 	.db 0xe0
+      000FC8 20 73 6F 6E 20 61 64  2566 	.ascii " son adversaire de jouer.La partie se termine lorsqu'un des "
+             76 65 72 73 61 69 72
+             65 20 64 65 20 6A 6F
+             75 65 72 2E 4C 61 20
+             70 61 72 74 69 65 20
+             73 65 20 74 65 72 6D
+             69 6E 65 20 6C 6F 72
+             73 71 75 27 75 6E 20
+             64 65 73 20
+      001004 6A 6F 75 65 75 72 20  2567 	.ascii "joueur ne peux plus jouer car lors de son tour dejeu, sa ran"
+             6E 65 20 70 65 75 78
+             20 70 6C 75 73 20 6A
+             6F 75 65 72 20 63 61
+             72 20 6C 6F 72 73 20
+             64 65 20 73 6F 6E 20
+             74 6F 75 72 20 64 65
+             6A 65 75 2C 20 73 61
+             20 72 61 6E
+      001040 67                    2568 	.ascii "g"
+      001041 E9                    2569 	.db 0xe9
+      001042 65 20 65 73 74 20 76  2570 	.ascii "e est vide. Les graines restant "
+             69 64 65 2E 20 4C 65
+             73 20 67 72 61 69 6E
+             65 73 20 72 65 73 74
+             61 6E 74 20
+      001062 E9                    2571 	.db 0xe9
+      001063 76 65 6E 74 75 65 6C  2572 	.ascii "ventuellement dans la rang"
+             6C 65 6D 65 6E 74 20
+             64 61 6E 73 20 6C 61
+             20 72 61 6E 67
+      00107D E9                    2573 	.db 0xe9
+      00107E 65 20 64 20 27 75 6E  2574 	.ascii "e d 'un joueursont plac"
+             20 6A 6F 75 65 75 72
+             73 6F 6E 74 20 70 6C
+             61 63
+      001095 E9                    2575 	.db 0xe9
+      001096 65 73 20 64 61 6E 73  2576 	.ascii "es dans son Kalaha. Le vainqueur est celui qui a le plus gra"
+             20 73 6F 6E 20 4B 61
+             6C 61 68 61 2E 20 4C
+             65 20 76 61 69 6E 71
+             75 65 75 72 20 65 73
+             74 20 63 65 6C 75 69
+             20 71 75 69 20 61 20
+             6C 65 20 70 6C 75 73
+             20 67 72 61
+      0010D2 6E 64 20 6E 6F 6D 62  2577 	.ascii "nd nombre degraines dans son Kalaha."
+             72 65 20 64 65 67 72
+             61 69 6E 65 73 20 64
+             61 6E 73 20 73 6F 6E
+             20 4B 61 6C 61 68 61
+             2E
+      0010F6 00                    2578 	.db 0x00
+                                   2579 	.area _CODE
+                                   2580 	.area _CABS (ABS)

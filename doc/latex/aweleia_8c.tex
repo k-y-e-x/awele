@@ -1,0 +1,129 @@
+\hypertarget{aweleia_8c}{}\doxysection{Référence du fichier src/aweleia.c}
+\label{aweleia_8c}\index{src/aweleia.c@{src/aweleia.c}}
+{\ttfamily \#include \char`\"{}mes\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}macros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}awele.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} \mbox{\hyperlink{aweleia_8c_a9853e9e749efebe92db581e0c3146eba}{jeu\+Poss}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$p, \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} \mbox{\hyperlink{awele_8h_a231fd36105d996f72973f76e23f7a7b2}{j}})
+\begin{DoxyCompactList}\small\item\em jeu\+Poss \+: retourne Vrai si le joueur j peut jouer à partir du plateau p \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} \mbox{\hyperlink{aweleia_8c_a675230bd919bc62f4d3226f7525dac49}{jouer}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$p, \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$pi, \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} c, \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} \mbox{\hyperlink{awele_8h_a231fd36105d996f72973f76e23f7a7b2}{j}})
+\begin{DoxyCompactList}\small\item\em jouer \+: le plateau p est le plateau obtenu en jouant la case c sur le plateau initial pi, la fonction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mes__types_8h_aefbb6ca39ebcf009709e607d159766d5}{UWORD}} \mbox{\hyperlink{aweleia_8c_a8a6267442d747710d2ae48d2a1a8a35c}{pos\+Eval}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{aweleia_8c_a9853e9e749efebe92db581e0c3146eba}\label{aweleia_8c_a9853e9e749efebe92db581e0c3146eba}} 
+\index{aweleia.c@{aweleia.c}!jeuPoss@{jeuPoss}}
+\index{jeuPoss@{jeuPoss}!aweleia.c@{aweleia.c}}
+\doxysubsubsection{\texorpdfstring{jeuPoss()}{jeuPoss()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} jeu\+Poss (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{j }\end{DoxyParamCaption})}
+
+
+
+jeu\+Poss \+: retourne Vrai si le joueur j peut jouer à partir du plateau p 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p} & \+: pointeur vers le plateau de jeu \\
+\hline
+{\em j} & \+: numero du joueur (0 ou 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: Booléen indiquant si le joeuur j peut jouer 
+\end{DoxyReturn}
+
+
+Définition à la ligne 25 du fichier aweleia.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27    \textcolor{keyword}{register} \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} i, b=\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29    \textcolor{keywordflow}{for}( i=\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1); i<(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}+1)*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}; b|=p[i++] );}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31    \textcolor{keywordflow}{return}(b);}
+\DoxyCodeLine{32 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aweleia_8c_a675230bd919bc62f4d3226f7525dac49}\label{aweleia_8c_a675230bd919bc62f4d3226f7525dac49}} 
+\index{aweleia.c@{aweleia.c}!jouer@{jouer}}
+\index{jouer@{jouer}!aweleia.c@{aweleia.c}}
+\doxysubsubsection{\texorpdfstring{jouer()}{jouer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} jouer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$}]{pi,  }\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{c,  }\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{j }\end{DoxyParamCaption})}
+
+
+
+jouer \+: le plateau p est le plateau obtenu en jouant la case c sur le plateau initial pi, la fonction 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p} & \+: pointeur vers le plateau de jeu rséultat \\
+\hline
+{\em pi} & pointeur vers le plateau de jeu initial \\
+\hline
+{\em c} & \+: case jouée \\
+\hline
+{\em j} & \+: numéro du joueur (0 ou 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Vrai si le joueur doit rejouer 
+\end{DoxyReturn}
+
+
+Définition à la ligne 44 du fichier aweleia.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46    \textcolor{keyword}{register}  \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} i, n, xi;}
+\DoxyCodeLine{47    \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} x;}
+\DoxyCodeLine{48 \textcolor{comment}{/*   printf("{}jouer : \%d par \%d\(\backslash\)n"{},c,j);}}
+\DoxyCodeLine{49 \textcolor{comment}{  */} n  = pi[c];}
+\DoxyCodeLine{50    xi = (c+n)\%\mbox{\hyperlink{awele_8h_ab190129374ac20b9e83931e87e8b5a36}{LGPLAT}};}
+\DoxyCodeLine{51    x = (xi>=\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1)) \&\& (xi<(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}+1)*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}) \&\& !pi[xi];}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53    \textcolor{keywordflow}{for}( i=0; i<c; ++i )}
+\DoxyCodeLine{54       p[i]=pi[i];}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56    p[c]=0;}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58    \textcolor{keywordflow}{for}( i=c+1; i<=c+n; ++i )}
+\DoxyCodeLine{59       p[i\%\mbox{\hyperlink{awele_8h_ab190129374ac20b9e83931e87e8b5a36}{LGPLAT}}]=pi[i\%\mbox{\hyperlink{awele_8h_ab190129374ac20b9e83931e87e8b5a36}{LGPLAT}}]+1;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61    \textcolor{keywordflow}{for}( i=c+n+1; i<\mbox{\hyperlink{awele_8h_ab190129374ac20b9e83931e87e8b5a36}{LGPLAT}}; ++i )}
+\DoxyCodeLine{62       p[i]=pi[i];}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65    \textcolor{keywordflow}{if}( x )}
+\DoxyCodeLine{66    \{}
+\DoxyCodeLine{67       p[(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}+1)*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}] += p[2*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}-\/xi]+1;}
+\DoxyCodeLine{68       p[2*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}-\/xi] = p[xi] = 0;}
+\DoxyCodeLine{69    \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71    \textcolor{keywordflow}{return}( ((c+n)==((\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}+1)*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}})) \&\& \mbox{\hyperlink{aweleia_8c_a9853e9e749efebe92db581e0c3146eba}{jeuPoss}}(p,\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}) );}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Documentation des variables}
+\mbox{\Hypertarget{aweleia_8c_a8a6267442d747710d2ae48d2a1a8a35c}\label{aweleia_8c_a8a6267442d747710d2ae48d2a1a8a35c}} 
+\index{aweleia.c@{aweleia.c}!posEval@{posEval}}
+\index{posEval@{posEval}!aweleia.c@{aweleia.c}}
+\doxysubsubsection{\texorpdfstring{posEval}{posEval}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_aefbb6ca39ebcf009709e607d159766d5}{UWORD}} pos\+Eval = 0}
+
+
+
+Définition à la ligne 16 du fichier aweleia.\+c.
+

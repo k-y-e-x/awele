@@ -1,0 +1,508 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.7 #12016 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module globals
+                                      6 	.optsdcc -mgbz80
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _gEgalite
+                                     12 	.globl _gVainqueur
+                                     13 	.globl _gQuelleCase
+                                     14 	.globl _gPositionsEvaluees
+                                     15 	.globl _gJoueur
+                                     16 	.globl _gJ2
+                                     17 	.globl _gJ1
+                                     18 	.globl _gOptionProfondeur
+                                     19 	.globl _gJ2ordi
+                                     20 	.globl _gJ1commence
+                                     21 	.globl _gOptionQuiCommence
+                                     22 	.globl _gOptionJoueurs
+                                     23 ;--------------------------------------------------------
+                                     24 ; special function registers
+                                     25 ;--------------------------------------------------------
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area _DATA
+      000000                         30 _gOptionJoueurs::
+      000000                         31 	.ds 6
+      000006                         32 _gOptionQuiCommence::
+      000006                         33 	.ds 24
+      00001E                         34 _gJ1commence::
+      00001E                         35 	.ds 23
+      000035                         36 _gJ2ordi::
+      000035                         37 	.ds 30
+      000053                         38 _gOptionProfondeur::
+      000053                         39 	.ds 36
+      000077                         40 _gJ1::
+      000077                         41 	.ds 9
+      000080                         42 _gJ2::
+      000080                         43 	.ds 9
+      000089                         44 _gJoueur::
+      000089                         45 	.ds 4
+      00008D                         46 _gPositionsEvaluees::
+      00008D                         47 	.ds 9
+      000096                         48 _gQuelleCase::
+      000096                         49 	.ds 29
+      0000B3                         50 _gVainqueur::
+      0000B3                         51 	.ds 11
+      0000BE                         52 _gEgalite::
+      0000BE                         53 	.ds 8
+                                     54 ;--------------------------------------------------------
+                                     55 ; absolute external ram data
+                                     56 ;--------------------------------------------------------
+                                     57 	.area _DABS (ABS)
+                                     58 ;--------------------------------------------------------
+                                     59 ; global & static initialisations
+                                     60 ;--------------------------------------------------------
+                                     61 	.area _HOME
+                                     62 	.area _GSINIT
+                                     63 	.area _GSFINAL
+                                     64 	.area _GSINIT
+                                     65 ;src/globals.c:7: char*	gOptionJoueurs[]= {"1 : Humain vs Humain","2 : Humain vs Ordinateur","3 : Ordinateur vs Ordinateur"};
+      000000 21r00r00                66 	ld	hl, #_gOptionJoueurs
+      000003 36r00                   67 	ld	(hl), #<(___str_0)
+      000005 23                      68 	inc	hl
+      000006 36s00                   69 	ld	(hl), #>(___str_0)
+      000008 21r02r00                70 	ld	hl, #(_gOptionJoueurs + 0x0002)
+      00000B 36r15                   71 	ld	(hl), #<(___str_1)
+      00000D 23                      72 	inc	hl
+      00000E 36s00                   73 	ld	(hl), #>(___str_1)
+      000010 21r04r00                74 	ld	hl, #(_gOptionJoueurs + 0x0004)
+      000013 36r2E                   75 	ld	(hl), #<(___str_2)
+      000015 23                      76 	inc	hl
+      000016 36s00                   77 	ld	(hl), #>(___str_2)
+                                     78 ;src/globals.c:8: char	gOptionQuiCommence[]="Quel joueur commence ? ";
+      000018 21r06r00                79 	ld	hl, #_gOptionQuiCommence
+      00001B 36 51                   80 	ld	(hl), #0x51
+      00001D 21r07r00                81 	ld	hl, #(_gOptionQuiCommence + 0x0001)
+      000020 36 75                   82 	ld	(hl), #0x75
+      000022 21r08r00                83 	ld	hl, #(_gOptionQuiCommence + 0x0002)
+      000025 36 65                   84 	ld	(hl), #0x65
+      000027 21r09r00                85 	ld	hl, #(_gOptionQuiCommence + 0x0003)
+      00002A 36 6C                   86 	ld	(hl), #0x6c
+      00002C 21r0Ar00                87 	ld	hl, #(_gOptionQuiCommence + 0x0004)
+      00002F 36 20                   88 	ld	(hl), #0x20
+      000031 21r0Br00                89 	ld	hl, #(_gOptionQuiCommence + 0x0005)
+      000034 36 6A                   90 	ld	(hl), #0x6a
+      000036 21r0Cr00                91 	ld	hl, #(_gOptionQuiCommence + 0x0006)
+      000039 36 6F                   92 	ld	(hl), #0x6f
+      00003B 21r0Dr00                93 	ld	hl, #(_gOptionQuiCommence + 0x0007)
+      00003E 36 75                   94 	ld	(hl), #0x75
+      000040 21r0Er00                95 	ld	hl, #(_gOptionQuiCommence + 0x0008)
+      000043 36 65                   96 	ld	(hl), #0x65
+      000045 21r0Fr00                97 	ld	hl, #(_gOptionQuiCommence + 0x0009)
+      000048 36 75                   98 	ld	(hl), #0x75
+      00004A 21r10r00                99 	ld	hl, #(_gOptionQuiCommence + 0x000a)
+      00004D 36 72                  100 	ld	(hl), #0x72
+      00004F 21r11r00               101 	ld	hl, #(_gOptionQuiCommence + 0x000b)
+      000052 36 20                  102 	ld	(hl), #0x20
+      000054 21r12r00               103 	ld	hl, #(_gOptionQuiCommence + 0x000c)
+      000057 36 63                  104 	ld	(hl), #0x63
+      000059 21r13r00               105 	ld	hl, #(_gOptionQuiCommence + 0x000d)
+      00005C 36 6F                  106 	ld	(hl), #0x6f
+      00005E 21r14r00               107 	ld	hl, #(_gOptionQuiCommence + 0x000e)
+      000061 36 6D                  108 	ld	(hl), #0x6d
+      000063 21r15r00               109 	ld	hl, #(_gOptionQuiCommence + 0x000f)
+      000066 36 6D                  110 	ld	(hl), #0x6d
+      000068 21r16r00               111 	ld	hl, #(_gOptionQuiCommence + 0x0010)
+      00006B 36 65                  112 	ld	(hl), #0x65
+      00006D 21r17r00               113 	ld	hl, #(_gOptionQuiCommence + 0x0011)
+      000070 36 6E                  114 	ld	(hl), #0x6e
+      000072 21r18r00               115 	ld	hl, #(_gOptionQuiCommence + 0x0012)
+      000075 36 63                  116 	ld	(hl), #0x63
+      000077 21r19r00               117 	ld	hl, #(_gOptionQuiCommence + 0x0013)
+      00007A 36 65                  118 	ld	(hl), #0x65
+      00007C 21r1Ar00               119 	ld	hl, #(_gOptionQuiCommence + 0x0014)
+      00007F 36 20                  120 	ld	(hl), #0x20
+      000081 21r1Br00               121 	ld	hl, #(_gOptionQuiCommence + 0x0015)
+      000084 36 3F                  122 	ld	(hl), #0x3f
+      000086 21r1Cr00               123 	ld	hl, #(_gOptionQuiCommence + 0x0016)
+      000089 36 20                  124 	ld	(hl), #0x20
+      00008B 21r1Dr00               125 	ld	hl, #(_gOptionQuiCommence + 0x0017)
+      00008E 36 00                  126 	ld	(hl), #0x00
+                                    127 ;src/globals.c:9: char	gJ1commence[]="Le joueur 1 commence. ";
+      000090 21r1Er00               128 	ld	hl, #_gJ1commence
+      000093 36 4C                  129 	ld	(hl), #0x4c
+      000095 21r1Fr00               130 	ld	hl, #(_gJ1commence + 0x0001)
+      000098 36 65                  131 	ld	(hl), #0x65
+      00009A 21r20r00               132 	ld	hl, #(_gJ1commence + 0x0002)
+      00009D 36 20                  133 	ld	(hl), #0x20
+      00009F 21r21r00               134 	ld	hl, #(_gJ1commence + 0x0003)
+      0000A2 36 6A                  135 	ld	(hl), #0x6a
+      0000A4 21r22r00               136 	ld	hl, #(_gJ1commence + 0x0004)
+      0000A7 36 6F                  137 	ld	(hl), #0x6f
+      0000A9 21r23r00               138 	ld	hl, #(_gJ1commence + 0x0005)
+      0000AC 36 75                  139 	ld	(hl), #0x75
+      0000AE 21r24r00               140 	ld	hl, #(_gJ1commence + 0x0006)
+      0000B1 36 65                  141 	ld	(hl), #0x65
+      0000B3 21r25r00               142 	ld	hl, #(_gJ1commence + 0x0007)
+      0000B6 36 75                  143 	ld	(hl), #0x75
+      0000B8 21r26r00               144 	ld	hl, #(_gJ1commence + 0x0008)
+      0000BB 36 72                  145 	ld	(hl), #0x72
+      0000BD 21r27r00               146 	ld	hl, #(_gJ1commence + 0x0009)
+      0000C0 36 20                  147 	ld	(hl), #0x20
+      0000C2 21r28r00               148 	ld	hl, #(_gJ1commence + 0x000a)
+      0000C5 36 31                  149 	ld	(hl), #0x31
+      0000C7 21r29r00               150 	ld	hl, #(_gJ1commence + 0x000b)
+      0000CA 36 20                  151 	ld	(hl), #0x20
+      0000CC 21r2Ar00               152 	ld	hl, #(_gJ1commence + 0x000c)
+      0000CF 36 63                  153 	ld	(hl), #0x63
+      0000D1 21r2Br00               154 	ld	hl, #(_gJ1commence + 0x000d)
+      0000D4 36 6F                  155 	ld	(hl), #0x6f
+      0000D6 21r2Cr00               156 	ld	hl, #(_gJ1commence + 0x000e)
+      0000D9 36 6D                  157 	ld	(hl), #0x6d
+      0000DB 21r2Dr00               158 	ld	hl, #(_gJ1commence + 0x000f)
+      0000DE 36 6D                  159 	ld	(hl), #0x6d
+      0000E0 21r2Er00               160 	ld	hl, #(_gJ1commence + 0x0010)
+      0000E3 36 65                  161 	ld	(hl), #0x65
+      0000E5 21r2Fr00               162 	ld	hl, #(_gJ1commence + 0x0011)
+      0000E8 36 6E                  163 	ld	(hl), #0x6e
+      0000EA 21r30r00               164 	ld	hl, #(_gJ1commence + 0x0012)
+      0000ED 36 63                  165 	ld	(hl), #0x63
+      0000EF 21r31r00               166 	ld	hl, #(_gJ1commence + 0x0013)
+      0000F2 36 65                  167 	ld	(hl), #0x65
+      0000F4 21r32r00               168 	ld	hl, #(_gJ1commence + 0x0014)
+      0000F7 36 2E                  169 	ld	(hl), #0x2e
+      0000F9 21r33r00               170 	ld	hl, #(_gJ1commence + 0x0015)
+      0000FC 36 20                  171 	ld	(hl), #0x20
+      0000FE 21r34r00               172 	ld	hl, #(_gJ1commence + 0x0016)
+      000101 36 00                  173 	ld	(hl), #0x00
+                                    174 ;src/globals.c:10: char	gJ2ordi[]="L'ordinateur est le joueur 2 ";
+      000103 21r35r00               175 	ld	hl, #_gJ2ordi
+      000106 36 4C                  176 	ld	(hl), #0x4c
+      000108 21r36r00               177 	ld	hl, #(_gJ2ordi + 0x0001)
+      00010B 36 27                  178 	ld	(hl), #0x27
+      00010D 21r37r00               179 	ld	hl, #(_gJ2ordi + 0x0002)
+      000110 36 6F                  180 	ld	(hl), #0x6f
+      000112 21r38r00               181 	ld	hl, #(_gJ2ordi + 0x0003)
+      000115 36 72                  182 	ld	(hl), #0x72
+      000117 21r39r00               183 	ld	hl, #(_gJ2ordi + 0x0004)
+      00011A 36 64                  184 	ld	(hl), #0x64
+      00011C 21r3Ar00               185 	ld	hl, #(_gJ2ordi + 0x0005)
+      00011F 36 69                  186 	ld	(hl), #0x69
+      000121 21r3Br00               187 	ld	hl, #(_gJ2ordi + 0x0006)
+      000124 36 6E                  188 	ld	(hl), #0x6e
+      000126 21r3Cr00               189 	ld	hl, #(_gJ2ordi + 0x0007)
+      000129 36 61                  190 	ld	(hl), #0x61
+      00012B 21r3Dr00               191 	ld	hl, #(_gJ2ordi + 0x0008)
+      00012E 36 74                  192 	ld	(hl), #0x74
+      000130 21r3Er00               193 	ld	hl, #(_gJ2ordi + 0x0009)
+      000133 36 65                  194 	ld	(hl), #0x65
+      000135 21r3Fr00               195 	ld	hl, #(_gJ2ordi + 0x000a)
+      000138 36 75                  196 	ld	(hl), #0x75
+      00013A 21r40r00               197 	ld	hl, #(_gJ2ordi + 0x000b)
+      00013D 36 72                  198 	ld	(hl), #0x72
+      00013F 21r41r00               199 	ld	hl, #(_gJ2ordi + 0x000c)
+      000142 36 20                  200 	ld	(hl), #0x20
+      000144 21r42r00               201 	ld	hl, #(_gJ2ordi + 0x000d)
+      000147 36 65                  202 	ld	(hl), #0x65
+      000149 21r43r00               203 	ld	hl, #(_gJ2ordi + 0x000e)
+      00014C 36 73                  204 	ld	(hl), #0x73
+      00014E 21r44r00               205 	ld	hl, #(_gJ2ordi + 0x000f)
+      000151 36 74                  206 	ld	(hl), #0x74
+      000153 21r45r00               207 	ld	hl, #(_gJ2ordi + 0x0010)
+      000156 36 20                  208 	ld	(hl), #0x20
+      000158 21r46r00               209 	ld	hl, #(_gJ2ordi + 0x0011)
+      00015B 36 6C                  210 	ld	(hl), #0x6c
+      00015D 21r47r00               211 	ld	hl, #(_gJ2ordi + 0x0012)
+      000160 36 65                  212 	ld	(hl), #0x65
+      000162 21r48r00               213 	ld	hl, #(_gJ2ordi + 0x0013)
+      000165 36 20                  214 	ld	(hl), #0x20
+      000167 21r49r00               215 	ld	hl, #(_gJ2ordi + 0x0014)
+      00016A 36 6A                  216 	ld	(hl), #0x6a
+      00016C 21r4Ar00               217 	ld	hl, #(_gJ2ordi + 0x0015)
+      00016F 36 6F                  218 	ld	(hl), #0x6f
+      000171 21r4Br00               219 	ld	hl, #(_gJ2ordi + 0x0016)
+      000174 36 75                  220 	ld	(hl), #0x75
+      000176 21r4Cr00               221 	ld	hl, #(_gJ2ordi + 0x0017)
+      000179 36 65                  222 	ld	(hl), #0x65
+      00017B 21r4Dr00               223 	ld	hl, #(_gJ2ordi + 0x0018)
+      00017E 36 75                  224 	ld	(hl), #0x75
+      000180 21r4Er00               225 	ld	hl, #(_gJ2ordi + 0x0019)
+      000183 36 72                  226 	ld	(hl), #0x72
+      000185 21r4Fr00               227 	ld	hl, #(_gJ2ordi + 0x001a)
+      000188 36 20                  228 	ld	(hl), #0x20
+      00018A 21r50r00               229 	ld	hl, #(_gJ2ordi + 0x001b)
+      00018D 36 32                  230 	ld	(hl), #0x32
+      00018F 21r51r00               231 	ld	hl, #(_gJ2ordi + 0x001c)
+      000192 36 20                  232 	ld	(hl), #0x20
+      000194 21r52r00               233 	ld	hl, #(_gJ2ordi + 0x001d)
+      000197 36 00                  234 	ld	(hl), #0x00
+                                    235 ;src/globals.c:11: char	gOptionProfondeur[]="Profondeur recherche (en \\coups) ? ";
+      000199 21r53r00               236 	ld	hl, #_gOptionProfondeur
+      00019C 36 50                  237 	ld	(hl), #0x50
+      00019E 21r54r00               238 	ld	hl, #(_gOptionProfondeur + 0x0001)
+      0001A1 36 72                  239 	ld	(hl), #0x72
+      0001A3 21r55r00               240 	ld	hl, #(_gOptionProfondeur + 0x0002)
+      0001A6 36 6F                  241 	ld	(hl), #0x6f
+      0001A8 21r56r00               242 	ld	hl, #(_gOptionProfondeur + 0x0003)
+      0001AB 36 66                  243 	ld	(hl), #0x66
+      0001AD 21r57r00               244 	ld	hl, #(_gOptionProfondeur + 0x0004)
+      0001B0 36 6F                  245 	ld	(hl), #0x6f
+      0001B2 21r58r00               246 	ld	hl, #(_gOptionProfondeur + 0x0005)
+      0001B5 36 6E                  247 	ld	(hl), #0x6e
+      0001B7 21r59r00               248 	ld	hl, #(_gOptionProfondeur + 0x0006)
+      0001BA 36 64                  249 	ld	(hl), #0x64
+      0001BC 21r5Ar00               250 	ld	hl, #(_gOptionProfondeur + 0x0007)
+      0001BF 36 65                  251 	ld	(hl), #0x65
+      0001C1 21r5Br00               252 	ld	hl, #(_gOptionProfondeur + 0x0008)
+      0001C4 36 75                  253 	ld	(hl), #0x75
+      0001C6 21r5Cr00               254 	ld	hl, #(_gOptionProfondeur + 0x0009)
+      0001C9 36 72                  255 	ld	(hl), #0x72
+      0001CB 21r5Dr00               256 	ld	hl, #(_gOptionProfondeur + 0x000a)
+      0001CE 36 20                  257 	ld	(hl), #0x20
+      0001D0 21r5Er00               258 	ld	hl, #(_gOptionProfondeur + 0x000b)
+      0001D3 36 72                  259 	ld	(hl), #0x72
+      0001D5 21r5Fr00               260 	ld	hl, #(_gOptionProfondeur + 0x000c)
+      0001D8 36 65                  261 	ld	(hl), #0x65
+      0001DA 21r60r00               262 	ld	hl, #(_gOptionProfondeur + 0x000d)
+      0001DD 36 63                  263 	ld	(hl), #0x63
+      0001DF 21r61r00               264 	ld	hl, #(_gOptionProfondeur + 0x000e)
+      0001E2 36 68                  265 	ld	(hl), #0x68
+      0001E4 21r62r00               266 	ld	hl, #(_gOptionProfondeur + 0x000f)
+      0001E7 36 65                  267 	ld	(hl), #0x65
+      0001E9 21r63r00               268 	ld	hl, #(_gOptionProfondeur + 0x0010)
+      0001EC 36 72                  269 	ld	(hl), #0x72
+      0001EE 21r64r00               270 	ld	hl, #(_gOptionProfondeur + 0x0011)
+      0001F1 36 63                  271 	ld	(hl), #0x63
+      0001F3 21r65r00               272 	ld	hl, #(_gOptionProfondeur + 0x0012)
+      0001F6 36 68                  273 	ld	(hl), #0x68
+      0001F8 21r66r00               274 	ld	hl, #(_gOptionProfondeur + 0x0013)
+      0001FB 36 65                  275 	ld	(hl), #0x65
+      0001FD 21r67r00               276 	ld	hl, #(_gOptionProfondeur + 0x0014)
+      000200 36 20                  277 	ld	(hl), #0x20
+      000202 21r68r00               278 	ld	hl, #(_gOptionProfondeur + 0x0015)
+      000205 36 28                  279 	ld	(hl), #0x28
+      000207 21r69r00               280 	ld	hl, #(_gOptionProfondeur + 0x0016)
+      00020A 36 65                  281 	ld	(hl), #0x65
+      00020C 21r6Ar00               282 	ld	hl, #(_gOptionProfondeur + 0x0017)
+      00020F 36 6E                  283 	ld	(hl), #0x6e
+      000211 21r6Br00               284 	ld	hl, #(_gOptionProfondeur + 0x0018)
+      000214 36 20                  285 	ld	(hl), #0x20
+      000216 21r6Cr00               286 	ld	hl, #(_gOptionProfondeur + 0x0019)
+      000219 36 5C                  287 	ld	(hl), #0x5c
+      00021B 21r6Dr00               288 	ld	hl, #(_gOptionProfondeur + 0x001a)
+      00021E 36 63                  289 	ld	(hl), #0x63
+      000220 21r6Er00               290 	ld	hl, #(_gOptionProfondeur + 0x001b)
+      000223 36 6F                  291 	ld	(hl), #0x6f
+      000225 21r6Fr00               292 	ld	hl, #(_gOptionProfondeur + 0x001c)
+      000228 36 75                  293 	ld	(hl), #0x75
+      00022A 21r70r00               294 	ld	hl, #(_gOptionProfondeur + 0x001d)
+      00022D 36 70                  295 	ld	(hl), #0x70
+      00022F 21r71r00               296 	ld	hl, #(_gOptionProfondeur + 0x001e)
+      000232 36 73                  297 	ld	(hl), #0x73
+      000234 21r72r00               298 	ld	hl, #(_gOptionProfondeur + 0x001f)
+      000237 36 29                  299 	ld	(hl), #0x29
+      000239 21r73r00               300 	ld	hl, #(_gOptionProfondeur + 0x0020)
+      00023C 36 20                  301 	ld	(hl), #0x20
+      00023E 21r74r00               302 	ld	hl, #(_gOptionProfondeur + 0x0021)
+      000241 36 3F                  303 	ld	(hl), #0x3f
+      000243 21r75r00               304 	ld	hl, #(_gOptionProfondeur + 0x0022)
+      000246 36 20                  305 	ld	(hl), #0x20
+      000248 21r76r00               306 	ld	hl, #(_gOptionProfondeur + 0x0023)
+      00024B 36 00                  307 	ld	(hl), #0x00
+                                    308 ;src/globals.c:12: char	gJ1[]="Joueur 1";
+      00024D 21r77r00               309 	ld	hl, #_gJ1
+      000250 36 4A                  310 	ld	(hl), #0x4a
+      000252 21r78r00               311 	ld	hl, #(_gJ1 + 0x0001)
+      000255 36 6F                  312 	ld	(hl), #0x6f
+      000257 21r79r00               313 	ld	hl, #(_gJ1 + 0x0002)
+      00025A 36 75                  314 	ld	(hl), #0x75
+      00025C 21r7Ar00               315 	ld	hl, #(_gJ1 + 0x0003)
+      00025F 36 65                  316 	ld	(hl), #0x65
+      000261 21r7Br00               317 	ld	hl, #(_gJ1 + 0x0004)
+      000264 36 75                  318 	ld	(hl), #0x75
+      000266 21r7Cr00               319 	ld	hl, #(_gJ1 + 0x0005)
+      000269 36 72                  320 	ld	(hl), #0x72
+      00026B 21r7Dr00               321 	ld	hl, #(_gJ1 + 0x0006)
+      00026E 36 20                  322 	ld	(hl), #0x20
+      000270 21r7Er00               323 	ld	hl, #(_gJ1 + 0x0007)
+      000273 36 31                  324 	ld	(hl), #0x31
+      000275 21r7Fr00               325 	ld	hl, #(_gJ1 + 0x0008)
+      000278 36 00                  326 	ld	(hl), #0x00
+                                    327 ;src/globals.c:13: char	gJ2[]="Joueur 2";
+      00027A 21r80r00               328 	ld	hl, #_gJ2
+      00027D 36 4A                  329 	ld	(hl), #0x4a
+      00027F 21r81r00               330 	ld	hl, #(_gJ2 + 0x0001)
+      000282 36 6F                  331 	ld	(hl), #0x6f
+      000284 21r82r00               332 	ld	hl, #(_gJ2 + 0x0002)
+      000287 36 75                  333 	ld	(hl), #0x75
+      000289 21r83r00               334 	ld	hl, #(_gJ2 + 0x0003)
+      00028C 36 65                  335 	ld	(hl), #0x65
+      00028E 21r84r00               336 	ld	hl, #(_gJ2 + 0x0004)
+      000291 36 75                  337 	ld	(hl), #0x75
+      000293 21r85r00               338 	ld	hl, #(_gJ2 + 0x0005)
+      000296 36 72                  339 	ld	(hl), #0x72
+      000298 21r86r00               340 	ld	hl, #(_gJ2 + 0x0006)
+      00029B 36 20                  341 	ld	(hl), #0x20
+      00029D 21r87r00               342 	ld	hl, #(_gJ2 + 0x0007)
+      0002A0 36 32                  343 	ld	(hl), #0x32
+      0002A2 21r88r00               344 	ld	hl, #(_gJ2 + 0x0008)
+      0002A5 36 00                  345 	ld	(hl), #0x00
+                                    346 ;src/globals.c:14: char*	gJoueur[]={"Joueur 1","Joueur 2"};
+      0002A7 21r89r00               347 	ld	hl, #_gJoueur
+      0002AA 36r4B                  348 	ld	(hl), #<(___str_9)
+      0002AC 23                     349 	inc	hl
+      0002AD 36s00                  350 	ld	(hl), #>(___str_9)
+      0002AF 21r8Br00               351 	ld	hl, #(_gJoueur + 0x0002)
+      0002B2 36r54                  352 	ld	(hl), #<(___str_10)
+      0002B4 23                     353 	inc	hl
+      0002B5 36s00                  354 	ld	(hl), #>(___str_10)
+                                    355 ;src/globals.c:16: char	gPositionsEvaluees[]="_valu_es";  //"positions _valu_es :      ";
+      0002B7 21r8Dr00               356 	ld	hl, #_gPositionsEvaluees
+      0002BA 36 5F                  357 	ld	(hl), #0x5f
+      0002BC 21r8Er00               358 	ld	hl, #(_gPositionsEvaluees + 0x0001)
+      0002BF 36 76                  359 	ld	(hl), #0x76
+      0002C1 21r8Fr00               360 	ld	hl, #(_gPositionsEvaluees + 0x0002)
+      0002C4 36 61                  361 	ld	(hl), #0x61
+      0002C6 21r90r00               362 	ld	hl, #(_gPositionsEvaluees + 0x0003)
+      0002C9 36 6C                  363 	ld	(hl), #0x6c
+      0002CB 21r91r00               364 	ld	hl, #(_gPositionsEvaluees + 0x0004)
+      0002CE 36 75                  365 	ld	(hl), #0x75
+      0002D0 21r92r00               366 	ld	hl, #(_gPositionsEvaluees + 0x0005)
+      0002D3 36 5F                  367 	ld	(hl), #0x5f
+      0002D5 21r93r00               368 	ld	hl, #(_gPositionsEvaluees + 0x0006)
+      0002D8 36 65                  369 	ld	(hl), #0x65
+      0002DA 21r94r00               370 	ld	hl, #(_gPositionsEvaluees + 0x0007)
+      0002DD 36 73                  371 	ld	(hl), #0x73
+      0002DF 21r95r00               372 	ld	hl, #(_gPositionsEvaluees + 0x0008)
+      0002E2 36 00                  373 	ld	(hl), #0x00
+                                    374 ;src/globals.c:23: char	gQuelleCase[]=" : quelle case jouez-vous ? ";
+      0002E4 21r96r00               375 	ld	hl, #_gQuelleCase
+      0002E7 36 20                  376 	ld	(hl), #0x20
+      0002E9 21r97r00               377 	ld	hl, #(_gQuelleCase + 0x0001)
+      0002EC 36 3A                  378 	ld	(hl), #0x3a
+      0002EE 21r98r00               379 	ld	hl, #(_gQuelleCase + 0x0002)
+      0002F1 36 20                  380 	ld	(hl), #0x20
+      0002F3 21r99r00               381 	ld	hl, #(_gQuelleCase + 0x0003)
+      0002F6 36 71                  382 	ld	(hl), #0x71
+      0002F8 21r9Ar00               383 	ld	hl, #(_gQuelleCase + 0x0004)
+      0002FB 36 75                  384 	ld	(hl), #0x75
+      0002FD 21r9Br00               385 	ld	hl, #(_gQuelleCase + 0x0005)
+      000300 36 65                  386 	ld	(hl), #0x65
+      000302 21r9Cr00               387 	ld	hl, #(_gQuelleCase + 0x0006)
+      000305 36 6C                  388 	ld	(hl), #0x6c
+      000307 21r9Dr00               389 	ld	hl, #(_gQuelleCase + 0x0007)
+      00030A 36 6C                  390 	ld	(hl), #0x6c
+      00030C 21r9Er00               391 	ld	hl, #(_gQuelleCase + 0x0008)
+      00030F 36 65                  392 	ld	(hl), #0x65
+      000311 21r9Fr00               393 	ld	hl, #(_gQuelleCase + 0x0009)
+      000314 36 20                  394 	ld	(hl), #0x20
+      000316 21rA0r00               395 	ld	hl, #(_gQuelleCase + 0x000a)
+      000319 36 63                  396 	ld	(hl), #0x63
+      00031B 21rA1r00               397 	ld	hl, #(_gQuelleCase + 0x000b)
+      00031E 36 61                  398 	ld	(hl), #0x61
+      000320 21rA2r00               399 	ld	hl, #(_gQuelleCase + 0x000c)
+      000323 36 73                  400 	ld	(hl), #0x73
+      000325 21rA3r00               401 	ld	hl, #(_gQuelleCase + 0x000d)
+      000328 36 65                  402 	ld	(hl), #0x65
+      00032A 21rA4r00               403 	ld	hl, #(_gQuelleCase + 0x000e)
+      00032D 36 20                  404 	ld	(hl), #0x20
+      00032F 21rA5r00               405 	ld	hl, #(_gQuelleCase + 0x000f)
+      000332 36 6A                  406 	ld	(hl), #0x6a
+      000334 21rA6r00               407 	ld	hl, #(_gQuelleCase + 0x0010)
+      000337 36 6F                  408 	ld	(hl), #0x6f
+      000339 21rA7r00               409 	ld	hl, #(_gQuelleCase + 0x0011)
+      00033C 36 75                  410 	ld	(hl), #0x75
+      00033E 21rA8r00               411 	ld	hl, #(_gQuelleCase + 0x0012)
+      000341 36 65                  412 	ld	(hl), #0x65
+      000343 21rA9r00               413 	ld	hl, #(_gQuelleCase + 0x0013)
+      000346 36 7A                  414 	ld	(hl), #0x7a
+      000348 21rAAr00               415 	ld	hl, #(_gQuelleCase + 0x0014)
+      00034B 36 2D                  416 	ld	(hl), #0x2d
+      00034D 21rABr00               417 	ld	hl, #(_gQuelleCase + 0x0015)
+      000350 36 76                  418 	ld	(hl), #0x76
+      000352 21rACr00               419 	ld	hl, #(_gQuelleCase + 0x0016)
+      000355 36 6F                  420 	ld	(hl), #0x6f
+      000357 21rADr00               421 	ld	hl, #(_gQuelleCase + 0x0017)
+      00035A 36 75                  422 	ld	(hl), #0x75
+      00035C 21rAEr00               423 	ld	hl, #(_gQuelleCase + 0x0018)
+      00035F 36 73                  424 	ld	(hl), #0x73
+      000361 21rAFr00               425 	ld	hl, #(_gQuelleCase + 0x0019)
+      000364 36 20                  426 	ld	(hl), #0x20
+      000366 21rB0r00               427 	ld	hl, #(_gQuelleCase + 0x001a)
+      000369 36 3F                  428 	ld	(hl), #0x3f
+      00036B 21rB1r00               429 	ld	hl, #(_gQuelleCase + 0x001b)
+      00036E 36 20                  430 	ld	(hl), #0x20
+      000370 21rB2r00               431 	ld	hl, #(_gQuelleCase + 0x001c)
+      000373 36 00                  432 	ld	(hl), #0x00
+                                    433 ;src/globals.c:24: char	gVainqueur[]=" vainqueur";
+      000375 21rB3r00               434 	ld	hl, #_gVainqueur
+      000378 36 20                  435 	ld	(hl), #0x20
+      00037A 21rB4r00               436 	ld	hl, #(_gVainqueur + 0x0001)
+      00037D 36 76                  437 	ld	(hl), #0x76
+      00037F 21rB5r00               438 	ld	hl, #(_gVainqueur + 0x0002)
+      000382 36 61                  439 	ld	(hl), #0x61
+      000384 21rB6r00               440 	ld	hl, #(_gVainqueur + 0x0003)
+      000387 36 69                  441 	ld	(hl), #0x69
+      000389 21rB7r00               442 	ld	hl, #(_gVainqueur + 0x0004)
+      00038C 36 6E                  443 	ld	(hl), #0x6e
+      00038E 21rB8r00               444 	ld	hl, #(_gVainqueur + 0x0005)
+      000391 36 71                  445 	ld	(hl), #0x71
+      000393 21rB9r00               446 	ld	hl, #(_gVainqueur + 0x0006)
+      000396 36 75                  447 	ld	(hl), #0x75
+      000398 21rBAr00               448 	ld	hl, #(_gVainqueur + 0x0007)
+      00039B 36 65                  449 	ld	(hl), #0x65
+      00039D 21rBBr00               450 	ld	hl, #(_gVainqueur + 0x0008)
+      0003A0 36 75                  451 	ld	(hl), #0x75
+      0003A2 21rBCr00               452 	ld	hl, #(_gVainqueur + 0x0009)
+      0003A5 36 72                  453 	ld	(hl), #0x72
+      0003A7 21rBDr00               454 	ld	hl, #(_gVainqueur + 0x000a)
+      0003AA 36 00                  455 	ld	(hl), #0x00
+                                    456 ;src/globals.c:25: char	gEgalite[]="Egalit_";
+      0003AC 21rBEr00               457 	ld	hl, #_gEgalite
+      0003AF 36 45                  458 	ld	(hl), #0x45
+      0003B1 21rBFr00               459 	ld	hl, #(_gEgalite + 0x0001)
+      0003B4 36 67                  460 	ld	(hl), #0x67
+      0003B6 21rC0r00               461 	ld	hl, #(_gEgalite + 0x0002)
+      0003B9 36 61                  462 	ld	(hl), #0x61
+      0003BB 21rC1r00               463 	ld	hl, #(_gEgalite + 0x0003)
+      0003BE 36 6C                  464 	ld	(hl), #0x6c
+      0003C0 21rC2r00               465 	ld	hl, #(_gEgalite + 0x0004)
+      0003C3 36 69                  466 	ld	(hl), #0x69
+      0003C5 21rC3r00               467 	ld	hl, #(_gEgalite + 0x0005)
+      0003C8 36 74                  468 	ld	(hl), #0x74
+      0003CA 21rC4r00               469 	ld	hl, #(_gEgalite + 0x0006)
+      0003CD 36 5F                  470 	ld	(hl), #0x5f
+      0003CF 21rC5r00               471 	ld	hl, #(_gEgalite + 0x0007)
+      0003D2 36 00                  472 	ld	(hl), #0x00
+                                    473 ;--------------------------------------------------------
+                                    474 ; Home
+                                    475 ;--------------------------------------------------------
+                                    476 	.area _HOME
+                                    477 	.area _HOME
+                                    478 ;--------------------------------------------------------
+                                    479 ; code
+                                    480 ;--------------------------------------------------------
+                                    481 	.area _CODE
+                                    482 	.area _CODE
+      000000                        483 ___str_0:
+      000000 31 20 3A 20 48 75 6D   484 	.ascii "1 : Humain vs Humain"
+             61 69 6E 20 76 73 20
+             48 75 6D 61 69 6E
+      000014 00                     485 	.db 0x00
+      000015                        486 ___str_1:
+      000015 32 20 3A 20 48 75 6D   487 	.ascii "2 : Humain vs Ordinateur"
+             61 69 6E 20 76 73 20
+             4F 72 64 69 6E 61 74
+             65 75 72
+      00002D 00                     488 	.db 0x00
+      00002E                        489 ___str_2:
+      00002E 33 20 3A 20 4F 72 64   490 	.ascii "3 : Ordinateur vs Ordinateur"
+             69 6E 61 74 65 75 72
+             20 76 73 20 4F 72 64
+             69 6E 61 74 65 75 72
+      00004A 00                     491 	.db 0x00
+      00004B                        492 ___str_9:
+      00004B 4A 6F 75 65 75 72 20   493 	.ascii "Joueur 1"
+             31
+      000053 00                     494 	.db 0x00
+      000054                        495 ___str_10:
+      000054 4A 6F 75 65 75 72 20   496 	.ascii "Joueur 2"
+             32
+      00005C 00                     497 	.db 0x00
+                                    498 	.area _CABS (ABS)
