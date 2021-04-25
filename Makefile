@@ -349,6 +349,8 @@ clean:
 	$(call RMFILES,$(DEPENDS))
 	$(call RMFILES,$(REMOVES))
 	$(call RMFILES,$(PROGRAM))
+#spécifique gameboy gbdk 
+	$(call RMFILES,$(PROGRAM))
 
 else # $(words $(TARGETLIST)),1
 
