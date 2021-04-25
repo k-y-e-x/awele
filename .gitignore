@@ -1,6 +1,8 @@
 .DS_Store
 awele.dox
 doc/
+doc/html
+doc/latex
 obj/
 tgt/
 *.html
