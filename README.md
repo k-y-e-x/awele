@@ -1,12 +1,12 @@
-#AWELE-KAHALA
+# AWELE-KAHALA
 
-Un peu d'histoire perso...
+** Un peu d'histoire perso...
 Il y a (très, très...) longtemps, j'ai écrit un programme d'awele-kalaha pour un TP à la Fac
 Puis j'ai fait une version pour mon amiga 
 Fin 2020, j'ai retrouvé les sources en transférant mes anciennes disquettes en ADF pour utilisation via gotek et émulateur
 
 
-Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standard s'est un peu complexifié :
+** Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standard s'est un peu complexifié :
 - Réécriture pour oric et compilation avec cc65
 - Réécriture pour Gameboy et compilation avec gbdk
 - Fusion en un seul répertoire avec Makefile unique
@@ -17,7 +17,7 @@ Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standard 
 - Boucle sur nouvelle partie (nécessaire sur gameboy)
 
 
-Reste À Faire :
+** Reste À Faire :
 - Rendre variables certaines constantes qui sont sous forme de define
 -Ajouter un menu d'option pour gérer des variantes des règles (avec les nouvelles variables)
 Nettoyage du code !!!!! (après pas mal d'ajout, une cohérence est à faire)- 
