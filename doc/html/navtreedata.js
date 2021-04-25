@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Awele", "index.html", [
+    [ "AWELE-KAHALA", "index.html", null ],
     [ "Fichiers", "files.html", [
       [ "Liste des fichiers", "files.html", "files_dup" ],
       [ "Variables globale", "globals.html", [
@@ -41,7 +42,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "awele_8c.html",
-"mes__types_8h.html#a5f5e06c273a346b641e0914782b25744"
+"mes__types_8h.html#a5850d5316caf7f4cedd742fdf8cd7c02"
 ];
 
 var SYNCONMSG = 'cliquez pour désactiver la synchronisation du panel';

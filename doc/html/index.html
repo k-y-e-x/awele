@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Awele: awele</title>
+<title>Awele: AWELE-KAHALA</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,11 +83,35 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">awele </div>  </div>
+<div class="title">AWELE-KAHALA </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> AWELE-KAHALA</p>
-<p>Il y a (très, très...) longtemps, j'ai écrit un programme d'awele-kalaha pour un TP à la Fac Puis j'ai fait une version pour mon amiga Fin 2020, j'ai retrouvé les sources en transférant mes anciennes disquettes en ADF pour utilisation via gotek et émulateur </p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <b>Un peu d'histoire perso...</b></p>
+<p>Il y a (très, très...) longtemps, j'ai écrit un programme d'awele-kalaha pour un TP à la Fac. Puis j'ai fait une version pour mon amiga aux vacances suivantes donc août 1989 !</p>
+<p>Fin 2020, j'ai retrouvé les sources en transférant mes anciennes disquettes en ADF pour utilisation via gotek et émulateur</p>
+<p><b>Le simple fichier <a class="el" href="awele_8c.html">awele.c</a> qui ne faisait qu'un affichage sur la sortie standard s'est un peu complexifié :</b></p><ul>
+<li>Réécriture pour oric et compilation avec cc65</li>
+<li>Réécriture pour Gameboy et compilation avec gbdk</li>
+<li>Fusion en un seul répertoire avec Makefile unique</li>
+<li>modification de tap2dsk pour créer des D7 au format EDSK : obligatoire pour le core Oric sur Mister</li>
+<li>Ajout de la compilation vers C64</li>
+<li>Mise en commun de la partie conio Oric et C64</li>
+<li>Ajout d'un menu sur Oric et C64 + possibilité d'appel du menu en cours de partie</li>
+<li>Ajout des règles du jeu</li>
+<li>Boucle sur nouvelle partie (nécessaire sur gameboy)</li>
+</ul>
+<p><b>Reste À Faire :</b></p><ul>
+<li>Rendre variables certaines constantes qui sont sous forme de define</li>
+<li>Ajouter un menu d'option pour gérer des variantes des règles (avec les nouvelles variables)</li>
+<li>Nettoyage du code !!!!! (après pas mal d'ajout, une cohérence est à faire)-</li>
+<li>Ajouter les règles dans la documentation sur Github Pages</li>
+</ul>
+<p>Lien vers la documentation (sur Github Pages et créée avec doxygen) : <br  />
+</p>
+<p><a href="https://k-y-e-x.github.io/awele/doc/html/index.html">https://k-y-e-x.github.io/awele/doc/html/index.html</a></p>
+<p>Lien vers le GitHub : <br  />
+</p>
+<p><a href="https://github.com/k-y-e-x/awele">https://github.com/k-y-e-x/awele</a> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

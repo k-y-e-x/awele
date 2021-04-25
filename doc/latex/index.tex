@@ -1,5 +1,38 @@
 \label{index_md_README}%
 \Hypertarget{index_md_README}%
- AWELE-\/\+KAHALA
+ {\bfseries{Un peu d\textquotesingle{}histoire perso...}}
 
-Il y a (très, très...) longtemps, j\textquotesingle{}ai écrit un programme d\textquotesingle{}awele-\/kalaha pour un TP à la Fac Puis j\textquotesingle{}ai fait une version pour mon amiga Fin 2020, j\textquotesingle{}ai retrouvé les sources en transférant mes anciennes disquettes en ADF pour utilisation via gotek et émulateur 
+Il y a (très, très...) longtemps, j\textquotesingle{}ai écrit un programme d\textquotesingle{}awele-\/kalaha pour un TP à la Fac. Puis j\textquotesingle{}ai fait une version pour mon amiga aux vacances suivantes donc août 1989 !
+
+Fin 2020, j\textquotesingle{}ai retrouvé les sources en transférant mes anciennes disquettes en ADF pour utilisation via gotek et émulateur
+
+{\bfseries{Le simple fichier \mbox{\hyperlink{awele_8c}{awele.\+c}} qui ne faisait qu\textquotesingle{}un affichage sur la sortie standard s\textquotesingle{}est un peu complexifié \+:}}
+\begin{DoxyItemize}
+\item Réécriture pour oric et compilation avec cc65
+\item Réécriture pour Gameboy et compilation avec gbdk
+\item Fusion en un seul répertoire avec Makefile unique
+\item modification de tap2dsk pour créer des D7 au format EDSK \+: obligatoire pour le core Oric sur Mister
+\item Ajout de la compilation vers C64
+\item Mise en commun de la partie conio Oric et C64
+\item Ajout d\textquotesingle{}un menu sur Oric et C64 + possibilité d\textquotesingle{}appel du menu en cours de partie
+\item Ajout des règles du jeu
+\item Boucle sur nouvelle partie (nécessaire sur gameboy)
+\end{DoxyItemize}
+
+{\bfseries{Reste À Faire \+:}}
+\begin{DoxyItemize}
+\item Rendre variables certaines constantes qui sont sous forme de define
+\item Ajouter un menu d\textquotesingle{}option pour gérer des variantes des règles (avec les nouvelles variables)
+\item Nettoyage du code !!!!! (après pas mal d\textquotesingle{}ajout, une cohérence est à faire)-\/
+\item Ajouter les règles dans la documentation sur Github Pages
+\end{DoxyItemize}
+
+Lien vers la documentation (sur Github Pages et créée avec doxygen) \+: ~\newline
+
+
+\href{https://k-y-e-x.github.io/awele/doc/html/index.html}{\texttt{ https\+://k-\/y-\/e-\/x.\+github.\+io/awele/doc/html/index.\+html}}
+
+Lien vers le Git\+Hub \+: ~\newline
+
+
+\href{https://github.com/k-y-e-x/awele}{\texttt{ https\+://github.\+com/k-\/y-\/e-\/x/awele}} 

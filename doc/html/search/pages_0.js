@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['awele_331',['awele',['../index.html',1,'']]]
+  ['awele_2dkahala_331',['AWELE-KAHALA',['../index.html',1,'']]]
 ];

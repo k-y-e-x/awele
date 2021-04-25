@@ -9,7 +9,7 @@ var searchData=
   ['alphabeta_6',['alphabeta',['../awele_8h.html#ada42f55cc512fb606396ca7cc1670c88',1,'awele.h']]],
   ['aptr_7',['APTR',['../mes__types_8h.html#a201013872f88d6f535b12e644d7f4d5a',1,'mes_types.h']]],
   ['aptr_5ftypedef_8',['APTR_TYPEDEF',['../mes__types_8h.html#a087bdb36fddc0b328263561776ebffc3',1,'mes_types.h']]],
-  ['awele_9',['awele',['../index.html',1,'']]],
+  ['awele_2dkahala_9',['AWELE-KAHALA',['../index.html',1,'']]],
   ['awele_2ec_10',['awele.c',['../awele_8c.html',1,'']]],
   ['awele_2edox_11',['awele.dox',['../awele_8dox.html',1,'']]],
   ['awele_2eh_12',['awele.h',['../awele_8h.html',1,'']]],
