@@ -94,8 +94,7 @@ UBYTE getkj()
  *	@param	c	: caractère à redéfinir
  *	@param	t	: tableau contenant les 8 octets du caractère à modifier (type BYTEBITS)
  */
-void modifCaractere(c,t)
-char c; BYTEBITS t[8];
+void modifCaractere(char c, BYTEBITS t[8])
 {
 	int i;
 	for(i=0;i<8;i++)

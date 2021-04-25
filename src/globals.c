@@ -1,3 +1,8 @@
+/**
+ *	@file globals.c
+ * initialisation des variables globales pour l'affichage
+ */
+ 
 #include <string.h>
 #include "mes_types.h"
 #include "globals.h"

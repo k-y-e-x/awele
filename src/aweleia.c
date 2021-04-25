@@ -1,26 +1,26 @@
-/*******
+/**
+* @file aweleia.c
 * Séparation en plusieurs fichiers pour faciliter la maintenance et le multi systeme
 * 14/03/20121
 * source la version GB => mise à jour des types dans mes_types.h
 * ce fichier est commun pour toutes les versions
-*******/
+*/
 
-//#include <stdio.h>
 #include "mes_types.h"
-//#include <stdlib.h>
-
 #include "macros.h"
 #include "awele.h"
-//#include <gb/gB.h>
-//#include <gb/drawing.h>
+
+/**
+ * posEval : variable globale contenant le nombre de position évaluées
+ */
 UWORD posEval = 0;
 
 /**
  * jeuPoss : retourne Vrai si le joueur j peut jouer
  * à partir du plateau p
- * @param p : pointeur vers le plateau de jeu
- * @param j : numero du joueur (0 ou 1)
- * @return : Booléen indiquant si le joeuur j peut jouer
+ * @param p pointeur vers le plateau de jeu
+ * @param j numero du joueur (0 ou 1)
+ * @return Booléen indiquant si le joueur j peut jouer
  */
 BOOLEAN jeuPoss(UBYTE *p,UBYTE j)
 {
@@ -34,11 +34,11 @@ BOOLEAN jeuPoss(UBYTE *p,UBYTE j)
 
 /**
  * jouer : le plateau p est le plateau obtenu en jouant 
- * la case c sur le plateau initial pi, la fonction
- * @param p : pointeur vers le plateau de jeu rséultat
- * @param pi: pointeur vers le plateau de jeu initial
- * @param c : case jouée
- * @param j : numéro du joueur (0 ou 1)
+ * la case c sur le plateau initial pi
+ * @param p pointeur vers le plateau de jeu rséultat
+ * @param pi pointeur vers le plateau de jeu initial
+ * @param c case jouée
+ * @param j numéro du joueur (0 ou 1)
  * @return Vrai si le joueur doit rejouer
  */
 BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j)
@@ -73,9 +73,11 @@ BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j)
 }
 
 /**
- * alphabeta : procedure alpha-beta
- * ~~~~~~~~~~~~~~~~~~~~
+ * alphabeta : procedure d'élagage alpha-beta
+ * @see minmax
  * @param p contient le plateau de jeu initial
+ * @param alpha vaut moins l'infini au premier appel
+ * @param beta vaut plus l'infini au premier appel
  * @param j est le n° du joueur utilisant cette procedure (0 ou 1)
  * @param prf est la profondeur de recherche
  * @param n est le nombre de coups joués
@@ -161,7 +163,17 @@ A METTRE A JOUR : TEST POUR AFFICHAGE INFO AVANCEMENT RECHERCHE
    return( alpha );
 }
 
-
+/**
+ * minmax : algorithme minmax avec utilisation de l'inverse pour changement de joueur et descente dans la profondeur de recherche
+ * @see maxmin
+ * @see eval
+ * @param p plateau de jeu
+ * @param alpha
+ * @param beta
+ * @param j n° du joueur (0 ou 1)
+ * @param prf profondeur de recherche max en cours
+ * @return si on est sur un feuille ou plus de profondeur de recherche alors l'évaluation du plateau sino calcul du MIN
+ */
 WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 {
    register UBYTE np[LGPLAT], i, jp=0, jo;
@@ -169,7 +181,7 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
    if(prf<=0)
       return( eval(p,j) );
 
-   jo=1-j;
+   jo=1-j; //jo = joueur opposé à j
 
    for( i=jo*(NCASES+1); (i<(jo+1)*NCASES+jo) && (alpha<beta); i++)
    {
@@ -193,7 +205,17 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
    return( beta );
 }
 
-
+/**
+ * maxmin : algorithme minmax pour gestion de changement du joueur : cas MAX
+ * @see minmax
+ * @see eval
+ * @param p plateau de jeu
+ * @param alpha
+ * @param beta
+ * @param j n° du joueur (0 ou 1)
+ * @param prf profondeur de recherche max en cours
+ * @return si on est sur un feuille ou plus de profondeur de recherche alors l'évaluation du plateau sino calcul du MAX
+ */
 WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 {
    register UBYTE np[LGPLAT], i, jp=0;
@@ -223,7 +245,11 @@ WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
    return( alpha );
 }
 
-
+/**
+ * maxmin : algorithme minmax pour gestion de changement du joueur : cas MAX
+ * @param p plateau de jeu
+ * @param j n° du joueur pour lequel on évalue le plateau
+ */
 WORD eval(UBYTE *p, UBYTE j)
 {
       ++posEval; 

@@ -1,9 +1,6 @@
-/*
- *	globals.h
- *	cc65 Chess
- *
- *	Created by Stefan Wessels, February 2014.
- *
+/**
+ *	@file globals.h
+ * définition des variables globales pour l'affichage
  */
 
 #ifndef _GLOBALS_H_

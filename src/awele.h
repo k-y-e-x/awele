@@ -1,6 +1,6 @@
 /**
  * @file awele.h
- * @brief	Déclaration des fonctions et #define du projet
+ * Déclaration des fonctions et define du projet
  */
  
 #ifndef	AWELE_H
@@ -55,12 +55,12 @@ extern UBYTE jeu[LGPLAT], prof[2], tab[20], j[2];
 
 // gestion CC65 ou GBDK (et autres un jour, ou pas) via option compilation -D
 // donc le else laisse le printf standard
-#if defined(CC65) 
-#define PRINTF cprintf
-#elif defined(GB)
-#define PRINTF gprintf
-#else
-#define PRINTF printf
-#endif
+// #if defined(CC65) 
+// #define PRINTF cprintf
+// #elif defined(GB)
+// #define PRINTF gprintf
+// #else
+// #define PRINTF printf
+// #endif
 
 #endif	/* AWELE_H */
