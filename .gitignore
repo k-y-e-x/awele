@@ -8,3 +8,6 @@ tgt
 *.map
 *.ihx
 *.sym
+*.tex
+*.js
+*.sty
