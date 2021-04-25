@@ -1,10 +1,10 @@
-DSK = awele-oric.dsk
+DSK = build/awele-oric.dsk
 
 REMOVES += $(DSK)
 
 .PHONY: dsk
 dsk: $(DSK)
 
-$(DSK): aweloric.tap
+$(DSK): build/aweloric.tap
 	tap2dsk -nKALAHA -iCLS:AWELE $< $@
 	old2mfm $@
