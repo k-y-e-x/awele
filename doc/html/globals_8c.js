@@ -1,0 +1,28 @@
+var globals_8c =
+[
+    [ "gEgalite", "globals_8c.html#ad05bfa44993a47d94040a322d3570376", null ],
+    [ "gJ", "globals_8c.html#a469ff20a2ce6f4205eb1bf558514c955", null ],
+    [ "gJ1", "globals_8c.html#a82743644d8d6b01ea22537f066272269", null ],
+    [ "gJ1commence", "globals_8c.html#a39122909e08ea4c370fffd0dbd72eb84", null ],
+    [ "gJ2", "globals_8c.html#a3fd12fcf3ff2fdac9a87f1d4d496f31a", null ],
+    [ "gJ2ordi", "globals_8c.html#a73157e4e9c839208c67c615ed9f40042", null ],
+    [ "gJoueur", "globals_8c.html#a3896d960fddeb1c8b48a3b029dab9b0d", null ],
+    [ "gMenuJoueurs", "globals_8c.html#a1dd26fb2ecd394bfabad2ee8a54d2a07", null ],
+    [ "gMenuOK", "globals_8c.html#a5d0ffd176bdd97e36d7a30de8f5c3f5b", null ],
+    [ "gMenuOptions", "globals_8c.html#a7259bdd12e6cc21741ea5d704fa9add9", null ],
+    [ "gMenuRegles", "globals_8c.html#a0182f6e04c00e49a10947ab13b2f08e7", null ],
+    [ "gMoi", "globals_8c.html#a93803055258562cf5bf6c03cf87c3f12", null ],
+    [ "gO1", "globals_8c.html#a9fb5d8d0c35d23be15223ac8de96a974", null ],
+    [ "gO2", "globals_8c.html#a2b97e57b23c5c8c206ec20db0796c6fb", null ],
+    [ "gOption1Joueur", "globals_8c.html#a930bf5a993c03939f56ff07bf098bd46", null ],
+    [ "gOption2Joueurs", "globals_8c.html#a15007e291cb4a4f0e9d5ca09e10b1b36", null ],
+    [ "gOption2Ordinateurs", "globals_8c.html#a498c6c91c48ce649195f5d8e9bb7c5e3", null ],
+    [ "gOptionJoueurs", "globals_8c.html#a038f5e9e5374d375de432d4ffe2997f3", null ],
+    [ "gOptionProfondeur", "globals_8c.html#ac727c0195135469e77e2bdc1ce553468", null ],
+    [ "gOptionQuiCommence", "globals_8c.html#a0788f0384ac33f775f2518b10a90253e", null ],
+    [ "gPositionsEvaluees", "globals_8c.html#a2f707717fbae1c38d0594f51bcf1b5e1", null ],
+    [ "gQuelleCase", "globals_8c.html#a7af8dc874f5ed94fa0ae9209aa8c4709", null ],
+    [ "gRegles", "globals_8c.html#afba58a7388415b583b16c5ef1eb08a02", null ],
+    [ "gVainqueur", "globals_8c.html#a494e57594d2c030c64e45b56daa3b89d", null ],
+    [ "gVous", "globals_8c.html#aa366294c9e56697e815b182d4a692d4c", null ]
+];

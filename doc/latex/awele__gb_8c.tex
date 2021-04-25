@@ -1,0 +1,856 @@
+\hypertarget{awele__gb_8c}{}\doxysection{Référence du fichier src/gb/awele\+\_\+gb.c}
+\label{awele__gb_8c}\index{src/gb/awele\_gb.c@{src/gb/awele\_gb.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$types.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$gb/g\+B.\+h$>$}\newline
+{\ttfamily \#include $<$gb/drawing.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../macros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../awele.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../globals.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{awele__gb_8c_a4ee9a8ff2912c3c4829224ed9faf3672}{gbglobals}} ()
+\item 
+void \mbox{\hyperlink{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}{printxy}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} x, \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} y, \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} rv, \mbox{\hyperlink{mes__types_8h_a454d98e8ec5bedf6c8e399034af40008}{STRPTR}} s)
+\item 
+void \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}} (\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} b)
+\item 
+void \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{efface\+Ligne}} (UINT8 l)
+\item 
+void \mbox{\hyperlink{awele__gb_8c_a7f18b1a524fab622ab537c3ecd9c5a11}{efface\+Chr}} (UINT8 l, UINT16 n)
+\item 
+void \mbox{\hyperlink{awele__gb_8c_af3eac3ad203ab091baad010ef3f7ab0a}{clrscr}} ()
+\item 
+void \mbox{\hyperlink{awele__gb_8c_ad4b0d8e14ead948ac05817074a4147ef}{gbtbcar}} ()
+\item 
+void \mbox{\hyperlink{awele__gb_8c_a4b4b6da5eb55edf6a58839e9603b16d8}{boite\+Plateau}} ()
+\item 
+void \mbox{\hyperlink{awele__gb_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}{init\+Joystick}} ()
+\begin{DoxyCompactList}\small\item\em Initialisation du joystick \+: uniquement de type IJK sur Oric. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{awele__gb_8c_aa25d21866cf984b531a24441b45ee482}{init\+Plateau}} ()
+\begin{DoxyCompactList}\small\item\em Initialisation du plateau de jeu \+: redéfinition de caractères pour les accents redéfinition de caractères pour le plateau de jeu remplacement des accents dans des variables globales redéfinition de variables globales pour du spécifique Oric. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} \mbox{\hyperlink{awele__gb_8c_a82378a8841088d9333c582370d628904}{getkj}} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui attend la saisie d\textquotesingle{}une touche ou une action sur le joystick. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} \mbox{\hyperlink{awele__gb_8c_a89f72af0c0aa059edf8b3db5516257c2}{menu\+Options}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} n)
+\begin{DoxyCompactList}\small\item\em Fonction de choix dans les menus de l\textquotesingle{}application. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{awele__gb_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficher\+Plateau}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Affichage du plateau de jeu. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} \mbox{\hyperlink{awele__gb_8c_aabb31b331982dfbc0b64eb9784171d24}{afficher\+Resultats}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} k1, \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} k2)
+\begin{DoxyCompactList}\small\item\em Affichage du résultat de la partie et question si l\textquotesingle{}utilisateur veut rejouer ou non. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{awele__gb_8c_af55fc8a1d312d2d1fb5e77ea1f58a064}{afficher\+Pos\+Eval}} ()
+\begin{DoxyCompactList}\small\item\em Affichage du nombre de positions évaluées à la position prévue pour cela sur l\textquotesingle{}écran pos\+Eval est une varialbe globale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{awele__gb_8c_a48e5b979c909ca734b632601a0011f3f}{afficher\+Attente}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} joueur, \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} casejouee)
+\begin{DoxyCompactList}\small\item\em Affichage du message d\textquotesingle{}attente lors d\textquotesingle{}un coup de l\textquotesingle{}ordinateur et attente de l\textquotesingle{}appui sur la touche RETURN (= le bouton de feu si joystick) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{awele__gb_8c_aa3d88bbfba78784c6660833668aee101}{effacer\+Attente}} ()
+\begin{DoxyCompactList}\small\item\em Effacer le message d\textquotesingle{}attente du coup de l\textquotesingle{}ordinateur. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} \mbox{\hyperlink{awele__gb_8c_a0b05c1eab3e573cfad4e4411552b211d}{choix\+Joueur}} (\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} joueur)
+\begin{DoxyCompactList}\small\item\em Fonction de selection d\textquotesingle{}un coup par le joueur en cours permet aussi l\textquotesingle{}accès au menu principal en cours de partie. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{awele__gb_8c_a5f3b020fde2c659ee4b0d19ec7cc8f61}{dbgprint}} (\mbox{\hyperlink{mes__types_8h_a454d98e8ec5bedf6c8e399034af40008}{STRPTR}} s)
+\begin{DoxyCompactList}\small\item\em Affichage d\textquotesingle{}une chaîne pour déboggage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{awele__gb_8c_a57577c6761f88a9329f66cba243791b7}{afficher\+Regles}} ()
+\begin{DoxyCompactList}\small\item\em Affichage des règles du jeu Si compilation pour Oric, affichage du message d\textquotesingle{}attente en vert. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mes__types_8h_aefbb6ca39ebcf009709e607d159766d5}{UWORD}} \mbox{\hyperlink{awele__gb_8c_a8a6267442d747710d2ae48d2a1a8a35c}{pos\+Eval}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{awele__gb_8c_a48e5b979c909ca734b632601a0011f3f}\label{awele__gb_8c_a48e5b979c909ca734b632601a0011f3f}} 
+\index{awele\_gb.c@{awele\_gb.c}!afficherAttente@{afficherAttente}}
+\index{afficherAttente@{afficherAttente}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{afficherAttente()}{afficherAttente()}}
+{\footnotesize\ttfamily void afficher\+Attente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{joueur,  }\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{casejouee }\end{DoxyParamCaption})}
+
+
+
+Affichage du message d\textquotesingle{}attente lors d\textquotesingle{}un coup de l\textquotesingle{}ordinateur et attente de l\textquotesingle{}appui sur la touche RETURN (= le bouton de feu si joystick) 
+
+\begin{DoxySeeAlso}{Voir également}
+\mbox{\hyperlink{awele__conio_8c_aa3d88bbfba78784c6660833668aee101}{effacer\+Attente}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Paramètres}
+{\em joueur} & \+: numéro du joueur (1 ou 2) \\
+\hline
+{\em casejouee} & \+: case jouée par le joueur \\
+\hline
+\end{DoxyParams}
+
+
+Définition à la ligne 302 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{303 \{}
+\DoxyCodeLine{304     \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} x,y;}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     gotogxy(0,14);}
+\DoxyCodeLine{307     color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{308     gprintf(\textcolor{stringliteral}{"{}J\%d joue en "{}}, joueur);}
+\DoxyCodeLine{309     gprintf(\textcolor{stringliteral}{"{}\%d   "{}}, casejouee);}
+\DoxyCodeLine{310     gotogxy(2,15);}
+\DoxyCodeLine{311     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{312     gprint(\textcolor{stringliteral}{"{}B pour continuer"{}});}
+\DoxyCodeLine{313     \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{314     }
+\DoxyCodeLine{315     joueur-\/-\/;}
+\DoxyCodeLine{316     y= 6-\/joueur*4;}
+\DoxyCodeLine{317     \textcolor{comment}{//effaceLigne(y);}}
+\DoxyCodeLine{318     color(WHITE,WHITE,SOLID);}
+\DoxyCodeLine{319     (joueur==0)?box(16,49,144,55,M\_FILL):box(16,16,144,22,M\_FILL);}
+\DoxyCodeLine{320     }
+\DoxyCodeLine{321     x=(casejouee-\/joueur*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1));}
+\DoxyCodeLine{322     x = (1-\/2*joueur)*x;}
+\DoxyCodeLine{323     x+=7*joueur;}
+\DoxyCodeLine{324     x = x*2;}
+\DoxyCodeLine{325     x+=2;}
+\DoxyCodeLine{326     gotogxy(x,y);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});wrtchr(1+(\textcolor{keywordtype}{char})joueur);}
+\DoxyCodeLine{327     \textcolor{comment}{//      sprintf(temp,"{}e\%d,\%d-\/\%d-\/\%d      "{},x,y,casejouee,joueur);dbgprint(temp);}}
+\DoxyCodeLine{328     \mbox{\hyperlink{awele__gb_8c_a4b4b6da5eb55edf6a58839e9603b16d8}{boitePlateau}}();}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330     waitpad(J\_B);}
+\DoxyCodeLine{331     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(15);}
+\DoxyCodeLine{332     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(16);}
+\DoxyCodeLine{333 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a6981e113cd4381e2b07e4c170c3b4a1a}\label{awele__gb_8c_a6981e113cd4381e2b07e4c170c3b4a1a}} 
+\index{awele\_gb.c@{awele\_gb.c}!afficherPlateau@{afficherPlateau}}
+\index{afficherPlateau@{afficherPlateau}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{afficherPlateau()}{afficherPlateau()}}
+{\footnotesize\ttfamily void afficher\+Plateau (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Affichage du plateau de jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p} & \+: pointeur vers le tableau contenant le plateau à afficher \\
+\hline
+\end{DoxyParams}
+
+
+Définition à la ligne 210 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{211 \{}
+\DoxyCodeLine{212     \textcolor{keyword}{register} \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{213     gotogxy(0,1);}
+\DoxyCodeLine{214     \textcolor{comment}{// les numeros des cases du joueur 2 en alternant inversion couleur}}
+\DoxyCodeLine{215     \textcolor{keywordflow}{for}( i=2*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}; i>\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}; i-\/-\/)}
+\DoxyCodeLine{216         \{}
+\DoxyCodeLine{217             gotogxy(2*(2*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}-\/i+1),1);}
+\DoxyCodeLine{218         \textcolor{keywordflow}{if}(i\%2)  color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{219         \textcolor{keywordflow}{else}     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{220         gprintln(i,10,UNSIGNED);}
+\DoxyCodeLine{221        }
+\DoxyCodeLine{222     \}}
+\DoxyCodeLine{223     \textcolor{comment}{// les cases du joueur 2 en alternant inversion couleur}}
+\DoxyCodeLine{224     \textcolor{keywordflow}{for}( i=2*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}; i>\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}; i-\/-\/)}
+\DoxyCodeLine{225     \{}
+\DoxyCodeLine{226         gotogxy(2*(2*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}-\/i+1),3);\textcolor{comment}{//+i\%2);}}
+\DoxyCodeLine{227         \textcolor{keywordflow}{if}(i\%2)  color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{228         \textcolor{keywordflow}{else}     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{229          gprintln(p[i],10,UNSIGNED);}
+\DoxyCodeLine{230          \textcolor{keywordflow}{if}(p[i]<10) wrtchr(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{comment}{//}}
+\DoxyCodeLine{235     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{236     gotogxy(0,4);}
+\DoxyCodeLine{237     gprintln(p[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}],10,UNSIGNED);}
+\DoxyCodeLine{238     \textcolor{keywordflow}{if}(p[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}]<10) wrtchr(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{239     gotogxy(2*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+2,4);}
+\DoxyCodeLine{240     gprintln(p[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}],10,UNSIGNED);}
+\DoxyCodeLine{241     \textcolor{keywordflow}{if}(p[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}]<10) wrtchr(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243     \textcolor{comment}{// les cases du joueur 1 en alternant inversion couleur}}
+\DoxyCodeLine{244     \textcolor{keywordflow}{for}( i=0; i<\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}; i++)}
+\DoxyCodeLine{245     \{}
+\DoxyCodeLine{246         gotogxy(2*i+2,5);\textcolor{comment}{//+i\%2);}}
+\DoxyCodeLine{247         \textcolor{keywordflow}{if}(i\%2)     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{248         \textcolor{keywordflow}{else}     color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{249          gprintln(p[i],10,UNSIGNED);}
+\DoxyCodeLine{250         \textcolor{keywordflow}{if}(p[i]<10) wrtchr(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253     \textcolor{comment}{// les numeros des cases du joueur 1 en alternant inversion couleur}}
+\DoxyCodeLine{254     \textcolor{keywordflow}{for}( i=0; i<\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}; i++)}
+\DoxyCodeLine{255     \{}
+\DoxyCodeLine{256             gotogxy(2*i+2,7);}
+\DoxyCodeLine{257         \textcolor{keywordflow}{if}(i\%2)     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{258         \textcolor{keywordflow}{else}     color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{259         gprintln(i,10,UNSIGNED);}
+\DoxyCodeLine{260     \}}
+\DoxyCodeLine{261 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_af55fc8a1d312d2d1fb5e77ea1f58a064}\label{awele__gb_8c_af55fc8a1d312d2d1fb5e77ea1f58a064}} 
+\index{awele\_gb.c@{awele\_gb.c}!afficherPosEval@{afficherPosEval}}
+\index{afficherPosEval@{afficherPosEval}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{afficherPosEval()}{afficherPosEval()}}
+{\footnotesize\ttfamily void afficher\+Pos\+Eval (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Affichage du nombre de positions évaluées à la position prévue pour cela sur l\textquotesingle{}écran pos\+Eval est une varialbe globale. 
+
+
+
+Définition à la ligne 295 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{296 \{}
+\DoxyCodeLine{297     gotogxy(10,0);}
+\DoxyCodeLine{298     \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{299      gprintf(\textcolor{stringliteral}{"{}\%d   "{}},\mbox{\hyperlink{awele__gb_8c_a8a6267442d747710d2ae48d2a1a8a35c}{posEval}});}
+\DoxyCodeLine{300 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a57577c6761f88a9329f66cba243791b7}\label{awele__gb_8c_a57577c6761f88a9329f66cba243791b7}} 
+\index{awele\_gb.c@{awele\_gb.c}!afficherRegles@{afficherRegles}}
+\index{afficherRegles@{afficherRegles}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{afficherRegles()}{afficherRegles()}}
+{\footnotesize\ttfamily void afficher\+Regles (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Affichage des règles du jeu Si compilation pour Oric, affichage du message d\textquotesingle{}attente en vert. 
+
+
+
+Définition à la ligne 424 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{425 \{}
+\DoxyCodeLine{426     \mbox{\hyperlink{awele__gb_8c_af3eac3ad203ab091baad010ef3f7ab0a}{clrscr}}();}
+\DoxyCodeLine{427     gotogxy(0,1);}
+\DoxyCodeLine{428     gprint(\textcolor{stringliteral}{"{}ACTION: Au début de la partie, les joueurs placent leurs graines, par groupes de 6,\(\backslash\)}}
+\DoxyCodeLine{429 \textcolor{stringliteral}{dans les troues de leur rangée (on ne place aucune graines dans le Kalaha). L'un\(\backslash\)}}
+\DoxyCodeLine{430 \textcolor{stringliteral}{d'entre eux (tiré au sort) commence la partie.\(\backslash\)}}
+\DoxyCodeLine{431 \textcolor{stringliteral}{A son tour de jeu, un joueur prend les graines dans un trou des trous la rangée proche\(\backslash\)}}
+\DoxyCodeLine{432 \textcolor{stringliteral}{de lui et les sème une par une dans chacun des trous qui suivent ainsi que dans son\(\backslash\)}}
+\DoxyCodeLine{433 \textcolor{stringliteral}{Kalaha en suivant le sens anti-\/horaire. Le joueur ne sème jamais de graines dans le\(\backslash\)}}
+\DoxyCodeLine{434 \textcolor{stringliteral}{Kalaha de son adversaire.\(\backslash\)}}
+\DoxyCodeLine{435 \textcolor{stringliteral}{-\/ Si le joueur sème sa dernière graine dans son Kalaha, il peut rejouer. On peut ainsi\(\backslash\)}}
+\DoxyCodeLine{436 \textcolor{stringliteral}{enchaîner plusieurs tous de jeu.\(\backslash\)}}
+\DoxyCodeLine{437 \textcolor{stringliteral}{-\/ Si le joueur sème sa dernière graine dans un trou vide de sa propre rangée, il capture\(\backslash\)}}
+\DoxyCodeLine{438 \textcolor{stringliteral}{les graines situées dans le trou en vis à vis et les place dans son Kalaha. Puis c'est a\(\backslash\)}}
+\DoxyCodeLine{439 \textcolor{stringliteral}{son adversaire de jouer.\(\backslash\)}}
+\DoxyCodeLine{440 \textcolor{stringliteral}{-\/ Si le joueur sème sa dernière graine dans un trou qui n'était pas vide, son tour de jeu\(\backslash\)}}
+\DoxyCodeLine{441 \textcolor{stringliteral}{se termine et c'est à son adversaire de jouer.\(\backslash\)}}
+\DoxyCodeLine{442 \textcolor{stringliteral}{La partie se termine lorsqu'un des joueur ne peux plus jouer car lors de son tour de\(\backslash\)}}
+\DoxyCodeLine{443 \textcolor{stringliteral}{jeu, sa rangée est vide. Les graines restant éventuellement dans la rangée d 'un joueur\(\backslash\)}}
+\DoxyCodeLine{444 \textcolor{stringliteral}{sont placées dans son Kalaha. Le vainqueur est celui qui a le plus grand nombre de\(\backslash\)}}
+\DoxyCodeLine{445 \textcolor{stringliteral}{graines dans son Kalaha."{}});}
+\DoxyCodeLine{446     }
+\DoxyCodeLine{447 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_aabb31b331982dfbc0b64eb9784171d24}\label{awele__gb_8c_aabb31b331982dfbc0b64eb9784171d24}} 
+\index{awele\_gb.c@{awele\_gb.c}!afficherResultats@{afficherResultats}}
+\index{afficherResultats@{afficherResultats}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{afficherResultats()}{afficherResultats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}} afficher\+Resultats (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{k1,  }\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{k2 }\end{DoxyParamCaption})}
+
+
+
+Affichage du résultat de la partie et question si l\textquotesingle{}utilisateur veut rejouer ou non. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em k1} & \+: Nombre de grains dans le kalah du joueur 1 \\
+\hline
+{\em k2} & \+: Nombre de grains dans le kalah du joueur 2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+boolén si l\textquotesingle{}utilisateur veut rejouer ou non 
+\end{DoxyReturn}
+
+
+Définition à la ligne 265 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{266 \{}
+\DoxyCodeLine{267     gotogxy(0,12);}
+\DoxyCodeLine{268     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{269     \textcolor{keywordflow}{if}( k1>k2 )}
+\DoxyCodeLine{270     \{}
+\DoxyCodeLine{271        gprint(\mbox{\hyperlink{globals_8c_a3896d960fddeb1c8b48a3b029dab9b0d}{gJoueur}}[0]);}
+\DoxyCodeLine{272        gprint(\mbox{\hyperlink{globals_8c_a494e57594d2c030c64e45b56daa3b89d}{gVainqueur}});}
+\DoxyCodeLine{273     \}}
+\DoxyCodeLine{274     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( k1==k2 )}
+\DoxyCodeLine{275        gprint(\mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}});}
+\DoxyCodeLine{276     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{277     \{}
+\DoxyCodeLine{278        gprint(\mbox{\hyperlink{globals_8c_a3896d960fddeb1c8b48a3b029dab9b0d}{gJoueur}}[1]);}
+\DoxyCodeLine{279        gprint(\mbox{\hyperlink{globals_8c_a494e57594d2c030c64e45b56daa3b89d}{gVainqueur}});}
+\DoxyCodeLine{280     \}}
+\DoxyCodeLine{281     \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{282     gotogxy(2,13);gprintf(\textcolor{stringliteral}{"{} \%d : "{}},(k1<k2)?k2:k1);gprintf(\textcolor{stringliteral}{"{}\%d"{}},(k1<k2)?k1:k2);}
+\DoxyCodeLine{283     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(14);}
+\DoxyCodeLine{284     }
+\DoxyCodeLine{285     gotogxy(2,15);}
+\DoxyCodeLine{286     color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{287     gprint(\textcolor{stringliteral}{"{}B pour continuer"{}});}
+\DoxyCodeLine{288     waitpad(J\_B);}
+\DoxyCodeLine{289     waitpadup();}
+\DoxyCodeLine{290     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(15);}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292     \textcolor{keywordflow}{return}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{293 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a4b4b6da5eb55edf6a58839e9603b16d8}\label{awele__gb_8c_a4b4b6da5eb55edf6a58839e9603b16d8}} 
+\index{awele\_gb.c@{awele\_gb.c}!boitePlateau@{boitePlateau}}
+\index{boitePlateau@{boitePlateau}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{boitePlateau()}{boitePlateau()}}
+{\footnotesize\ttfamily void boite\+Plateau (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 83 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{84 \{}
+\DoxyCodeLine{85     color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{86     box(16,23,144,48,M\_NOFILL);}
+\DoxyCodeLine{87     box(0,23,16,40,M\_NOFILL);}
+\DoxyCodeLine{88     box(144,31,159,48,M\_NOFILL);}
+\DoxyCodeLine{89 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a0b05c1eab3e573cfad4e4411552b211d}\label{awele__gb_8c_a0b05c1eab3e573cfad4e4411552b211d}} 
+\index{awele\_gb.c@{awele\_gb.c}!choixJoueur@{choixJoueur}}
+\index{choixJoueur@{choixJoueur}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{choixJoueur()}{choixJoueur()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} choix\+Joueur (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{joueur }\end{DoxyParamCaption})}
+
+
+
+Fonction de selection d\textquotesingle{}un coup par le joueur en cours permet aussi l\textquotesingle{}accès au menu principal en cours de partie. 
+
+\begin{DoxySeeAlso}{Voir également}
+\mbox{\hyperlink{awele__conio_8c_aa3d88bbfba78784c6660833668aee101}{effacer\+Attente}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Paramètres}
+{\em joueur} & \+: numéro du joueur (1 ou 2) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: case jouée par le joueur 
+\end{DoxyReturn}
+
+
+Définition à la ligne 341 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{342 \{}
+\DoxyCodeLine{343     \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} x,y;}
+\DoxyCodeLine{344     \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} k;}
+\DoxyCodeLine{345     \textcolor{comment}{//UBYTE temp[64];}}
+\DoxyCodeLine{346     \textcolor{keywordtype}{signed} \textcolor{keywordtype}{char} c;}
+\DoxyCodeLine{347     }
+\DoxyCodeLine{348     \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{349     gotogxy(0,10);}
+\DoxyCodeLine{350     gprint(\mbox{\hyperlink{globals_8c_a3896d960fddeb1c8b48a3b029dab9b0d}{gJoueur}}[joueur]);}
+\DoxyCodeLine{351     gotogxy(0,11);}
+\DoxyCodeLine{352     gprint(\mbox{\hyperlink{globals_8c_a7af8dc874f5ed94fa0ae9209aa8c4709}{gQuelleCase}}); }
+\DoxyCodeLine{353 \textcolor{comment}{//  effaceLigne(2);}}
+\DoxyCodeLine{354 \textcolor{comment}{//  effaceLigne(6);}}
+\DoxyCodeLine{355     color(WHITE,WHITE,SOLID);}
+\DoxyCodeLine{356     box(16,16,144,22,M\_FILL);}
+\DoxyCodeLine{357     box(16,49,144,55,M\_FILL);}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359     \textcolor{keywordflow}{for}(c=joueur*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1);!\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c];c++);}
+\DoxyCodeLine{360     y= 6-\/joueur*4;}
+\DoxyCodeLine{361     \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{362     \textcolor{keywordflow}{do}}
+\DoxyCodeLine{363     \{}
+\DoxyCodeLine{364         \textcolor{comment}{//effaceLigne(y);}}
+\DoxyCodeLine{365         color(WHITE,WHITE,SOLID);}
+\DoxyCodeLine{366         (joueur==0)?box(16,49,144,55,M\_FILL):box(16,16,144,22,M\_FILL);}
+\DoxyCodeLine{367         \textcolor{comment}{//x=2+(2*joueur+(1-\/2*joueur)*(c-\/joueur*(NCASES+1)))*2;}}
+\DoxyCodeLine{368         x=(c-\/joueur*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1));}
+\DoxyCodeLine{369         x = (1-\/2*joueur)*x;}
+\DoxyCodeLine{370         x+=7*joueur;}
+\DoxyCodeLine{371         x = x*2;}
+\DoxyCodeLine{372         x+=2;}
+\DoxyCodeLine{373         gotogxy(x,y);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});wrtchr(1+(\textcolor{keywordtype}{char})joueur);}
+\DoxyCodeLine{374         \mbox{\hyperlink{awele__gb_8c_a4b4b6da5eb55edf6a58839e9603b16d8}{boitePlateau}}();}
+\DoxyCodeLine{375         \textcolor{keywordflow}{do}}
+\DoxyCodeLine{376         \{}
+\DoxyCodeLine{377 }
+\DoxyCodeLine{378             \textcolor{keywordflow}{do} k = \mbox{\hyperlink{awele__gb_8c_a82378a8841088d9333c582370d628904}{getkj}}(); \textcolor{keywordflow}{while}(!k);}
+\DoxyCodeLine{379             \textcolor{keywordflow}{if}(k == \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}})}
+\DoxyCodeLine{380             \{}
+\DoxyCodeLine{381                     gotogxy(x,y);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});wrtchr(32);}
+\DoxyCodeLine{382                     c-\/=(1-\/2*joueur);}
+\DoxyCodeLine{383             }
+\DoxyCodeLine{384             \}}
+\DoxyCodeLine{385             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(k == \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}})}
+\DoxyCodeLine{386             \{ }
+\DoxyCodeLine{387                     gotogxy(x,y);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});wrtchr(32);}
+\DoxyCodeLine{388                     c+=(1-\/2*joueur);}
+\DoxyCodeLine{389             \} }
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391             \textcolor{keywordflow}{if}(c<joueur*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1)) c=joueur*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1);}
+\DoxyCodeLine{392             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c>=(joueur+1)*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+joueur) c=(joueur+1)*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+joueur-\/1;}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394             x=(c-\/joueur*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1));}
+\DoxyCodeLine{395             x = (1-\/2*joueur)*x;}
+\DoxyCodeLine{396             x+=7*joueur;}
+\DoxyCodeLine{397             x = x*2;}
+\DoxyCodeLine{398             x+=2;}
+\DoxyCodeLine{399             gotogxy(x,y);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});wrtchr(1+(\textcolor{keywordtype}{char})joueur);}
+\DoxyCodeLine{400             gotogxy(16,11);}
+\DoxyCodeLine{401             gprintf(\textcolor{stringliteral}{"{}\%d "{}},c);}
+\DoxyCodeLine{402             \mbox{\hyperlink{awele__gb_8c_a4b4b6da5eb55edf6a58839e9603b16d8}{boitePlateau}}();     }
+\DoxyCodeLine{403         \} \textcolor{keywordflow}{while}(k != \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{404         waitpadup();}
+\DoxyCodeLine{405 }
+\DoxyCodeLine{406         gotogxy(x,y);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});wrtchr(1+(\textcolor{keywordtype}{char})joueur);}
+\DoxyCodeLine{407     }
+\DoxyCodeLine{408     \} \textcolor{keywordflow}{while}(c<joueur*(\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+1) || c>=(joueur+1)*\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}}+joueur || !\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{409     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(10);}
+\DoxyCodeLine{410     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(11);}
+\DoxyCodeLine{411     \textcolor{keywordflow}{return}(c);}
+\DoxyCodeLine{412 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_af3eac3ad203ab091baad010ef3f7ab0a}\label{awele__gb_8c_af3eac3ad203ab091baad010ef3f7ab0a}} 
+\index{awele\_gb.c@{awele\_gb.c}!clrscr@{clrscr}}
+\index{clrscr@{clrscr}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{clrscr()}{clrscr()}}
+{\footnotesize\ttfamily void clrscr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 66 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{67 \{}
+\DoxyCodeLine{68     \mbox{\hyperlink{awele__gb_8c_a7f18b1a524fab622ab537c3ecd9c5a11}{effaceChr}}(0,360);}
+\DoxyCodeLine{69 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a5f3b020fde2c659ee4b0d19ec7cc8f61}\label{awele__gb_8c_a5f3b020fde2c659ee4b0d19ec7cc8f61}} 
+\index{awele\_gb.c@{awele\_gb.c}!dbgprint@{dbgprint}}
+\index{dbgprint@{dbgprint}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{dbgprint()}{dbgprint()}}
+{\footnotesize\ttfamily void dbgprint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a454d98e8ec5bedf6c8e399034af40008}{STRPTR}}}]{s }\end{DoxyParamCaption})}
+
+
+
+Affichage d\textquotesingle{}une chaîne pour déboggage. 
+
+
+
+Définition à la ligne 414 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{415 \{}
+\DoxyCodeLine{416     \textcolor{comment}{//return;}}
+\DoxyCodeLine{417     gotogxy(0,15);}
+\DoxyCodeLine{418     \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{419     gprint(s);  }
+\DoxyCodeLine{420     waitpad(J\_B);}
+\DoxyCodeLine{421     waitpadup();}
+\DoxyCodeLine{422 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a7f18b1a524fab622ab537c3ecd9c5a11}\label{awele__gb_8c_a7f18b1a524fab622ab537c3ecd9c5a11}} 
+\index{awele\_gb.c@{awele\_gb.c}!effaceChr@{effaceChr}}
+\index{effaceChr@{effaceChr}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{effaceChr()}{effaceChr()}}
+{\footnotesize\ttfamily void efface\+Chr (\begin{DoxyParamCaption}\item[{UINT8}]{l,  }\item[{UINT16}]{n }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 59 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61     \mbox{\hyperlink{mes__types_8h_aefbb6ca39ebcf009709e607d159766d5}{UWORD}} i;}
+\DoxyCodeLine{62     color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{63     gotogxy(0,l);}
+\DoxyCodeLine{64     \textcolor{keywordflow}{for}(i=0;i<n;i++) wrtchr(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{65 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}\label{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}} 
+\index{awele\_gb.c@{awele\_gb.c}!effaceLigne@{effaceLigne}}
+\index{effaceLigne@{effaceLigne}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{effaceLigne()}{effaceLigne()}}
+{\footnotesize\ttfamily void efface\+Ligne (\begin{DoxyParamCaption}\item[{UINT8}]{l }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 51 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53     \textcolor{keyword}{register} UINT8 i;}
+\DoxyCodeLine{54     color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{55     gotogxy(0,l);}
+\DoxyCodeLine{56     \textcolor{keywordflow}{for}(i=0;i<20;i++) wrtchr(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{57 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_aa3d88bbfba78784c6660833668aee101}\label{awele__gb_8c_aa3d88bbfba78784c6660833668aee101}} 
+\index{awele\_gb.c@{awele\_gb.c}!effacerAttente@{effacerAttente}}
+\index{effacerAttente@{effacerAttente}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{effacerAttente()}{effacerAttente()}}
+{\footnotesize\ttfamily void effacer\+Attente (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Effacer le message d\textquotesingle{}attente du coup de l\textquotesingle{}ordinateur. 
+
+\begin{DoxySeeAlso}{Voir également}
+\mbox{\hyperlink{awele__conio_8c_a48e5b979c909ca734b632601a0011f3f}{afficher\+Attente}} 
+\end{DoxySeeAlso}
+
+
+Définition à la ligne 335 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{336 \{}
+\DoxyCodeLine{337     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(12);}
+\DoxyCodeLine{338     \mbox{\hyperlink{awele__gb_8c_a8339d8003ca334d5c374cea67881c62f}{effaceLigne}}(13);}
+\DoxyCodeLine{339 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a4ee9a8ff2912c3c4829224ed9faf3672}\label{awele__gb_8c_a4ee9a8ff2912c3c4829224ed9faf3672}} 
+\index{awele\_gb.c@{awele\_gb.c}!gbglobals@{gbglobals}}
+\index{gbglobals@{gbglobals}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{gbglobals()}{gbglobals()}}
+{\footnotesize\ttfamily void gbglobals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 8 du fichier gbglobals.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10     strcpy(\mbox{\hyperlink{globals_8c_a498c6c91c48ce649195f5d8e9bb7c5e3}{gOption2Ordinateurs}},\textcolor{stringliteral}{"{}2 Gameboy    "{}});}
+\DoxyCodeLine{11     strcpy(\mbox{\hyperlink{globals_8c_a0788f0384ac33f775f2518b10a90253e}{gOptionQuiCommence}},\textcolor{stringliteral}{"{}Qui commence ? "{}});}
+\DoxyCodeLine{12     strcpy(\mbox{\hyperlink{globals_8c_a39122909e08ea4c370fffd0dbd72eb84}{gJ1commence}},\textcolor{stringliteral}{"{}Joueur 1 commence"{}});}
+\DoxyCodeLine{13     strcpy(\mbox{\hyperlink{globals_8c_a73157e4e9c839208c67c615ed9f40042}{gJ2ordi}},\textcolor{stringliteral}{"{}Je suis le joueur2"{}});}
+\DoxyCodeLine{14     strcpy(\mbox{\hyperlink{globals_8c_ac727c0195135469e77e2bdc1ce553468}{gOptionProfondeur}},\textcolor{stringliteral}{"{} niveau ? "{}});}
+\DoxyCodeLine{15     strcpy(\mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}},\textcolor{stringliteral}{"{}\_valu\_es"{}});  \textcolor{comment}{//"{}positions \_valu\_es :      "{});}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     strcpy(\mbox{\hyperlink{globals_8c_a7af8dc874f5ed94fa0ae9209aa8c4709}{gQuelleCase}},\textcolor{stringliteral}{"{}quelle case ? "{}});}
+\DoxyCodeLine{18     strcpy(\mbox{\hyperlink{globals_8c_a494e57594d2c030c64e45b56daa3b89d}{gVainqueur}},\textcolor{stringliteral}{"{} vainqueur"{}});}
+\DoxyCodeLine{19     strcpy(\mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}},\textcolor{stringliteral}{"{}Egalit\_"{}});}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{comment}{// remplacement caractères accentués pour GB}}
+\DoxyCodeLine{22     \mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}}[6]=(char)130;}
+\DoxyCodeLine{23     \mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}}[0]=\mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}}[5]=(char)130;}
+\DoxyCodeLine{24     \mbox{\hyperlink{globals_8c_ac727c0195135469e77e2bdc1ce553468}{gOptionProfondeur}}[11]=(char)130;}
+\DoxyCodeLine{25 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_ad4b0d8e14ead948ac05817074a4147ef}\label{awele__gb_8c_ad4b0d8e14ead948ac05817074a4147ef}} 
+\index{awele\_gb.c@{awele\_gb.c}!gbtbcar@{gbtbcar}}
+\index{gbtbcar@{gbtbcar}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{gbtbcar()}{gbtbcar()}}
+{\footnotesize\ttfamily void gbtbcar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 70 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{71 \{}
+\DoxyCodeLine{72     \textcolor{keyword}{register} \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} x,y;}
+\DoxyCodeLine{73     \textcolor{keywordflow}{for}(y=0;y<20;y++)}
+\DoxyCodeLine{74     \{}
+\DoxyCodeLine{75         \textcolor{keywordflow}{for}(x=0;x<20;x++)}
+\DoxyCodeLine{76         \{}
+\DoxyCodeLine{77             gotogxy(x,y);}
+\DoxyCodeLine{78             wrtchr(y*20+x);}
+\DoxyCodeLine{79         \}}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a82378a8841088d9333c582370d628904}\label{awele__gb_8c_a82378a8841088d9333c582370d628904}} 
+\index{awele\_gb.c@{awele\_gb.c}!getkj@{getkj}}
+\index{getkj@{getkj}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{getkj()}{getkj()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} getkj (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui attend la saisie d\textquotesingle{}une touche ou une action sur le joystick. 
+
+\begin{DoxyReturn}{Renvoie}
+touche saisie ou équivalent touche si joystick 
+\end{DoxyReturn}
+
+
+Définition à la ligne 98 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{99 \{}
+\DoxyCodeLine{100     \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} c=0,\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=0;}
+\DoxyCodeLine{101     \textcolor{keywordtype}{int} pad;}
+\DoxyCodeLine{102     \textcolor{keywordflow}{while}(!(pad=joypad()));}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keywordflow}{if}(pad \&  J\_UP) c = \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}};}
+\DoxyCodeLine{106     \textcolor{keywordflow}{if}(pad \&  J\_DOWN) c = \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}};}
+\DoxyCodeLine{107     \textcolor{keywordflow}{if}(pad \&  J\_LEFT) c = \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}};}
+\DoxyCodeLine{108     \textcolor{keywordflow}{if}(pad \&  J\_RIGHT) c = \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}};}
+\DoxyCodeLine{109     \textcolor{keywordflow}{if}(pad \&  J\_A) c = \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}};}
+\DoxyCodeLine{110     \textcolor{comment}{//gotogxy(0,13);}}
+\DoxyCodeLine{111     \textcolor{comment}{//gprintf("{}pad = \%d / c=\%d   "{},pad,(int)c);}}
+\DoxyCodeLine{112     waitpadup();}
+\DoxyCodeLine{113     \textcolor{keywordflow}{return} c;}
+\DoxyCodeLine{114 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}\label{awele__gb_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}} 
+\index{awele\_gb.c@{awele\_gb.c}!initJoystick@{initJoystick}}
+\index{initJoystick@{initJoystick}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{initJoystick()}{initJoystick()}}
+{\footnotesize\ttfamily void init\+Joystick (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initialisation du joystick \+: uniquement de type IJK sur Oric. 
+
+
+
+Définition à la ligne 91 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{91 \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_aa25d21866cf984b531a24441b45ee482}\label{awele__gb_8c_aa25d21866cf984b531a24441b45ee482}} 
+\index{awele\_gb.c@{awele\_gb.c}!initPlateau@{initPlateau}}
+\index{initPlateau@{initPlateau}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{initPlateau()}{initPlateau()}}
+{\footnotesize\ttfamily void init\+Plateau (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initialisation du plateau de jeu \+: redéfinition de caractères pour les accents redéfinition de caractères pour le plateau de jeu remplacement des accents dans des variables globales redéfinition de variables globales pour du spécifique Oric. 
+
+
+
+Définition à la ligne 92 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{93 \{}
+\DoxyCodeLine{94     \mbox{\hyperlink{awele__gb_8c_a4ee9a8ff2912c3c4829224ed9faf3672}{gbglobals}}();}
+\DoxyCodeLine{95 \textcolor{comment}{//gbtbcar();waitpad(J\_B);}}
+\DoxyCodeLine{96 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a89f72af0c0aa059edf8b3db5516257c2}\label{awele__gb_8c_a89f72af0c0aa059edf8b3db5516257c2}} 
+\index{awele\_gb.c@{awele\_gb.c}!menuOptions@{menuOptions}}
+\index{menuOptions@{menuOptions}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{menuOptions()}{menuOptions()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} menu\+Options (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{n }\end{DoxyParamCaption})}
+
+
+
+Fonction de choix dans les menus de l\textquotesingle{}application. 
+
+
+\begin{DoxyItemize}
+\item Affichage des règles du jeu
+\item choix des options de jeu (0/1/2 joueurs huamains ou ordinateurs)
+\item TODO \+: menu pour gérer des variantes \begin{DoxySeeAlso}{Voir également}
+\mbox{\hyperlink{awele__conio_8c_a0b05c1eab3e573cfad4e4411552b211d}{choix\+Joueur}} 
+
+\mbox{\hyperlink{awele_8c_a6288eba0f8e8ad3ab1544ad731eb7667}{main}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Paramètres}
+{\em n} & \+: n=0 pour l\textquotesingle{}affichage en début de partie sinon numéro du joueur en cours \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: case jouée par le joueur 
+\end{DoxyReturn}
+
+\end{DoxyItemize}
+
+Définition à la ligne 116 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{117 \{}
+\DoxyCodeLine{118     \textcolor{keyword}{register} \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} i,l,k,c;}
+\DoxyCodeLine{119     \textcolor{comment}{//signed char  c;}}
+\DoxyCodeLine{120     }
+\DoxyCodeLine{121     \mbox{\hyperlink{awele__gb_8c_af3eac3ad203ab091baad010ef3f7ab0a}{clrscr}}();}
+\DoxyCodeLine{122     i=2; \textcolor{comment}{// par défaut PvC}}
+\DoxyCodeLine{123     \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{124     \textcolor{keywordflow}{if}(n == 0)}
+\DoxyCodeLine{125     \textcolor{keywordflow}{do}}
+\DoxyCodeLine{126     \{}
+\DoxyCodeLine{127         gotogxy(0,1);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(i==1);gprint(\mbox{\hyperlink{globals_8c_a15007e291cb4a4f0e9d5ca09e10b1b36}{gOption2Joueurs}});}
+\DoxyCodeLine{128         gotogxy(0,2);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(i==2);gprint(\mbox{\hyperlink{globals_8c_a930bf5a993c03939f56ff07bf098bd46}{gOption1Joueur}});}
+\DoxyCodeLine{129         gotogxy(0,3);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(i==3);gprint(\mbox{\hyperlink{globals_8c_a498c6c91c48ce649195f5d8e9bb7c5e3}{gOption2Ordinateurs}});}
+\DoxyCodeLine{130         \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{131         c = \mbox{\hyperlink{awele__gb_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{132         \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}} \&\& i>1) i-\/-\/;}
+\DoxyCodeLine{133         \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}} \&\& i<3) i++;}
+\DoxyCodeLine{134     \} \textcolor{keywordflow}{while}(c != \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136     l=4;}
+\DoxyCodeLine{137     \textcolor{keywordflow}{switch}(i)}
+\DoxyCodeLine{138     \{}
+\DoxyCodeLine{139         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{140         \mbox{\hyperlink{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}{printxy}}(0,l,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{globals_8c_a39122909e08ea4c370fffd0dbd72eb84}{gJ1commence}});}
+\DoxyCodeLine{141         \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0] = \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1] = 0;}
+\DoxyCodeLine{142         i = 0;}
+\DoxyCodeLine{143         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{144        \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{145         \mbox{\hyperlink{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}{printxy}}(0,l,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{globals_8c_a73157e4e9c839208c67c615ed9f40042}{gJ2ordi}});}
+\DoxyCodeLine{146         i=1;}
+\DoxyCodeLine{147         \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[i]=1;}
+\DoxyCodeLine{148         \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1-\/i]=0;}
+\DoxyCodeLine{149         \mbox{\hyperlink{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}{printxy}}(0,++l,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{globals_8c_ac727c0195135469e77e2bdc1ce553468}{gOptionProfondeur}});}
+\DoxyCodeLine{150         i=1;}
+\DoxyCodeLine{151         \textcolor{keywordflow}{do}}
+\DoxyCodeLine{152         \{}
+\DoxyCodeLine{153             gotogxy(17,l);}
+\DoxyCodeLine{154             wrtchr((\textcolor{keywordtype}{char})(i+48));}
+\DoxyCodeLine{155             c = \mbox{\hyperlink{awele__gb_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{156             \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}} \&\& i<6) i++;}
+\DoxyCodeLine{157             \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}} \&\& i>1) i-\/-\/;}
+\DoxyCodeLine{158          \} \textcolor{keywordflow}{while}(c != \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{159          \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[1]=i;}
+\DoxyCodeLine{160          i=1;}
+\DoxyCodeLine{161          \textcolor{comment}{// A AMELIORER -\/> CHOIX ORDI / JOUEUR}}
+\DoxyCodeLine{162         \mbox{\hyperlink{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}{printxy}}(0,++l,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{globals_8c_a0788f0384ac33f775f2518b10a90253e}{gOptionQuiCommence}});}
+\DoxyCodeLine{163          \textcolor{keywordflow}{do}}
+\DoxyCodeLine{164          \{}
+\DoxyCodeLine{165             gotogxy(15,l);}
+\DoxyCodeLine{166             \textcolor{comment}{//wrtchr((char)(i+48));}}
+\DoxyCodeLine{167             \textcolor{keywordflow}{if}(i==1) gprint(\mbox{\hyperlink{globals_8c_aa366294c9e56697e815b182d4a692d4c}{gVous}}); \textcolor{keywordflow}{else} gprint(\mbox{\hyperlink{globals_8c_a93803055258562cf5bf6c03cf87c3f12}{gMoi}});}
+\DoxyCodeLine{168             c = \mbox{\hyperlink{awele__gb_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{169             \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}}) i=2;}
+\DoxyCodeLine{170             \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}}) i=1;}
+\DoxyCodeLine{171          \} \textcolor{keywordflow}{while}(c != \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173           -\/-\/i;}
+\DoxyCodeLine{174         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176        \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{177         \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0] = \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1] = 1;}
+\DoxyCodeLine{178         gotogxy(0,l);}
+\DoxyCodeLine{179         \mbox{\hyperlink{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}{printxy}}(0,l,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{globals_8c_a39122909e08ea4c370fffd0dbd72eb84}{gJ1commence}});}
+\DoxyCodeLine{180         \textcolor{keywordflow}{for}( i=0; i<2; i++)}
+\DoxyCodeLine{181         \{}
+\DoxyCodeLine{182             gotogxy(0,++l);}
+\DoxyCodeLine{183              gprint(\mbox{\hyperlink{globals_8c_a3896d960fddeb1c8b48a3b029dab9b0d}{gJoueur}}[i]);}
+\DoxyCodeLine{184             gprint(\mbox{\hyperlink{globals_8c_ac727c0195135469e77e2bdc1ce553468}{gOptionProfondeur}});}
+\DoxyCodeLine{185             k = 1;}
+\DoxyCodeLine{186             \textcolor{keywordflow}{do}}
+\DoxyCodeLine{187             \{}
+\DoxyCodeLine{188                 gotogxy(18,l);}
+\DoxyCodeLine{189                 wrtchr((\textcolor{keywordtype}{char})(k+48));}
+\DoxyCodeLine{190                 c = \mbox{\hyperlink{awele__gb_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{191                 \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}} \&\& k<6) k++;}
+\DoxyCodeLine{192                 \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}} \&\& k>1) k-\/-\/;}
+\DoxyCodeLine{193             \} \textcolor{keywordflow}{while}(c != \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{194             \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[i]=k;}
+\DoxyCodeLine{195         \}}
+\DoxyCodeLine{196         i=0;}
+\DoxyCodeLine{197         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{198        \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{199 \textcolor{comment}{//          clputs("{}\(\backslash\)n\(\backslash\)r\(\backslash\)t\(\backslash\)tVous n'\string^tes pas en forme !..\(\backslash\)n\(\backslash\)r"{});}}
+\DoxyCodeLine{200 \textcolor{comment}{//          clputs("{}Revenez me voir quand vous irez mieux ....\(\backslash\)n\(\backslash\)r"{});}}
+\DoxyCodeLine{201 \textcolor{comment}{//          clputs("{}\(\backslash\)n\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)t\(\backslash\)t\(\backslash\)t\(\backslash\)tAtchao !\(\backslash\)n\(\backslash\)r\(\backslash\)n\(\backslash\)r"{});}}
+\DoxyCodeLine{202           \mbox{\hyperlink{awele__conio_8c_a358d2e2397ca11ccd17553e3c40e7901}{exit}}(5);}
+\DoxyCodeLine{203        \}}
+\DoxyCodeLine{204     \mbox{\hyperlink{awele__gb_8c_af3eac3ad203ab091baad010ef3f7ab0a}{clrscr}}();}
+\DoxyCodeLine{205      gotogxy(0,0);gprint(\mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}});}
+\DoxyCodeLine{206     \textcolor{keywordflow}{return}(i);}
+\DoxyCodeLine{207   }
+\DoxyCodeLine{208 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}\label{awele__gb_8c_a9f80e3c57da4337cef0e244e6f0a2f4b}} 
+\index{awele\_gb.c@{awele\_gb.c}!printxy@{printxy}}
+\index{printxy@{printxy}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{printxy()}{printxy()}}
+{\footnotesize\ttfamily void printxy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{x,  }\item[{\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}}]{y,  }\item[{\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}}]{rv,  }\item[{\mbox{\hyperlink{mes__types_8h_a454d98e8ec5bedf6c8e399034af40008}{STRPTR}}}]{s }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 36 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38     gotogxy(x,y);}
+\DoxyCodeLine{39      \textcolor{keywordflow}{if}(rv) color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{40     \textcolor{keywordflow}{else}    color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{41     gprintf(s);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}\label{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}} 
+\index{awele\_gb.c@{awele\_gb.c}!revers@{revers}}
+\index{revers@{revers}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{revers()}{revers()}}
+{\footnotesize\ttfamily void revers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}}]{b }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne 45 du fichier awele\+\_\+gb.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{46 \{}
+\DoxyCodeLine{47      \textcolor{keywordflow}{if}(b)  color(WHITE, DKGREY, SOLID);}
+\DoxyCodeLine{48     \textcolor{keywordflow}{else}    color(BLACK, WHITE, SOLID);}
+\DoxyCodeLine{49 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Documentation des variables}
+\mbox{\Hypertarget{awele__gb_8c_a8a6267442d747710d2ae48d2a1a8a35c}\label{awele__gb_8c_a8a6267442d747710d2ae48d2a1a8a35c}} 
+\index{awele\_gb.c@{awele\_gb.c}!posEval@{posEval}}
+\index{posEval@{posEval}!awele\_gb.c@{awele\_gb.c}}
+\doxysubsubsection{\texorpdfstring{posEval}{posEval}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_aefbb6ca39ebcf009709e607d159766d5}{UWORD}} pos\+Eval\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Définition à la ligne 16 du fichier aweleia.\+c.
+

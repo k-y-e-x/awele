@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Awele:  Fichier source de src/globals.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Awele
+   </div>
+   <div id="projectbrief">Jeu d&#39;Awele-Kahala multisystèmes via cc65,gbdk</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('globals_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">globals.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="globals_8c.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mes__types_8h.html">mes_types.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="globals_8h.html">globals.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="globals_8c.html#a038f5e9e5374d375de432d4ffe2997f3">    7</a></span>&#160;<span class="keywordtype">char</span>*   <a class="code" href="globals_8c.html#a038f5e9e5374d375de432d4ffe2997f3">gOptionJoueurs</a>[]={<span class="stringliteral">&quot;2 joueurs    &quot;</span>,<span class="stringliteral">&quot;1 joueur     &quot;</span>,<span class="stringliteral">&quot;2 ordinateurs&quot;</span>};</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="globals_8c.html#a15007e291cb4a4f0e9d5ca09e10b1b36">    8</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a15007e291cb4a4f0e9d5ca09e10b1b36">gOption2Joueurs</a>[]=<span class="stringliteral">&quot;2 joueurs    &quot;</span>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="globals_8c.html#a930bf5a993c03939f56ff07bf098bd46">    9</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a930bf5a993c03939f56ff07bf098bd46">gOption1Joueur</a>[]= <span class="stringliteral">&quot;1 joueur     &quot;</span>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="globals_8c.html#a498c6c91c48ce649195f5d8e9bb7c5e3">   10</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a498c6c91c48ce649195f5d8e9bb7c5e3">gOption2Ordinateurs</a>[]= <span class="stringliteral">&quot;2 ordinateurs&quot;</span>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="globals_8c.html#a0788f0384ac33f775f2518b10a90253e">   11</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a0788f0384ac33f775f2518b10a90253e">gOptionQuiCommence</a>[]=<span class="stringliteral">&quot;Quel joueur commence ? &quot;</span>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="globals_8c.html#a39122909e08ea4c370fffd0dbd72eb84">   12</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a39122909e08ea4c370fffd0dbd72eb84">gJ1commence</a>[]=<span class="stringliteral">&quot;Le joueur 1 commence &quot;</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="globals_8c.html#a73157e4e9c839208c67c615ed9f40042">   13</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a73157e4e9c839208c67c615ed9f40042">gJ2ordi</a>[]=<span class="stringliteral">&quot;L&#39;ordinateur est le joueur 2 &quot;</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="globals_8c.html#ac727c0195135469e77e2bdc1ce553468">   14</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#ac727c0195135469e77e2bdc1ce553468">gOptionProfondeur</a>[]=<span class="stringliteral">&quot;Profondeur recherche ? &quot;</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="globals_8c.html#a3896d960fddeb1c8b48a3b029dab9b0d">   15</a></span>&#160;<span class="keywordtype">char</span>*   <a class="code" href="globals_8c.html#a3896d960fddeb1c8b48a3b029dab9b0d">gJoueur</a>[]={<span class="stringliteral">&quot;Joueur 1&quot;</span>,<span class="stringliteral">&quot;Joueur 2&quot;</span>};</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="globals_8c.html#a469ff20a2ce6f4205eb1bf558514c955">   16</a></span>&#160;<span class="keywordtype">char</span>*   <a class="code" href="globals_8c.html#a469ff20a2ce6f4205eb1bf558514c955">gJ</a>[3][2]={{<span class="stringliteral">&quot;Joueur 1&quot;</span>,<span class="stringliteral">&quot;Joueur 2&quot;</span>},{<span class="stringliteral">&quot;Vous    &quot;</span>,<span class="stringliteral">&quot;Moi     &quot;</span>},{<span class="stringliteral">&quot;Ordi 1  &quot;</span>,<span class="stringliteral">&quot;Ordi 2  &quot;</span>}};</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//char  gJ[]={{&quot;Joueur 1&quot;,&quot;Joueur 2&quot;},{&quot;Ordi 1  &quot;,&quot;ORDI 2  &quot;},{&quot;Vous    &quot;,&quot;Moi     &quot;}};</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="globals_8c.html#a2f707717fbae1c38d0594f51bcf1b5e1">   18</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a2f707717fbae1c38d0594f51bcf1b5e1">gPositionsEvaluees</a>[]=<span class="stringliteral">&quot;positions évaluées    &quot;</span>;  <span class="comment">//&quot;positions _valu_es :      &quot;;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="globals_8c.html#aa366294c9e56697e815b182d4a692d4c">   20</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#aa366294c9e56697e815b182d4a692d4c">gVous</a>[]=<span class="stringliteral">&quot;Vous    &quot;</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="globals_8c.html#a93803055258562cf5bf6c03cf87c3f12">   21</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a93803055258562cf5bf6c03cf87c3f12">gMoi</a>[]=<span class="stringliteral">&quot;Moi     &quot;</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="globals_8c.html#a82743644d8d6b01ea22537f066272269">   22</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a82743644d8d6b01ea22537f066272269">gJ1</a>[]=<span class="stringliteral">&quot;Joueur 1&quot;</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="globals_8c.html#a3fd12fcf3ff2fdac9a87f1d4d496f31a">   23</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a3fd12fcf3ff2fdac9a87f1d4d496f31a">gJ2</a>[]=<span class="stringliteral">&quot;Joueur 2&quot;</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="globals_8c.html#a9fb5d8d0c35d23be15223ac8de96a974">   24</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a9fb5d8d0c35d23be15223ac8de96a974">gO1</a>[]=<span class="stringliteral">&quot;Ordi 1  &quot;</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="globals_8c.html#a2b97e57b23c5c8c206ec20db0796c6fb">   25</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a2b97e57b23c5c8c206ec20db0796c6fb">gO2</a>[]=<span class="stringliteral">&quot;Ordi 2  &quot;</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="globals_8c.html#a7af8dc874f5ed94fa0ae9209aa8c4709">   27</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a7af8dc874f5ed94fa0ae9209aa8c4709">gQuelleCase</a>[]=<span class="stringliteral">&quot; que jouez-vous ? &quot;</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="globals_8c.html#a494e57594d2c030c64e45b56daa3b89d">   28</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a494e57594d2c030c64e45b56daa3b89d">gVainqueur</a>[]=<span class="stringliteral">&quot; vainqueur&quot;</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="globals_8c.html#ad05bfa44993a47d94040a322d3570376">   29</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#ad05bfa44993a47d94040a322d3570376">gEgalite</a>[]=<span class="stringliteral">&quot; Egalité &quot;</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="globals_8c.html#afba58a7388415b583b16c5ef1eb08a02">   31</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#afba58a7388415b583b16c5ef1eb08a02">gRegles</a>[]=<span class="stringliteral">&quot;       REGLES DE L&#39;AWELE-KAHLAHA\r\</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">Les joueurs placent leurs graines par 4\r\</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">dans les trous de leur rangée.\r\</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">On ne place aucune graine dans le KalahaA son tour de jeu, un joueur prend les\r\</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">graines dans un trou de la rangée prochede lui et les sème une par une dans\r\</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">chacun des trous qui suivent ainsi que\r\</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">dans son Kalaha en sens anti-horaire.\r\</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">Si le joueur sème sa dernière graine\r\</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">dans son Kalaha, il peut rejouer. \r\</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">Si le joueur sème sa dernière graine\r\</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">dans un trou vide de sa propre rangée,ilcapture les graines situées dans le trouen face et les place dans son Kalaha\r\</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">Puis c&#39;est a son adversaire de jouer.\r\</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral">Si le joueur sème sa dernière graine\r\</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="stringliteral">dans un trou qui n&#39;était pas vide, son\r\</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">tour se termine, c&#39;est à son adversaire de jouer.\r\</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral">\</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">La partie se termine quand un joueur\r\</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">ne peux plus jouer car lors de son tour\r\</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">de jeu, sa rangée est vide.&quot;</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="globals_8c.html#a0182f6e04c00e49a10947ab13b2f08e7">   51</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a0182f6e04c00e49a10947ab13b2f08e7">gMenuRegles</a>[]=<span class="stringliteral">&quot;Règles&quot;</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="globals_8c.html#a1dd26fb2ecd394bfabad2ee8a54d2a07">   52</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a1dd26fb2ecd394bfabad2ee8a54d2a07">gMenuJoueurs</a>[]=<span class="stringliteral">&quot;Joueurs&quot;</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="globals_8c.html#a7259bdd12e6cc21741ea5d704fa9add9">   53</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a7259bdd12e6cc21741ea5d704fa9add9">gMenuOptions</a>[]=<span class="stringliteral">&quot;Options&quot;</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="globals_8c.html#a5d0ffd176bdd97e36d7a30de8f5c3f5b">   54</a></span>&#160;<span class="keywordtype">char</span>    <a class="code" href="globals_8c.html#a5d0ffd176bdd97e36d7a30de8f5c3f5b">gMenuOK</a>[]=<span class="stringliteral">&quot;OK&quot;</span>;</div>
+<div class="ttc" id="aglobals_8c_html_a0182f6e04c00e49a10947ab13b2f08e7"><div class="ttname"><a href="globals_8c.html#a0182f6e04c00e49a10947ab13b2f08e7">gMenuRegles</a></div><div class="ttdeci">char gMenuRegles[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00051">globals.c:51</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a038f5e9e5374d375de432d4ffe2997f3"><div class="ttname"><a href="globals_8c.html#a038f5e9e5374d375de432d4ffe2997f3">gOptionJoueurs</a></div><div class="ttdeci">char * gOptionJoueurs[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00007">globals.c:7</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a0788f0384ac33f775f2518b10a90253e"><div class="ttname"><a href="globals_8c.html#a0788f0384ac33f775f2518b10a90253e">gOptionQuiCommence</a></div><div class="ttdeci">char gOptionQuiCommence[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00011">globals.c:11</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a15007e291cb4a4f0e9d5ca09e10b1b36"><div class="ttname"><a href="globals_8c.html#a15007e291cb4a4f0e9d5ca09e10b1b36">gOption2Joueurs</a></div><div class="ttdeci">char gOption2Joueurs[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00008">globals.c:8</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a1dd26fb2ecd394bfabad2ee8a54d2a07"><div class="ttname"><a href="globals_8c.html#a1dd26fb2ecd394bfabad2ee8a54d2a07">gMenuJoueurs</a></div><div class="ttdeci">char gMenuJoueurs[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00052">globals.c:52</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a2b97e57b23c5c8c206ec20db0796c6fb"><div class="ttname"><a href="globals_8c.html#a2b97e57b23c5c8c206ec20db0796c6fb">gO2</a></div><div class="ttdeci">char gO2[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00025">globals.c:25</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a2f707717fbae1c38d0594f51bcf1b5e1"><div class="ttname"><a href="globals_8c.html#a2f707717fbae1c38d0594f51bcf1b5e1">gPositionsEvaluees</a></div><div class="ttdeci">char gPositionsEvaluees[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00018">globals.c:18</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a3896d960fddeb1c8b48a3b029dab9b0d"><div class="ttname"><a href="globals_8c.html#a3896d960fddeb1c8b48a3b029dab9b0d">gJoueur</a></div><div class="ttdeci">char * gJoueur[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00015">globals.c:15</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a39122909e08ea4c370fffd0dbd72eb84"><div class="ttname"><a href="globals_8c.html#a39122909e08ea4c370fffd0dbd72eb84">gJ1commence</a></div><div class="ttdeci">char gJ1commence[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00012">globals.c:12</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a3fd12fcf3ff2fdac9a87f1d4d496f31a"><div class="ttname"><a href="globals_8c.html#a3fd12fcf3ff2fdac9a87f1d4d496f31a">gJ2</a></div><div class="ttdeci">char gJ2[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00023">globals.c:23</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a469ff20a2ce6f4205eb1bf558514c955"><div class="ttname"><a href="globals_8c.html#a469ff20a2ce6f4205eb1bf558514c955">gJ</a></div><div class="ttdeci">char * gJ[3][2]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00016">globals.c:16</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a494e57594d2c030c64e45b56daa3b89d"><div class="ttname"><a href="globals_8c.html#a494e57594d2c030c64e45b56daa3b89d">gVainqueur</a></div><div class="ttdeci">char gVainqueur[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00028">globals.c:28</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a498c6c91c48ce649195f5d8e9bb7c5e3"><div class="ttname"><a href="globals_8c.html#a498c6c91c48ce649195f5d8e9bb7c5e3">gOption2Ordinateurs</a></div><div class="ttdeci">char gOption2Ordinateurs[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00010">globals.c:10</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a5d0ffd176bdd97e36d7a30de8f5c3f5b"><div class="ttname"><a href="globals_8c.html#a5d0ffd176bdd97e36d7a30de8f5c3f5b">gMenuOK</a></div><div class="ttdeci">char gMenuOK[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00054">globals.c:54</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a7259bdd12e6cc21741ea5d704fa9add9"><div class="ttname"><a href="globals_8c.html#a7259bdd12e6cc21741ea5d704fa9add9">gMenuOptions</a></div><div class="ttdeci">char gMenuOptions[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00053">globals.c:53</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a73157e4e9c839208c67c615ed9f40042"><div class="ttname"><a href="globals_8c.html#a73157e4e9c839208c67c615ed9f40042">gJ2ordi</a></div><div class="ttdeci">char gJ2ordi[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00013">globals.c:13</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a7af8dc874f5ed94fa0ae9209aa8c4709"><div class="ttname"><a href="globals_8c.html#a7af8dc874f5ed94fa0ae9209aa8c4709">gQuelleCase</a></div><div class="ttdeci">char gQuelleCase[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00027">globals.c:27</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a82743644d8d6b01ea22537f066272269"><div class="ttname"><a href="globals_8c.html#a82743644d8d6b01ea22537f066272269">gJ1</a></div><div class="ttdeci">char gJ1[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00022">globals.c:22</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a930bf5a993c03939f56ff07bf098bd46"><div class="ttname"><a href="globals_8c.html#a930bf5a993c03939f56ff07bf098bd46">gOption1Joueur</a></div><div class="ttdeci">char gOption1Joueur[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00009">globals.c:9</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a93803055258562cf5bf6c03cf87c3f12"><div class="ttname"><a href="globals_8c.html#a93803055258562cf5bf6c03cf87c3f12">gMoi</a></div><div class="ttdeci">char gMoi[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00021">globals.c:21</a></div></div>
+<div class="ttc" id="aglobals_8c_html_a9fb5d8d0c35d23be15223ac8de96a974"><div class="ttname"><a href="globals_8c.html#a9fb5d8d0c35d23be15223ac8de96a974">gO1</a></div><div class="ttdeci">char gO1[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00024">globals.c:24</a></div></div>
+<div class="ttc" id="aglobals_8c_html_aa366294c9e56697e815b182d4a692d4c"><div class="ttname"><a href="globals_8c.html#aa366294c9e56697e815b182d4a692d4c">gVous</a></div><div class="ttdeci">char gVous[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00020">globals.c:20</a></div></div>
+<div class="ttc" id="aglobals_8c_html_ac727c0195135469e77e2bdc1ce553468"><div class="ttname"><a href="globals_8c.html#ac727c0195135469e77e2bdc1ce553468">gOptionProfondeur</a></div><div class="ttdeci">char gOptionProfondeur[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00014">globals.c:14</a></div></div>
+<div class="ttc" id="aglobals_8c_html_ad05bfa44993a47d94040a322d3570376"><div class="ttname"><a href="globals_8c.html#ad05bfa44993a47d94040a322d3570376">gEgalite</a></div><div class="ttdeci">char gEgalite[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00029">globals.c:29</a></div></div>
+<div class="ttc" id="aglobals_8c_html_afba58a7388415b583b16c5ef1eb08a02"><div class="ttname"><a href="globals_8c.html#afba58a7388415b583b16c5ef1eb08a02">gRegles</a></div><div class="ttdeci">char gRegles[]</div><div class="ttdef"><b>Definition:</b> <a href="globals_8c_source.html#l00031">globals.c:31</a></div></div>
+<div class="ttc" id="aglobals_8h_html"><div class="ttname"><a href="globals_8h.html">globals.h</a></div></div>
+<div class="ttc" id="ames__types_8h_html"><div class="ttname"><a href="mes__types_8h.html">mes_types.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="globals_8c.html">globals.c</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>
