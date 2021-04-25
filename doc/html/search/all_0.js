@@ -11,11 +11,12 @@ var searchData=
   ['aptr_5ftypedef_8',['APTR_TYPEDEF',['../mes__types_8h.html#a087bdb36fddc0b328263561776ebffc3',1,'mes_types.h']]],
   ['awele_9',['awele',['../index.html',1,'']]],
   ['awele_2ec_10',['awele.c',['../awele_8c.html',1,'']]],
-  ['awele_2eh_11',['awele.h',['../awele_8h.html',1,'']]],
-  ['awele_5fc64_2ec_12',['awele_c64.c',['../awele__c64_8c.html',1,'']]],
-  ['awele_5fconio_2ec_13',['awele_conio.c',['../awele__conio_8c.html',1,'']]],
-  ['awele_5fgb_2ec_14',['awele_gb.c',['../awele__gb_8c.html',1,'']]],
-  ['awele_5fh_15',['AWELE_H',['../awele_8h.html#a9d8a5271a2cbd4b28874344389d79636',1,'awele.h']]],
-  ['awele_5foric_2ec_16',['awele_oric.c',['../awele__oric_8c.html',1,'']]],
-  ['aweleia_2ec_17',['aweleia.c',['../aweleia_8c.html',1,'']]]
+  ['awele_2edox_11',['awele.dox',['../awele_8dox.html',1,'']]],
+  ['awele_2eh_12',['awele.h',['../awele_8h.html',1,'']]],
+  ['awele_5fc64_2ec_13',['awele_c64.c',['../awele__c64_8c.html',1,'']]],
+  ['awele_5fconio_2ec_14',['awele_conio.c',['../awele__conio_8c.html',1,'']]],
+  ['awele_5fgb_2ec_15',['awele_gb.c',['../awele__gb_8c.html',1,'']]],
+  ['awele_5fh_16',['AWELE_H',['../awele_8h.html#a9d8a5271a2cbd4b28874344389d79636',1,'awele.h']]],
+  ['awele_5foric_2ec_17',['awele_oric.c',['../awele__oric_8c.html',1,'']]],
+  ['aweleia_2ec_18',['aweleia.c',['../aweleia_8c.html',1,'']]]
 ];
