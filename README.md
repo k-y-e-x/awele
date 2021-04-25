@@ -20,6 +20,9 @@ Reste À Faire :
 Rendre variables certaines constantes qui sont sous forme de define
 Ajouter un menu d'option pour gérer des variantes des règles (avec les nouvelles variables)
 Nettoyage du code !!!!! (après pas mal d'ajout, une cohérence est à faire)
+Ajouter les règles dans la documentation sur Github Pages
 
-lien vers la documentation (Sur Githu b Pages et créée par doxygen) :
+Lien vers la documentation (Sur Github Pages et créée par doxygen) :
  https://k-y-e-x.github.io/awele/doc/html/index.html
+Lien vers le GitHub :
+ https://github.com/k-y-e-x/awele
