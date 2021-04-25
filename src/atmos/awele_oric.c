@@ -20,12 +20,6 @@
 
 #include "../conio/awele_conio.c"
 
-void setup(void);
-int getkey(void);
-// void hires(void);
-// void quit(void);
-// void cursorno();
-
 
 /**
  *	Remplacement des accents ISO Latin1 par les équivalents redéfinis pour Oric
@@ -74,7 +68,9 @@ UBYTE getkj()
 	do{j=joy_read(JOY_1);} while(j);
 	do
 	{
-		c = getkey(); 
+		// c = getkey(); 
+		if(kbhit())
+			c = cgetc();
         j=joy_read(JOY_1);
 	}
 	while(!c && !j);
@@ -111,7 +107,7 @@ void modifCaractere(char c, BYTEBITS t[8])
 void initPlateau()
 {
 	int c,k,i;
-	setup();
+	//setup();
 
 // gotoxy(1,20);cprintf("%d-->%c",'_','_');
 // gotoxy(1,21);cprintf("%d-->%c-->%s",'é','é',"égalité");
