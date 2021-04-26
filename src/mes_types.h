@@ -31,9 +31,9 @@ typedef float		FLOAT;
 typedef short		BOOL;
 typedef unsigned char	TEXT;
 
-  /*  WARNING: APTR was redefined for the V36 Includes!  APTR is a   */
- /*  32-Bit Absolute Memory Pointer.  C pointer math will not	    */
-/*  operate on APTR --	use "ULONG *" instead.			   */
+/*  WARNING: APTR was redefined for the V36 Includes!  APTR is a   */
+/*  32-Bit Absolute Memory Pointer.  C pointer math will not	   */
+/*  operate on APTR --	use "ULONG *" instead.			           */
 #ifndef APTR_TYPEDEF
 #define APTR_TYPEDEF
 typedef void	       *APTR;	    /* 32-bit untyped pointer */
@@ -87,7 +87,7 @@ typedef ULONG		CPTR;
 #define BYTEMASK	0xFF
 
 
- /* #define LIBRARY_VERSION is now obsolete.  Please use LIBRARY_MINIMUM */
+/* #define LIBRARY_VERSION is now obsolete.  Please use LIBRARY_MINIMUM */
 /* or code the specific minimum library version you require.		*/
 #define LIBRARY_MINIMUM	33 /* Lowest version supported by Amiga, Inc. */
 

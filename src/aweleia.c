@@ -89,23 +89,6 @@ WORD alphabeta(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf, UBYTE n, UBY
    register UBYTE np[LGPLAT], i, jp;
    WORD a=0;
 
-/*
-    gotogxy(1,15);
-    color(BLACK, WHITE, SOLID);
-	gprintf("alphabeta : %d",prf);
-    jp = 0;
-    gotogxy(5,16);
-    color(BLACK, WHITE, SOLID);
-	gprintln(posEval, 10, UNSIGNED);
-    gotogxy(10,16);
-	gprintln(alpha, 10, SIGNED);
-    gotogxy(15,16);
-	gprintln(beta, 10, SIGNED);
-	waitpad(J_B);
-	gotogxy(1,15);
-    color(BLACK, WHITE, SOLID);
-	gprintf("     ");         
-*/
 	jp=0;
    for( i=j*(NCASES+1); (i<(j+1)*NCASES+j) && (alpha<beta); i++)
    {
@@ -132,18 +115,8 @@ WORD alphabeta(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf, UBYTE n, UBY
       }
    }
 
-/*
-    gotogxy(10,17);
-    color(BLACK, WHITE, SOLID);
-    gprintf("%u %u %u ",posEval,alpha,beta);
 
-    gotogxy(10,16);
-	gprintln(alpha, 10, SIGNED);
-    gotogxy(15,16);
-	gprintln(beta, 10, SIGNED);
-*/
-/*
-***************
+/****************
 
 A METTRE A JOUR : TEST POUR AFFICHAGE INFO AVANCEMENT RECHERCHE
 => APPEL FONCTION  UI DEPOEND DU SYSTEM CIBLE
