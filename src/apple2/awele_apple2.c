@@ -11,16 +11,15 @@
 // #include "../awele.h"
 // #include "../globals.h"
 
-#define STRCPY_JOUEURS		strcpy(gJoueur[0],"C65\x00");\
-		strcpy(gJoueur[1],"C64\x00 ");\
-		strcpy(gJ1,"C65\x00");\
-		strcpy(gJ2,"C64\x00 ");\
+#define STRCPY_JOUEURS		strcpy(gJoueur[0],"Steve\x00");\
+		strcpy(gJoueur[1],"Woz\x00 ");\
+		strcpy(gJ1,"Steve\x00");\
+		strcpy(gJ2,"Woz\x00 ");\
 
 #include "../conio/awele_conio.c"
 
 //void free();
 //void exit();
-
 //extern UWORD posEval;
 
 // void init()
@@ -29,7 +28,7 @@
 // }
 void initJoystick()
 {
-    joy_install (&c64_stdjoy_joy);
+    joy_install (&a2_stdjoy_joy);
 }
 
 UBYTE getkj()
@@ -54,17 +53,17 @@ UBYTE getkj()
 		case CH_CURS_RIGHT :
 			c = KEY_RIGHT;
 			break;
-		case CH_CURS_DOWN :
-			c = KEY_DOWN;
-			break;
-		case CH_CURS_UP :
-			c = KEY_UP;
-			break;
+// 		case CH_CURS_DOWN :
+// 			c = KEY_DOWN;
+// 			break;
+// 		case CH_CURS_UP :
+// 			c = KEY_UP;
+// 			break;
 		case CH_ENTER :
 			c = KEY_RETURN;
 			break;
 		case CH_ESC:
-		case CH_STOP:
+// 		case CH_STOP:
 			c = KEY_ESC;
 			break;
 			
@@ -74,10 +73,10 @@ UBYTE getkj()
 	if(JOY_DOWN(j)) c = KEY_DOWN;
 	if(JOY_LEFT(j)) c = KEY_LEFT;
 	if(JOY_RIGHT(j)) c = KEY_RIGHT;
-	if(JOY_FIRE(j)) c = KEY_RETURN;
+	if(JOY_BTN_1(j)) c = KEY_RETURN;
 	//if(c) cprintf("=>c=%d   ",c);
 	do{j=joy_read(JOY_1);} while(j);
-	while(kbhit()) cgetc();	// vide buffer clavier sinon pb joy_left=>key_right!
+	//while(kbhit()) cgetc();	// vide buffer clavier sinon pb joy_left=>key_right!
 	return c;
 }
 
@@ -113,10 +112,11 @@ void initPlateau()
 	remplacerAccents(gPositionsEvaluees);
 	remplacerAccents(gRegles);
 	remplacerAccents(gMenuRegles);
-	
+		
+		
 	remplacerAccents(gOptionCompte);
 	remplacerAccents(gJeuRegles);
 
-	strcpy(gJ2ordi,"C64 en joueur 2");
+	strcpy(gJ2ordi,"Apple en joueur 2");
 	clrscr();
 }

@@ -7,11 +7,11 @@
 
 void gbglobals()
 {
-	strcpy(gOption2Ordinateurs,"2 Gameboy    ");
-	strcpy(gOptionQuiCommence,"Qui commence ? ");
+	strcpy(g2Ordinateurs,"2 Gameboy    ");
+	strcpy(gQuiCommence,"Qui commence ? ");
 	strcpy(gJ1commence,"Joueur 1 commence");
 	strcpy(gJ2ordi,"Je suis le joueur2");
-	strcpy(gOptionProfondeur," niveau ? ");
+	strcpy(gProfondeur," niveau ? ");
 	strcpy(gPositionsEvaluees,"_valu_es");  //"positions _valu_es :      ");
 
 	strcpy(gQuelleCase,"quelle case ? ");
@@ -21,5 +21,5 @@ void gbglobals()
 	// remplacement caractères accentués pour GB
 	gEgalite[6]=(char)130;
 	gPositionsEvaluees[0]=gPositionsEvaluees[5]=(char)130;
-	gOptionProfondeur[11]=(char)130;
+	gProfondeur[11]=(char)130;
 }

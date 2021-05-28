@@ -22,35 +22,6 @@
 
 
 /**
- *	Remplacement des accents ISO Latin1 par les équivalents redéfinis pour Oric
- *	@param	chaine	: chaîne de caractères dont il faut remplacer les accents
- */
-void remplacerAccents(char *chaine)
-{
-	char *s;
-	s=chaine;
-	s=strchr(s,'é');
-	while (s!=NULL)
-	{
-		*s ='_';
-		s=strchr(s+1,'é');
-	}
-	s=chaine;
-	s=strchr(s,'è');
-	while (s!=NULL)
-	{
-		*s ='^';
-		s=strchr(s+1,'è');
-	}
-	s=chaine;
-	s=strchr(s,'à');
-	while (s!=NULL)
-	{
-		*s ='`';
-		s=strchr(s+1,'à');
-	}
-}
-/**
  *	Initialisation du joystick : uniquement de type IJK sur Oric
  */
 void initJoystick()
@@ -86,6 +57,35 @@ UBYTE getkj()
 }
 
 /**
+ *	Remplacement des accents ISO Latin1 par les équivalents redéfinis pour Oric
+ *	@param	chaine	: chaîne de caractères dont il faut remplacer les accents
+ */
+void remplacerAccents(char *chaine)
+{
+	char *s;
+	s=chaine;
+	s=strchr(s,'é');
+	while (s!=NULL)
+	{
+		*s ='_';
+		s=strchr(s+1,'é');
+	}
+	s=chaine;
+	s=strchr(s,'è');
+	while (s!=NULL)
+	{
+		*s ='^';
+		s=strchr(s+1,'è');
+	}
+	s=chaine;
+	s=strchr(s,'à');
+	while (s!=NULL)
+	{
+		*s ='`';
+		s=strchr(s+1,'à');
+	}
+}
+/**
  *	Modification d'un caractère à partir d'un tableau 8 bits x 8 bits
  *	@param	c	: caractère à redéfinir
  *	@param	t	: tableau contenant les 8 octets du caractère à modifier (type BYTEBITS)
@@ -107,15 +107,9 @@ void modifCaractere(char c, BYTEBITS t[8])
 void initPlateau()
 {
 	int c,k,i;
-	//setup();
+	
+	POKE(0x26a,8);	// son clavier..
 
-// gotoxy(1,20);cprintf("%d-->%c",'_','_');
-// gotoxy(1,21);cprintf("%d-->%c-->%s",'é','é',"égalité");
-// gotoxy(1,22);cprintf("%s->%c->%d=%x",gEgalite,gEgalite[6],gEgalite[6],gEgalite[6]);
-// gEgalite[6]='_';
-// gotoxy(1,23);cprintf("%s->%c->%d=%x",gEgalite,gEgalite[6],gEgalite[6],gEgalite[6]);
-//cgetc();
-//fflush(stdin);
 	strcpy(gJ2ordi,"Oric en joueur 2");
 /* redef de caractere peu utilisé pour accent */
 // livre ( = _ en latin1) pour é
@@ -135,7 +129,7 @@ void initPlateau()
 	{
 		POKE(46080L+c*8+i, PEEK(46080L+k*8+i));
 	}
-// ` pour à
+// (c) => ` en latin1 pour à
 	c=96;k=97;
 	POKE(46080L+c*8, 16);
 	POKE(46080L+c*8+1, 8);
@@ -143,7 +137,7 @@ void initPlateau()
 	{
 		POKE(46080L+c*8+i, PEEK(46080L+k*8+i));
 	}
-//    pour 1/2 (obsolète ?)
+// \   pour 1/2 (obsolète ?) => à remplacer par ô 
 	{
 		BYTEBITS tb[] = {
 		0b00010001,
@@ -157,7 +151,7 @@ void initPlateau()
 		};
 	modifCaractere(92,  tb);
 	}
-//
+// |
 	{
 		BYTEBITS tb[] = {
 		0b00001100,
@@ -171,7 +165,7 @@ void initPlateau()
 		};
 	modifCaractere(124,  tb);
 	}
-	
+// #	
 	{
 		BYTEBITS tb[] = {
 		0b00000000,
@@ -185,8 +179,7 @@ void initPlateau()
 		};
 	modifCaractere(35,  tb);
 	}
-	
-	
+// $
 	{
 		BYTEBITS tb[] = {
 		0b00000000,
@@ -200,7 +193,7 @@ void initPlateau()
 		};
 	modifCaractere(36,  tb);
 	}
-	
+// %
 	{
 		BYTEBITS tb[] = {
 		0b00001100,
@@ -214,7 +207,7 @@ void initPlateau()
 		};
 	modifCaractere(37,  tb);
 	}
-	
+// &
 	{
 		BYTEBITS tb[] = {
 		0b00001100,
@@ -228,7 +221,7 @@ void initPlateau()
 		};
 	modifCaractere(38,  tb);
 	}
-
+// =
 	{
 		BYTEBITS tb[] = {
 		0b00000000,
@@ -242,7 +235,7 @@ void initPlateau()
 		};
 	modifCaractere(61,  tb);
 	}
-
+// [
 	{
 		BYTEBITS tb[] = {
 		0b00001100,
@@ -256,7 +249,7 @@ void initPlateau()
 		};
 	modifCaractere(91,  tb);
 	}
-	
+// ]
 	{
 		BYTEBITS tb[] = {
 		0b00001100,
@@ -270,9 +263,8 @@ void initPlateau()
 		};
 	modifCaractere(93, tb);
 	}		
-	
-	
-		{
+// @
+	{
 		BYTEBITS tb[] = {
 		0b00001100,
 		0b00001100,
@@ -285,8 +277,7 @@ void initPlateau()
 		};
 	modifCaractere(64, tb);
 	}	
-	
-	
+// {
 	{
 		BYTEBITS tb[] = {
 		0b00000000,
@@ -300,6 +291,7 @@ void initPlateau()
 		};
 	modifCaractere(123, tb);
 	}		
+// }
 	{
 		BYTEBITS tb[] = {
 		0b00001100,
@@ -314,16 +306,17 @@ void initPlateau()
 	modifCaractere(125, tb);
 	}
 	
-	
+	remplacerAccents(gOptionCompte);
 	remplacerAccents(gEgalite);
 	remplacerAccents(gPositionsEvaluees);
 	remplacerAccents(gRegles);
-	gRegles[6]=1;
+	gReglesTitre[0]=1;
 	remplacerAccents(gMenuRegles);
-	strcpy(gO1,"\6Oric 1\7\x00");
-	strcpy(gO2,"\1Atmos\7\x00 ");//gJ2[0]=1;
-	strcpy(gJ[2][0],"\6Oric 1\7");
-	strcpy(gJ[2][1],"\1Atmos\7 ");//gJ2[0]=1;
+	remplacerAccents(gJeuRegles);
+	strcpy(gO1,"\3Oric 1\7");
+	strcpy(gO2,"\6Atmos\7 ");
+	strcpy(gJ[2][0],"\4Oric 1\7");
+	strcpy(gJ[2][1],"\1Atmos\7 ");
 
 	clrscr();
 }

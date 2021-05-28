@@ -9,7 +9,7 @@
 
 # Space or comma separated list of cc65 supported target platforms to build for.
 # Default: c64 (lowercase!)
-TARGETS := atmos gb c64
+TARGETS := atmos gb c64 apple2enh apple2
 
 # Name of the final, single-file executable.
 # Default: name of the current dir with target name appended
@@ -158,7 +158,7 @@ plus4_EMUCMD := $(VICE_HOME)xplus4 -TEDdsize -autoload
 c16_EMUCMD := $(VICE_HOME)xplus4 -ramsize 16 -TEDdsize -autoload
 cbm510_EMUCMD := $(VICE_HOME)xcbm2 -model 510 -VICIIdsize -autoload
 cbm610_EMUCMD := $(VICE_HOME)xcbm2 -model 610 -Crtcdsize -autoload
-atari_EMUCMD := $(ATARI_HOME)Altirra64 /defprofile:800 /disk cc65-Chess.atr
+atari_EMUCMD := $(ATARI_HOME)Altirra64 /defprofile:800 /disk awele.atr
 cx16_EMUCMD := $(CX16_HOME)x16emu -run -prg
 apple2_EMUCMD := $(AWIN_HOME)AppleWin.exe -d1 
 atmos_EMUCMD := $(ORIC_HOME)Oricutron.exe -t 

@@ -9,11 +9,11 @@
 #include "mes_types.h"
 #include "macros.h"
 #include "awele.h"
-
+//#include <conio.h>
 /**
- * posEval : variable globale contenant le nombre de position évaluées
+ * gPosEval : variable globale contenant le nombre de position évaluées
  */
-UWORD posEval = 0;
+UWORD gPosEval = 0;
 
 /**
  * jeuPoss : retourne Vrai si le joueur j peut jouer
@@ -26,7 +26,7 @@ BOOLEAN jeuPoss(UBYTE *p,UBYTE j)
 {
    register UBYTE i, b=FALSE;
 
-   for( i=j*(NCASES+1); i<(j+1)*NCASES+j; b|=p[i++] );
+   for( i=j*(gNbCases+1); i<(j+1)*gNbCases+j; b|=p[i++] );
 
    return(b);
 }
@@ -43,32 +43,49 @@ BOOLEAN jeuPoss(UBYTE *p,UBYTE j)
  */
 BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j)
 {
-   register  UBYTE i, n, xi;
+   register  UBYTE i, n,kalahAdverse,xi;
    BOOLEAN x;
 /*   printf("jouer : %d par %d\n",c,j);
-  */ n  = pi[c];
-   xi = (c+n)%LGPLAT;
-   x = (xi>=j*(NCASES+1)) && (xi<(j+1)*NCASES+j) && !pi[xi];
+  */
+	n  = pi[c];
+	kalahAdverse = (2-j)*gNbCases+1-j;
 
-   for( i=0; i<c; ++i )
-      p[i]=pi[i];
+// 	xi = (c+n)%gLongueurPlateau;
+// 	gotoxy(0,24);
+// 	cprintf("%d %d %d - xi=%d,j=%d,lgp=%d,pixi=%d   ",(xi>=j*(gNbCases+1)),(xi<(j+1)*gNbCases+j),!pi[xi],xi,j,kalahAdverse,pi[xi]);
+	
+	// copie des cases avant la cases jouées
+	for( i=0; i<c; ++i )
+		p[i]=pi[i];
 
-   p[c]=0;
+	p[c]=0;	// on vide la case jouée
 
-   for( i=c+1; i<=c+n; ++i )
-      p[i%LGPLAT]=pi[i%LGPLAT]+1;
+	// distribution des grains dans les cases suivante
+	for( i=c+1; i<=c+n; ++i )
+	{	
+		if(gSauteKalah && (i%gLongueurPlateau == kalahAdverse))
+			n++;
+		else
+			p[i%gLongueurPlateau]=pi[i%gLongueurPlateau]+1;
+	}
+	xi = (c+n)%gLongueurPlateau;
+	x = (xi>=j*(gNbCases+1)) && (xi<(j+1)*gNbCases+j) && (p[xi]==1);
+// 	gotoxy(0,25);
+// 	cprintf("%d %d %d - xi=%d,j=%d,nbc=%d,pixi=%d,pxi=%d   ",(xi>=j*(gNbCases+1)),(xi<(j+1)*gNbCases+j),!pi[xi],xi,j,gNbCases,pi[xi],p[xi]);
 
-   for( i=c+n+1; i<LGPLAT; ++i )
-      p[i]=pi[i];
+	// les cases suivantes non changées sont copiées 
+	for( i=c+n+1; i<gLongueurPlateau; ++i )
+		p[i]=pi[i];
 
 
-   if( x )
-   {
-      p[(j+1)*NCASES+j] += p[2*NCASES-xi]+1;
-      p[2*NCASES-xi] = p[xi] = 0;
-   }
 
-   return( ((c+n)==((j+1)*NCASES+j)) && jeuPoss(p,j) );
+	if( x )
+	{
+		p[(j+1)*gNbCases+j] += p[2*gNbCases-xi]+1;
+		p[2*gNbCases-xi] = p[xi] = 0;
+	}
+
+   return( ((c+n)==((j+1)*gNbCases+j)) && jeuPoss(p,j) );
 
 }
 
@@ -90,7 +107,7 @@ WORD alphabeta(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf, UBYTE n, UBY
    WORD a=0;
 
 	jp=0;
-   for( i=j*(NCASES+1); (i<(j+1)*NCASES+j) && (alpha<beta); i++)
+   for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j) && (alpha<beta); i++)
    {
       jp |= p[i];
       
@@ -120,18 +137,25 @@ WORD alphabeta(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf, UBYTE n, UBY
 
 A METTRE A JOUR : TEST POUR AFFICHAGE INFO AVANCEMENT RECHERCHE
 => APPEL FONCTION  UI DEPOEND DU SYSTEM CIBLE
-
+ou du simplement du compilateur
 ***************
 
     gotogxy(10,17);
     color(BLACK, WHITE, SOLID);
-	gprintln(posEval, 10, UNSIGNED);
+	gprintln(gPosEval, 10, UNSIGNED);
 */
    if(!jp)
    {
       res[n]=i;
-      return( eval(p, j) );
+      return( evalFin(p, j) );
    }
+// 	else
+// 	{
+// 				gotoxy(0,1);
+// 		cprintf("ab jp=%d i=%d pi=%d j=%d prf=%d       ",jp,i,p[i],j,prf);
+// 
+// 		//getkj();
+// 	}
 
    return( alpha );
 }
@@ -156,7 +180,7 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 
    jo=1-j; //jo = joueur opposé à j
 
-   for( i=jo*(NCASES+1); (i<(jo+1)*NCASES+jo) && (alpha<beta); i++)
+   for( i=jo*(gNbCases+1); (i<(jo+1)*gNbCases+jo) && (alpha<beta); i++)
    {
       jp |= p[i];
    if( p[i] )
@@ -172,8 +196,17 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
       }
    }
 
-   if( !jp )
-      return( eval(p, j) );
+	if( !jp )
+	{
+		return( evalFin(p, j) );
+	}
+// 	else
+// 	{
+// 		gotoxy(0,2);
+// 		cprintf("min jp=%d i=%d pi=%d j=%d prf=%d       ",jp,i,p[i],j,prf);
+// //				getkj();
+// 
+// 	}
 
    return( beta );
 }
@@ -196,7 +229,7 @@ WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
    if(prf<=0)
       return( eval(p,j) );
 
-   for( i=j*(NCASES+1); (i<(j+1)*NCASES+j) && (alpha<beta); i++)
+   for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j) && (alpha<beta); i++)
    {
       jp |= p[i];
    if( p[i] )
@@ -213,20 +246,62 @@ WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
    }
 
    if( !jp )
-      return( eval(p, j) );
-
+   {
+      return( evalFin(p, j) );
+    }
+// 	else
+// 	{
+// 		gotoxy(0,3);
+// 		cprintf("max jp=%d i=%d pi=%d j=%d prf=%d       ",jp,i,p[i],j,prf);
+// 	//getkj();
+// 	}
    return( alpha );
 }
 
 /**
- * maxmin : algorithme minmax pour gestion de changement du joueur : cas MAX
+ * eval : calcul de la position onbtenue
  * @param p plateau de jeu
- * @param j n° du joueur pour lequel on évalue le plateau
+ * @param j n° du joueur (0 ou 1) pour lequel on évalue le plateau
  */
 WORD eval(UBYTE *p, UBYTE j)
 {
-      ++posEval; 
-   return( (1-2*j)*(p[KALAH1]-p[KALAH2]) );
+	 ++gPosEval; 
+	return( (1-2*j)*(p[KALAH1]-p[KALAH2]) );
 }
 
+/**
+ * evalFin : calcul d'une position de fin de partie (rangée vide)
+ * @param p plateau de jeu
+ * @param j n° du joueur (0 ou 1) pour lequel on évalue le plateau
+ */
+WORD evalFin(UBYTE *p, UBYTE j)
+{
+	WORD cpt=0;
+	UBYTE i;
+
+	if(p[(j+1)*gNbCases+j]>gNbCases*gNbGrains)
+		return(99);
+	j=1-j;
+	if(p[(j+1)*gNbCases+j]>gNbCases*gNbGrains)
+		return(-99);
+	j=1-j;
+	switch(gCompte)
+	{
+		case 0:		// aucun ajout
+			break;
+		case 1:		// ajout reste de ses grains
+			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt+=p[i];
+			j=1-j;
+			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt-=p[i];			
+			break;
+		case 2:		// ajout reste grains adversaire
+			j=1-j;
+			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt+=p[i];
+			j=1-j;
+			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt-=p[i];
+			break;
+	}
+	 ++gPosEval; 
+	return( (1-2*j)*(p[KALAH1]-p[KALAH2]) + cpt);
+}
 
