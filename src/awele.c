@@ -1,6 +1,13 @@
 // version mai 2021
 // simplification avec appel fonctions 
+<<<<<<< Updated upstream
 // passage de constantes (define) en variables globales => remplacement dans le code
+=======
+// Nouvelle version dev :
+// 	- refonte menu => en haut
+// 	- centrage plateau de jeu donc redécoupage des zones l'écran
+// 	- passage de define en variables pour nouveau menu d'options/variantes
+>>>>>>> Stashed changes
 #include "awele.h"
 
 //extern UWORD gPosEval;
