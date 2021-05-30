@@ -15,10 +15,11 @@ __Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standar
 - modification de tap2dsk pour créer des D7 au format EDSK : obligatoire pour le core Oric sur Mister
 - Ajout de la compilation vers C64
 - Mise en commun de la partie conio pour Oric et C64
-- Ajout d'un menu sur Oric et C64 + possibilit� d'appel du menu en cours de partie
+- Ajout d'un menu sur Oric et C64 + possibilité d'appel du menu en cours de partie
 - Ajout des règles du jeu
-- Boucle sur nouvelle partie (n�cessaire sur gameboy)
-- Ajouter un menu d'option pour gérer des variantes des règles
+- Boucle sur nouvelle partie (nécessaire sur gameboy)
+- Ajouter un menu d'option pour gérer des variantes des règles (et mise à jour automatique des règles)
+- Ajout Apple// et // enhanced
 - Ajout d'un écran titre (suggestion de @didier_v de https://ceo.oric.org)
 
 __Reste À Faire :__
