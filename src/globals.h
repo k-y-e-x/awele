@@ -52,7 +52,7 @@ GLOBAL char	gReglesTitre[];
 GLOBAL char	gRegles[];
 GLOBAL char*	gJ[3][2];
 
-GLOBAL char	gMenuRegles[];
+//GLOBAL char	gMenuRegles[];
 GLOBAL char	gMenuJoueurs[];
 GLOBAL char	gMenuOptions[];
 GLOBAL char	gMenuOK[];

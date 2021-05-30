@@ -7,7 +7,7 @@
 #include "mes_types.h"
 #include "globals.h"
 
-char	gMenuRegles[]="Règles";
+//char	gMenuRegles[]="Règles";
 char	gMenuJoueurs[]="Joueurs";
 char	gMenuOptions[]="Options";
 char	gMenuOK[]="OK";
@@ -17,9 +17,9 @@ char*	gTypeJoueurs[]={"2 joueurs","1 joueur","2 ordinateurs"};
 char	g2Joueurs[]=	"2 joueurs     ";
 char	g1Joueur[]=		"1 joueur      ";
 char	g2Ordinateurs[]="2 ordinateurs ";
-char	gJoueursType[]=	"Type Joueurs >";
-char	gQuiCommence[]=	"Qui commence >";
-char	gProfondeur[]=	"Niveau       >";
+char	gJoueursType[]=	"Type Joueurs";
+char	gQuiCommence[]=	"Qui commence";
+char	gProfondeur[]=	"Niveau";
 
 char	gJ1commence[]="Le joueur 1 commence ";
 char	gJ2ordi[]="L'ordinateur est le joueur 2 ";

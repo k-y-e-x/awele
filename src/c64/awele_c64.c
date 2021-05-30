@@ -112,8 +112,6 @@ void initPlateau()
 	remplacerAccents(gEgalite);
 	remplacerAccents(gPositionsEvaluees);
 	remplacerAccents(gRegles);
-	remplacerAccents(gMenuRegles);
-	
 	remplacerAccents(gOptionCompte);
 	remplacerAccents(gJeuRegles);
 

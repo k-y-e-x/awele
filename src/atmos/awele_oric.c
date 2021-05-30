@@ -311,7 +311,7 @@ void initPlateau()
 	remplacerAccents(gPositionsEvaluees);
 	remplacerAccents(gRegles);
 	gReglesTitre[0]=1;
-	remplacerAccents(gMenuRegles);
+//	remplacerAccents(gMenuRegles);
 	remplacerAccents(gJeuRegles);
 	strcpy(gO1,"\3Oric 1\7");
 	strcpy(gO2,"\6Atmos\7 ");

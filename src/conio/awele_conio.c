@@ -80,7 +80,6 @@ void cputixy(UBYTE x, UBYTE y, BOOLEAN rv, UBYTE grains)
 
 void init()
 {
-	char k;
 	screensize(&gScreenX,&gScreenY);
 	gPosEvalY = gScreenY-1;
 	
@@ -93,12 +92,6 @@ void init()
 	
 	gMenuOKX = gScreenX - strlen(gMenuOK)-1;
 	
-// 	gotoxy(0,3);cprintf("c = %d,%d,%d,%d =>r=%d n=%d ret=%d !", gRegles[31], gRegles[32], gRegles[33], gRegles[34],'\r','\n','\
-// ');
-// 			do k = getkj(); while(!k);
-
-
-
 }
 
 void ecranTitre()
@@ -126,12 +119,6 @@ void ecranTitre()
 	cputsxy(x,y++,gTitre);		// donc on double l'écriture
 	POKE(0xbb80+y*40+x-2,2);
 	POKE(0xbb80+y*40+x-1,10);
-	// scrptr = (STRPTR)(0xbb80+y*40+x-1);
-// 	*scrptr = 10;
-// 	scrptr+=40;
-// 	*scrptr = 10;
-
-
 	#endif
 	textcolor(2);
 	gotoxy(x,y++);
@@ -522,10 +509,27 @@ UBYTE choixJoueur(UBYTE joueur)
  *	@see afficherMenu
  *	@param choix 	: option choisie dans le menu joueur
  *	@param n 		: n=0 pour l'affichage en début de partie sinon numéro du joueur en cours
- *	@return	: joueur qui commence
  */
 void afficherMenuJoueur(UBYTE choix, signed char n)
 {
+	UBYTE l0,l1,l2,l3,l4,lmax,k;
+
+	l0=strlen(gProfondeur);
+	l1=strlen(gO1)+l0;
+	lmax=l1-1;
+	l2=strlen(gO2)+l0; 
+	lmax=(l2-1>lmax)?l2-1:lmax;
+	l3=strlen(gJoueursType);
+	lmax=(l3>lmax)?l3:lmax;
+	l4=strlen(gQuiCommence);
+	lmax=(l4>lmax)?l4:lmax;
+	l0=lmax-l0;
+	l3=lmax-l3;
+	l4=lmax-l4;
+	lmax++;
+	l1=lmax-l1;
+	l2=lmax-l2;
+
 	revers(FALSE);
 	//gotoxy(0,gScreenY-2);cprintf("choix=%d, n=%d",choix,n);
 	cclearxy(gMenuJoueursX,gMenuY+2,38);
@@ -546,7 +550,7 @@ void afficherMenuJoueur(UBYTE choix, signed char n)
 				cputsxy(0,gChoixJoueurY,gJ2ordi);cputs("          ");
 				revers(TRUE);
 				cputsxy(gMenuJoueursX,gMenuY+3," ");
-				cputsxy(gMenuJoueursX+1,gMenuY+3,gQuiCommence);
+				cputsxy(gMenuJoueursX+1,gMenuY+3,gQuiCommence);for(k=0;k<l4;k++) cputc(' ');cputc('>');
 				//revers(FALSE);
 				//if(n==0) cputs(gVous); else cputs(gMoi);
 				//cputs("          ");
@@ -555,20 +559,25 @@ void afficherMenuJoueur(UBYTE choix, signed char n)
 // 				cclearxy(gMenuJoueursX,gMenuY+3,38);
 			revers(TRUE);			
 			cputsxy(gMenuJoueursX,gMenuY+2," ");			
-			cputsxy(gMenuJoueursX+1,gMenuY+2,gProfondeur);//revers(FALSE);cprintf("%d",prof[1]);cputs("          ");
+			cputsxy(gMenuJoueursX+1,gMenuY+2,gProfondeur);for(k=0;k<l0;k++) cputc(' ');cputc('>');//revers(FALSE);cprintf("%d",prof[1]);cputs("          ");
 			break;
 		case 3:
 			if(n<=0)
 			{
 				cputsxy(0,gChoixJoueurY,gJ1commence);cputs("          ");
 			}
-			revers(TRUE);cputsxy(gMenuJoueursX,gMenuY+2, gO1);revers(TRUE);cputs(gProfondeur);//revers(FALSE);cprintf("%c",(char)(prof[0]+48));cputs("          ");
-			revers(TRUE);cputsxy(gMenuJoueursX,gMenuY+3, gO2);revers(TRUE);cputs(gProfondeur);//revers(FALSE);cprintf("%c",(char)(prof[1]+48));cputs("          ");
+			revers(TRUE);cputsxy(gMenuJoueursX,gMenuY+2, gO1);revers(TRUE);cputs(gProfondeur);for(k=0;k<l1;k++) cputc(' ');cputc('>');//revers(FALSE);cprintf("%c",(char)(prof[0]+48));cputs("          ");
+			revers(TRUE);cputsxy(gMenuJoueursX,gMenuY+3, gO2);revers(TRUE);cputs(gProfondeur);for(k=0;k<l2;k++) cputc(' ');cputc('>');//revers(FALSE);cprintf("%c",(char)(prof[1]+48));cputs("          ");
 			break;
 	}
 	revers(FALSE);
 }
 
+/**
+ *	Fonction locale d'affichage du détail du menu Jeu (Règles, commencer, quitter...)
+ *	@see afficherMenu
+ *	@param n 		: n=0 pour l'affichage en début de partie sinon numéro du joueur en cours
+ */
 UBYTE afficherMenuJeu(signed char n)
 {
 	UBYTE choix = 1, c,y;
@@ -609,10 +618,19 @@ UBYTE afficherMenuJeu(signed char n)
 		revers(TRUE);cputcxy(gMenuJeuX,++y,' ');revers(choix!=4);cputsxy(gMenuJeuX+1,y,gJeuQuitter);
 		cclear(l4);revers(TRUE);cputcxy(gMenuJeuX+lmax,y,' ');
 		c = getkj();
-		if(c == KEY_UP && choix>1) 
+		if(c == KEY_UP)
 		{
-			choix--;
-			if(n==0 && choix==3) choix--;
+			if(choix>1) 
+			{
+				choix--;
+				if(n==0 && choix==3) choix--;
+			}
+			else
+			{
+				choix = 0;
+				c = KEY_RETURN;
+			}	
+			
 		}
 		if(c == KEY_DOWN && choix<4)
 		{
@@ -741,7 +759,11 @@ void afficherMenuOptions()
 			cputs("     ");
 		}
 		c = getkj();
-		if(c == KEY_UP && choix>1) choix--;
+		if(c == KEY_UP)
+		{
+			if(choix>1) choix--;
+			else	c=KEY_RETURN;
+		}
 		if(c == KEY_DOWN && choix<4) choix++;
 		if(c == KEY_RIGHT)
 		{
@@ -846,7 +868,7 @@ UBYTE afficherMenu(UBYTE n)
 			c = getkj();
 			if(c == KEY_LEFT && choix>1) choix--;
 			if(c == KEY_RIGHT && choix<3) choix++;
-		} while(c != KEY_RETURN);
+		} while(c != KEY_RETURN && c!=KEY_DOWN);
 		
 		revers(FALSE);
 		switch(choix)
@@ -863,13 +885,29 @@ UBYTE afficherMenu(UBYTE n)
 				afficherMenuJoueur(i,n-commence);
 				do
 				{
+					UBYTE l0,l1,l2,l3,l4,lmax;
+					l0=strlen(gProfondeur);
+					l1=strlen(gO1)+l0;
+					lmax=l1-1;
+					l2=strlen(gO2)+l0; 
+					lmax=(l2-1>lmax)?l2-1:lmax;
+					l3=strlen(gJoueursType);
+					lmax=(l3>lmax)?l3:lmax;
+					l4=strlen(gQuiCommence);
+					lmax=(l4>lmax)?l4:lmax;
+					l0=lmax-l0;
+					l3=lmax-l3;
+					l4=lmax-l4;
+					lmax++;
+					l1=lmax-l1;
+					l2=lmax-l2;
 
 					do
 					{
 						gotoxy(gMenuJoueursX,gMenuY+1);
 						revers(TRUE);
 						cputc(' ');
-						revers(FALSE);cputs(gJoueursType);
+						revers(FALSE);cputs(gJoueursType);for(k=0;k<l3;k++) cputc(' ');cputc('>');
 						revers(TRUE);cputs(gTypeJoueurs[i-1]);revers(FALSE);cclear(7);
 						c = getkj();
 						if(c == KEY_RIGHT && i>1) i--;
@@ -888,7 +926,7 @@ UBYTE afficherMenu(UBYTE n)
 					{
 						gotoxy(gMenuJoueursX,gMenuY+1);
 						cputc(' ');
-						cputsxy(gMenuJoueursX+1,gMenuY+1,gJoueursType);
+						cputsxy(gMenuJoueursX+1,gMenuY+1,gJoueursType);for(k=0;k<l3;k++) cputc(' ');cputc('>');
 						revers(FALSE);cclear(strlen(gTypeJoueurs[i-1]));
 					}
 					else break;
@@ -912,7 +950,7 @@ UBYTE afficherMenu(UBYTE n)
 								gotoxy(gMenuJoueursX,gMenuY+2);
 								cputc(' ');
 								revers(FALSE);
-								cputs(gProfondeur); // sans reverse
+								cputs(gProfondeur);for(k=0;k<l0;k++) cputc(' ');cputc('>'); // sans reverse
 								i = prof[1];
 								revers(TRUE);
 								cputc(' ');
@@ -927,7 +965,7 @@ UBYTE afficherMenu(UBYTE n)
 								revers(TRUE);
 								gotoxy(gMenuJoueursX,gMenuY+2);
 								cputc(' ');
-								cputs(gProfondeur); // sans reverse
+								cputs(gProfondeur);for(k=0;k<l0;k++) cputc(' ');cputc('>'); // sans reverse
 								revers(FALSE);
 								cputs("  ");
 								//cplotc((char)(i+48));
@@ -937,7 +975,7 @@ UBYTE afficherMenu(UBYTE n)
 								if(n==0)
 								{
 									i = commence;
-									revers(FALSE);cputsxy(gMenuJoueursX+1,gMenuY+3,gQuiCommence);revers(TRUE);
+									revers(FALSE);cputsxy(gMenuJoueursX+1,gMenuY+3,gQuiCommence);for(k=0;k<l4;k++) cputc(' ');cputc('>');revers(TRUE);
 									do
 									{
 										if(i==0) cputs(gVous); else cputs(gMoi);
@@ -946,7 +984,7 @@ UBYTE afficherMenu(UBYTE n)
 										if( c == KEY_LEFT || c == KEY_RIGHT) i=1-i;
 									} while(c != KEY_RETURN && c != KEY_UP); // && c != KEY_DOWN );
 									commence=i;
-									cputsxy(gMenuJoueursX+1,gMenuY+3,gQuiCommence);
+									cputsxy(gMenuJoueursX+1,gMenuY+3,gQuiCommence);for(k=0;k<l4;k++) cputc(' ');cputc('>');
 									revers(FALSE);
 									//if(i==0) cputs(gVous); else cputs(gMoi);
 									cclear(strlen(gMoi));
@@ -960,6 +998,8 @@ UBYTE afficherMenu(UBYTE n)
 							//#ifdef STRCPY_JOUEURS
 							//STRCPY_JOUEURS
 							//#endif
+						{	
+
 							j[0] = j[1] = 1;
 							i=0;
 							do
@@ -971,7 +1011,7 @@ UBYTE afficherMenu(UBYTE n)
 								cputc(gJ[2][i][0]);
 								revers(FALSE);
 								cputs(gJ[2][i]+1);
-								revers(FALSE);cputs(gProfondeur);revers(TRUE);
+								revers(FALSE);cputs(gProfondeur);for(k=0;k<l1;k++) cputc(' ');cputc('>');revers(TRUE);
 								k = prof[i];
 								cputc(' ');
 								do
@@ -984,13 +1024,14 @@ UBYTE afficherMenu(UBYTE n)
 								prof[i]=k;
 								if(i==1 & c==KEY_UP)  c=0;// en bas donc on ne quitte pas
 								revers(TRUE);cputsxy(gMenuJoueursX,gMenuY+2, gO1);
-								revers(TRUE);cputs(gProfondeur);revers(FALSE);cputs("   ");
+								revers(TRUE);cputs(gProfondeur);for(k=0;k<l1;k++) cputc(' ');cputc('>');revers(FALSE);cputs("   ");
 								revers(TRUE);cputsxy(gMenuJoueursX,gMenuY+3, gO2);
-								revers(TRUE);cputs(gProfondeur);revers(FALSE);cputs("   ");
+								revers(TRUE);cputs(gProfondeur);for(k=0;k<l1;k++) cputc(' ');cputc('>');revers(FALSE);cputs("   ");
 								i=1-i;
 							}
 							while(c != KEY_RETURN && c != KEY_UP);
 							i=3;
+						}
 							break;
 						default:
 						// inutile maintenant mais souvenir de la première version de 89!
@@ -1015,7 +1056,7 @@ UBYTE afficherMenu(UBYTE n)
 
 	//clrscr();
 	//for(k=7;k>0;k--) cclearxy(0,gScreenY-k,38);
-	cputsxy(0,gPosEvalY,gPositionsEvaluees);
+	if(j[0]+j[1]>0) cputsxy(0,gPosEvalY,gPositionsEvaluees);
 	
 	revers(TRUE);
 	cputsxy(gMenuJeuX,gMenuY,gMenuJeu);
@@ -1035,7 +1076,7 @@ void afficherRegles()
 	UBYTE k;
 	char *lRegles;
 	char *s;
-	UBYTE x,y;
+	UBYTE y;
 	
 	clrscr();
 	// gestion sur plusieurs pages si nécessaire

@@ -85,8 +85,9 @@ void initPlateau()
 	remplacerAccents(gEgalite);
 	remplacerAccents(gPositionsEvaluees);
 	remplacerAccents(gRegles);
-	remplacerAccents(gMenuRegles);
-		
+	remplacerAccents(gJeuRegles);
+	remplacerAccents(gOptionCompte);
+
 	strcpy(gJ2ordi,"Apple en joueur 2");
 	clrscr();
 }
