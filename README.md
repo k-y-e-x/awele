@@ -1,4 +1,4 @@
-# AWELE-KALAHA
+ AWELE-KALAHA
 
 **Un peu d'histoire perso...**
 
@@ -20,7 +20,6 @@ __Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standar
 - Boucle sur nouvelle partie (n�cessaire sur gameboy)
 - Ajouter un menu d'option pour gérer des variantes des règles
 - Ajout d'un écran titre (suggestion de &didier_v de ceo.oric.org
-
 __Reste À Faire :__
 - Nettoyage du code !!!!!
 - Optimisation et clarification de la gestion des menus
