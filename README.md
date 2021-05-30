@@ -28,17 +28,17 @@ __Reste À Faire :__
 - Musique 
 
 __Version Oric, C64 et Apple//__
-Le menu est affiché en bas de l'écran.
-Il permet de configurer les options de jeu.
-L'ouverture d'un menu se faire par la touche ENTER ou le bouton FEU du joystick
+Le menu est affiché en haut de l'écran.
+Il permet de configurer les caractéristiques de jeu.
+L'ouverture d'un menu se faire par la touche ENTER/RETURN ou le bouton FEU du joystick ou la touche/le joystick BAS
 Ensuite, on se déplace verticalement dans les points de menu et horizontalement pour choisir chaque option (avec les flèches ou le joystick)
-Pour revenir au menu principal, c'est la touche ENTER ou le bouton FIRE du joystick
-Pour quitter le menu sélectionner OK
+Pour revenir au menu principal, c'est la touche ENTER ou le bouton FIRE du joystick ou via la touche/le jostick HAUT
+Le menu Jeu permet de commencer, abandonner, retourner à la partie ou quitter le jeu.
 
 Pendant le déroulement du jeu, l'appel au menu en quand on a la main (attente d'une touche/joystick) s'effecture par la touche ESC sur Oric et RUN/STOP sur C64
 Le choix de la case à jouer se fait via les touches fleches gauche/droite ou le joystick.
 La case sélectionnée passe en inverse video.
-La validation est par le touche ENTER ou le bouton FEU.
+La validation est par le touche ENTER/RETURN ou le bouton FEU.
 De même la case jouée par l'ordinateur passe en inverse video et son numéro est indiqué.
 
 Lien vers la documentation (sur Github Pages et créée avec doxygen) :  
