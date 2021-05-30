@@ -19,7 +19,7 @@ __Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standar
 - Ajout des règles du jeu
 - Boucle sur nouvelle partie (nécessaire sur gameboy)
 - Ajouter un menu d'option pour gérer des variantes des règles (et mise à jour automatique des règles)
-- Ajout Apple// et // enhanced
+- Ajout Apple// et // enhanced (toujours avec conio)
 - Ajout d'un écran titre (suggestion de @didier_v de https://ceo.oric.org)
 
 __Reste À Faire :__
