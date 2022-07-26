@@ -8,6 +8,17 @@ Puis j'ai fait une version pour mon amiga aux vacances suivantes donc août 1989
 Fin 2020, j'ai retrouvé les sources en transférant mes anciennes disquettes en ADF pour utilisation via gotek et émulateur
 
 
+
+
+
+
+Lien vers le GitHub :  
+
+ https://github.com/k-y-e-x/awele
+ 
+
+## Caractéristiques
+
 __Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standard s'est un peu complexifié :__
 - Réécriture pour oric et compilation avec cc65
 - Réécriture pour Gameboy et compilation avec gbdk
@@ -22,12 +33,20 @@ __Le simple fichier awele.c qui ne faisait qu'un affichage sur la sortie standar
 - Ajout Apple// et // enhanced (toujours avec conio)
 - Ajout d'un écran titre (suggestion de @didier_v de https://ceo.oric.org)
 
-__Reste À Faire :__
+
+## Reste À Faire
+
 - Nettoyage du code !!!!!
 - Optimisation et clarification de la gestion des menus
 - Musique 
 
+
+## Documentation
+
+[Lien vers la documentation]( https://k-y-e-x.github.io/awele/doc/html/index.html)
+
 __Version Oric, C64 et Apple//__
+
 Le menu est affiché en haut de l'écran.
 Il permet de configurer les caractéristiques de jeu.
 L'ouverture d'un menu se faire par la touche ENTER/RETURN ou le bouton FEU du joystick ou la touche/le joystick BAS
@@ -41,11 +60,11 @@ La case sélectionnée passe en inverse video.
 La validation est par le touche ENTER/RETURN ou le bouton FEU.
 De même la case jouée par l'ordinateur passe en inverse video et son numéro est indiqué.
 
-Lien vers la documentation (sur Github Pages et créée avec doxygen) :  
+## License
 
- https://k-y-e-x.github.io/awele/doc/html/index.html
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://github.com/k-y-e-x/awele/blob/main/LICENSE)
 
-Lien vers le GitHub :  
+## Releases
 
- https://github.com/k-y-e-x/awele
- 
+[![Github](https://img.shields.io/github/downloads/k-y-e-x/awele/total)](https://github.com/k-y-e-x/awele/releases)
+
