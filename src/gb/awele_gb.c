@@ -17,21 +17,24 @@
 #include <stdio.h>
 #include <types.h>
 #include <stdlib.h>
+#include <string.h>
 //#include <gb/console.h>
 #include <gb/gB.h>
+#include "tileset.h"
+#include "tilemap.h"
+
 #include <gb/drawing.h>
 #include "../macros.h"
 #include "../awele.h"
 #include "../globals.h"
+
+
 //extern UWORD posEval;
 extern void gbglobals();
 
+UBYTE temp[64];
+
 //#define clrscr() cls()
-/*******************
-
-A METTRE DANS UN AWELE_GB OU PLAT_GB
-
-***********+********/
 
 void printxy(UBYTE x, UBYTE y, BOOLEAN rv, STRPTR s)
 {
@@ -83,12 +86,18 @@ void gbtbcar()
 void boitePlateau()
 {
 	color(BLACK, WHITE, SOLID);
-	box(16,23,144,48,M_NOFILL);
-	box(0,23,16,40,M_NOFILL);
-	box(144,31,159,48,M_NOFILL);
+	box(16,(gPlateauY+2)*8-1,144,(gPlateauY+5)*8,M_NOFILL);
+	box(0,(gPlateauY+2)*8-1,16,(gPlateauY+4)*8,M_NOFILL);
+	box(144,(gPlateauY+3)*8-1,159,(gPlateauY+5)*8,M_NOFILL);
+//	box(0,23,16,40,M_NOFILL);
+//	box(144,31,159,48,M_NOFILL);
 }
 
-void init(){}
+void init()
+{
+	gScreenY = SCREENHEIGHT/8;
+	gScreenX = SCREENWIDTH/8;
+}
 void initJoystick(){}
 void initPlateau()
 {
@@ -96,7 +105,13 @@ void initPlateau()
 //gbtbcar();waitpad(J_B);
 }
 
-void ecranTitre(){}
+void ecranTitre()
+{
+    set_bkg_data(0, TILESET_TILE_COUNT, TILESET);
+    set_bkg_tiles(0, 0, TILEMAP_WIDTH, TILEMAP_HEIGHT, TILEMAP);
+    SHOW_BKG;
+    waitpad(J_START|J_A|J_B);
+}
 
 UBYTE getkj()
 {
@@ -118,7 +133,7 @@ UBYTE getkj()
 
 UBYTE afficherMenu(UBYTE n)
 {
-	register UBYTE i,l,k,c;
+	register UBYTE i,l,k,c,x;
 	//signed char  c;
 	
 	clrscr();
@@ -150,27 +165,30 @@ UBYTE afficherMenu(UBYTE n)
 		j[i]=1;
 		j[1-i]=0;
 		printxy(0,++l,FALSE,gProfondeur);
+		gprint(" : ");
+		x=strlen(gProfondeur)+3;
 		i=1;
 		do
 		{
-			gotogxy(17,l);
+			gotogxy(x,l);
 			wrtchr((char)(i+48));
 			c = getkj();
-	     	if(c == KEY_UP && i<6) i++;
-	     	if(c == KEY_DOWN && i>1) i--;
+	     	if((c == KEY_UP || c == KEY_RIGHT) && i<6) i++;
+	     	if((c == KEY_DOWN || c == KEY_LEFT) && i>1) i--;
 	     } while(c != KEY_RETURN);
 	     prof[1]=i;
 	     i=1;
 	     // A AMELIORER -> CHOIX ORDI / JOUEUR
 		printxy(0,++l,FALSE,gQuiCommence);
-	     do
+		gprint(" : ");
+		x=strlen(gQuiCommence)+3;
+		do
 	     {
-			gotogxy(15,l);
+			gotogxy(x,l);
 			//wrtchr((char)(i+48));
 			if(i==1) gprint(gVous); else gprint(gMoi);
 	     	c = getkj();
-	     	if(c == KEY_UP) i=2;
-	     	if(c == KEY_DOWN) i=1;
+	     	if(c == KEY_UP || c == KEY_RIGHT || c == KEY_DOWN || c == KEY_LEFT) i=3-i;
 	     } while(c != KEY_RETURN);
 
 	      --i;
@@ -191,8 +209,8 @@ UBYTE afficherMenu(UBYTE n)
 				gotogxy(18,l);
 				wrtchr((char)(k+48));
 				c = getkj();
-				if(c == KEY_UP && k<6) k++;
-				if(c == KEY_DOWN && k>1) k--;
+				if((c == KEY_UP  || c == KEY_RIGHT) && k<6) k++;
+				if((c == KEY_DOWN || c == KEY_LEFT) && k>1) k--;
 			} while(c != KEY_RETURN);
 			prof[i]=k;
 		}
@@ -212,55 +230,59 @@ UBYTE afficherMenu(UBYTE n)
 
 void afficherPlateau(UBYTE *p)
 {
-	register int i;
-	gotogxy(0,1);
+	register int i,l;
+	
+	l=gPlateauY;
+	
+	gotogxy(0,l);
 	// les numeros des cases du joueur 2 en alternant inversion couleur
 	for( i=2*gNbCases; i>gNbCases; i--)
 		{
-			gotogxy(2*(2*gNbCases-i+1),1);
+			gotogxy(2*(2*gNbCases-i+1),l);
 	   	if(i%2)  color(BLACK, WHITE, SOLID);
 		else     color(WHITE, DKGREY, SOLID);
 		gprintln(i,10,UNSIGNED);
 	   
 	}
+	l+=2;
 	// les cases du joueur 2 en alternant inversion couleur
 	for( i=2*gNbCases; i>gNbCases; i--)
 	{
-	   	gotogxy(2*(2*gNbCases-i+1),3);//+i%2);
+	   	gotogxy(2*(2*gNbCases-i+1),l);//+i%2);
 	   	if(i%2)  color(BLACK, WHITE, SOLID);
 		else     color(WHITE, DKGREY, SOLID);
 	     gprintln(p[i],10,UNSIGNED);
 	     if(p[i]<10) wrtchr(' ');
 
 	}
-
+	l++;
 	//
 	color(WHITE, DKGREY, SOLID);
-	gotogxy(0,4);
+	gotogxy(0,l);
 	gprintln(p[KALAH2],10,UNSIGNED);
 	if(p[KALAH2]<10) wrtchr(' ');
-	gotogxy(2*gNbCases+2,4);
+	gotogxy(2*gNbCases+2,l);
 	gprintln(p[KALAH1],10,UNSIGNED);
 	if(p[KALAH1]<10) wrtchr(' ');
-
+	l++;
 	// les cases du joueur 1 en alternant inversion couleur
 	for( i=0; i<gNbCases; i++)
 	{
-		gotogxy(2*i+2,5);//+i%2);
+		gotogxy(2*i+2,l);//+i%2);
 		if(i%2)     color(WHITE, DKGREY, SOLID);
 		else     color(BLACK, WHITE, SOLID);
 	     gprintln(p[i],10,UNSIGNED);
 		if(p[i]<10) wrtchr(' ');
 	}
-
+	l+=2;
 	// les numeros des cases du joueur 1 en alternant inversion couleur
 	for( i=0; i<gNbCases; i++)
 	{
-			gotogxy(2*i+2,7);
+			gotogxy(2*i+2,l);
 		if(i%2)     color(WHITE, DKGREY, SOLID);
 		else     color(BLACK, WHITE, SOLID);
 		gprintln(i,10,UNSIGNED);
-	}
+	}	
 }
 
 
@@ -299,28 +321,29 @@ void afficherPosEval()
 {
 	gotogxy(10,0);
 	revers(FALSE);
-	 gprintf("%d   ",gPosEval);
+	sprintf(temp,"%d",gPosEval);
+	 gprintf("%s   ",temp);
 }
 
 BOOLEAN afficherAttente(UBYTE joueur, UBYTE casejouee)
 {
 	UBYTE x,y;
 
-	gotogxy(0,14);
+	gotogxy(0,gAttenteY);
 	color(BLACK, WHITE, SOLID);
 	gprintf("J%d joue en ", joueur);
 	gprintf("%d   ", casejouee);
-	gotogxy(2,15);
+	gotogxy(2,gAttenteY+1);
 	color(WHITE, DKGREY, SOLID);
 	gprint("B pour continuer");
 	revers(FALSE);
 	
 	joueur--;
-	y= 6-joueur*4;
+	y= gPlateauY+5-joueur*4;
 	//effaceLigne(y);
 	color(WHITE,WHITE,SOLID);
-	(joueur==0)?box(16,49,144,55,M_FILL):box(16,16,144,22,M_FILL);
-	
+	(joueur==0)?box(16,(gPlateauY+5)*8+1,144,(gPlateauY+6)*8-1,M_FILL):box(16,(gPlateauY)*8+8,144,(gPlateauY+2)*8-2,M_FILL);
+
 	x=(casejouee-joueur*(gNbCases+1));
 	x = (1-2*joueur)*x;
 	x+=7*joueur;
@@ -331,16 +354,16 @@ BOOLEAN afficherAttente(UBYTE joueur, UBYTE casejouee)
 	boitePlateau();
 
 	waitpad(J_B);
-	effaceLigne(15);
-	effaceLigne(16);
+	effaceLigne(gAttenteY);
+	effaceLigne(gAttenteY+1);
 	
 	return(FALSE);	// option menu / abandonner / quitter à faire pour GB
 }
 
 void effacerAttente()
 {
-	effaceLigne(12);
-	effaceLigne(13);
+	effaceLigne(gAttenteY);
+	effaceLigne(gAttenteY+1);
 }
 
 UBYTE choixJoueur(UBYTE joueur)
@@ -351,24 +374,27 @@ UBYTE choixJoueur(UBYTE joueur)
 	signed char c;
 	
 	revers(FALSE);
-	gotogxy(0,10);
+	gotogxy(0,gChoixJoueurY);
 	gprint(gJoueur[joueur]);
-	gotogxy(0,11);
+	gotogxy(0,gChoixJoueurY+1);
 	gprint(gQuelleCase); 
 //	effaceLigne(2);
 //	effaceLigne(6);
 	color(WHITE,WHITE,SOLID);
-	box(16,16,144,22,M_FILL);
-	box(16,49,144,55,M_FILL);
+	box(16,(gPlateauY)*8+8,144,(gPlateauY+2)*8-2,M_FILL);
+	box(16,(gPlateauY+5)*8+1,144,(gPlateauY+6)*8-1,M_FILL);
+//??	box(16,16,144,22,M_FILL);
+//??	box(16,49,144,55,M_FILL);
 
 	for(c=joueur*(gNbCases+1);!jeu[c];c++);
-	y= 6-joueur*4;
+	y= gPlateauY+5-joueur*4;
+
 	revers(FALSE);
 	do
 	{
 		//effaceLigne(y);
 		color(WHITE,WHITE,SOLID);
-		(joueur==0)?box(16,49,144,55,M_FILL):box(16,16,144,22,M_FILL);
+		//???    (joueur==0)?box(16,49,144,55,M_FILL):box(16,16,144,22,M_FILL);
 		//x=2+(2*joueur+(1-2*joueur)*(c-joueur*(gNbCases+1)))*2;
 		x=(c-joueur*(gNbCases+1));
 		x = (1-2*joueur)*x;
@@ -402,7 +428,7 @@ UBYTE choixJoueur(UBYTE joueur)
 			x = x*2;
 			x+=2;
 			gotogxy(x,y);revers(FALSE);wrtchr(1+(char)joueur);
-			gotogxy(16,11);
+			gotogxy(16,gChoixJoueurY+1);
 			gprintf("%d ",c);
 			boitePlateau();		
 		} while(k != KEY_RETURN);
@@ -411,8 +437,8 @@ UBYTE choixJoueur(UBYTE joueur)
 		gotogxy(x,y);revers(FALSE);wrtchr(1+(char)joueur);
 	
 	} while(c<joueur*(gNbCases+1) || c>=(joueur+1)*gNbCases+joueur || !jeu[c]);
-	effaceLigne(10);
-	effaceLigne(11);
+	effaceLigne(gChoixJoueurY);
+	effaceLigne(gChoixJoueurY+1);
 	return(c);
 }
 

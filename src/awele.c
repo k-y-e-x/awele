@@ -6,6 +6,8 @@
 // 	- centrage plateau de jeu donc redécoupage des zones l'écran
 // 	- passage de define en variables pour nouveau menu d'options/variantes
 //  - écran titre
+// version juin 2026 avec utilisation de Codex pour verification code et optimisation
+
 #include "awele.h"
 
 //extern UWORD gPosEval;
