@@ -14,6 +14,7 @@ WORD minmax(UBYTE* a, WORD b, WORD c, UBYTE d, UBYTE e);
 WORD maxmin(UBYTE*, WORD , WORD , UBYTE , UBYTE);
 WORD eval(UBYTE *, UBYTE);
 WORD evalFin(UBYTE *, UBYTE);
+void initIA(void);
 
 BOOLEAN jeuPoss(UBYTE *p,UBYTE j);
 BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j);

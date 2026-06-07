@@ -110,7 +110,6 @@ UBYTE	gAttenteX=0;
 UBYTE	gAttenteY=12;
 UBYTE	gPosEvalX=20;
 UBYTE	gPosEvalY=0;
-
 UBYTE	gMenuY=0;
 UBYTE	gMenuReglesX=1;
 UBYTE	gMenuJeuX = 1;

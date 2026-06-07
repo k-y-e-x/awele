@@ -32,7 +32,7 @@
 //extern UWORD posEval;
 extern void gbglobals();
 
-UBYTE temp[64];
+extern UBYTE temp[64];
 
 //#define clrscr() cls()
 
@@ -98,7 +98,9 @@ void init()
 	gScreenY = SCREENHEIGHT/8;
 	gScreenX = SCREENWIDTH/8;
 }
-void initJoystick(){}
+void initJoystick()
+{
+}
 void initPlateau()
 {
 	gbglobals();
@@ -125,6 +127,8 @@ UBYTE getkj()
 	if(pad &  J_LEFT) c = KEY_LEFT;
 	if(pad &  J_RIGHT) c = KEY_RIGHT;
 	if(pad &  J_A) c = KEY_RETURN;
+	if(pad &  J_B) c = KEY_ESC;
+	
 	//gotogxy(0,13);
 	//gprintf("pad = %d / c=%d   ",pad,(int)c);
 	waitpadup();
@@ -337,7 +341,6 @@ BOOLEAN afficherAttente(UBYTE joueur, UBYTE casejouee)
 	color(WHITE, DKGREY, SOLID);
 	gprint("B pour continuer");
 	revers(FALSE);
-	
 	joueur--;
 	y= gPlateauY+5-joueur*4;
 	//effaceLigne(y);
@@ -352,11 +355,10 @@ BOOLEAN afficherAttente(UBYTE joueur, UBYTE casejouee)
 	gotogxy(x,y);revers(FALSE);wrtchr(1+(char)joueur);
 	//		sprintf(temp,"e%d,%d-%d-%d      ",x,y,casejouee,joueur);dbgprint(temp);
 	boitePlateau();
-
-	waitpad(J_B);
-	effaceLigne(gAttenteY);
-	effaceLigne(gAttenteY+1);
 	
+	while(getkj() != KEY_ESC);
+
+	//waitpad(J_B);
 	return(FALSE);	// option menu / abandonner / quitter à faire pour GB
 }
 

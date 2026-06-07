@@ -15,6 +15,25 @@
  */
 UWORD gPosEval = 0;
 
+static UBYTE gDebut[2], gFin[2], gKalah[2], gKalahAdverse[2], gOppose[LGPLAT];
+
+void initIA(void)
+{
+   UBYTE i;
+
+   gDebut[0] = 0;
+   gDebut[1] = gNbCases+1;
+   gFin[0] = gNbCases;
+   gFin[1] = 2*gNbCases+1;
+   gKalah[0] = gNbCases;
+   gKalah[1] = 2*gNbCases+1;
+   gKalahAdverse[0] = gKalah[1];
+   gKalahAdverse[1] = gKalah[0];
+
+   for(i=0; i<LGPLAT; ++i)
+      gOppose[i] = 2*gNbCases-i;
+}
+
 /**
  * jeuPoss : retourne Vrai si le joueur j peut jouer
  * � partir du plateau p
@@ -26,12 +45,13 @@ BOOLEAN jeuPoss(UBYTE *p,UBYTE j)
 {
    register UBYTE i, b=FALSE;
 
-   for( i=j*(gNbCases+1); i<(j+1)*gNbCases+j; b|=p[i++] );
+   for( i=gDebut[j]; i<gFin[j]; b|=p[i++] );
 
    return(b);
 }
 
-static UBYTE caseArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j, BOOLEAN semer);
+static UBYTE caseArrivee(UBYTE c, UBYTE n, UBYTE j);
+static UBYTE semerEtArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j);
 
 /**
  * jouer : le plateau p est le plateau obtenu en jouant 
@@ -60,35 +80,49 @@ BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j)
 
 	p[c]=0;	// on vide la case jou�e
 
-	xi = caseArrivee(p, c, n, j, TRUE);
-	x = (xi>=j*(gNbCases+1)) && (xi<(j+1)*gNbCases+j) && (p[xi]==1);
+	xi = semerEtArrivee(p, c, n, j);
+	x = (xi>=gDebut[j]) && (xi<gFin[j]) && (p[xi]==1);
 // 	gotoxy(0,25);
 // 	cprintf("%d %d %d - xi=%d,j=%d,nbc=%d,pixi=%d,pxi=%d   ",(xi>=j*(gNbCases+1)),(xi<(j+1)*gNbCases+j),!pi[xi],xi,j,gNbCases,pi[xi],p[xi]);
 
 	if( x )
 	{
-		p[(j+1)*gNbCases+j] += p[2*gNbCases-xi]+1;
-		p[2*gNbCases-xi] = p[xi] = 0;
+		p[gKalah[j]] += p[gOppose[xi]]+1;
+		p[gOppose[xi]] = p[xi] = 0;
 	}
 
-   return( (xi==((j+1)*gNbCases+j)) && jeuPoss(p,j) );
+   return( (xi==gKalah[j]) && jeuPoss(p,j) );
 
 }
 
-static UBYTE caseArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j, BOOLEAN semer)
+static UBYTE caseArrivee(UBYTE c, UBYTE n, UBYTE j)
 {
-   register UBYTE idx, kalahAdverse;
+   register UBYTE idx;
 
    idx = c;
-   kalahAdverse = (2-j)*gNbCases+1-j;
    while(n)
    {
       ++idx;
       if(idx==gLongueurPlateau) idx=0;
-      if(gSauteKalah && (idx == kalahAdverse))
+      if(gSauteKalah && (idx == gKalahAdverse[j]))
          continue;
-      if(semer)
-         ++p[idx];
+      --n;
+   }
+   return(idx);
+}
+
+static UBYTE semerEtArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j)
+{
+   register UBYTE idx;
+
+   idx = c;
+   while(n)
+   {
+      ++idx;
+      if(idx==gLongueurPlateau) idx=0;
+      if(gSauteKalah && (idx == gKalahAdverse[j]))
+         continue;
+      ++p[idx];
       --n;
    }
    return(idx);
@@ -96,16 +130,14 @@ static UBYTE caseArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j, BOOLEAN semer)
 
 static UBYTE scoreCoup(UBYTE *p, UBYTE c, UBYTE j)
 {
-   UBYTE score, xi, debut, fin;
+   UBYTE score, xi;
 
    score = 0;
-   xi = caseArrivee(p, c, p[c], j, FALSE);
-   debut = j*(gNbCases+1);
-   fin = debut+gNbCases;
+   xi = caseArrivee(c, p[c], j);
 
-   if(xi == ((j+1)*gNbCases+j))
+   if(xi == gKalah[j])
       score += 8;
-   if((xi>=debut) && (xi<fin) && !p[xi] && p[2*gNbCases-xi])
+   if((xi>=gDebut[j]) && (xi<gFin[j]) && !p[xi] && p[gOppose[xi]])
       score += 4;
    if(p[c] > gNbCases)
       ++score;
@@ -119,7 +151,7 @@ static UBYTE listeCoups(UBYTE *p, UBYTE j, UBYTE *coups)
    UBYTE i, k, n, score, coup;
 
    n = 0;
-   for(i=j*(gNbCases+1); i<(j+1)*gNbCases+j; ++i)
+   for(i=gDebut[j]; i<gFin[j]; ++i)
    {
       if(p[i])
       {
@@ -319,7 +351,7 @@ WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 WORD eval(UBYTE *p, UBYTE j)
 {
 	 ++gPosEval; 
-	return( (1-2*j)*(p[KALAH1]-p[KALAH2]) );
+	return( (1-2*j)*(p[gKalah[0]]-p[gKalah[1]]) );
 }
 
 /**
@@ -332,28 +364,28 @@ WORD evalFin(UBYTE *p, UBYTE j)
 	WORD cpt=0;
 	UBYTE i;
 
-	if(p[(j+1)*gNbCases+j]>gNbCases*gNbGrains)
+	if(p[gKalah[j]]>gNbCases*gNbGrains)
 		return(99);
 	j=1-j;
-	if(p[(j+1)*gNbCases+j]>gNbCases*gNbGrains)
+	if(p[gKalah[j]]>gNbCases*gNbGrains)
 		return(-99);
 	j=1-j;
 	switch(gCompte)
 	{
-		case 0:		// aucun ajout
-			break;
-		case 1:		// ajout reste de ses grains
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt+=p[i];
-			j=1-j;
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt-=p[i];			
-			break;
-		case 2:		// ajout reste grains adversaire
-			j=1-j;
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt+=p[i];
-			j=1-j;
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt-=p[i];
-			break;
+			case 0:		// aucun ajout
+				break;
+			case 1:		// ajout reste de ses grains
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt+=p[i];
+				j=1-j;
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt-=p[i];			
+				break;
+			case 2:		// ajout reste grains adversaire
+				j=1-j;
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt+=p[i];
+				j=1-j;
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt-=p[i];
+				break;
 	}
 	 ++gPosEval; 
-	return( (1-2*j)*(p[KALAH1]-p[KALAH2]) + cpt);
+	return( (1-2*j)*(p[gKalah[0]]-p[gKalah[1]]) + cpt);
 }
