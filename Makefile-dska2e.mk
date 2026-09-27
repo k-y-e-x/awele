@@ -1,3 +1,4 @@
+# Apple II enhanced : image de disquette DSK amorçable (build/awelea2e.dsk).
 DSK = build/awelea2e.dsk
 
 # For this one, see https://applecommander.github.io/
@@ -10,7 +11,7 @@ else
 	CP = copy $(subst /,\,$1)
 endif
 
-REMOVES += build/awelea2e.dsk
+apple2enh_MEDIA += build/awelea2e.dsk
 
 .PHONY: dsk
 dsk: $(DSK)

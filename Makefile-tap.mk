@@ -1,3 +1,4 @@
+# Oric Atmos : image de cassette TAP (build/aweloric.tap).
 TAP = build/aweloric.tap
 
 # Unix or Windows
@@ -7,7 +8,7 @@ else
 	CP = copy $(subst /,\,$1)
 endif
 
-REMOVES += $(TAP)
+atmos_MEDIA += $(TAP)
 
 .PHONY: tap
 tap: $(TAP)

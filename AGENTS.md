@@ -15,13 +15,14 @@ Il n'y a **pas encore de cible Amiga dans ce dépôt**. La version historique é
 
 ## Compilation et sorties
 
-- `make` (cible `build`) construit les exécutables Oric Atmos, C64, Apple II, Apple II enhanced et deux ROM Game Boy : `build/awele-gbdk-4.0.gb` et `build/awele-gbdk-4.5.gb`.
-- `make all` ajoute les supports : `build/awele-c64.prg`, `build/awele.d64`, `build/aweloric.tap`, `build/awele-oric.dsk`, `build/awele-oric_edsk.dsk`, `build/awelea2.dsk` et `build/awelea2e.dsk`. Les trois formats de disquette utilisent tous l'extension `.dsk` ; leurs noms complets les distinguent.
-- `make TARGETS=atmos`, `c64`, `apple2`, `apple2enh` ou `gb` construit une cible. Pour une ROM Game Boy isolée, renseigner aussi `GBDK_HOME`, `OBJDIR` et `PROGRAM` afin de séparer compilateurs, objets et sorties. En construction globale, le Makefile fixe `/opt/gbdk` pour 4.0 et `/opt/gbdk-4.5` pour 4.5 ; le `PATH` global ne choisit pas entre elles.
-- `make clean` retire les sorties et objets des cibles prévues ; `make zap` sert au nettoyage plus large. Éviter de supprimer les fichiers personnels ou non suivis.
+- `make` (cible `build`) construit les exécutables Oric Atmos, C64, Apple II, Apple II enhanced et `build/awele.gb` avec GBDK 4.5.
+- `make atmos` construit l'exécutable Oric, `build/aweloric.tap`, `build/awele-oric.dsk` et `build/awele-oric_edsk.dsk`. `make c64` construit l'exécutable C64, `build/awele-c64.prg` et `build/awele.d64`. `make apple2` ou `make apple2enh` construit l'exécutable et la disquette DSK de la version choisie. `make gb` construit seulement `build/awele.gb` avec GBDK 4.5. `make gbdk-4.0` et `make gbdk-4.5` construisent chacun une ROM nommée.
+- `make all` conserve `build/awele.gb`, ajoute les deux ROM nommées (`build/awele-gbdk-4.0.gb` et `build/awele-gbdk-4.5.gb`) et les supports : `build/awele-c64.prg`, `build/awele.d64`, `build/aweloric.tap`, `build/awele-oric.dsk`, `build/awele-oric_edsk.dsk`, `build/awelea2.dsk` et `build/awelea2e.dsk`. Les trois formats de disquette utilisent tous l'extension `.dsk` ; leurs noms complets les distinguent.
+- `make TARGETS=atmos`, `c64`, `apple2`, `apple2enh` ou `gb` construit une cible. La cible `gb` utilise GBDK 4.5 par défaut et des objets distincts de ceux des deux ROM nommées. Pour choisir manuellement un autre GBDK, renseigner aussi `GBDK_HOME` et `OBJDIR` afin de ne pas réutiliser les mêmes objets. Les cibles nommées fixent `/opt/gbdk` pour 4.0 et `/opt/gbdk-4.5` pour 4.5 ; le `PATH` global ne choisit pas entre elles.
+- `make clean` nettoie toutes les cibles ; `make TARGETS=atmos clean` (ou une autre cible unique) ne nettoie que ses objets, son exécutable et ses supports.
 - `make doc` et `make docs` lancent Doxygen avec `awele.dox` et écrivent dans `doc/`.
 
-Le Makefile inclut les `Makefile-*.mk` pour créer les supports physiques. Les outils supplémentaires comprennent `cc1541`, `tap2dsk`, `tap2edsk`, `old2mfm`, Java et `apple2/ac.jar`. Les règles `test` contiennent encore des commandes d'émulateurs surtout pensées pour Windows ; sur Mac, le mainteneur utilise Clock Signal (Apple II et Oric), Denis ou VICE (C64), et SameBoy ou KGB (Game Boy). Ne pas assimiler une compilation réussie à un test de partie.
+Le Makefile inclut les `Makefile-*.mk` pour créer les supports physiques. Les outils supplémentaires comprennent `cc1541`, `tap2dsk`, `tap2edsk`, `old2mfm`, Java et `apple2/ac.jar`. Le lancement des émulateurs est manuel : sur Mac, le mainteneur utilise Clock Signal (Apple II et Oric), Denis ou VICE (C64), et SameBoy ou KGB (Game Boy). Ne pas assimiler une compilation réussie à un test de partie.
 
 ## Compatibilité et vérification
 
@@ -33,4 +34,4 @@ Il n'y a pas de suite de tests automatisés identifiée. Après un changement pa
 
 Les fichiers source mélangent UTF-8 et ISO-8859-1. `README.md` est en UTF-8, tandis que plusieurs anciens `.c` et `src/awele.h` sont en ISO-8859-1. Ne pas convertir globalement les sources ni réenregistrer par mégarde un fichier historique en UTF-8 : les chaînes affichées sur les machines peuvent changer. `awele.dox` définit UTF-8 par défaut et liste dans `INPUT_FILE_ENCODING` les fichiers historiques en ISO-8859-1. Si l'on ajoute ou convertit un fichier, maintenir cette liste. Une mauvaise valeur globale ISO-8859-1 transforme « très » en « trÃ¨s » dans la documentation.
 
-`awele.dox` vient d'être retiré de `.gitignore` et peut apparaître comme fichier non suivi : l'inclure explicitement avec les changements de documentation. Les dossiers `doc/`, `obj/` et les supports dans `build/` sont des sorties générées ou locales. Préserver les modifications déjà présentes dans l'arbre de travail.
+`awele.dox` est suivi par Git et exclut `AGENTS.md` et `CLAUDE.md` de la documentation. `doc/` et `obj/` sont des sorties générées ; plusieurs fichiers de `build/` sont suivis par Git et peuvent apparaître modifiés ou supprimés après compilation ou nettoyage. Préserver les modifications déjà présentes dans l'arbre de travail.

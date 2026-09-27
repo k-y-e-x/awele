@@ -1,9 +1,9 @@
 /**
 * @file aweleia.c
-* S�paration en plusieurs fichiers pour faciliter la maintenance et le multi systeme
-* 14/03/20121
-* source la version GB => mise � jour des types dans mes_types.h
-* ce fichier est commun pour toutes les versions
+* Séparation en plusieurs fichiers pour faciliter la maintenance et le multisystème
+* 14/03/2021
+* Version GB : mise à jour des types dans mes_types.h
+* Ce fichier est commun à toutes les versions.
 */
 
 #include "mes_types.h"
@@ -11,7 +11,7 @@
 #include "awele.h"
 //#include <conio.h>
 /**
- * gPosEval : variable globale contenant le nombre de position �valu�es
+ * gPosEval : variable globale contenant le nombre de positions évaluées
  */
 UWORD gPosEval = 0;
 
@@ -36,10 +36,10 @@ void initIA(void)
 
 /**
  * jeuPoss : retourne Vrai si le joueur j peut jouer
- * � partir du plateau p
+ * à partir du plateau p
  * @param p pointeur vers le plateau de jeu
- * @param j numero du joueur (0 ou 1)
- * @return Bool�en indiquant si le joueur j peut jouer
+ * @param j numéro du joueur (0 ou 1)
+ * @return Booléen indiquant si le joueur j peut jouer
  */
 BOOLEAN jeuPoss(UBYTE *p,UBYTE j)
 {
@@ -56,10 +56,10 @@ static UBYTE semerEtArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j);
 /**
  * jouer : le plateau p est le plateau obtenu en jouant 
  * la case c sur le plateau initial pi
- * @param p pointeur vers le plateau de jeu rs�ultat
+ * @param p pointeur vers le plateau de jeu résultat
  * @param pi pointeur vers le plateau de jeu initial
- * @param c case jou�e
- * @param j num�ro du joueur (0 ou 1)
+ * @param c case jouée
+ * @param j numéro du joueur (0 ou 1)
  * @return Vrai si le joueur doit rejouer
  */
 BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j)
@@ -78,7 +78,7 @@ BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j)
 	for( i=0; i<gLongueurPlateau; ++i )
 		p[i]=pi[i];
 
-	p[c]=0;	// on vide la case jou�e
+	p[c]=0;	// on vide la case jouée
 
 	xi = semerEtArrivee(p, c, n, j);
 	x = (xi>=gDebut[j]) && (xi<gFin[j]) && (p[xi]==1);
@@ -173,16 +173,16 @@ static UBYTE listeCoups(UBYTE *p, UBYTE j, UBYTE *coups)
 }
 
 /**
- * alphabeta : procedure d'�lagage alpha-beta
+ * alphabeta : procédure d'élagage alpha-bêta
  * @see minmax
  * @param p contient le plateau de jeu initial
  * @param alpha vaut moins l'infini au premier appel
  * @param beta vaut plus l'infini au premier appel
- * @param j est le n� du joueur utilisant cette procedure (0 ou 1)
+ * @param j est le n° du joueur utilisant cette procédure (0 ou 1)
  * @param prf est la profondeur de recherche
- * @param n est le nombre de coups jou�s
- * @param res est un tableau contenant les coups succesifs trouves
- * @return valeur de l'�valuation alphabeta
+ * @param n est le nombre de coups joués
+ * @param res est un tableau contenant les coups successifs trouvés
+ * @return valeur de l'évaluation alphabeta
  */
 WORD alphabeta(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf, UBYTE n, UBYTE *res)
 {
@@ -250,9 +250,9 @@ ou du simplement du compilateur
  * @param p plateau de jeu
  * @param alpha
  * @param beta
- * @param j n� du joueur (0 ou 1)
+ * @param j n° du joueur (0 ou 1)
  * @param prf profondeur de recherche max en cours
- * @return si on est sur un feuille ou plus de profondeur de recherche alors l'�valuation du plateau sino calcul du MIN
+ * @return Si la profondeur maximale est atteinte, évaluation du plateau ; sinon, minimum des coups possibles.
  */
 WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 {
@@ -262,7 +262,7 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
    if(prf<=0)
       return( eval(p,j) );
 
-   jo=1-j; //jo = joueur oppos� � j
+   jo=1-j; //jo = joueur opposé à j
 
    nbCoups = listeCoups(p, jo, coups);
    for( k=0; (k<nbCoups) && (alpha<beta); ++k)
@@ -302,9 +302,9 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
  * @param p plateau de jeu
  * @param alpha
  * @param beta
- * @param j n� du joueur (0 ou 1)
+ * @param j n° du joueur (0 ou 1)
  * @param prf profondeur de recherche max en cours
- * @return si on est sur un feuille ou plus de profondeur de recherche alors l'�valuation du plateau sino calcul du MAX
+ * @return Si la profondeur maximale est atteinte, évaluation du plateau ; sinon, maximum des coups possibles.
  */
 WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 {
@@ -344,9 +344,9 @@ WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 }
 
 /**
- * eval : calcul de la position onbtenue
+ * eval : calcul de la position obtenue
  * @param p plateau de jeu
- * @param j n� du joueur (0 ou 1) pour lequel on �value le plateau
+ * @param j n° du joueur (0 ou 1) pour lequel on évalue le plateau
  */
 WORD eval(UBYTE *p, UBYTE j)
 {
@@ -355,9 +355,9 @@ WORD eval(UBYTE *p, UBYTE j)
 }
 
 /**
- * evalFin : calcul d'une position de fin de partie (rang�e vide)
+ * evalFin : calcul d'une position de fin de partie (rangée vide)
  * @param p plateau de jeu
- * @param j n� du joueur (0 ou 1) pour lequel on �value le plateau
+ * @param j n° du joueur (0 ou 1) pour lequel on évalue le plateau
  */
 WORD evalFin(UBYTE *p, UBYTE j)
 {

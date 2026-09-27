@@ -7,7 +7,7 @@
 ### In order to override defaults - values can be assigned to the variables ###
 ###############################################################################
 
-# Platforms built by default, in addition to the two GBDK versions below.
+# cc65 platforms built by default, alongside the generic Game Boy ROM.
 TARGETS := atmos c64 apple2enh apple2
 
 # Name of the final, single-file executable.
@@ -45,35 +45,12 @@ SRCDIR :=
 # Default: obj
 OBJDIR :=
 
-# Command used to run the emulator.
-# Default: depending on target platform. For default (c64) target: x64 -kernal kernal -VICIIdsize -autoload
-EMUCMD :=
-
-# Optional commands used before starting the emulation process, and after finishing it.
-# Default: none
-#PREEMUCMD := osascript -e "tell application /"System Events/" to set isRunning to (name of processes) contains /"X11.bin/"" -e "if isRunning is true then tell application /"X11/" to activate"
-#PREEMUCMD := osascript -e "tell application /"X11/" to activate"
-#POSTEMUCMD := osascript -e "tell application /"System Events/" to tell process /"X11/" to set visible to false"
-#POSTEMUCMD := osascript -e "tell application /"Terminal/" to activate"
-PREEMUCMD :=
-POSTEMUCMD :=
-
-# On Windows machines VICE emulators may not be available in the PATH by default.
-# In such case, please set the variable below to point to directory containing
-# VICE emulators.
-#VICE_HOME := "C:/Program Files/WinVICE-2.2-x86/"
-VICE_HOME := 
-CX16_HOME := 
-AWIN_HOME := 
-ORIC_HOME := 
-ATARI_HOME :=
-
 # Options state file name. You should not need to change this, but for those
 # rare cases when you feel you really need to name it differently - here you are
 STATEFILE := Makefile.options
 
-# Installation GBDK utilisée par la cible Game Boy.
-GBDK_HOME ?= /opt/gbdk
+# Installation GBDK utilisée par la cible Game Boy générique.
+GBDK_HOME ?= /opt/gbdk-4.5
 
 ###################################################################################
 ####  DO NOT EDIT BELOW THIS LINE, UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!  ####
@@ -145,29 +122,13 @@ endif
 # Presume the object and dependency files to be located in the subdirectory
 # 'obj' (which will be created). Set OBJDIR to override.
 ifeq ($(OBJDIR),)
-  OBJDIR := obj
+  ifeq ($(TARGETS),gb)
+    OBJDIR := obj/gbdk-default-4.5
+  else
+    OBJDIR := obj
+  endif
 endif
 TARGETOBJDIR := $(OBJDIR)/$(TARGETS)
-
-# Default emulator commands and options for particular targets.
-# Set EMUCMD to override.
-c64_EMUCMD := $(VICE_HOME)x64 -kernal kernal -VICIIdsize -autostart
-c128_EMUCMD := $(VICE_HOME)x128 -kernal kernal -VICIIdsize -autoload
-vic20_EMUCMD := $(VICE_HOME)xvic -kernal kernal -VICdsize -autoload
-pet_EMUCMD := $(VICE_HOME)xpet -Crtcdsize -autoload
-plus4_EMUCMD := $(VICE_HOME)xplus4 -TEDdsize -autoload
-# So far there is no x16 emulator in VICE (why??) so we have to use xplus4 with -memsize option
-c16_EMUCMD := $(VICE_HOME)xplus4 -ramsize 16 -TEDdsize -autoload
-cbm510_EMUCMD := $(VICE_HOME)xcbm2 -model 510 -VICIIdsize -autoload
-cbm610_EMUCMD := $(VICE_HOME)xcbm2 -model 610 -Crtcdsize -autoload
-atari_EMUCMD := $(ATARI_HOME)Altirra64 /defprofile:800 /disk awele.atr
-cx16_EMUCMD := $(CX16_HOME)x16emu -run -prg
-apple2_EMUCMD := $(AWIN_HOME)AppleWin.exe -d1 
-atmos_EMUCMD := $(ORIC_HOME)Oricutron.exe -t 
-
-ifeq ($(EMUCMD),)
-  EMUCMD = $($(CC65TARGET)_EMUCMD)
-endif
 
 ###############################################################################
 ### The magic begins                                                        ###
@@ -206,6 +167,8 @@ endef
 # Note: Do not remove any of the two empty lines above !
 
 TARGETLIST := $(subst $(COMMA),$(SPACE),$(TARGETS))
+# The default build creates the cc65 executables and a generic GBDK 4.5 ROM.
+.DEFAULT_GOAL := build
 
 ifeq ($(words $(TARGETLIST)),1)
 
@@ -247,9 +210,7 @@ ifneq ($(word 2,$(CONFIG)),)
 endif
 
 .SUFFIXES:
-# make builds the six executables; make all also creates their physical media.
-.DEFAULT_GOAL := build
-.PHONY: build all test clean zap love
+.PHONY: build all clean love
 
 -include $(DEPENDS)
 -include $(STATEFILE)
@@ -294,17 +255,12 @@ $(TARGETOBJDIR):
 CC65TARGET := $(firstword $(subst .,$(SPACE),$(TARGETLIST)))
 
 
-# TEST GB et AMIGA pour utilisation du bon compilateur
+# Compilation Game Boy avec GBDK, autres cibles avec cc65.
 ifeq ($(TARGETLIST),gb)
-#	CC	= lcc -Wa-l -Wl-m -Wl-j
 	CC = "$(GBDK_HOME)/bin/lcc" -Wa-l -Wl-m -Wl-j
 	CFLAGS	= -DGB -DGBDK_2_COMPAT
 GB_HEADERS := $(wildcard $(SRCDIR)/*.h $(SRCDIR)/gb/*.h)
 $(OBJECTS): $(GB_HEADERS)
-
-# 	make.bat: Makefile
-# 		@echo "REM Automatically generated from Makefile" > make.bat
-# 		@make -sn | sed y/\\//\\\\/ | grep -v make >> make.bat
 
 vpath %.c $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
 
@@ -320,8 +276,9 @@ $(TARGETOBJDIR)/%.o: %.s | $(TARGETOBJDIR)
 	$(CC) -o $@ $<
 
 $(PROGRAM): $(CONFIG) $(OBJECTS) $(LIBS)
+	$(if $(wildcard $(@D)),,$(call MKDIR,$(@D)))
 	$(CC) -o $@  $(patsubst %.cfg,-C %.cfg,$^)
-	$(call RMFILES,build/*ihx build/*.map build/*.noi)
+	$(call RMFILES,$(basename $(PROGRAM)).ihx $(basename $(PROGRAM)).map $(basename $(PROGRAM)).noi)
 else
 
 vpath %.c $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
@@ -345,32 +302,50 @@ $(TARGETOBJDIR)/%.o: %.a65 | $(TARGETOBJDIR)
 	cl65 -t $(CC65TARGET) -c --create-dep $(@:.o=.d) $(ASFLAGS) -o $@ $<
 
 $(PROGRAM): $(CONFIG) $(OBJECTS) $(LIBS)
+	$(if $(wildcard $(@D)),,$(call MKDIR,$(@D)))
 	cl65 -t $(CC65TARGET) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
 
 
-endif  # gameboy amiga ou vrai cc65
-
-test: $(PROGRAM)
-	$(PREEMUCMD)
-	$(EMUCMD) $<
-	$(POSTEMUCMD)
+endif  # GBDK ou cc65
 
 clean:
 	$(call RMFILES,$(OBJECTS))
 	$(call RMFILES,$(DEPENDS))
 	$(call RMFILES,$(REMOVES))
+	$(call RMFILES,$($(TARGETLIST)_MEDIA))
 	$(call RMFILES,$(PROGRAM))
-	$(call RMFILES,build/*ihx build/*.map build/*.noi)
 ifeq ($(TARGETLIST),gb)
+	$(call RMFILES,$(basename $(PROGRAM)).ihx $(basename $(PROGRAM)).map $(basename $(PROGRAM)).noi)
 	$(call RMFILES,$(TARGETOBJDIR)/*.asm $(TARGETOBJDIR)/*.lst $(TARGETOBJDIR)/*.sym)
+	$(call RMFILES,$(TARGETOBJDIR)/.DS_Store)
 	$(if $(wildcard $(TARGETOBJDIR)),$(call RMDIR,$(TARGETOBJDIR)))
 endif
 
 else # $(words $(TARGETLIST)),1
 
-.PHONY: gbdk-4.0 gbdk-4.5
+.PHONY: atmos c64 apple2 apple2enh gb gbdk-4.0 gbdk-4.5
 
-build: gbdk-4.0 gbdk-4.5
+atmos:
+	$(MAKE) TARGETS=atmos build
+	$(MAKE) build/aweloric.tap build/awele-oric.dsk build/awele-oric_edsk.dsk
+
+c64:
+	$(MAKE) TARGETS=c64 build
+	$(MAKE) build/awele-c64.prg build/awele.d64
+
+apple2:
+	$(MAKE) TARGETS=apple2 build
+	$(MAKE) build/awelea2.dsk
+
+apple2enh:
+	$(MAKE) TARGETS=apple2enh build
+	$(MAKE) build/awelea2e.dsk
+
+gb:
+	$(MAKE) TARGETS=gb build
+
+build: gb
+	$(foreach t,$(TARGETLIST),$(MAKE) TARGETS=$t all$(NEWLINE))
 
 gbdk-4.0:
 	$(MAKE) TARGETS=gb GBDK_HOME=/opt/gbdk \
@@ -380,14 +355,8 @@ gbdk-4.5:
 	$(MAKE) TARGETS=gb GBDK_HOME=/opt/gbdk-4.5 \
 	    OBJDIR=obj/gbdk-4.5 PROGRAM=build/awele-gbdk-4.5 all
 
-build:
-	$(foreach t,$(TARGETLIST),$(MAKE) TARGETS=$t all$(NEWLINE))
-
-all: build
+all: build gbdk-4.0 gbdk-4.5
 	$(MAKE) d64 prg tap edsk dsk
-
-test:
-	$(foreach t,$(TARGETLIST),$(MAKE) TARGETS=$t $@$(NEWLINE))
 
 clean:
 	$(foreach t,$(TARGETLIST),$(MAKE) TARGETS=$t clean$(NEWLINE))
@@ -395,6 +364,8 @@ clean:
 	    OBJDIR=obj/gbdk-4.0 PROGRAM=build/awele-gbdk-4.0 clean
 	$(MAKE) TARGETS=gb GBDK_HOME=/opt/gbdk-4.5 \
 	    OBJDIR=obj/gbdk-4.5 PROGRAM=build/awele-gbdk-4.5 clean
+	$(MAKE) TARGETS=gb clean
+	$(MAKE) TARGETS=gb OBJDIR=obj clean
 	$(call RMFILES,obj/gbdk-4.0/.DS_Store obj/gbdk-4.5/.DS_Store)
 	$(if $(wildcard obj/gbdk-4.0),$(call RMDIR,obj/gbdk-4.0))
 	$(if $(wildcard obj/gbdk-4.5),$(call RMDIR,obj/gbdk-4.5))
@@ -407,14 +378,6 @@ doc:
 	doxygen awele.dox
 
 docs: doc
-
-OBJDIRLIST := $(wildcard $(OBJDIR)/*)
-
-zap:
-	$(foreach o,$(OBJDIRLIST),-$(call RMFILES,$o/*.o $o/*.d $o/*.lst)$(NEWLINE))
-	$(foreach o,$(OBJDIRLIST),-$(call RMDIR,$o)$(NEWLINE))
-	-$(call RMDIR,$(OBJDIR))
-	-$(call RMFILES,$(basename $(PROGRAM)).* $(STATEFILE))
 
 love:
 	@echo "Not war, eh?"

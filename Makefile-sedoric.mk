@@ -1,6 +1,7 @@
+# Oric Atmos / Sedoric : image de disquette DSK (build/awele-oric.dsk).
 DSK = build/awele-oric.dsk
 
-REMOVES += $(DSK)
+atmos_MEDIA += build/awele-oric.dsk
 
 .PHONY: dsk
 dsk: $(DSK)
