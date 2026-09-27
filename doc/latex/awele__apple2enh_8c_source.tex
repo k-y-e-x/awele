@@ -1,0 +1,99 @@
+\hypertarget{awele__apple2enh_8c_source}{}\doxysection{awele\+\_\+apple2enh.\+c}
+\label{awele__apple2enh_8c_source}\index{src/apple2enh/awele\_apple2enh.c@{src/apple2enh/awele\_apple2enh.c}}
+\mbox{\hyperlink{awele__apple2enh_8c}{Aller à la documentation de ce fichier.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00001}00001\ \textcolor{comment}{//\ version\ du\ 14\ mars\ 2021}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00002}00002\ \textcolor{comment}{//\ \#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00003}00003\ \textcolor{comment}{//\ \#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00004}00004\ \textcolor{comment}{//\ \#include\ <stdarg.h>}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00005}00005\ \textcolor{comment}{//\ \#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00006}00006\ \textcolor{comment}{//\ \#include\ "{}../mes\_types.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00007}00007\ \textcolor{comment}{//\ \#include\ <joystick.h>}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00008}00008\ \textcolor{comment}{//\ \#include\ <conio.h>}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00009}00009\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00010}00010\ \textcolor{comment}{//\ \#include\ "{}../macros.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00011}00011\ \textcolor{comment}{//\ \#include\ "{}../awele.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00012}00012\ \textcolor{comment}{//\ \#include\ "{}../globals.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00014}\mbox{\hyperlink{awele__apple2enh_8c_a415407836cd534e567b8bdaf6c1796ff}{00014}}\ \textcolor{preprocessor}{\#define\ STRCPY\_JOUEURS\ \ \ \ \ \ strcpy(gJoueur[0],"{}IIe\(\backslash\)x00"{}});\(\backslash\)}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00015}00015\ \ \ \ \ \ \ \ \ strcpy(gJoueur[1],"{}IIc\(\backslash\)x00\ "{});\(\backslash\)}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00016}00016\ \ \ \ \ \ \ \ \ strcpy(gJ1,"{}IIe\(\backslash\)x00"{});\(\backslash\)}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ strcpy(gJ2,"{}IIc\(\backslash\)x00\ "{});\(\backslash\)}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}../conio/awele\_conio.c"{}}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00021}00021\ \textcolor{comment}{//void\ free();}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00022}00022\ \textcolor{comment}{//void\ exit();}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00024}00024\ \textcolor{comment}{//extern\ UWORD\ posEval;}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00026}00026\ \textcolor{comment}{//\ void\ init()}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00027}00027\ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00028}00028\ \textcolor{comment}{//\ \ clrscr();}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00029}00029\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00030}\mbox{\hyperlink{awele__apple2enh_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}{00030}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__apple2enh_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}{initJoystick}}()}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00031}00031\ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00032}00032\ \ \ \ \ joy\_install\ (\&a2e\_stdjoy\_joy);}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00035}\mbox{\hyperlink{awele__apple2enh_8c_a82378a8841088d9333c582370d628904}{00035}}\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ \mbox{\hyperlink{awele__apple2enh_8c_a82378a8841088d9333c582370d628904}{getkj}}()}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00036}00036\ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ c=0,\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=0;}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{do}\{\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);\}\ \textcolor{keywordflow}{while}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(kbhit())}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ c=cgetc();}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{while}(!c\ \&\&\ !\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_UP(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_DOWN(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_LEFT(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_RIGHT(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_BTN\_1(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{do}\{\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);\}\ \textcolor{keywordflow}{while}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//while(kbhit())\ cgetc();\ \ \ //\ vide\ buffer\ clavier\ sinon\ pb\ joy\_left=>key\_right!}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{return}\ c;}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00057}\mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{00057}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\textcolor{keywordtype}{char}\ *chaine)}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00058}00058\ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{char}\ *s;}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00060}00060\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00061}00061\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'é'});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00063}00063\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'e'};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'é'});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00067}00067\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00068}00068\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'è'});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00070}00070\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'e'};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'è'});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00074}00074\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00075}00075\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'à'});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'a'};}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'à'});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00083}\mbox{\hyperlink{awele__apple2enh_8c_aa25d21866cf984b531a24441b45ee482}{00083}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__apple2enh_8c_aa25d21866cf984b531a24441b45ee482}{initPlateau}}()}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00084}00084\ \{}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00085}00085\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00087}00087\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_afba58a7388415b583b16c5ef1eb08a02}{gRegles}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00088}00088\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_a166d50e59cf01e9a788036ff0461e3ed}{gJeuRegles}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00089}00089\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_acd547323c9ca3fbeaebaacf5f64d5d41}{gOptionCompte}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00091}00091\ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_a73157e4e9c839208c67c615ed9f40042}{gJ2ordi}},\textcolor{stringliteral}{"{}Apple\ en\ joueur\ 2"{}});}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00092}00092\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__apple2enh_8c_source_l00093}00093\ \}}
+
+\end{DoxyCode}

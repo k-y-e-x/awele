@@ -1,0 +1,104 @@
+\hypertarget{mes__types_8h_source}{}\doxysection{mes\+\_\+types.\+h}
+\label{mes__types_8h_source}\index{src/mes\_types.h@{src/mes\_types.h}}
+\mbox{\hyperlink{mes__types_8h}{Aller à la documentation de ce fichier.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MES\_TYPES\_H}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MES\_TYPES\_H}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00003}00003\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00004}00004\ \textcolor{comment}{\ **\ SOURCE\ EXEC\_TYPES.H\ DE\ L'AMIGA}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00005}00005\ \textcolor{comment}{**\ \ \$Filename:\ exec/types.h\ \$}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00006}00006\ \textcolor{comment}{**\ \ \$Release:\ 2.04\ Includes,\ V37.4\ \$}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00007}00007\ \textcolor{comment}{**\ \ \$Revision:\ 36.14\ \$}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00008}00008\ \textcolor{comment}{**\ \ \$Date:\ 91/11/08\ \$}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00009}00009\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00010}00010\ \textcolor{comment}{**\ \ Data\ typing.\ \ Must\ be\ included\ before\ any\ other\ Amiga\ include.}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00011}00011\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00012}00012\ \textcolor{comment}{**\ \ (C)\ Copyright\ 1985-\/1999\ Amiga,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00013}00013\ \textcolor{comment}{**\ \ \ \ \ \ All\ Rights\ Reserved}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00014}00014\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00016}00016\ \textcolor{comment}{/*\ \ ajout\ des\ types\ spécifiques\ gameboy\ pour\ compatibilité\ GBDK\ 4.0\ et\ 4.5\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00017}00017\ \textcolor{preprocessor}{\#ifdef\ GB}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <gb/gb.h>}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00019}00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00021}\mbox{\hyperlink{mes__types_8h_a3de33738fd3c7e77bffbcfaefc3e7645}{00021}}\ \textcolor{preprocessor}{\#define\ GLOBAL\ \ extern\ \ \ \ \ \ }\textcolor{comment}{/*\ the\ declaratory\ use\ of\ an\ external\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00022}\mbox{\hyperlink{mes__types_8h_a773175d74e73776d69c3e538f17de1ee}{00022}}\ \textcolor{preprocessor}{\#define\ IMPORT\ \ extern\ \ \ \ \ \ }\textcolor{comment}{/*\ reference\ to\ an\ external\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00023}\mbox{\hyperlink{mes__types_8h_a10b2d890d871e1489bb02b7e70d9bdfb}{00023}}\ \textcolor{preprocessor}{\#define\ STATIC\ \ static\ \ \ \ \ \ }\textcolor{comment}{/*\ a\ local\ static\ variable\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00024}\mbox{\hyperlink{mes__types_8h_a9b6de0e26f74363b0c360e2a4020f035}{00024}}\ \textcolor{preprocessor}{\#define\ REGISTER\ register\ \ \ }\textcolor{comment}{/*\ a\ (hopefully)\ register\ variable\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00027}00027\ \textcolor{preprocessor}{\#ifndef\ VOID}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00028}\mbox{\hyperlink{mes__types_8h_a7f319bfc2492a2136964194204e7a8cf}{00028}}\ \textcolor{preprocessor}{\#define\ VOID\ \ \ \ \ \ \ \ void}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00029}00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00032}00032\ \textcolor{comment}{/*\ Types\ with\ specific\ semantics\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00033}\mbox{\hyperlink{mes__types_8h_a8d06b04c04132c6f7c0fcb08c6167455}{00033}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a8d06b04c04132c6f7c0fcb08c6167455}{FLOAT}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00034}\mbox{\hyperlink{mes__types_8h_a2df9d82ef74025dde989a5ae3edc886c}{00034}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a2df9d82ef74025dde989a5ae3edc886c}{BOOL}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00035}\mbox{\hyperlink{mes__types_8h_a71f17a95a306872429f636c2b7a7f63b}{00035}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \ \ \mbox{\hyperlink{mes__types_8h_a71f17a95a306872429f636c2b7a7f63b}{TEXT}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00037}00037\ \textcolor{comment}{/*\ \ WARNING:\ APTR\ was\ redefined\ for\ the\ V36\ Includes!\ \ APTR\ is\ a\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00038}00038\ \textcolor{comment}{/*\ \ 32-\/Bit\ Absolute\ Memory\ Pointer.\ \ C\ pointer\ math\ will\ not\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00039}00039\ \textcolor{comment}{/*\ \ operate\ on\ APTR\ -\/-\/\ \ use\ "{}ULONG\ *"{}\ instead.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00040}00040\ \textcolor{preprocessor}{\#ifndef\ APTR\_TYPEDEF}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00041}\mbox{\hyperlink{mes__types_8h_a087bdb36fddc0b328263561776ebffc3}{00041}}\ \textcolor{preprocessor}{\#define\ APTR\_TYPEDEF}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00042}\mbox{\hyperlink{mes__types_8h_a201013872f88d6f535b12e644d7f4d5a}{00042}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{mes__types_8h_a201013872f88d6f535b12e644d7f4d5a}{APTR}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ 32-\/bit\ untyped\ pointer\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00043}00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00044}\mbox{\hyperlink{mes__types_8h_a2a3e0cda5f1249bef6db47c5eb8e3813}{00044}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a2a3e0cda5f1249bef6db47c5eb8e3813}{LONG}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ signed\ 32-\/bit\ quantity\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00045}\mbox{\hyperlink{mes__types_8h_af632da489ebc3708ec3ab6791ee53fa4}{00045}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ \mbox{\hyperlink{mes__types_8h_af632da489ebc3708ec3ab6791ee53fa4}{ULONG}};\ \ \ \ \ \textcolor{comment}{/*\ unsigned\ 32-\/bit\ quantity\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00046}\mbox{\hyperlink{mes__types_8h_ab5480dab4915e1a5a924cece436b6845}{00046}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ \mbox{\hyperlink{mes__types_8h_ab5480dab4915e1a5a924cece436b6845}{LONGBITS}};\ \ \ \textcolor{comment}{/*\ 32\ bits\ manipulated\ individually\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00047}00047\ \textcolor{preprocessor}{\#ifndef\ ASM\_TYPES\_INCLUDE\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ pour\ compat\ gbdk\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00048}00048\ \textcolor{comment}{//\#define\ TYPES\_INCLUDE}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00049}\mbox{\hyperlink{mes__types_8h_ae85f127d5c866e86244b083d859d7bf7}{00049}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_ae85f127d5c866e86244b083d859d7bf7}{WORD}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ signed\ 16-\/bit\ quantity\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00050}\mbox{\hyperlink{mes__types_8h_aefbb6ca39ebcf009709e607d159766d5}{00050}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \ \mbox{\hyperlink{mes__types_8h_aefbb6ca39ebcf009709e607d159766d5}{UWORD}};\ \ \ \ \ \textcolor{comment}{/*\ unsigned\ 16-\/bit\ quantity\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00051}\mbox{\hyperlink{mes__types_8h_a5f5e06c273a346b641e0914782b25744}{00051}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \ \mbox{\hyperlink{mes__types_8h_a5f5e06c273a346b641e0914782b25744}{WORDBITS}};\ \ \ \textcolor{comment}{/*\ 16\ bits\ manipulated\ individually\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00052}\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{00052}}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{mes__types_8h_a2df9d82ef74025dde989a5ae3edc886c}{BOOL}}\ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00053}00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00054}00054\ \textcolor{preprocessor}{\#ifndef\ GB}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00055}\mbox{\hyperlink{mes__types_8h_aeb90fd78c942591ef3a935cf98baf4f8}{00055}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{double}\ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_aeb90fd78c942591ef3a935cf98baf4f8}{DOUBLE}};\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ pas\ de\ double\ sur\ GB\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00056}00056\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00057}00057\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_aeb90fd78c942591ef3a935cf98baf4f8}{DOUBLE}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00058}00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00059}00059\ \textcolor{preprocessor}{\#if\ \_\_STDC\_\_}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00060}00060\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{mes__types_8h_ab6cc7b4aeb6ea31aba2b3fbfc83ff5e6}{BYTE}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ signed\ 8-\/bit\ quantity\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00061}00061\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00062}\mbox{\hyperlink{mes__types_8h_ab6cc7b4aeb6ea31aba2b3fbfc83ff5e6}{00062}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{char}\ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_ab6cc7b4aeb6ea31aba2b3fbfc83ff5e6}{BYTE}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ signed\ 8-\/bit\ quantity\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00063}00063\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00064}\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{00064}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}};\ \ \ \ \ \textcolor{comment}{/*\ unsigned\ 8-\/bit\ quantity\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00065}\mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{00065}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}};\ \ \ \textcolor{comment}{/*\ 8\ bits\ manipulated\ individually\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00066}\mbox{\hyperlink{mes__types_8h_a3f926347f217f42c80a6c8da7b50bb13}{00066}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \ \mbox{\hyperlink{mes__types_8h_a3f926347f217f42c80a6c8da7b50bb13}{RPTR}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ signed\ relative\ pointer\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00067}\mbox{\hyperlink{mes__types_8h_a454d98e8ec5bedf6c8e399034af40008}{00067}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \ *\mbox{\hyperlink{mes__types_8h_a454d98e8ec5bedf6c8e399034af40008}{STRPTR}};\ \ \ \ \ \textcolor{comment}{/*\ string\ pointer\ (NULL\ terminated)\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00070}00070\ \textcolor{comment}{/*\ For\ compatibility\ only:\ (don't\ use\ in\ new\ code)\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00071}\mbox{\hyperlink{mes__types_8h_a9909bd3cf05f0906045f2ee85be4eeac}{00071}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a9909bd3cf05f0906045f2ee85be4eeac}{SHORT}};\ \ \ \ \ \textcolor{comment}{/*\ signed\ 16-\/bit\ quantity\ (use\ WORD)\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00072}\mbox{\hyperlink{mes__types_8h_a5850d5316caf7f4cedd742fdf8cd7c02}{00072}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \ \mbox{\hyperlink{mes__types_8h_a5850d5316caf7f4cedd742fdf8cd7c02}{USHORT}};\ \ \ \ \ \textcolor{comment}{/*\ unsigned\ 16-\/bit\ quantity\ (use\ UWORD)\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00073}\mbox{\hyperlink{mes__types_8h_ac3efc31d64f31d45eee43de3ec1a021f}{00073}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_ac3efc31d64f31d45eee43de3ec1a021f}{COUNT}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00074}\mbox{\hyperlink{mes__types_8h_a1d0323ea48572fb220d6dddbf839f75f}{00074}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \ \mbox{\hyperlink{mes__types_8h_a1d0323ea48572fb220d6dddbf839f75f}{UCOUNT}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00075}\mbox{\hyperlink{mes__types_8h_afc562e41fb5b6687cc0e224947c34783}{00075}}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{mes__types_8h_af632da489ebc3708ec3ab6791ee53fa4}{ULONG}}\ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_afc562e41fb5b6687cc0e224947c34783}{CPTR}};}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00079}00079\ \textcolor{preprocessor}{\#ifndef\ TRUE}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00080}\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{00080}}\ \textcolor{preprocessor}{\#define\ TRUE\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00081}00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00082}00082\ \textcolor{preprocessor}{\#ifndef\ FALSE}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00083}\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{00083}}\ \textcolor{preprocessor}{\#define\ FALSE\ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00084}00084\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00085}00085\ \textcolor{preprocessor}{\#ifndef\ NULL}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00086}\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{00086}}\ \textcolor{preprocessor}{\#define\ NULL\ \ \ \ \ \ \ \ 0L}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00087}00087\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00090}\mbox{\hyperlink{mes__types_8h_aa5ce16f8b6fcac9f1d13717f8bfa1048}{00090}}\ \textcolor{preprocessor}{\#define\ BYTEMASK\ \ \ \ 0xFF}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00093}00093\ \textcolor{comment}{/*\ \#define\ LIBRARY\_VERSION\ is\ now\ obsolete.\ \ Please\ use\ LIBRARY\_MINIMUM\ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00094}00094\ \textcolor{comment}{/*\ or\ code\ the\ specific\ minimum\ library\ version\ you\ require.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00095}\mbox{\hyperlink{mes__types_8h_a7b213e971ba92e16a9efebd38976caf3}{00095}}\ \textcolor{preprocessor}{\#define\ LIBRARY\_MINIMUM\ 33\ }\textcolor{comment}{/*\ Lowest\ version\ supported\ by\ Amiga,\ Inc.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{mes__types_8h_source_l00098}00098\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ MES\_TYPES\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

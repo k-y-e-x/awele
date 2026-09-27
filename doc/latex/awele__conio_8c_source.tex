@@ -1,0 +1,1112 @@
+\hypertarget{awele__conio_8c_source}{}\doxysection{awele\+\_\+conio.\+c}
+\label{awele__conio_8c_source}\index{src/conio/awele\_conio.c@{src/conio/awele\_conio.c}}
+\mbox{\hyperlink{awele__conio_8c}{Aller à la documentation de ce fichier.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00001}00001\ \textcolor{comment}{//\ version\ du\ 16\ avril\ 2021}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00002}00002\ \textcolor{comment}{//\ mise\ en\ commun\ affichage\ conio}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00003}00003\ \textcolor{comment}{//\ =>\ on\ sort\ les\ init\ et\ les\ fonction\ joystick/clavier}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <stdarg.h>}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}../mes\_types.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <joystick.h>}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <conio.h>}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}../macros.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}../awele.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}../globals.h"{}}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00019}\mbox{\hyperlink{awele__conio_8c_a358d2e2397ca11ccd17553e3c40e7901}{00019}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a358d2e2397ca11ccd17553e3c40e7901}{exit}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00021}00021\ \textcolor{comment}{//extern\ UWORD\ posEval;}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00023}00023\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ *);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00025}00025\ \textcolor{preprocessor}{\#ifndef\ CH\_REDEFINED}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00026}\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{00026}}\ \textcolor{preprocessor}{\#define\ MYCH\_HLINE\ \ CH\_HLINE}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00027}\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{00027}}\ \textcolor{preprocessor}{\#define\ MYCH\_VLINE\ \ CH\_VLINE}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00028}\mbox{\hyperlink{awele__conio_8c_ab5cd9e8ffd9acc36c6b194489e16a44d}{00028}}\ \textcolor{preprocessor}{\#define\ MYCH\_CROSS\ \ CH\_CROSS}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00029}\mbox{\hyperlink{awele__conio_8c_ac7233bfa5137b13846a845c4cfeea630}{00029}}\ \textcolor{preprocessor}{\#define\ MYCH\_RTEE\ \ \ CH\_RTEE}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00030}\mbox{\hyperlink{awele__conio_8c_a7c782303a1dc9f46f8c73c7ce52f1843}{00030}}\ \textcolor{preprocessor}{\#define\ MYCH\_LTEE\ \ \ CH\_LTEE}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00031}\mbox{\hyperlink{awele__conio_8c_a29ee09374837fb732b5aa6f475c3e47e}{00031}}\ \textcolor{preprocessor}{\#define\ MYCH\_TTEE\ \ \ CH\_TTEE}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00032}\mbox{\hyperlink{awele__conio_8c_a01f0d954f8725151219dd694d530736e}{00032}}\ \textcolor{preprocessor}{\#define\ MYCH\_BTEE\ \ \ CH\_BTEE}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00033}\mbox{\hyperlink{awele__conio_8c_a36c3eff851e83e77430c2b22e3587e02}{00033}}\ \textcolor{preprocessor}{\#define\ MYCH\_URCORNER\ \ \ CH\_URCORNER}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00034}\mbox{\hyperlink{awele__conio_8c_a5ab9cbc67177038922788c266a5b099f}{00034}}\ \textcolor{preprocessor}{\#define\ MYCH\_ULCORNER\ \ \ CH\_ULCORNER}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00035}\mbox{\hyperlink{awele__conio_8c_a24d2b9068271bbea352942dfb9740feb}{00035}}\ \textcolor{preprocessor}{\#define\ MYCH\_LRCORNER\ \ \ CH\_LRCORNER}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00036}\mbox{\hyperlink{awele__conio_8c_affa8b8a18082843688e967c0dc419848}{00036}}\ \textcolor{preprocessor}{\#define\ MYCH\_LLCORNER\ \ \ CH\_LLCORNER}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00037}00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00039}\mbox{\hyperlink{awele__conio_8c_a19014d27351c2eb28bab85bf180e23b6}{00039}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_a19014d27351c2eb28bab85bf180e23b6}{sLineUp}}[4]\ =\ \{\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_a29ee09374837fb732b5aa6f475c3e47e}{MYCH\_TTEE}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00040}\mbox{\hyperlink{awele__conio_8c_a424adb94ee45c60ff87c7d9b2bc33df1}{00040}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_a424adb94ee45c60ff87c7d9b2bc33df1}{sLineUpRightCorner}}[4]\ =\ \{\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_a36c3eff851e83e77430c2b22e3587e02}{MYCH\_URCORNER}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00041}\mbox{\hyperlink{awele__conio_8c_a5797a73d2c72fd0410a3731eeb638ec6}{00041}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_a5797a73d2c72fd0410a3731eeb638ec6}{sKalahUpLeft}}[8]\ =\ \{\textcolor{charliteral}{'\ '},\textcolor{charliteral}{'\ '},\mbox{\hyperlink{awele__conio_8c_a5ab9cbc67177038922788c266a5b099f}{MYCH\_ULCORNER}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_ac7233bfa5137b13846a845c4cfeea630}{MYCH\_RTEE}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00042}\mbox{\hyperlink{awele__conio_8c_ae2568c92a78b615525fb3d5d5643a087}{00042}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_ae2568c92a78b615525fb3d5d5643a087}{sKalahUpRight}}[6]\ =\ \{\mbox{\hyperlink{awele__conio_8c_a7c782303a1dc9f46f8c73c7ce52f1843}{MYCH\_LTEE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_a36c3eff851e83e77430c2b22e3587e02}{MYCH\_URCORNER}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00043}\mbox{\hyperlink{awele__conio_8c_aaf042082ea37b58e505dccdb549250af}{00043}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_aaf042082ea37b58e505dccdb549250af}{sLineDown}}[4]\ =\ \{\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_a01f0d954f8725151219dd694d530736e}{MYCH\_BTEE}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00044}\mbox{\hyperlink{awele__conio_8c_afa1e77f20fab3b3b2933e9a628ff277e}{00044}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_afa1e77f20fab3b3b2933e9a628ff277e}{sLineDownCorner}}[4]\ =\ \{\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_a24d2b9068271bbea352942dfb9740feb}{MYCH\_LRCORNER}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00045}\mbox{\hyperlink{awele__conio_8c_a162daf8a01f945b2fec2c4bff08a97d9}{00045}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_a162daf8a01f945b2fec2c4bff08a97d9}{sKalahDownLeft}}[8]\ =\ \{\textcolor{charliteral}{'\ '},\textcolor{charliteral}{'\ '},\mbox{\hyperlink{awele__conio_8c_affa8b8a18082843688e967c0dc419848}{MYCH\_LLCORNER}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_ac7233bfa5137b13846a845c4cfeea630}{MYCH\_RTEE}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00046}\mbox{\hyperlink{awele__conio_8c_a24759fbd0e5d56af121f5d5023d5c486}{00046}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_a24759fbd0e5d56af121f5d5023d5c486}{sKalahDownRight}}[6]\ =\ \{\mbox{\hyperlink{awele__conio_8c_a7c782303a1dc9f46f8c73c7ce52f1843}{MYCH\_LTEE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_a24d2b9068271bbea352942dfb9740feb}{MYCH\_LRCORNER}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00047}\mbox{\hyperlink{awele__conio_8c_a5e194173735a22c57cf3432234386039}{00047}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_a5e194173735a22c57cf3432234386039}{sLineMid}}[4]=\ \{\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_ab5cd9e8ffd9acc36c6b194489e16a44d}{MYCH\_CROSS}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00048}\mbox{\hyperlink{awele__conio_8c_a748608b3c9cb8b4748fb01447ef906f5}{00048}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{awele__conio_8c_a748608b3c9cb8b4748fb01447ef906f5}{sLine}}[3]=\{\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}},0\};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00055}\mbox{\hyperlink{awele_8h_a70ccbfe2c15e0b34847ac09e959e1d31}{00055}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a98a56b547b21a9550ed21e930c03c446}{cplotc}}(\textcolor{keywordtype}{char}\ c)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00056}00056\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00057}00057\ \ \ \ \ cputc(c);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00058}00058\ \ \ \ \ gotox(wherex()-\/1);\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00067}\mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{00067}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{cputixy}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ x,\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ y,\ \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}\ rv,\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ grains)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(rv);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00070}00070\ \ \ \ \ gotoxy(x,y);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00071}00071\ \textcolor{preprocessor}{\ \ \ \ \#ifndef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00072}00072\ \ \ \ \ (void)textcolor(cpeekcolor());}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00073}00073\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00074}00074\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%2d"{}},grains);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00075}00075\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00076}00076\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00077}00077\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00081}\mbox{\hyperlink{awele_8h_a2858154e2009b0e6e616f313177762bc}{00081}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a02fd73d861ef2e4aabb38c0c9ff82947}{init}}()}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00083}00083\ \ \ \ \ screensize(\&\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}},\&\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00084}00084\ \ \ \ \ \mbox{\hyperlink{globals_8c_ac627db54f680998b1304073597ffc904}{gPosEvalY}}\ =\ \mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}-\/1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00085}00085\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{globals_8c_aca157dfada3dec3776155da53a620981}{gLongueurPlateau}}\ =\ (2*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1));}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00087}00087\ \ \ \ \ \mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}=(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2)-\/(3*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}/2+6);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00088}00088\ \textcolor{comment}{//gPosEval=gPlateauX;afficherPosEval();}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00089}00089\ \ \ \ \ \mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}\ =\ \mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}/2-\/4;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00090}00090\ \ \ \ \ \mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}}=\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+9;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00091}00091\ \ \ \ \ \mbox{\hyperlink{globals_8c_a000bb0db126eabf803d96aecdef66aea}{gAttenteY}}=\mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}}+1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00092}00092\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00093}00093\ \ \ \ \ \mbox{\hyperlink{globals_8c_a3c89f82a1a597f1ea1c75e727f350489}{gMenuOKX}}\ =\ \mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}\ -\/\ strlen(\mbox{\hyperlink{globals_8c_a5d0ffd176bdd97e36d7a30de8f5c3f5b}{gMenuOK}})-\/1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00094}00094\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00095}00095\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00097}\mbox{\hyperlink{awele_8h_a9dd04331363838f38db7fee10b86fa87}{00097}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a39e15806bd255dbd8beaba76af6c5d2b}{ecranTitre}}()}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00098}00098\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00100}00100\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ x,y,i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00101}00101\ \ \ \ \ \textcolor{keywordtype}{char}\ s[]=\_\_DATE\_\_;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00102}00102\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00103}00103\ \ \ \ \ i=strlen(\mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}})-\/8;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00104}00104\ \ \ \ \ \mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}}[i++]=s[0];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00105}00105\ \ \ \ \ \mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}}[i++]=s[1];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00106}00106\ \ \ \ \ \mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}}[i++]=s[2];i++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00107}00107\ \ \ \ \ \mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}}[i++]=s[7];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00108}00108\ \ \ \ \ \mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}}[i++]=s[8];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00109}00109\ \ \ \ \ \mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}}[i++]=s[9];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00110}00110\ \ \ \ \ \mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}}[i++]=s[10];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00111}00111\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00112}00112\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00113}00113\ \ \ \ \ x=\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_aa79703dc51a91d4c0cca152a1e55cc35}{gTitre}})/2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00114}00114\ \ \ \ \ y=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00115}00115\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40+x-\/2,1);\ \ \ \ \textcolor{comment}{//\ rouge}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00118}00118\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40+x-\/1,10);\ \ \ \textcolor{comment}{//\ double\ hauteur}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00119}00119\ \ \ \ \ cputsxy(x,y++,\mbox{\hyperlink{globals_8c_aa79703dc51a91d4c0cca152a1e55cc35}{gTitre}});\ \ \ \ \ \ \ \ \textcolor{comment}{//\ donc\ on\ double\ l'écriture}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00120}00120\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40+x-\/2,2);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00121}00121\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40+x-\/1,10);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00122}00122\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00123}00123\ \ \ \ \ (void)textcolor(2);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00124}00124\ \ \ \ \ gotoxy(x,y++);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<strlen(\mbox{\hyperlink{globals_8c_aa79703dc51a91d4c0cca152a1e55cc35}{gTitre}});i++)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00126}00126\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ (void)textcolor((i\%2)?COLOR\_RED:COLOR\_GREEN);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ cputc(\mbox{\hyperlink{globals_8c_aa79703dc51a91d4c0cca152a1e55cc35}{gTitre}}[i]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00130}00130\ \ \ \ \ (void)textcolor(1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00132}00132\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}})/2,y++,\mbox{\hyperlink{globals_8c_a609771716d6fbd40a4e64aa498d908b9}{gTitreCredits}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00133}00133\ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00134}00134\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00135}00135\ \ \ \ \ cputsxy(1,\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}-\/1,\mbox{\hyperlink{globals_8c_a4737f2c643a97c6dddeac04ac5bc3338}{gAppuyerTouche}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00136}00136\ \ \ \ \ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00137}00137\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00138}00138\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00139}00139\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00145}\mbox{\hyperlink{awele_8h_a2f7b6d708a82db42fc8d4d517aaa07fe}{00145}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ *p)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00146}00146\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00147}00147\ \ \ \ \ \textcolor{keyword}{register}\ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00148}00148\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ y;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00151}00151\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00152}00152\ \ \ \ \ \textcolor{comment}{//\ un\ peu\ de\ couleur\ sur\ le\ plateau}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00153}00153\ \ \ \ \ y\ =\ \mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00154}00154\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40,1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00155}00155\ \ \ \ \ y+=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00156}00156\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40,6);\ \ \textcolor{comment}{//\ 2\ OK\ (verts-\/>magenta),\ \ 3OK\ (jaune-\/>blau)}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00157}00157\ \ \ \ \ y++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00158}00158\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40,6);\ \ \textcolor{comment}{//\ 2\ OK\ (verts-\/>magenta),\ \ 3OK\ (jaune-\/>blau)}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00159}00159\ \ \ \ \ y++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00160}00160\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40,6);\ \ \textcolor{comment}{//\ 2\ OK\ (verts-\/>magenta),\ \ 3OK\ (jaune-\/>blau)}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00161}00161\ \ \ \ \ y++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00162}00162\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40,3);\ \textcolor{comment}{//\ 6\ OK\ (cyan-\/>rouge)}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00163}00163\ \ \ \ \ y++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00164}00164\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40,3);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00165}00165\ \ \ \ \ y+=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00166}00166\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+y*40,2);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00167}00167\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00169}00169\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00170}00170\ \ \ \ \ y\ =\ \mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00171}00171\ \ \ \ \ (void)textcolor(COLOR\_RED);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00172}00172\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]][1])/2,y++,\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]][1]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00174}00174\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+7,y++);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00175}00175\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00176}00176\ \ \ \ \ \textcolor{keywordflow}{for}(\ i=2*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}};\ i>\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}};\ i-\/-\/)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00177}00177\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%2d\ "{}},\ i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00179}00179\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00180}00180\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+6,y++);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00181}00181\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_a5ab9cbc67177038922788c266a5b099f}{MYCH\_ULCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{for}(\ i=0;\ i<\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}-\/1;\ i++)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00183}00183\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_a19014d27351c2eb28bab85bf180e23b6}{sLineUp}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00185}00185\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00186}00186\ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_a424adb94ee45c60ff87c7d9b2bc33df1}{sLineUpRightCorner}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00187}00187\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00188}00188\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}},y++,\mbox{\hyperlink{awele__conio_8c_a5797a73d2c72fd0410a3731eeb638ec6}{sKalahUpLeft}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00189}00189\ \ \ \ \ \textcolor{keywordflow}{for}(\ i=2*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}};\ i>\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1;\ i-\/-\/)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00190}00190\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ (void)textcolor(COLOR\_CYAN);cprintf(\textcolor{stringliteral}{"{}\%2d"{}},\ p[i]);(void)textcolor(COLOR\_WHITE);cputc(\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00192}00192\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00193}00193\ \ \ \ \ (void)textcolor(COLOR\_CYAN);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00194}00194\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%2d"{}},\ p[i]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00195}00195\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00196}00196\ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_ae2568c92a78b615525fb3d5d5643a087}{sKalahUpRight}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00197}00197\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00198}00198\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}},y++);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00199}00199\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%2d\%c"{}},\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}},\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00200}00200\ \ \ \ \ (void)textcolor(COLOR\_CYAN);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00201}00201\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%2d\ "{}},p[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00202}00202\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00203}00203\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00204}00204\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb58+y*40+\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+5,7);\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00205}00205\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00206}00206\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_a7c782303a1dc9f46f8c73c7ce52f1843}{MYCH\_LTEE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00207}00207\ \ \ \ \ \textcolor{keywordflow}{for}(\ i=0;\ i<\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}-\/1;\ i++)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_a5e194173735a22c57cf3432234386039}{sLineMid}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00209}00209\ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_a748608b3c9cb8b4748fb01447ef906f5}{sLine}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00210}00210\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_ac7233bfa5137b13846a845c4cfeea630}{MYCH\_RTEE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00211}00211\ \ \ \ \ (void)textcolor(COLOR\_YELLOW);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00212}00212\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\ \%2d"{}},p[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00213}00213\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00214}00214\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00215}00215\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb58+y*40+\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+7+3*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}},3);\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00216}00216\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00217}00217\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%c\%2d\(\backslash\)r\(\backslash\)n"{}},\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}},\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00218}00218\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00219}00219\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}},y++,\mbox{\hyperlink{awele__conio_8c_a162daf8a01f945b2fec2c4bff08a97d9}{sKalahDownLeft}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00220}00220\ \ \ \ \ \textcolor{keywordflow}{for}(\ i=0;\ i<\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}-\/1;\ i++)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00221}00221\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ (void)textcolor(COLOR\_YELLOW);cprintf(\textcolor{stringliteral}{"{}\%2d"{}},\ p[i]);(void)textcolor(COLOR\_WHITE);cputc(\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00223}00223\ \ \ \ \ \ \ \textcolor{comment}{//cprintf("{}\%2d\%c"{},\ p[i],MYCH\_VLINE);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00224}00224\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00225}00225\ \ \ \ \ (void)textcolor(COLOR\_YELLOW);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00226}00226\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%2d"{}},\ p[i]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00227}00227\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00229}00229\ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_a24759fbd0e5d56af121f5d5023d5c486}{sKalahDownRight}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00231}00231\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+6,y++);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00232}00232\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_affa8b8a18082843688e967c0dc419848}{MYCH\_LLCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00233}00233\ \ \ \ \ \textcolor{keywordflow}{for}(\ i=0;\ i<\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}-\/1;\ i++)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_aaf042082ea37b58e505dccdb549250af}{sLineDown}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00235}00235\ \ \ \ \ cputs(\mbox{\hyperlink{awele__conio_8c_afa1e77f20fab3b3b2933e9a628ff277e}{sLineDownCorner}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00237}00237\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+7,y++);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00238}00238\ \ \ \ \ \textcolor{keywordflow}{for}(\ i=0;\ i<\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}};\ i++)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00239}00239\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00240}00240\ \ \ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%2d\ "{}},\ i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00241}00241\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00242}00242\ \ \ \ \ (void)textcolor(COLOR\_GREEN);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00243}00243\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]][1])/2,y++,\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]][0]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00244}00244\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00245}00245\ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\ \ \ \ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00247}00247\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00256}\mbox{\hyperlink{awele_8h_aabb31b331982dfbc0b64eb9784171d24}{00256}}\ \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}\ \mbox{\hyperlink{awele__conio_8c_aabb31b331982dfbc0b64eb9784171d24}{afficherResultats}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ k1,\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ k2)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00257}00257\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00258}00258\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ i,l;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00259}00259\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ k;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00262}00262\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00263}00263\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+(\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+8)*40,7);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00264}00264\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00265}00265\ \ \ \ \ l=\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+7;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00266}00266\ \ \ \ \ cputcxy(10,l,\mbox{\hyperlink{awele__conio_8c_a5ab9cbc67177038922788c266a5b099f}{MYCH\_ULCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00267}00267\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<20;i++)\ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00268}00268\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_a36c3eff851e83e77430c2b22e3587e02}{MYCH\_URCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00269}00269\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00270}00270\ \ \ \ \ cputcxy(10,++l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00271}00271\ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00272}00272\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00273}00273\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]==2)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00274}00274\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00275}00275\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[0][0]=1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[1][0]=6;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00277}00277\ \ \ \ \ \}\ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00278}00278\ \ \ \ \ \textcolor{keywordflow}{if}(\ k1>k2\ )}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00279}00279\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ cputsxy(21-\/(strlen(\mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[0])+strlen(\mbox{\hyperlink{globals_8c_a494e57594d2c030c64e45b56daa3b89d}{gVainqueur}}))/2,l,\mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[0]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00281}00281\ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a494e57594d2c030c64e45b56daa3b89d}{gVainqueur}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00282}00282\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00283}00283\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(\ k1==k2\ )}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00284}00284\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ cputsxy(21-\/strlen(\mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}})/2,l,\mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00286}00286\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00287}00287\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00288}00288\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00289}00289\ \ \ \ \ \ \ \ \ cputsxy(21-\/(strlen(\mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[1])+strlen(\mbox{\hyperlink{globals_8c_a494e57594d2c030c64e45b56daa3b89d}{gVainqueur}}))/2,l,\mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[1]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00290}00290\ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a494e57594d2c030c64e45b56daa3b89d}{gVainqueur}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00291}00291\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00292}00292\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00293}00293\ \ \ \ \ cputcxy(31,l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00294}00294\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00295}00295\ \ \ \ \ gotoxy(10,++l);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00296}00296\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%c\ \ \ \ \ \ \ \%2d\ :\ \%2d\ \ \ \ \ \ \%c\(\backslash\)n\(\backslash\)r"{}},\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}},(k1<k2)?k2:k1,(k1<k2)?k1:k2,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00298}00298\ \ \ \ \ cputcxy(10,++l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00299}00299\ \ \ \ \ cputcxy(31,l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00300}00300\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00301}00301\ \ \ \ \ cputcxy(10,++l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00302}00302\ \ \ \ \ cputcxy(31,l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00304}00304\ \ \ \ \ cputsxy(12,l,\mbox{\hyperlink{globals_8c_ab1ebc6d97efda6866b742d78ebc85fa7}{gRejouer}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00306}00306\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00307}00307\ \ \ \ \ cputcxy(10,++l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00308}00308\ \ \ \ \ cputcxy(31,l,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00309}00309\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00310}00310\ \ \ \ \ cputcxy(10,++l,\mbox{\hyperlink{awele__conio_8c_affa8b8a18082843688e967c0dc419848}{MYCH\_LLCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00311}00311\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<20;i++)\ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00312}00312\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_a24d2b9068271bbea352942dfb9740feb}{MYCH\_LRCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00313}00313\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00314}00314\ \ \ \ \ l-\/=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00315}00315\ \ \ \ \ i=\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}};\ \textcolor{comment}{//\ par\ défaut\ on\ rejoue}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00316}00316\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00317}00317\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ cputsxy(23,l,\mbox{\hyperlink{globals_8c_a7aa33650891f3ed95552c9fbb7fa22a5}{gNonOui}}[1]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00320}00320\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00321}00321\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(!i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a7aa33650891f3ed95552c9fbb7fa22a5}{gNonOui}}[0]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ k\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(k\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}}\ ||\ k\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00325}00325\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ !i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00327}00327\ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00328}00328\ \ \ \ \ \}\ \textcolor{keywordflow}{while}(k\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00330}00330\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00331}00331\ \ \ \ \ \textcolor{keywordflow}{return}((\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}})i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00332}00332\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00334}\mbox{\hyperlink{awele__conio_8c_abae94b9152919eee65076fcd48e50a47}{00334}}\ \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}\ \mbox{\hyperlink{awele__conio_8c_abae94b9152919eee65076fcd48e50a47}{afficherPopUpOuiNon}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *ligne1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ligne2)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00335}00335\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00336}00336\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ l1,l2,lmax,x,y,i,k;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00337}00337\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00338}00338\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00339}00339\ \ \ \ \ l1=strlen(ligne1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00340}00340\ \ \ \ \ \textcolor{keywordflow}{if}(ligne2)\ l2=strlen(ligne2);\ \textcolor{keywordflow}{else}\ l2=0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00341}00341\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00342}00342\ \ \ \ \ lmax\ =\ (l1>l2)?l1:l2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00343}00343\ \ \ \ \ lmax+=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00344}00344\ \ \ \ \ \textcolor{keywordflow}{for}(y=\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+9;y<\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}-\/2;y++)\ cclearxy(0,y,\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00345}00345\ \ \ \ \ y=\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+9;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00346}00346\ \ \ \ \ x=\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/lmax/2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00347}00347\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00348}00348\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00349}00349\ \ \ \ \ cputcxy(x,y,\mbox{\hyperlink{awele__conio_8c_a5ab9cbc67177038922788c266a5b099f}{MYCH\_ULCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00350}00350\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<lmax;i++)\ cputc(\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00351}00351\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_a36c3eff851e83e77430c2b22e3587e02}{MYCH\_URCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00352}00352\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00353}00353\ \ \ \ \ cputcxy(x,++y,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00354}00354\ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00355}00355\ \ \ \ \ cputs(ligne1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00356}00356\ \ \ \ \ cputcxy(x+lmax+1,y,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00357}00357\ \ \ \ \ \textcolor{keywordflow}{if}(l2>0)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00358}00358\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00359}00359\ \ \ \ \ cputcxy(x,++y,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00360}00360\ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00361}00361\ \ \ \ \ cputs(ligne2);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00362}00362\ \ \ \ \ cputcxy(x+lmax+1,y,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00363}00363\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00364}00364\ \ \ \ \ cputcxy(x,++y,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00365}00365\ \ \ \ \ cputcxy(x+lmax+1,y,\mbox{\hyperlink{awele__conio_8c_a05ecb5d1b53ea3c43571133182a941ac}{MYCH\_VLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00367}00367\ \ \ \ \ cputcxy(x,++y,\mbox{\hyperlink{awele__conio_8c_affa8b8a18082843688e967c0dc419848}{MYCH\_LLCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00368}00368\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<lmax;i++)\ cputc(\mbox{\hyperlink{awele__conio_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{MYCH\_HLINE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00369}00369\ \ \ \ \ cputc(\mbox{\hyperlink{awele__conio_8c_a24d2b9068271bbea352942dfb9740feb}{MYCH\_LRCORNER}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00370}00370\ \ \ \ \ y-\/=1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00371}00371\ \ \ \ \ i=\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00372}00372\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00373}00373\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00375}00375\ \ \ \ \ \ \ \ \ cputsxy(x+lmax/2-\/3,y,\mbox{\hyperlink{globals_8c_a7aa33650891f3ed95552c9fbb7fa22a5}{gNonOui}}[1]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00376}00376\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00377}00377\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(!i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00378}00378\ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a7aa33650891f3ed95552c9fbb7fa22a5}{gNonOui}}[0]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00379}00379\ \ \ \ \ \ \ \ \ k\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00380}00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(k\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}}\ ||\ k\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00381}00381\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ !i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00383}00383\ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00384}00384\ \ \ \ \ \}\ \textcolor{keywordflow}{while}(k\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00385}00385\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00386}00386\ \ \ \ \ \textcolor{comment}{//clrscr();}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00387}00387\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00388}00388\ \ \ \ \ \textcolor{keywordflow}{for}(y=\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+9;y<\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}-\/2;y++)\ cclearxy(0,y,\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00389}00389\ \ \ \ \ \textcolor{keywordflow}{return}((\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}})i);\ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00390}00390\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00396}\mbox{\hyperlink{awele_8h_a3150b3d0e9a4ea670355afaa44371813}{00396}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_af55fc8a1d312d2d1fb5e77ea1f58a064}{afficherPosEval}}()}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00397}00397\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00398}00398\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_af823c1938db5f47092f3bcd854888313}{gPosEvalX}},\mbox{\hyperlink{globals_8c_ac627db54f680998b1304073597ffc904}{gPosEvalY}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00399}00399\ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\%d\ \ \ "{}},\mbox{\hyperlink{aweleia_8c_a08320bce5cb2ad7bb89fc2669fc020b3}{gPosEval}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00400}00400\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00409}\mbox{\hyperlink{awele_8h_adfb095973f3877d3ad0e51e50d2e0e2e}{00409}}\ \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}\ \mbox{\hyperlink{awele__conio_8c_adfb095973f3877d3ad0e51e50d2e0e2e}{afficherAttente}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ joueur,\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ casejouee)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00410}00410\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00411}00411\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ k;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00412}00412\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a3fa24a1fb54a82d89d0c4c06fbd0f9c6}{gAttenteX}},\mbox{\hyperlink{globals_8c_a000bb0db126eabf803d96aecdef66aea}{gAttenteY}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00413}00413\ \ \ \ \ cprintf(\mbox{\hyperlink{globals_8c_a40c05d02c3d52b85fc6249cbcfabcfc1}{gJoueurJoueCase}},joueur,casejouee);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00414}00414\ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a3fa24a1fb54a82d89d0c4c06fbd0f9c6}{gAttenteX}},\mbox{\hyperlink{globals_8c_a000bb0db126eabf803d96aecdef66aea}{gAttenteY}}+1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00415}00415\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00416}00416\ \ \ \ \ \ \ \ \ cputc(\textcolor{stringliteral}{'\(\backslash\)x02'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00417}00417\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00418}00418\ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a34bf1e75fd129a040a01aaff03f8972e}{gAppuyerReturn}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00419}00419\ \ \ \ \ \textcolor{comment}{//gotoxy(gAttenteX,gAttenteY+2);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00420}00420\ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00421}00421\ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_aaff73794ff06600443834cf50cc68625}{gEscMenu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00422}00422\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00423}00423\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ k\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(k\ ==\ \mbox{\hyperlink{awele_8h_a86b2b2d4eda22067d85d2287c118e2d8}{KEY\_ESC}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele__conio_8c_a0455eec60756fc2ef73a65f36f8c3163}{afficherMenu}}(1+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1])\ ==\ 99)\ \textcolor{keywordflow}{return}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[joueur-\/1]\ ==\ 0\ )\ k=\mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00429}00429\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00431}00431\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00432}00432\ \ \ \ \ \textcolor{keywordflow}{while}(k\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00433}00433\ \ \ \ \ \textcolor{keywordflow}{return}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00434}00434\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00440}\mbox{\hyperlink{awele_8h_a86294b82f17e500c9f012541c560e99e}{00440}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_aa3d88bbfba78784c6660833668aee101}{effacerAttente}}()}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00441}00441\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00442}00442\ \ \ \ \ cclearxy(\mbox{\hyperlink{globals_8c_a3fa24a1fb54a82d89d0c4c06fbd0f9c6}{gAttenteX}},\mbox{\hyperlink{globals_8c_a000bb0db126eabf803d96aecdef66aea}{gAttenteY}},40);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00443}00443\ \ \ \ \ cclearxy(\mbox{\hyperlink{globals_8c_a3fa24a1fb54a82d89d0c4c06fbd0f9c6}{gAttenteX}},\mbox{\hyperlink{globals_8c_a000bb0db126eabf803d96aecdef66aea}{gAttenteY}}+1,40);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00444}00444\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00445}00445\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00453}\mbox{\hyperlink{awele_8h_a0b05c1eab3e573cfad4e4411552b211d}{00453}}\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ \mbox{\hyperlink{awele__conio_8c_a0b05c1eab3e573cfad4e4411552b211d}{choixJoueur}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ joueur)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00454}00454\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00455}00455\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ x,y;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00456}00456\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ k;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00457}00457\ \ \ \ \ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{char}\ c;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00458}00458\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00459}00459\ \textcolor{comment}{//\ \ cputsxy(0,10,\ gJoueur[joueur]);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00460}00460\ \ \ \ \ cputsxy(0,\mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}},\ \mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]][joueur]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00461}00461\ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a7af8dc874f5ed94fa0ae9209aa8c4709}{gQuelleCase}});\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00463}00463\ \ \ \ \ \textcolor{keywordflow}{for}(c=joueur*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1);!\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c];c++);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00464}00464\ \ \ \ \ y=\ \mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+5-\/joueur*2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00465}00465\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00466}00466\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00467}00467\ \ \ \ \ \ \ \ \ x=7+\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+(7*joueur+(1-\/2*joueur)*(c-\/joueur*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1)))*3;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00468}00468\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{cputixy}}(x,y,\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}},\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00469}00469\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00470}00470\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00471}00471\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ k\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();\ \textcolor{keywordflow}{while}(!k);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(k\ ==\ \mbox{\hyperlink{awele_8h_a86b2b2d4eda22067d85d2287c118e2d8}{KEY\_ESC}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{cputixy}}(x,y,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele__conio_8c_a0455eec60756fc2ef73a65f36f8c3163}{afficherMenu}}(1+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1])\ ==\ 99)\ \textcolor{keywordflow}{return}(99);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[joueur])\ \ \textcolor{keywordflow}{return}(100);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(k\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{cputixy}}(x,y,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c-\/=(1-\/2*joueur);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(k\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{cputixy}}(x,y,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c+=(1-\/2*joueur);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c<joueur*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1))\ c=joueur*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(c>=(joueur+1)*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+joueur)\ c=(joueur+1)*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+joueur-\/1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ x=7+\mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}+(7*joueur+(1-\/2*joueur)*(c-\/joueur*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1)))*3;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{cputixy}}(x,y,\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}},\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00497}00497\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00498}00498\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(k\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00499}00499\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a072dbfc3f772f5d952062a5d53546e1a}{cputixy}}(x,y,\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}},\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00500}00500\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00501}00501\ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c<joueur*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1)\ ||\ c>=(joueur+1)*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+joueur\ ||\ !\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00502}00502\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00503}00503\ \ \ \ \ cclearxy(0,\mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}},38);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00504}00504\ \ \ \ \ \textcolor{keywordflow}{return}(c);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00505}00505\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00513}\mbox{\hyperlink{awele__conio_8c_a2cfe2720a6d25cb93180f94fa52b97c5}{00513}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a2cfe2720a6d25cb93180f94fa52b97c5}{afficherMenuJoueur}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ choix,\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{char}\ n)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00514}00514\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00515}00515\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ l0,l1,l2,l3,l4,lmax,k;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00517}00517\ \ \ \ \ l0=strlen(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00518}00518\ \ \ \ \ l1=strlen(\mbox{\hyperlink{globals_8c_a9fb5d8d0c35d23be15223ac8de96a974}{gO1}})+l0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00519}00519\ \ \ \ \ lmax=l1-\/1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00520}00520\ \ \ \ \ l2=strlen(\mbox{\hyperlink{globals_8c_a2b97e57b23c5c8c206ec20db0796c6fb}{gO2}})+l0;\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00521}00521\ \ \ \ \ lmax=(l2-\/1>lmax)?l2-\/1:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00522}00522\ \ \ \ \ l3=strlen(\mbox{\hyperlink{globals_8c_af538432d618bed93631f078ebb64d33e}{gJoueursType}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00523}00523\ \ \ \ \ lmax=(l3>lmax)?l3:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00524}00524\ \ \ \ \ l4=strlen(\mbox{\hyperlink{globals_8c_ab1da36e61eb0b68c66b519ed4292079d}{gQuiCommence}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00525}00525\ \ \ \ \ lmax=(l4>lmax)?l4:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00526}00526\ \ \ \ \ l0=lmax-\/l0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00527}00527\ \ \ \ \ l3=lmax-\/l3;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00528}00528\ \ \ \ \ l4=lmax-\/l4;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00529}00529\ \ \ \ \ lmax++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00530}00530\ \ \ \ \ l1=lmax-\/l1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00531}00531\ \ \ \ \ l2=lmax-\/l2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00532}00532\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00533}00533\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00534}00534\ \ \ \ \ \textcolor{comment}{//gotoxy(0,gScreenY-\/2);cprintf("{}choix=\%d,\ n=\%d"{},choix,n);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00535}00535\ \ \ \ \ cclearxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2,38);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00536}00536\ \ \ \ \ cclearxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,38);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00537}00537\ \ \ \ \ \textcolor{keywordflow}{switch}(choix)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00538}00538\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00539}00539\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ \textcolor{comment}{//\ 2\ joueurs\ =>\ pas\ d'autre\ question\ :\ joueur\ 1\ commence\ !}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n<=0)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(0,\mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}},\mbox{\hyperlink{globals_8c_a39122909e08ea4c370fffd0dbd72eb84}{gJ1commence}});cputs(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00544}00544\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ cclearxy(gMenuJoueursX,gMenuY+2,38);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00545}00545\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ cclearxy(gMenuJoueursX,gMenuY+3,38);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00547}00547\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n<=0)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(0,\mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}},\mbox{\hyperlink{globals_8c_a73157e4e9c839208c67c615ed9f40042}{gJ2ordi}});cputs(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\mbox{\hyperlink{globals_8c_ab1da36e61eb0b68c66b519ed4292079d}{gQuiCommence}});\textcolor{keywordflow}{for}(k=0;k<l4;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//revers(FALSE);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if(n==0)\ cputs(gVous);\ else\ cputs(gMoi);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//cputs("{}\ \ \ \ \ \ \ \ \ \ "{});}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00558}00558\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00559}00559\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ cclearxy(gMenuJoueursX,gMenuY+3,38);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2,\textcolor{stringliteral}{"{}\ "{}});\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2,\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l0;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\textcolor{comment}{//revers(FALSE);cprintf("{}\%d"{},prof[1]);cputs("{}\ \ \ \ \ \ \ \ \ \ "{});}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00564}00564\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n<=0)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(0,\mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}},\mbox{\hyperlink{globals_8c_a39122909e08ea4c370fffd0dbd72eb84}{gJ1commence}});cputs(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2,\ \mbox{\hyperlink{globals_8c_a9fb5d8d0c35d23be15223ac8de96a974}{gO1}});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputs(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l1;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\textcolor{comment}{//revers(FALSE);cprintf("{}\%c"{},(char)(prof[0]+48));cputs("{}\ \ \ \ \ \ \ \ \ \ "{});}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\ \mbox{\hyperlink{globals_8c_a2b97e57b23c5c8c206ec20db0796c6fb}{gO2}});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputs(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l2;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\textcolor{comment}{//revers(FALSE);cprintf("{}\%c"{},(char)(prof[1]+48));cputs("{}\ \ \ \ \ \ \ \ \ \ "{});}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00572}00572\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00573}00573\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00574}00574\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00575}00575\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00581}\mbox{\hyperlink{awele__conio_8c_aa6001bc221fe7cdb716a5798a5c470b3}{00581}}\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ \mbox{\hyperlink{awele__conio_8c_aa6001bc221fe7cdb716a5798a5c470b3}{afficherMenuJeu}}(\textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{char}\ n)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00582}00582\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00583}00583\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ choix\ =\ 1,\ c,y;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00584}00584\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ l1,l2,l3,l4,lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00585}00585\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}\ reponse;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00586}00586\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00587}00587\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00588}00588\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00589}00589\ \ \ \ \ l1=strlen(\mbox{\hyperlink{globals_8c_a166d50e59cf01e9a788036ff0461e3ed}{gJeuRegles}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00590}00590\ \ \ \ \ lmax=l1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00591}00591\ \ \ \ \ \textcolor{keywordflow}{if}(n==0)\ l2=strlen(\mbox{\hyperlink{globals_8c_a35e4cefdad445badf076bc57fa296124}{gJeuCommencer}});\ \textcolor{keywordflow}{else}\ l2=strlen(\mbox{\hyperlink{globals_8c_addd6f5e93f2192e10e68592b4b2cfa19}{gJeuRetour}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00592}00592\ \ \ \ \ lmax=(l2>lmax)?l2:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00593}00593\ \ \ \ \ l3=strlen(\mbox{\hyperlink{globals_8c_aca20073f5364f430b6cea579b69e7301}{gJeuAbandonner}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00594}00594\ \ \ \ \ lmax=(l3>lmax)?l3:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00595}00595\ \ \ \ \ l4=strlen(\mbox{\hyperlink{globals_8c_a6842d227b9c4513722428179fb004776}{gJeuQuitter}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00596}00596\ \ \ \ \ lmax=(l4>lmax)?l4:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00597}00597\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00598}00598\ \ \ \ \ lmax++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00599}00599\ \ \ \ \ l1=lmax-\/l1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00600}00600\ \ \ \ \ l2=lmax-\/l2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00601}00601\ \ \ \ \ l3=lmax-\/l3;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00602}00602\ \ \ \ \ l4=lmax-\/l4;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00603}00603\ \ \ \ \ \textcolor{comment}{//gotoxy(0,gScreenY-\/3);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00604}00604\ \ \ \ \ \textcolor{comment}{//cprintf("{}\%d-\/\%d-\/\%d-\/\%d\ max=\%d"{},l1,l2,l3,l4,lmax);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00605}00605\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00606}00606\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00607}00607\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00608}00608\ \ \ \ \ \ \ \ \ y=\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00609}00609\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}},y,\textcolor{charliteral}{'\ '});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=1);cputsxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+1,y,\mbox{\hyperlink{globals_8c_a166d50e59cf01e9a788036ff0461e3ed}{gJeuRegles}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00610}00610\ \ \ \ \ \ \ \ \ cclear(l1);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+lmax,y,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00611}00611\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}},++y,\textcolor{charliteral}{'\ '});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=2);cputsxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+1,y,(n==0)?\mbox{\hyperlink{globals_8c_a35e4cefdad445badf076bc57fa296124}{gJeuCommencer}}:\mbox{\hyperlink{globals_8c_addd6f5e93f2192e10e68592b4b2cfa19}{gJeuRetour}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00612}00612\ \ \ \ \ \ \ \ \ cclear(l2);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+lmax,y,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00613}00613\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n>0)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00614}00614\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00615}00615\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}},++y,\textcolor{charliteral}{'\ '});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=3);cputsxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+1,y,\mbox{\hyperlink{globals_8c_aca20073f5364f430b6cea579b69e7301}{gJeuAbandonner}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00616}00616\ \ \ \ \ \ \ \ \ cclear(l3);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+lmax,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00617}00617\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00618}00618\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}},++y,\textcolor{charliteral}{'\ '});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=4);cputsxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+1,y,\mbox{\hyperlink{globals_8c_a6842d227b9c4513722428179fb004776}{gJeuQuitter}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00619}00619\ \ \ \ \ \ \ \ \ cclear(l4);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}}+lmax,y,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00620}00620\ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00621}00621\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00622}00622\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00623}00623\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(choix>1)\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00625}00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ choix-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00626}00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n==0\ \&\&\ choix==3)\ choix-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00627}00627\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00628}00628\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00629}00629\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00630}00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ choix\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00631}00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00632}00632\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00633}00633\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00634}00634\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00635}00635\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}}\ \&\&\ choix<4)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00636}00636\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00637}00637\ \ \ \ \ \ \ \ \ \ \ \ \ choix++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00638}00638\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n==0\ \&\&\ choix==3)\ choix++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00639}00639\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00640}00640\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00641}00641\ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00642}00642\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00643}00643\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00644}00644\ \ \ \ \ \textcolor{keywordflow}{switch}(choix)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00645}00645\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00646}00646\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00647}00647\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a57577c6761f88a9329f66cba243791b7}{afficherRegles}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00649}00649\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00650}00650\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00651}00651\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00652}00652\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(c=1;c<6;c++)\ cclearxy(0,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+c,\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00653}00653\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(4);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00655}00655\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00656}00656\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Abandonner\ la\ partie\ en\ cours}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00657}00657\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ popup\ de\ confirmation}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ reponse\ =\ \mbox{\hyperlink{awele__conio_8c_abae94b9152919eee65076fcd48e50a47}{afficherPopUpOuiNon}}(\mbox{\hyperlink{globals_8c_a53c645aa7eed6c3cbc93ccfa43853521}{gPopAbandonner}}[0],\mbox{\hyperlink{globals_8c_a53c645aa7eed6c3cbc93ccfa43853521}{gPopAbandonner}}[1]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00659}00659\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(reponse)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00660}00660\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00661}00661\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(3);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00662}00662\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00663}00663\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00664}00664\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00665}00665\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Quitter\ l'application\ cours}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ popup\ de\ confirmation}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00667}00667\ \ \ \ \ \ \ \ \ \ \ \ \ reponse\ =\ \mbox{\hyperlink{awele__conio_8c_abae94b9152919eee65076fcd48e50a47}{afficherPopUpOuiNon}}(\mbox{\hyperlink{globals_8c_a2a514b653d3c6e3f4527dc601aa8103b}{gPopQuitter}}[0],\mbox{\hyperlink{globals_8c_a2a514b653d3c6e3f4527dc601aa8103b}{gPopQuitter}}[1]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00668}00668\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(reponse)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00669}00669\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00670}00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00671}00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a358d2e2397ca11ccd17553e3c40e7901}{exit}}(0);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00672}00672\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00673}00673\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00674}00674\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00675}00675\ \ \ \ \ \textcolor{keywordflow}{return}(1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00676}00676\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00681}\mbox{\hyperlink{awele__conio_8c_ac6ac8b4a1ff5100978d86d0216e1f168}{00681}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_ac6ac8b4a1ff5100978d86d0216e1f168}{afficherMenuOptions}}()}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00682}00682\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00683}00683\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ choix\ =\ 1,\ c,x,y;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00684}00684\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ l1,l2,l3,l4,lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00685}00685\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00686}00686\ \ \ \ \ l1=strlen(\mbox{\hyperlink{globals_8c_ac64f7c58ac391c43ec09b4b67f4c5057}{gOptionNbCases}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00687}00687\ \ \ \ \ lmax=l1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00688}00688\ \ \ \ \ l2=strlen(\mbox{\hyperlink{globals_8c_a73c4d7389706aecb1fb05a9e90de1a27}{gOptionNbGrains}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00689}00689\ \ \ \ \ lmax=(l2>lmax)?l2:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00690}00690\ \ \ \ \ l3=strlen(\mbox{\hyperlink{globals_8c_a96d78aa97d8d4135673888ede97305c2}{gOptionSauteKalah}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00691}00691\ \ \ \ \ lmax=(l3>lmax)?l3:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00692}00692\ \ \ \ \ l4=strlen(\mbox{\hyperlink{globals_8c_acd547323c9ca3fbeaebaacf5f64d5d41}{gOptionCompte}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00693}00693\ \ \ \ \ lmax=(l4>lmax)?l4:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00694}00694\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00695}00695\ \textcolor{comment}{//\ \ gotoxy(0,gScreenY-\/3);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00696}00696\ \textcolor{comment}{//\ \ cprintf("{}\%d-\/\%d-\/\%d-\/\%d\ max=\%d"{},l1,l2,l3,l4,lmax);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00697}00697\ \ \ \ \ l1=lmax-\/l1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00698}00698\ \ \ \ \ l2=lmax-\/l2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00699}00699\ \ \ \ \ l3=lmax-\/l3;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00700}00700\ \ \ \ \ l4=lmax-\/l4;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00701}00701\ \textcolor{comment}{//\ \ gotoxy(0,gScreenY-\/2);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00702}00702\ \textcolor{comment}{//\ \ cprintf("{}\%d-\/\%d-\/\%d-\/\%d\ max=\%d"{},l1,l2,l3,l4,lmax);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00703}00703\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00704}00704\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00705}00705\ \ \ \ \ x\ =\ \mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}}\ +\ strlen(\mbox{\hyperlink{globals_8c_ac64f7c58ac391c43ec09b4b67f4c5057}{gOptionNbCases}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00706}00706\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00707}00707\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00708}00708\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ affichage\ des\ options}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00709}00709\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+1,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00710}00710\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=1);cputsxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+1,\mbox{\hyperlink{globals_8c_ac64f7c58ac391c43ec09b4b67f4c5057}{gOptionNbCases}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00711}00711\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(x=0;x<l1;x++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00712}00712\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(choix==1)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00713}00713\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\ \%d"{}},\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00716}00716\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00717}00717\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00718}00718\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00719}00719\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00720}00720\ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00721}00721\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00722}00722\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00723}00723\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=2);cputsxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2,\mbox{\hyperlink{globals_8c_a73c4d7389706aecb1fb05a9e90de1a27}{gOptionNbGrains}});\textcolor{comment}{//revers(choix==2);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00724}00724\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(x=0;x<l2;x++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00725}00725\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(choix==2)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00726}00726\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00727}00727\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ cprintf(\textcolor{stringliteral}{"{}\ \%d"{}},\mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00729}00729\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00730}00730\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00731}00731\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00732}00732\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00733}00733\ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00734}00734\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00735}00735\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00736}00736\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=3);cputsxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\mbox{\hyperlink{globals_8c_a96d78aa97d8d4135673888ede97305c2}{gOptionSauteKalah}});\textcolor{comment}{//revers(choix==3);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00737}00737\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(x=0;x<l3;x++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00738}00738\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(choix==3)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00739}00739\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00740}00740\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00741}00741\ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a7aa33650891f3ed95552c9fbb7fa22a5}{gNonOui}}[\mbox{\hyperlink{globals_8c_acde4718ea58901d63cf41c9706d89934}{gSauteKalah}}]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00742}00742\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00743}00743\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00744}00744\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00745}00745\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00746}00746\ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\ \ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00747}00747\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00748}00748\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputcxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+4,\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00749}00749\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=4);cputsxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+4,\mbox{\hyperlink{globals_8c_acd547323c9ca3fbeaebaacf5f64d5d41}{gOptionCompte}});\textcolor{comment}{//revers(choix==4);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00750}00750\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(x=0;x<l4;x++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00751}00751\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(choix==4)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00752}00752\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00753}00753\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00754}00754\ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_ac9d8affa92d83dc9b1d36f7e102e3b89}{gComptes}}[\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00755}00755\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00756}00756\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00757}00757\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00758}00758\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00759}00759\ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\ \ \ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00760}00760\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00761}00761\ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00762}00762\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00763}00763\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00764}00764\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(choix>1)\ choix-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00765}00765\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \ \ \ c=\mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00766}00766\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00767}00767\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}}\ \&\&\ choix<4)\ choix++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00768}00768\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00769}00769\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00770}00770\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(choix)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00771}00771\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00772}00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1\ :}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00773}00773\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}<\mbox{\hyperlink{awele_8h_a87b4977344071ba519c4183402668852}{NCASES}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00774}00774\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00776}00776\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(y=\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+1;y<\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+8;y++)\ cclearxy(0,y,40);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00777}00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a02fd73d861ef2e4aabb38c0c9ff82947}{init}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00778}00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a48d4a37677341d3a7f17344871697ccf}{initPartie}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00779}00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00780}00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00781}00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00782}00782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00783}00783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}}<\mbox{\hyperlink{awele_8h_abffcff111cc0fbd1baf3237951eb3b65}{NGRAINS}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00784}00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00785}00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}}++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00786}00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a48d4a37677341d3a7f17344871697ccf}{initPartie}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00787}00787\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00788}00788\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00789}00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00790}00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_acde4718ea58901d63cf41c9706d89934}{gSauteKalah}}\ =\ !\mbox{\hyperlink{globals_8c_acde4718ea58901d63cf41c9706d89934}{gSauteKalah}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00793}00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00794}00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}<2)\ \mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00795}00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00796}00796\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00797}00797\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00798}00798\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00799}00799\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00800}00800\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(choix)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00801}00801\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00802}00802\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1\ :}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00803}00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}>4)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00804}00804\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00805}00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(y=\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+1;y<\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+8;y++)\ cclearxy(0,y,40);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00807}00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a02fd73d861ef2e4aabb38c0c9ff82947}{init}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00808}00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a48d4a37677341d3a7f17344871697ccf}{initPartie}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00811}00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00813}00813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}}>3)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00814}00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00815}00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00816}00816\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a48d4a37677341d3a7f17344871697ccf}{initPartie}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00817}00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a6981e113cd4381e2b07e4c170c3b4a1a}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00818}00818\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00819}00819\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00820}00820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00821}00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{globals_8c_acde4718ea58901d63cf41c9706d89934}{gSauteKalah}}\ =\ !\mbox{\hyperlink{globals_8c_acde4718ea58901d63cf41c9706d89934}{gSauteKalah}};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00822}00822\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00823}00823\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00824}00824\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}>0)\ \mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00825}00825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00826}00826\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00827}00827\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00828}00828\ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00829}00829\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00830}00830\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00841}\mbox{\hyperlink{awele_8h_a0455eec60756fc2ef73a65f36f8c3163}{00841}}\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ \mbox{\hyperlink{awele__conio_8c_a0455eec60756fc2ef73a65f36f8c3163}{afficherMenu}}(\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ n)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00842}00842\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00843}00843\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ c,\ i,\ choix,commence,k;\ \textcolor{comment}{//,\ l;}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00844}00844\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00845}00845\ \ \ \ \ choix=1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00846}00846\ \ \ \ \ i=(n!=0)?n:2;\ \textcolor{comment}{//\ choix\ joueurs/ordinateur\ :\ par\ défaut\ PvC}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00847}00847\ \ \ \ \ commence\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00848}00848\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00849}00849\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00850}00850\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00851}00851\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0xbb80+40,7);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00852}00852\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00853}00853\ \ \ \ \ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00854}00854\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00855}00855\ \ \ \ \ \ \ \ \ \textcolor{comment}{//for(k=7;k>0;k-\/-\/)\ cclearxy(0,gScreenY-\/k,38);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00856}00856\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(k=1;k<6;k++)\ cclearxy(0,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+k,\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00857}00857\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Choix\ du\ du\ menu\ :\ Règles\ -\/\ Joueurs\ -\/\ OK\ =>\ RÉF:\ Quitter\ puis\ Variantes}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00858}00858\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00859}00859\ \ \ \ \ \ \ \ \ cclearxy(0,0,\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00860}00860\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00861}00861\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00862}00862\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//revers(choix!=1);cputsxy(gMenuReglesX,gMenuY,gMenuRegles);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00863}00863\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=1);cputsxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}},\mbox{\hyperlink{globals_8c_a5c9301a3f41a9df06873edad5bd57c28}{gMenuJeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00864}00864\ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=2);cputs(\mbox{\hyperlink{globals_8c_a1dd26fb2ecd394bfabad2ee8a54d2a07}{gMenuJoueurs}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00865}00865\ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(choix!=3);cputs(\mbox{\hyperlink{globals_8c_a7259bdd12e6cc21741ea5d704fa9add9}{gMenuOptions}});\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00866}00866\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//gotoxy(gMenuOKX,gMenuY);revers(choix!=4);cputs(gMenuOK);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00867}00867\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00868}00868\ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00869}00869\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}}\ \&\&\ choix>1)\ choix-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00870}00870\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}}\ \&\&\ choix<3)\ choix++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00871}00871\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}}\ \&\&\ c!=\mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00872}00872\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00873}00873\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00874}00874\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(choix)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00875}00875\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00876}00876\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ \textcolor{comment}{//\ Règles\ du\ jeu}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00877}00877\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//afficherRegles();}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00878}00878\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//clrscr();}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00879}00879\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//afficherPlateau(jeu);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00880}00880\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ choix\ =\ \mbox{\hyperlink{awele__conio_8c_aa6001bc221fe7cdb716a5798a5c470b3}{afficherMenuJeu}}(n);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00881}00881\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(choix==3)\ \textcolor{keywordflow}{return}(99);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00882}00882\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00883}00883\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ \textcolor{comment}{//\ nb\ de\ joeurs/ordinateurs}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00884}00884\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00885}00885\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a2cfe2720a6d25cb93180f94fa52b97c5}{afficherMenuJoueur}}(i,n-\/commence);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00886}00886\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00887}00887\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00888}00888\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ l0,l1,l2,l3,l4,lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00889}00889\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l0=strlen(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00890}00890\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l1=strlen(\mbox{\hyperlink{globals_8c_a9fb5d8d0c35d23be15223ac8de96a974}{gO1}})+l0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00891}00891\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lmax=l1-\/1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00892}00892\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l2=strlen(\mbox{\hyperlink{globals_8c_a2b97e57b23c5c8c206ec20db0796c6fb}{gO2}})+l0;\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00893}00893\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lmax=(l2-\/1>lmax)?l2-\/1:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00894}00894\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l3=strlen(\mbox{\hyperlink{globals_8c_af538432d618bed93631f078ebb64d33e}{gJoueursType}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00895}00895\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lmax=(l3>lmax)?l3:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00896}00896\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l4=strlen(\mbox{\hyperlink{globals_8c_ab1da36e61eb0b68c66b519ed4292079d}{gQuiCommence}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00897}00897\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lmax=(l4>lmax)?l4:lmax;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00898}00898\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l0=lmax-\/l0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00899}00899\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l3=lmax-\/l3;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00900}00900\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l4=lmax-\/l4;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00901}00901\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lmax++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00902}00902\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l1=lmax-\/l1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00903}00903\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l2=lmax-\/l2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00904}00904\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00905}00905\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00906}00906\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00907}00907\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00908}00908\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00909}00909\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00910}00910\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cputs(\mbox{\hyperlink{globals_8c_af538432d618bed93631f078ebb64d33e}{gJoueursType}});\textcolor{keywordflow}{for}(k=0;k<l3;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00911}00911\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputs(\mbox{\hyperlink{globals_8c_a5c7a08ac8e7647dbb3366111e72e3d56}{gTypeJoueurs}}[i-\/1]);\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cclear(7);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00912}00912\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00913}00913\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}}\ \&\&\ i>1)\ i-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00914}00914\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}}\ \&\&\ i<3)\ i++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00915}00915\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a2cfe2720a6d25cb93180f94fa52b97c5}{afficherMenuJoueur}}(i,n-\/commence);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00916}00916\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00917}00917\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]][1])/2,\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}},\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[i-\/1][1]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00918}00918\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]][1])/2,\mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}+8,\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[i-\/1][0]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00919}00919\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c!=\mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}}\ \&\&\ c!=\mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}}\ \&\&\ c!=\mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00920}00920\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]=(i-\/1)>>1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00921}00921\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]=i>>1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00922}00922\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00923}00923\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00924}00924\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00925}00925\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c!=\mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}}\ \&\&\ c!=\mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00926}00926\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00927}00927\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00928}00928\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00929}00929\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+1,\mbox{\hyperlink{globals_8c_af538432d618bed93631f078ebb64d33e}{gJoueursType}});\textcolor{keywordflow}{for}(k=0;k<l3;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00930}00930\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cclear(strlen(\mbox{\hyperlink{globals_8c_a5c7a08ac8e7647dbb3366111e72e3d56}{gTypeJoueurs}}[i-\/1]));}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00931}00931\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00932}00932\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00933}00933\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00934}00934\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00935}00935\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00936}00936\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(i)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00937}00937\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00938}00938\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ \textcolor{comment}{//\ 2\ joueurs\ =>\ pas\ d'autre\ question\ :\ joueur\ 1\ commence\ !}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00939}00939\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00940}00940\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]\ =\ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00941}00941\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00942}00942\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ \textcolor{comment}{//\ 1\ joueur}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00943}00943\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//cputsxy(0,gScreenY-\/8,gJ2ordi);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00944}00944\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]=0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00945}00945\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]=1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00946}00946\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ choix\ de\ la\ profondeur\ de\ recherche\ pour\ l'ordi}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00947}00947\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00948}00948\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00949}00949\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00950}00950\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00951}00951\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00952}00952\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00953}00953\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l0;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\ \textcolor{comment}{//\ sans\ reverse}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00954}00954\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[1];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00955}00955\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00956}00956\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00957}00957\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00958}00958\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00959}00959\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a98a56b547b21a9550ed21e930c03c446}{cplotc}}((\textcolor{keywordtype}{char})(i+48));}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00960}00960\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00961}00961\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}}\ \&\&\ i<6)\ i++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00962}00962\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}}\ \&\&\ i>1)\ i-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00963}00963\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}}\ \&\&\ c\ !=\mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}}\ \&\&\ (n!=0\ ||\ c\ !=\mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}})\ );}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00964}00964\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[1]=i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00965}00965\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00966}00966\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00967}00967\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00968}00968\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l0;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\ \textcolor{comment}{//\ sans\ reverse}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00969}00969\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00970}00970\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00971}00971\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//cplotc((char)(i+48));}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00972}00972\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c==\mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}}\ ||\ c==\mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}})\ \textcolor{keywordflow}{break};\ \textcolor{comment}{//\ du\ do/while}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00973}00973\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00974}00974\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ commence\ utile\ juste\ la\ première\ fois\ quand\ n=0}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00975}00975\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n==0)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00976}00976\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00977}00977\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ commence;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00978}00978\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\mbox{\hyperlink{globals_8c_ab1da36e61eb0b68c66b519ed4292079d}{gQuiCommence}});\textcolor{keywordflow}{for}(k=0;k<l4;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00979}00979\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00980}00980\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00981}00981\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(i==0)\ cputs(\mbox{\hyperlink{globals_8c_aa366294c9e56697e815b182d4a692d4c}{gVous}});\ \textcolor{keywordflow}{else}\ cputs(\mbox{\hyperlink{globals_8c_a93803055258562cf5bf6c03cf87c3f12}{gMoi}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00982}00982\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gotox(wherex()-\/strlen(\mbox{\hyperlink{globals_8c_aa366294c9e56697e815b182d4a692d4c}{gVous}}));}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00983}00983\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00984}00984\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ c\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}}\ ||\ c\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}})\ i=1-\/i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00985}00985\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}}\ \&\&\ c\ !=\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}});\ \textcolor{comment}{//\ \&\&\ c\ !=\ KEY\_DOWN\ );}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00986}00986\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commence=i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00987}00987\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}}+1,\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\mbox{\hyperlink{globals_8c_ab1da36e61eb0b68c66b519ed4292079d}{gQuiCommence}});\textcolor{keywordflow}{for}(k=0;k<l4;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00988}00988\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00989}00989\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if(i==0)\ cputs(gVous);\ else\ cputs(gMoi);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00990}00990\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cclear(strlen(\mbox{\hyperlink{globals_8c_a93803055258562cf5bf6c03cf87c3f12}{gMoi}}));}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00991}00991\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00992}00992\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00993}00993\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \textcolor{keywordflow}{while}\ (c!=\mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00994}00994\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00995}00995\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00996}00996\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00997}00997\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:\ \textcolor{comment}{//\ 2\ ordi\ }}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00998}00998\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\#ifdef\ STRCPY\_JOUEURS}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l00999}00999\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//STRCPY\_JOUEURS}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01000}01000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01001}01001\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01002}01002\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01003}01003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]\ =\ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01004}01004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i=0;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01005}01005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01006}01006\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01007}01007\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//char\ k;}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01008}01008\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2+i);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01009}01009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01010}01010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//cputsxy(gMenuJoueursX,gMenuY+2+i,\ }}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01011}01011\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputc(\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[2][i][0]);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01012}01012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01013}01013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[2][i]+1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01014}01014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cputs(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l1;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01015}01015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[i];}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01016}01016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputc(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01017}01017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01018}01018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01019}01019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a98a56b547b21a9550ed21e930c03c446}{cplotc}}((\textcolor{keywordtype}{char})(k+48));}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01020}01020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01021}01021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}}\ \&\&\ k<6)\ k++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01022}01022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}}\ \&\&\ k>1)\ k-\/-\/;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01023}01023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(c\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}}\ \&\&\ c\ !=\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}}\ \&\&\ (c\ !=\ \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}}\ ||\ i==1));}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01024}01024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[i]=k;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01025}01025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(i==1\ \&\ c==\mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}})\ \ c=0;\textcolor{comment}{//\ en\ bas\ donc\ on\ ne\ quitte\ pas}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01026}01026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+2,\ \mbox{\hyperlink{globals_8c_a9fb5d8d0c35d23be15223ac8de96a974}{gO1}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01027}01027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputs(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l1;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cputs(\textcolor{stringliteral}{"{}\ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01028}01028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}}+3,\ \mbox{\hyperlink{globals_8c_a2b97e57b23c5c8c206ec20db0796c6fb}{gO2}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01029}01029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});cputs(\mbox{\hyperlink{globals_8c_adf4f5b900ec81bd0694c972a9244bf9c}{gProfondeur}});\textcolor{keywordflow}{for}(k=0;k<l1;k++)\ cputc(\textcolor{charliteral}{'\ '});cputc(\textcolor{charliteral}{'>'});\mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});cputs(\textcolor{stringliteral}{"{}\ \ \ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01030}01030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i=1-\/i;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01031}01031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01032}01032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(c\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}}\ \&\&\ c\ !=\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01033}01033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i=3;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01034}01034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01035}01035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01036}01036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01037}01037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ inutile\ maintenant\ mais\ souvenir\ de\ la\ première\ version\ de\ 89!}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01038}01038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)r\(\backslash\)t\(\backslash\)tVous\ n'\string^tes\ pas\ en\ forme\ !..\(\backslash\)n\(\backslash\)r"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01039}01039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}Revenez\ me\ voir\ quand\ vous\ irez\ mieux\ ....\(\backslash\)n\(\backslash\)r"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01040}01040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)t\(\backslash\)t\(\backslash\)t\(\backslash\)tAtchao\ !\(\backslash\)n\(\backslash\)r\(\backslash\)n\(\backslash\)r"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01041}01041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__conio_8c_a358d2e2397ca11ccd17553e3c40e7901}{exit}}(5);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01042}01042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01043}01043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//afficherPlateau(jeu);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01044}01044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (c!=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01045}01045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]==\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1])\ commence\ =\ 0;\ \textcolor{comment}{//\ 2\ joueurs\ ou\ 2\ ordi\ =>\ joueur\ 1\ commence}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01046}01046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01047}01047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01048}01048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:\ \textcolor{comment}{//\ Menu\ OPTIONS}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01049}01049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(n==0)\ \mbox{\hyperlink{awele__conio_8c_ac6ac8b4a1ff5100978d86d0216e1f168}{afficherMenuOptions}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01050}01050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01051}01051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01052}01052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01053}01053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01054}01054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//gotoxy(0,10);cprintf("{}choix\ :\ \%d,\ commence\ :\ \%d\ !\ "{},choix,commence);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01055}01055\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (choix\ !=\ 4);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01056}01056\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01057}01057\ \ \ \ \ \textcolor{comment}{//clrscr();}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01058}01058\ \ \ \ \ \textcolor{comment}{//for(k=7;k>0;k-\/-\/)\ cclearxy(0,gScreenY-\/k,38);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01059}01059\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]+\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]>0)\ cputsxy(0,\mbox{\hyperlink{globals_8c_ac627db54f680998b1304073597ffc904}{gPosEvalY}},\mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01060}01060\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01061}01061\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01062}01062\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae690c8d1dfed5afda7dbfad4415b5ac0}{gMenuJeuX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}},\mbox{\hyperlink{globals_8c_a5c9301a3f41a9df06873edad5bd57c28}{gMenuJeu}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01063}01063\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a42959f52f58cf77a943e296166d53be0}{gMenuJoueursX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}},\mbox{\hyperlink{globals_8c_a1dd26fb2ecd394bfabad2ee8a54d2a07}{gMenuJoueurs}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01064}01064\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_a858fa9ba6b3d20605f34df99d50d0f9a}{gMenuOptionsX}},\mbox{\hyperlink{globals_8c_ac2ec7a93c45cd6f278c6bf664fb03e30}{gMenuY}},\mbox{\hyperlink{globals_8c_a7259bdd12e6cc21741ea5d704fa9add9}{gMenuOptions}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01065}01065\ \ \ \ \ \textcolor{comment}{//cputsxy(gMenuOKX,gMenuY,gMenuOK);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01066}01066\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_acfa4ea0c4c83f1ff5f4152fd136abfc7}{revers}}(\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01067}01067\ \ \ \ \ \textcolor{keywordflow}{return}(commence);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01068}01068\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01069}01069\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01074}\mbox{\hyperlink{awele_8h_a08042156851c7f843d0c5281f2806e3f}{01074}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a57577c6761f88a9329f66cba243791b7}{afficherRegles}}()}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01075}01075\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01076}01076\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ k;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01077}01077\ \ \ \ \ \textcolor{keywordtype}{char}\ *lRegles;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01078}01078\ \ \ \ \ \textcolor{keywordtype}{char}\ *s;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01079}01079\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ y;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01080}01080\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01081}01081\ \ \ \ \ \textcolor{comment}{//\ gestion\ sur\ plusieurs\ pages\ si\ nécessaire}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01082}01082\ \ \ \ \ \textcolor{comment}{//\ remplacement\ des\ valeurs\ variables}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01083}01083\ \ \ \ \ lRegles\ =\ malloc(strlen(\mbox{\hyperlink{globals_8c_afba58a7388415b583b16c5ef1eb08a02}{gRegles}})+1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01084}01084\ \ \ \ \ \textcolor{keywordflow}{if}(lRegles\ ==\ \mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01085}01085\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01086}01086\ \ \ \ \ strcpy(lRegles,\mbox{\hyperlink{globals_8c_afba58a7388415b583b16c5ef1eb08a02}{gRegles}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01087}01087\ \ \ \ \ s=strchr(lRegles,\textcolor{charliteral}{'\$'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01088}01088\ \ \ \ \ \textcolor{comment}{//\ \$\ =\ >\ affichage\ du\ nombre\ de\ graines\ par\ trou}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01089}01089\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01090}01090\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01091}01091\ \ \ \ \ \ \ \ \ *s\ =\mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}}+\textcolor{charliteral}{'0'};}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01092}01092\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{charliteral}{'\$'});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01093}01093\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01094}01094\ \ \ \ \ \textcolor{comment}{//\ gestion\ du\ saute\ ou\ non\ le\ kalaha\ adverse\ lors\ de\ la\ distribution}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01095}01095\ \ \ \ \ s=strstr(lRegles,\textcolor{stringliteral}{"{}***"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01096}01096\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01097}01097\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01098}01098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_acde4718ea58901d63cf41c9706d89934}{gSauteKalah}})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01099}01099\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01100}01100\ \ \ \ \ \ \ \ \ \ \ \ \ *s++\ =\ \textcolor{charliteral}{'s'};\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01101}01101\ \ \ \ \ \ \ \ \ \ \ \ \ *s++\ =\ \textcolor{charliteral}{'o'};\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01102}01102\ \ \ \ \ \ \ \ \ \ \ \ \ *s++\ =\ \textcolor{charliteral}{'n'};\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01103}01103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01104}01104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01105}01105\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01106}01106\ \ \ \ \ \ \ \ \ \ \ \ \ *s++\ =\ \textcolor{charliteral}{'l'};\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01107}01107\ \ \ \ \ \ \ \ \ \ \ \ \ *s++\ =\ \textcolor{charliteral}{'e'};\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01108}01108\ \ \ \ \ \ \ \ \ \ \ \ \ *s++\ =\ \textcolor{charliteral}{'s'};\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01109}01109\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01110}01110\ \ \ \ \ \ \ \ \ s=strstr(s,\textcolor{stringliteral}{"{}***"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01111}01111\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01112}01112\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01113}01113\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01114}01114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ titre\ =\ centré\ !}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01115}01115\ \ \ \ \ (void)textcolor(COLOR\_RED);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01116}01116\ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_acf94d043279afb6708376ae5c58bed32}{gReglesTitre}})/2,0,\mbox{\hyperlink{globals_8c_acf94d043279afb6708376ae5c58bed32}{gReglesTitre}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01117}01117\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01118}01118\ \ \ \ \ y=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01119}01119\ \ \ \ \ s=strtok(lRegles,\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01120}01120\ \ \ \ \ \textcolor{comment}{//\ on\ découpe\ par\ ligne\ sur\ LF\ tant\ qu'on\ n'a\ pas\ tout\ afficher}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01121}01121\ \ \ \ \ \textcolor{keywordflow}{while}(s)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01122}01122\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01123}01123\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ page\ suivante\ =>\ message\ d'attente\ frappe\ clavier\ ou\ joystick}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01124}01124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}((*s\ ==\ \textcolor{charliteral}{'\(\backslash\)f'})\ ||\ (y==\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}-\/1))}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01125}01125\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01126}01126\ \ \ \ \ \ \ \ \ \ \ \ \ gotoxy(15,\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}-\/1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01127}01127\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01128}01128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\(\backslash\)x02"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01129}01129\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01130}01130\ \ \ \ \ \ \ \ \ \ \ \ \ (void)textcolor(COLOR\_GREEN);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01131}01131\ \ \ \ \ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}<RETURN>\ pour\ continuer"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01132}01132\ \ \ \ \ \ \ \ \ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01133}01133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ k\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();\ \textcolor{keywordflow}{while}(k\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01134}01134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01135}01135\ \ \ \ \ \ \ \ \ \ \ \ \ (void)textcolor(COLOR\_RED);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01136}01136\ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2-\/strlen(\mbox{\hyperlink{globals_8c_acf94d043279afb6708376ae5c58bed32}{gReglesTitre}})/2,0,\mbox{\hyperlink{globals_8c_acf94d043279afb6708376ae5c58bed32}{gReglesTitre}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01137}01137\ \ \ \ \ \ \ \ \ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01138}01138\ \ \ \ \ \ \ \ \ \ \ \ \ y=2;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01139}01139\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01140}01140\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01141}01141\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ @\ =>\ si\ gCompte-\/>mien\ =>\ affichage\ de\ la\ ligne\ sinon\ ligne\ suivante}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01142}01142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(*s\ ==\ \textcolor{charliteral}{'@'})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01143}01143\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01144}01144\ \ \ \ \ \ \ \ \ \ \ \ \ s++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01145}01145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}\ !=\ 1)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01146}01146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *s=\textcolor{charliteral}{'\(\backslash\)f'};\ \textcolor{comment}{//\ =>\ pour\ ne\ rien\ écrire\ de\ la\ ligne}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01147}01147\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01148}01148\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01149}01149\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ +\#\ =>\ si\ gCompte-\/>adversaire\ =>\ affichage\ de\ la\ ligne\ sinon\ ligne\ suivante}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01150}01150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(*s\ ==\ \textcolor{charliteral}{'\#'})}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01151}01151\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01152}01152\ \ \ \ \ \ \ \ \ \ \ \ \ s++;}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01153}01153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}\ !=\ 2)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01154}01154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *s=\textcolor{charliteral}{'\(\backslash\)f'};\ \textcolor{comment}{//\ =>\ pour\ ne\ rien\ écrire\ de\ la\ ligne}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01155}01155\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01156}01156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01157}01157\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01158}01158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(*s\ !=\ \textcolor{charliteral}{'\(\backslash\)f'})\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01159}01159\ \ \ \ \ \ \ \ \ \ \ \ \ cputsxy(0,y++,s);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01160}01160\ \ \ \ \ \ \ \ \ s=strtok(\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01161}01161\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01162}01162\ \ \ \ \ \textcolor{comment}{//cputsxy(0,0,gRegles);}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01163}01163\ \ \ \ \ \textcolor{comment}{//\ message\ d'attente\ de\ frappe\ clavier\ /joystick}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01164}01164\ \ \ \ \ gotoxy(15,\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}-\/1);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01165}01165\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_ATMOS\_\_}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01166}01166\ \ \ \ \ \ \ \ \ cputs(\textcolor{stringliteral}{"{}\(\backslash\)x02"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01167}01167\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01168}01168\ \ \ \ \ (void)textcolor(COLOR\_GREEN);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01169}01169\ \ \ \ \ cputs(\textcolor{stringliteral}{"{}<RETURN>\ pour\ continuer"{}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01170}01170\ \ \ \ \ \textcolor{keywordflow}{do}\ k\ =\ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();\ \textcolor{keywordflow}{while}(k\ !=\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}});}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01171}01171\ \ \ \ \ (void)textcolor(COLOR\_WHITE);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01172}01172\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01173}01173\ \ \ \ \ free(lRegles);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01174}01174\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01175}01175\ \}}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01176}01176\ }
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01180}\mbox{\hyperlink{awele_8h_a5f3b020fde2c659ee4b0d19ec7cc8f61}{01180}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__conio_8c_a5f3b020fde2c659ee4b0d19ec7cc8f61}{dbgprint}}(\mbox{\hyperlink{mes__types_8h_a454d98e8ec5bedf6c8e399034af40008}{STRPTR}}\ s)}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01181}01181\ \{}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01182}01182\ \ \ \ \ cputsxy(0,15,s);}
+\DoxyCodeLine{\Hypertarget{awele__conio_8c_source_l01183}01183\ \}}
+
+\end{DoxyCode}

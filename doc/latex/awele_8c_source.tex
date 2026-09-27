@@ -1,0 +1,140 @@
+\hypertarget{awele_8c_source}{}\doxysection{awele.\+c}
+\label{awele_8c_source}\index{src/awele.c@{src/awele.c}}
+\mbox{\hyperlink{awele_8c}{Aller à la documentation de ce fichier.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00001}00001\ \textcolor{comment}{//\ version\ mai\ 2021}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00002}00002\ \textcolor{comment}{//\ simplification\ avec\ appel\ fonctions\ }}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00003}00003\ \textcolor{comment}{//\ passage\ de\ constantes\ (define)\ en\ variables\ globales\ =>\ remplacement\ dans\ le\ code}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00004}00004\ \textcolor{comment}{//\ Nouvelle\ version\ dev\ :}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00005}00005\ \textcolor{comment}{//\ \ -\/\ refonte\ menu\ =>\ en\ haut}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00006}00006\ \textcolor{comment}{//\ \ -\/\ centrage\ plateau\ de\ jeu\ donc\ redécoupage\ des\ zones\ l'écran}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00007}00007\ \textcolor{comment}{//\ \ -\/\ passage\ de\ define\ en\ variables\ pour\ nouveau\ menu\ d'options/variantes}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00008}00008\ \textcolor{comment}{//\ \ -\/\ écran\ titre}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{awele_8h}{awele.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00011}00011\ \textcolor{comment}{//extern\ UWORD\ gPosEval;}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00013}\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{00013}}\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_ab190129374ac20b9e83931e87e8b5a36}{LGPLAT}}],\ \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[2],\ \mbox{\hyperlink{awele_8c_a2823949c67c58e1567b85582b488855a}{tab}}[20],\ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[2];}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00015}\mbox{\hyperlink{awele_8c_a843d63490cb8eb51c713887c423eead0}{00015}}\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ \mbox{\hyperlink{awele_8c_a843d63490cb8eb51c713887c423eead0}{temp}}[64];}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00020}\mbox{\hyperlink{awele_8c_a48d4a37677341d3a7f17344871697ccf}{00020}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele_8c_a48d4a37677341d3a7f17344871697ccf}{initPartie}}(\mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}\ tout)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ i;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00023}00023\ \ \ \ \ \mbox{\hyperlink{aweleia_8c_a08320bce5cb2ad7bb89fc2669fc020b3}{gPosEval}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{awele_8h_aed2390222efef0c914201c0a99cd80eb}{initIA}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}};i++)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00026}00026\ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1+i]\ =\ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[i]\ =\ \mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}]\ =\ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{if}(tout)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00029}00029\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00030}00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[0]=\mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[1]=1;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[0]=0;\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[1]=1;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00038}\mbox{\hyperlink{awele_8c_a6288eba0f8e8ad3ab1544ad731eb7667}{00038}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele_8c_a6288eba0f8e8ad3ab1544ad731eb7667}{main}}\ (\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00040}00040\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ i;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00041}00041\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ c;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_aec3927e18c6db6a505a2aab8776ff977}{BOOLEAN}}\ b=\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}},\ rejoue\ =\ \mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00045}00045\ \ \ \ \ \mbox{\hyperlink{awele_8h_a2858154e2009b0e6e616f313177762bc}{init}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{globals_8c_aca157dfada3dec3776155da53a620981}{gLongueurPlateau}}\ =\ (2*(\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1));}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00047}00047\ \ \ \ \ \mbox{\hyperlink{globals_8c_ad1609b471b8aa5cf8fe2a74a4701068e}{gPlateauX}}=(\mbox{\hyperlink{globals_8c_ae0733d2c3d8a6e641638a35a05fcd8d8}{gScreenX}}/2)-\/(3*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}/2+6);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//gPosEval=gPlateauX;afficherPosEval();}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{globals_8c_ab451fc8cf11606c99427b887f5d1fab9}{gPlateauY}}\ =\ \mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}/2-\/4;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}}=\mbox{\hyperlink{globals_8c_a3b491c27eeb563b88384936ea5821e9e}{gScreenY}}/2+5;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{globals_8c_a3fa24a1fb54a82d89d0c4c06fbd0f9c6}{gAttenteX}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{globals_8c_a000bb0db126eabf803d96aecdef66aea}{gAttenteY}}\ =\ \mbox{\hyperlink{globals_8c_ab1d76610b28be27791852574e5e90d0e}{gChoixJoueurY}}+1;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{awele__apple2_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}{initJoystick}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{awele__apple2_8c_aa25d21866cf984b531a24441b45ee482}{initPlateau}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00057}00057\ \ \ \ \ \mbox{\hyperlink{awele_8h_a9dd04331363838f38db7fee10b86fa87}{ecranTitre}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ boucle\ principale\ :\ jusqu'à\ ne\ plus\ rejouer}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ rejoue=\mbox{\hyperlink{mes__types_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a48d4a37677341d3a7f17344871697ccf}{initPartie}}(\mbox{\hyperlink{mes__types_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}});}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a2f7b6d708a82db42fc8d4d517aaa07fe}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ i=\mbox{\hyperlink{awele_8h_a0455eec60756fc2ef73a65f36f8c3163}{afficherMenu}}(0);\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a2f7b6d708a82db42fc8d4d517aaa07fe}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ boucle\ d'une\ partie\ :\ jusqu'à\ égalité\ ou\ vainqueur}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[i]\ )}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ordi\ joue}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aweleia_8c_a08320bce5cb2ad7bb89fc2669fc020b3}{gPosEval}}=0;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a3150b3d0e9a4ea670355afaa44371813}{afficherPosEval}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_ada42f55cc512fb606396ca7cc1670c88}{alphabeta}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}},\ \mbox{\hyperlink{awele_8h_a02d446ea23b0db2b7815363de2427d88}{MOINS\_INFINI}},\ \mbox{\hyperlink{awele_8h_ab545f67affcec654c47410b5220577a5}{PLUS\_INFINI}},\ i,\ \mbox{\hyperlink{awele_8c_a5a0fe04711b3f6e3b5564acefd0dea96}{prof}}[i],\ 0,\ \mbox{\hyperlink{awele_8c_a2823949c67c58e1567b85582b488855a}{tab}});}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a3150b3d0e9a4ea670355afaa44371813}{afficherPosEval}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(c=0,b=1;b;c++)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ \mbox{\hyperlink{awele_8h_a675230bd919bc62f4d3226f7525dac49}{jouer}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}},\ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}},\ \mbox{\hyperlink{awele_8c_a2823949c67c58e1567b85582b488855a}{tab}}[c],\ i);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rejoue\ =\ \mbox{\hyperlink{awele_8h_adfb095973f3877d3ad0e51e50d2e0e2e}{afficherAttente}}(i+1,\mbox{\hyperlink{awele_8c_a2823949c67c58e1567b85582b488855a}{tab}}[c]);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a86294b82f17e500c9f012541c560e99e}{effacerAttente}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a2f7b6d708a82db42fc8d4d517aaa07fe}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(rejoue)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[i]==0)\ \ \ \ \textcolor{comment}{//\ on\ a\ changé\ d'ordi\ vers\ joueur}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(b)\ \ \ \textcolor{comment}{//\ si\ le\ joueur\ en\ cours\ peut\ encore\ jouer\ on\ garde\ la\ main}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i=1-\/i;\ \ \textcolor{comment}{//\ pour\ sortir\ et\ ne\ pas\ changer\ i}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ choix\ du\ joueur}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ \mbox{\hyperlink{awele_8h_a0b05c1eab3e573cfad4e4411552b211d}{choixJoueur}}(i);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rejoue=(c==99);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(rejoue)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}[i]==1)\ \ \ \ \textcolor{comment}{//\ on\ a\ changé\ de\ joueur\ vers\ ordi}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i=1-\/i;\ \ \textcolor{comment}{//\ pour\ sortir\ et\ ne\ pas\ changer\ i}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c==100)\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ \mbox{\hyperlink{awele_8h_a675230bd919bc62f4d3226f7525dac49}{jouer}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}},\ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}},\ c,\ i);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a2f7b6d708a82db42fc8d4d517aaa07fe}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(b);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ i=1-\/i;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(!rejoue\ \&\&\ (\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[(2-\/i)*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1-\/i]\ <=\ \mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}*\mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}})\ \&\&\ \ \mbox{\hyperlink{awele_8h_a9853e9e749efebe92db581e0c3146eba}{jeuPoss}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}},\ i));}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}\ \&\&\ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}]<=\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}*\mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}}\ \&\&\ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}]<=\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}*\mbox{\hyperlink{globals_8c_aee776febe02cb1c06a013fd82cf20b6f}{gNbGrains}}\ )}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ c=0;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ i=0;\ i<\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}};\ i++)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}==1)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}]+=\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[i];}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}]+=\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[i];}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[i]=0;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ i=\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1;\ i<2*\mbox{\hyperlink{globals_8c_adffd2955fc00b48ed65939f41f68521f}{gNbCases}}+1;\ i++)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{globals_8c_a08e8f346e7a7f2574da4a854f48d0bc3}{gCompte}}==1)}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}]+=\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[i];}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}]+=\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[i];}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[i]=0;}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele__apple2_8c_a82378a8841088d9333c582370d628904}{getkj}}();}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8h_a2f7b6d708a82db42fc8d4d517aaa07fe}{afficherPlateau}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}});}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!rejoue)\ rejoue\ =\ \mbox{\hyperlink{awele_8h_aabb31b331982dfbc0b64eb9784171d24}{afficherResultats}}(\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_a635dea76eb4cc6236997bdfaef527b14}{KALAH1}}],\mbox{\hyperlink{awele_8c_a64d6e5427f4123de4f6cc7933c2f15d6}{jeu}}[\mbox{\hyperlink{awele_8h_abf35ad12e2c3f5e06091301bb82b4a40}{KALAH2}}]);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00139}00139\ \ \ \ \ \}\ \textcolor{keywordflow}{while}(rejoue);}
+\DoxyCodeLine{\Hypertarget{awele_8c_source_l00140}00140\ \}}
+
+\end{DoxyCode}

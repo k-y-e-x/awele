@@ -1,0 +1,156 @@
+\hypertarget{awele__apple2enh_8c}{}\doxysection{Référence du fichier src/apple2enh/awele\+\_\+apple2enh.c}
+\label{awele__apple2enh_8c}\index{src/apple2enh/awele\_apple2enh.c@{src/apple2enh/awele\_apple2enh.c}}
+{\ttfamily \#include \char`\"{}../conio/awele\+\_\+conio.\+c\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{awele__apple2enh_8c_a415407836cd534e567b8bdaf6c1796ff}{STRCPY\+\_\+\+JOUEURS}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{awele__apple2enh_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}{init\+Joystick}} ()
+\item 
+\mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} \mbox{\hyperlink{awele__apple2enh_8c_a82378a8841088d9333c582370d628904}{getkj}} ()
+\item 
+void \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacer\+Accents}} (char $\ast$chaine)
+\item 
+void \mbox{\hyperlink{awele__apple2enh_8c_aa25d21866cf984b531a24441b45ee482}{init\+Plateau}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentation des macros}
+\mbox{\Hypertarget{awele__apple2enh_8c_a415407836cd534e567b8bdaf6c1796ff}\label{awele__apple2enh_8c_a415407836cd534e567b8bdaf6c1796ff}} 
+\index{awele\_apple2enh.c@{awele\_apple2enh.c}!STRCPY\_JOUEURS@{STRCPY\_JOUEURS}}
+\index{STRCPY\_JOUEURS@{STRCPY\_JOUEURS}!awele\_apple2enh.c@{awele\_apple2enh.c}}
+\doxysubsubsection{\texorpdfstring{STRCPY\_JOUEURS}{STRCPY\_JOUEURS}}
+{\footnotesize\ttfamily \#define STRCPY\+\_\+\+JOUEURS}
+
+{\bfseries Valeur \+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[0],\textcolor{stringliteral}{"{}IIe\(\backslash\)x00"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_ac1b0f359ac3b196358588b6084da7759}{gJoueur}}[1],\textcolor{stringliteral}{"{}IIc\(\backslash\)x00\ "{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_aef6d7ca44acfd5e4fbb6c1386545c14f}{gJ1}},\textcolor{stringliteral}{"{}IIe\(\backslash\)x00"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_aeb1e6d95b2863059453dfb004dc198be}{gJ2}},\textcolor{stringliteral}{"{}IIc\(\backslash\)x00\ "{}});\(\backslash\)}
+
+\end{DoxyCode}
+
+
+Définition à la ligne \mbox{\hyperlink{awele__apple2enh_8c_source_l00014}{14}} du fichier \mbox{\hyperlink{awele__apple2enh_8c_source}{awele\+\_\+apple2enh.\+c}}.
+
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{awele__apple2enh_8c_a82378a8841088d9333c582370d628904}\label{awele__apple2enh_8c_a82378a8841088d9333c582370d628904}} 
+\index{awele\_apple2enh.c@{awele\_apple2enh.c}!getkj@{getkj}}
+\index{getkj@{getkj}!awele\_apple2enh.c@{awele\_apple2enh.c}}
+\doxysubsubsection{\texorpdfstring{getkj()}{getkj()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}} getkj (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne \mbox{\hyperlink{awele__apple2enh_8c_source_l00035}{35}} du fichier \mbox{\hyperlink{awele__apple2enh_8c_source}{awele\+\_\+apple2enh.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ c=0,\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=0;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{do}\{\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);\}\ \textcolor{keywordflow}{while}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(kbhit())}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ c=cgetc();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{while}(!c\ \&\&\ !\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_UP(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_DOWN(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_LEFT(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_RIGHT(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}};}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_BTN\_1(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{do}\{\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);\}\ \textcolor{keywordflow}{while}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//while(kbhit())\ cgetc();\ \ \ //\ vide\ buffer\ clavier\ sinon\ pb\ joy\_left=>key\_right!}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ c;}
+\DoxyCodeLine{00055\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__apple2enh_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}\label{awele__apple2enh_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}} 
+\index{awele\_apple2enh.c@{awele\_apple2enh.c}!initJoystick@{initJoystick}}
+\index{initJoystick@{initJoystick}!awele\_apple2enh.c@{awele\_apple2enh.c}}
+\doxysubsubsection{\texorpdfstring{initJoystick()}{initJoystick()}}
+{\footnotesize\ttfamily void init\+Joystick (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne \mbox{\hyperlink{awele__apple2enh_8c_source_l00030}{30}} du fichier \mbox{\hyperlink{awele__apple2enh_8c_source}{awele\+\_\+apple2enh.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ joy\_install\ (\&a2e\_stdjoy\_joy);}
+\DoxyCodeLine{00033\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__apple2enh_8c_aa25d21866cf984b531a24441b45ee482}\label{awele__apple2enh_8c_aa25d21866cf984b531a24441b45ee482}} 
+\index{awele\_apple2enh.c@{awele\_apple2enh.c}!initPlateau@{initPlateau}}
+\index{initPlateau@{initPlateau}!awele\_apple2enh.c@{awele\_apple2enh.c}}
+\doxysubsubsection{\texorpdfstring{initPlateau()}{initPlateau()}}
+{\footnotesize\ttfamily void init\+Plateau (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne \mbox{\hyperlink{awele__apple2enh_8c_source_l00083}{83}} du fichier \mbox{\hyperlink{awele__apple2enh_8c_source}{awele\+\_\+apple2enh.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00084\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}});}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}});}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_afba58a7388415b583b16c5ef1eb08a02}{gRegles}});}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_a166d50e59cf01e9a788036ff0461e3ed}{gJeuRegles}});}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_acd547323c9ca3fbeaebaacf5f64d5d41}{gOptionCompte}});}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_a73157e4e9c839208c67c615ed9f40042}{gJ2ordi}},\textcolor{stringliteral}{"{}Apple\ en\ joueur\ 2"{}});}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{00093\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}\label{awele__apple2enh_8c_a838615b8270b14b184750c2287de3fde}} 
+\index{awele\_apple2enh.c@{awele\_apple2enh.c}!remplacerAccents@{remplacerAccents}}
+\index{remplacerAccents@{remplacerAccents}!awele\_apple2enh.c@{awele\_apple2enh.c}}
+\doxysubsubsection{\texorpdfstring{remplacerAccents()}{remplacerAccents()}}
+{\footnotesize\ttfamily void remplacer\+Accents (\begin{DoxyParamCaption}\item[{char $\ast$}]{chaine }\end{DoxyParamCaption})}
+
+
+
+Définition à la ligne \mbox{\hyperlink{awele__apple2enh_8c_source_l00057}{57}} du fichier \mbox{\hyperlink{awele__apple2enh_8c_source}{awele\+\_\+apple2enh.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00058\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{char}\ *s;}
+\DoxyCodeLine{00060\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{00061\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'é'});}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{00063\ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'e'};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'é'});}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{00068\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'è'});}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{00070\ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'e'};}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'è'});}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{00075\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'à'});}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{00077\ \ \ \ \ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'a'};}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'à'});}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \}}
+
+\end{DoxyCode}

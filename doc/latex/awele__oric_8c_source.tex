@@ -1,0 +1,305 @@
+\hypertarget{awele__oric_8c_source}{}\doxysection{awele\+\_\+oric.\+c}
+\label{awele__oric_8c_source}\index{src/atmos/awele\_oric.c@{src/atmos/awele\_oric.c}}
+\mbox{\hyperlink{awele__oric_8c}{Aller à la documentation de ce fichier.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00001}00001\ \textcolor{comment}{//\ version\ du\ 16\ avril\ 2021}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00002}00002\ \textcolor{comment}{//\ utilisation\ du\ fichier\ awele\_conio.c\ commun}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00003}00003\ \textcolor{comment}{//\ Fichier\ edité\ en\ ISO\ LATIN1}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00005}00005\ \textcolor{comment}{//\ redéfinition\ des\ caracteres}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00006}\mbox{\hyperlink{awele__oric_8c_afbe2b5357f47d73300c04375213dab55}{00006}}\ \textcolor{preprocessor}{\#define\ CH\_REDEFINED}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00007}\mbox{\hyperlink{awele__oric_8c_adc40e6fb3f3e7411b56f3b38f3b3f016}{00007}}\ \textcolor{preprocessor}{\#define\ MYCH\_HLINE\ \ '='}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00008}\mbox{\hyperlink{awele__oric_8c_a05ecb5d1b53ea3c43571133182a941ac}{00008}}\ \textcolor{preprocessor}{\#define\ MYCH\_VLINE\ \ '|'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00009}\mbox{\hyperlink{awele__oric_8c_ab5cd9e8ffd9acc36c6b194489e16a44d}{00009}}\ \textcolor{preprocessor}{\#define\ MYCH\_CROSS\ \ '@'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00010}\mbox{\hyperlink{awele__oric_8c_ac7233bfa5137b13846a845c4cfeea630}{00010}}\ \textcolor{preprocessor}{\#define\ MYCH\_RTEE\ \ \ ']'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00011}\mbox{\hyperlink{awele__oric_8c_a7c782303a1dc9f46f8c73c7ce52f1843}{00011}}\ \textcolor{preprocessor}{\#define\ MYCH\_LTEE\ \ \ '['}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00012}\mbox{\hyperlink{awele__oric_8c_a29ee09374837fb732b5aa6f475c3e47e}{00012}}\ \textcolor{preprocessor}{\#define\ MYCH\_TTEE\ \ \ '\{'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00013}\mbox{\hyperlink{awele__oric_8c_a01f0d954f8725151219dd694d530736e}{00013}}\ \textcolor{preprocessor}{\#define\ MYCH\_BTEE\ \ \ '\}'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00014}\mbox{\hyperlink{awele__oric_8c_a36c3eff851e83e77430c2b22e3587e02}{00014}}\ \textcolor{preprocessor}{\#define\ MYCH\_URCORNER\ \ \ '\$'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00015}\mbox{\hyperlink{awele__oric_8c_a5ab9cbc67177038922788c266a5b099f}{00015}}\ \textcolor{preprocessor}{\#define\ MYCH\_ULCORNER\ \ \ '\#'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00016}\mbox{\hyperlink{awele__oric_8c_a24d2b9068271bbea352942dfb9740feb}{00016}}\ \textcolor{preprocessor}{\#define\ MYCH\_LRCORNER\ \ \ '\&'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00017}\mbox{\hyperlink{awele__oric_8c_affa8b8a18082843688e967c0dc419848}{00017}}\ \textcolor{preprocessor}{\#define\ MYCH\_LLCORNER\ \ \ '\%'}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00019}00019\ \textcolor{comment}{//\#pragma\ charmap\ (0xE9,\ 0x5F)}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}../conio/awele\_conio.c"{}}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00027}\mbox{\hyperlink{awele__oric_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}{00027}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__oric_8c_a9fcf437c0c8f724462b9cadc36e7e6f4}{initJoystick}}()}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00028}00028\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00029}00029\ \ \ \ \ joy\_install\ (\&atmos\_ijk\_joy);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00036}\mbox{\hyperlink{awele__oric_8c_a82378a8841088d9333c582370d628904}{00036}}\ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ \mbox{\hyperlink{awele__oric_8c_a82378a8841088d9333c582370d628904}{getkj}}()}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00038}00038\ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a122c4acf389c050379f00341fdcd5812}{UBYTE}}\ c=0,\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=0;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{do}\{\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);\}\ \textcolor{keywordflow}{while}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00041}00041\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ c\ =\ getkey();\ }}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(kbhit())}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ cgetc();}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{while}(!c\ \&\&\ !\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_UP(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_afa086fc916a81e7fd348ec00cf786916}{KEY\_UP}};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_DOWN(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_a203163bc0189184a1de6ca8d1e53c6bf}{KEY\_DOWN}};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_LEFT(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_af4d1b8a2912354646c74cf36c69f8223}{KEY\_LEFT}};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_RIGHT(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_a004194639b9ad76cea01d9e93716d4d6}{KEY\_RIGHT}};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}(JOY\_FIRE(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}))\ c\ =\ \mbox{\hyperlink{awele_8h_afe5716cf1626fceab51044a6c2492831}{KEY\_RETURN}};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{do}\{\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}}=joy\_read(JOY\_1);\}\ \textcolor{keywordflow}{while}(\mbox{\hyperlink{awele_8c_a231fd36105d996f72973f76e23f7a7b2}{j}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{return}\ c;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00063}\mbox{\hyperlink{awele__oric_8c_a838615b8270b14b184750c2287de3fde}{00063}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__oric_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\textcolor{keywordtype}{char}\ *chaine)}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00064}00064\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{char}\ *s;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00066}00066\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00067}00067\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'é'});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00069}00069\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'\_'};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'é'});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00073}00073\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00074}00074\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'è'});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'\string^'};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'è'});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00080}00080\ \ \ \ \ s=chaine;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00081}00081\ \ \ \ \ s=strchr(s,\textcolor{stringliteral}{'à'});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{while}\ (s!=\mbox{\hyperlink{mes__types_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00083}00083\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ *s\ =\textcolor{charliteral}{'`'};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ s=strchr(s+1,\textcolor{stringliteral}{'à'});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00093}\mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{00093}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(\textcolor{keywordtype}{char}\ c,\ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ t[8])}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00094}00094\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00095}00095\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<8;i++)}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8+i,\ t[i]);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00098}00098\ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00107}\mbox{\hyperlink{awele__oric_8c_aa25d21866cf984b531a24441b45ee482}{00107}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{awele__oric_8c_aa25d21866cf984b531a24441b45ee482}{initPlateau}}()}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00108}00108\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00109}00109\ \ \ \ \ \textcolor{keywordtype}{int}\ c,k,i;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00110}00110\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00111}00111\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(0x26a,8);\ \ \textcolor{comment}{//\ son\ clavier..}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00113}00113\ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_a73157e4e9c839208c67c615ed9f40042}{gJ2ordi}},\textcolor{stringliteral}{"{}Oric\ en\ joueur\ 2"{}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00114}00114\ \textcolor{comment}{/*\ redef\ de\ caractere\ peu\ utilisé\ pour\ accent\ */}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00115}00115\ \textcolor{comment}{//\ livre\ (\ =\ \_\ en\ latin1)\ pour\ é}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00116}00116\ \ \ \ \ c=95;k=101;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8,\ 4);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00118}00118\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8+1,\ 8);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{for}(i=2;i<8;i++)}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00120}00120\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8+i,\ \mbox{\hyperlink{macros_8h_af7c55efc63dab4dcbffbd88299b65e24}{PEEK}}(46080L+k*8+i));}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00123}00123\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00124}00124\ \textcolor{comment}{//\ \string^\ pour\ è}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00125}00125\ \ \ \ \ c=94;k=101;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00126}00126\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8,\ 16);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00127}00127\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8+1,\ 8);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{for}(i=2;i<8;i++)}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00129}00129\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8+i,\ \mbox{\hyperlink{macros_8h_af7c55efc63dab4dcbffbd88299b65e24}{PEEK}}(46080L+k*8+i));}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00131}00131\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00132}00132\ \textcolor{comment}{//\ (c)\ =>\ `\ en\ latin1\ pour\ à}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00133}00133\ \ \ \ \ c=96;k=97;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00134}00134\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8,\ 16);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00135}00135\ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8+1,\ 8);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{for}(i=2;i<8;i++)}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00137}00137\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{macros_8h_ae532ed87bc1ee0756bcfcc1663e3816e}{POKE}}(46080L+c*8+i,\ \mbox{\hyperlink{macros_8h_af7c55efc63dab4dcbffbd88299b65e24}{PEEK}}(46080L+k*8+i));}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00139}00139\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00140}00140\ \textcolor{comment}{//\ \(\backslash\)\ \ \ pour\ 1/2\ (obsolète\ ?)\ =>\ à\ remplacer\ par\ ô\ }}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00141}00141\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ 0b00010001,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ 0b00110010,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ 0b00010100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ 0b00010111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ 0b00001001,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ 0b00010010,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ 0b00100111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ 0b00000000}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00152}00152\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(92,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00153}00153\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00154}00154\ \textcolor{comment}{//\ |}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00155}00155\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ 0b00001100}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00166}00166\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(124,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00167}00167\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00168}00168\ \textcolor{comment}{//\ \#\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00169}00169\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ 0b00000111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ 0b00001111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ 0b00001110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ 0b00001100}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00180}00180\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(35,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00181}00181\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00182}00182\ \textcolor{comment}{//\ \$}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00183}00183\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ 0b00111000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ 0b00111100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ 0b00011100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ 0b00001100}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00194}00194\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(36,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00195}00195\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00196}00196\ \textcolor{comment}{//\ \%}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00197}00197\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00199}00199\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ 0b00001110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ 0b00001111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ 0b00000111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ 0b00000000}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00208}00208\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(37,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00209}00209\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00210}00210\ \textcolor{comment}{//\ \&}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00211}00211\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ 0b00011100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ 0b00111100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00217}00217\ \ \ \ \ \ \ \ \ 0b00111000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00220}00220\ \ \ \ \ \ \ \ \ 0b00000000}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00222}00222\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(38,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00223}00223\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00224}00224\ \textcolor{comment}{//\ =}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00225}00225\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ 0b00000000}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00236}00236\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(61,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00237}00237\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00238}00238\ \textcolor{comment}{//\ [}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00239}00239\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00240}00240\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00241}00241\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00243}00243\ \ \ \ \ \ \ \ \ 0b00001110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00244}00244\ \ \ \ \ \ \ \ \ 0b00001111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00245}00245\ \ \ \ \ \ \ \ \ 0b00001111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ 0b00001110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00248}00248\ \ \ \ \ \ \ \ \ 0b00001100}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00250}00250\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(91,\ \ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00251}00251\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00252}00252\ \textcolor{comment}{//\ ]}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00253}00253\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00255}00255\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00256}00256\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ 0b00011100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ 0b00111100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ 0b00111100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ 0b00011100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00261}00261\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ 0b00001100}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00264}00264\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(93,\ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00265}00265\ \ \ \ \ \}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00266}00266\ \textcolor{comment}{//\ @}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00267}00267\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00268}00268\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00270}00270\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ 0b00011110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00272}00272\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00273}00273\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00274}00274\ \ \ \ \ \ \ \ \ 0b00011110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00275}00275\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ 0b00001100}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00278}00278\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(64,\ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00279}00279\ \ \ \ \ \}\ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00280}00280\ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00281}00281\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00282}00282\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00283}00283\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00284}00284\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00286}00286\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ 0b00011110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00289}00289\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00290}00290\ \ \ \ \ \ \ \ \ 0b00001100}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00291}00291\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00292}00292\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(123,\ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00293}00293\ \ \ \ \ \}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00294}00294\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00295}00295\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00296}00296\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mes__types_8h_a660df9a591b5916318ac639661f8b062}{BYTEBITS}}\ tb[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00297}00297\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ 0b00001100,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ 0b00011110,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ 0b00111111,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00302}00302\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00303}00303\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ 0b00000000,}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00305}00305\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00306}00306\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_abcb6756d3b54a45aeb927677e5b3e64f}{modifCaractere}}(125,\ tb);}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00308}00308\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00309}00309\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_acd547323c9ca3fbeaebaacf5f64d5d41}{gOptionCompte}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00310}00310\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_ad05bfa44993a47d94040a322d3570376}{gEgalite}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00311}00311\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_a2f707717fbae1c38d0594f51bcf1b5e1}{gPositionsEvaluees}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00312}00312\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_afba58a7388415b583b16c5ef1eb08a02}{gRegles}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00313}00313\ \ \ \ \ \mbox{\hyperlink{globals_8c_acf94d043279afb6708376ae5c58bed32}{gReglesTitre}}[0]=1;}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00314}00314\ \textcolor{comment}{//\ \ remplacerAccents(gMenuRegles);}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00315}00315\ \ \ \ \ \mbox{\hyperlink{awele__oric_8c_a838615b8270b14b184750c2287de3fde}{remplacerAccents}}(\mbox{\hyperlink{globals_8c_a166d50e59cf01e9a788036ff0461e3ed}{gJeuRegles}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00316}00316\ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_a9fb5d8d0c35d23be15223ac8de96a974}{gO1}},\textcolor{stringliteral}{"{}\(\backslash\)3Oric\ 1\(\backslash\)7"{}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00317}00317\ \ \ \ \ strcpy(\mbox{\hyperlink{globals_8c_a2b97e57b23c5c8c206ec20db0796c6fb}{gO2}},\textcolor{stringliteral}{"{}\(\backslash\)6Atmos\(\backslash\)7\ "{}});}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00318}00318\ \ \ \ \ \mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[2][0]\ =\ \textcolor{stringliteral}{"{}\(\backslash\)4Oric\ 1\(\backslash\)7"{}};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00319}00319\ \ \ \ \ \mbox{\hyperlink{globals_8c_a10aec142cb235d961d925303912369cb}{gJ}}[2][1]\ =\ \textcolor{stringliteral}{"{}\(\backslash\)1Atmos\(\backslash\)7\ "{}};}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00320}00320\ \ \ \ \ \mbox{\hyperlink{awele__gb_8c_a209453284e1e2ed32261e11e00d53760}{clrscr}}();}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00321}00321\ \}}
+\DoxyCodeLine{\Hypertarget{awele__oric_8c_source_l00322}00322\ }
+
+\end{DoxyCode}
