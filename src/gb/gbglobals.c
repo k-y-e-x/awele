@@ -5,7 +5,7 @@
 #include "../globals.h"
 
 
-void gbglobals()
+void gbglobals(void)
 {
 	strcpy(g2Ordinateurs,"2 Gameboy    ");
 	//strcpy(gQuiCommence,"Qui commence ? ");
@@ -24,5 +24,4 @@ void gbglobals()
 	// remplacement caractères accentués pour GB
 	gEgalite[6]=(char)130;
 	gPositionsEvaluees[0]=gPositionsEvaluees[5]=(char)130;
-	gProfondeur[11]=(char)130;
 }

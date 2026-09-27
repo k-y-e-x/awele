@@ -7,9 +7,8 @@
 ### In order to override defaults - values can be assigned to the variables ###
 ###############################################################################
 
-# Space or comma separated list of cc65 supported target platforms to build for.
-# Default: c64 (lowercase!)
-TARGETS := atmos gb c64 apple2enh apple2
+# Platforms built by default, in addition to the two GBDK versions below.
+TARGETS := atmos c64 apple2enh apple2
 
 # Name of the final, single-file executable.
 # Default: name of the current dir with target name appended
@@ -72,6 +71,9 @@ ATARI_HOME :=
 # Options state file name. You should not need to change this, but for those
 # rare cases when you feel you really need to name it differently - here you are
 STATEFILE := Makefile.options
+
+# Installation GBDK utilisée par la cible Game Boy.
+GBDK_HOME ?= /opt/gbdk
 
 ###################################################################################
 ####  DO NOT EDIT BELOW THIS LINE, UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!  ####
@@ -245,9 +247,9 @@ ifneq ($(word 2,$(CONFIG)),)
 endif
 
 .SUFFIXES:
-.PHONY: all test clean zap love
-
-all: $(PROGRAM)
+# make builds the six executables; make all also creates their physical media.
+.DEFAULT_GOAL := build
+.PHONY: build all test clean zap love
 
 -include $(DEPENDS)
 -include $(STATEFILE)
@@ -280,6 +282,11 @@ endif
 $(foreach o,$(subst $(COMMA),$(SPACE),$(OPTIONS)),$(eval $(_$o_)))
 
 # The remaining targets.
+ifeq ($(words $(TARGETLIST)),1)
+build: $(PROGRAM)
+all: build
+endif
+
 $(TARGETOBJDIR):
 	$(call MKDIR,$@)
 
@@ -289,8 +296,11 @@ CC65TARGET := $(firstword $(subst .,$(SPACE),$(TARGETLIST)))
 
 # TEST GB et AMIGA pour utilisation du bon compilateur
 ifeq ($(TARGETLIST),gb)
-	CC	= lcc -Wa-l -Wl-m -Wl-j
+#	CC	= lcc -Wa-l -Wl-m -Wl-j
+	CC = "$(GBDK_HOME)/bin/lcc" -Wa-l -Wl-m -Wl-j
 	CFLAGS	= -DGB -DGBDK_2_COMPAT
+GB_HEADERS := $(wildcard $(SRCDIR)/*.h $(SRCDIR)/gb/*.h)
+$(OBJECTS): $(GB_HEADERS)
 
 # 	make.bat: Makefile
 # 		@echo "REM Automatically generated from Makefile" > make.bat
@@ -351,13 +361,52 @@ clean:
 	$(call RMFILES,$(REMOVES))
 	$(call RMFILES,$(PROGRAM))
 	$(call RMFILES,build/*ihx build/*.map build/*.noi)
+ifeq ($(TARGETLIST),gb)
+	$(call RMFILES,$(TARGETOBJDIR)/*.asm $(TARGETOBJDIR)/*.lst $(TARGETOBJDIR)/*.sym)
+	$(if $(wildcard $(TARGETOBJDIR)),$(call RMDIR,$(TARGETOBJDIR)))
+endif
 
 else # $(words $(TARGETLIST)),1
 
-all test clean:
+.PHONY: gbdk-4.0 gbdk-4.5
+
+build: gbdk-4.0 gbdk-4.5
+
+gbdk-4.0:
+	$(MAKE) TARGETS=gb GBDK_HOME=/opt/gbdk \
+	    OBJDIR=obj/gbdk-4.0 PROGRAM=build/awele-gbdk-4.0 all
+
+gbdk-4.5:
+	$(MAKE) TARGETS=gb GBDK_HOME=/opt/gbdk-4.5 \
+	    OBJDIR=obj/gbdk-4.5 PROGRAM=build/awele-gbdk-4.5 all
+
+build:
+	$(foreach t,$(TARGETLIST),$(MAKE) TARGETS=$t all$(NEWLINE))
+
+all: build
+	$(MAKE) d64 prg tap edsk dsk
+
+test:
 	$(foreach t,$(TARGETLIST),$(MAKE) TARGETS=$t $@$(NEWLINE))
 
+clean:
+	$(foreach t,$(TARGETLIST),$(MAKE) TARGETS=$t clean$(NEWLINE))
+	$(MAKE) TARGETS=gb GBDK_HOME=/opt/gbdk \
+	    OBJDIR=obj/gbdk-4.0 PROGRAM=build/awele-gbdk-4.0 clean
+	$(MAKE) TARGETS=gb GBDK_HOME=/opt/gbdk-4.5 \
+	    OBJDIR=obj/gbdk-4.5 PROGRAM=build/awele-gbdk-4.5 clean
+	$(call RMFILES,obj/gbdk-4.0/.DS_Store obj/gbdk-4.5/.DS_Store)
+	$(if $(wildcard obj/gbdk-4.0),$(call RMDIR,obj/gbdk-4.0))
+	$(if $(wildcard obj/gbdk-4.5),$(call RMDIR,obj/gbdk-4.5))
+
 endif # $(words $(TARGETLIST)),1
+
+# Generate HTML and LaTeX documentation in doc/ as configured by awele.dox.
+.PHONY: doc docs
+doc:
+	doxygen awele.dox
+
+docs: doc
 
 OBJDIRLIST := $(wildcard $(OBJDIR)/*)
 

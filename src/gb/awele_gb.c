@@ -30,7 +30,7 @@
 
 
 //extern UWORD posEval;
-extern void gbglobals();
+extern void gbglobals(void);
 
 extern UBYTE temp[64];
 
@@ -43,6 +43,13 @@ void printxy(UBYTE x, UBYTE y, BOOLEAN rv, STRPTR s)
 	else	color(BLACK, WHITE, SOLID);
 	gprintf(s);
 
+}
+
+static void gprintConst(const char *texte)
+{
+    while (*texte) {
+        wrtchr(*texte++);
+    }
 }
 
 void revers(BOOLEAN b)
@@ -66,11 +73,11 @@ void effaceChr(UINT8 l, UINT16 n)
 	gotogxy(0,l);
 	for(i=0;i<n;i++) wrtchr(' ');
 }
-void clrscr()
+void clrscr(void)
 {
 	effaceChr(0,360);
 }
-void gbtbcar()
+void gbtbcar(void)
 {
 	register UBYTE x,y;
 	for(y=0;y<20;y++)
@@ -83,7 +90,7 @@ void gbtbcar()
 	}
 }
 
-void boitePlateau()
+void boitePlateau(void)
 {
 	color(BLACK, WHITE, SOLID);
 	box(16,(gPlateauY+2)*8-1,144,(gPlateauY+5)*8,M_NOFILL);
@@ -93,21 +100,21 @@ void boitePlateau()
 //	box(144,31,159,48,M_NOFILL);
 }
 
-void init()
+void init(void)
 {
 	gScreenY = SCREENHEIGHT/8;
 	gScreenX = SCREENWIDTH/8;
 }
-void initJoystick()
+void initJoystick(void)
 {
 }
-void initPlateau()
+void initPlateau(void)
 {
 	gbglobals();
 //gbtbcar();waitpad(J_B);
 }
 
-void ecranTitre()
+void ecranTitre(void)
 {
     set_bkg_data(0, TILESET_TILE_COUNT, TILESET);
     set_bkg_tiles(0, 0, TILEMAP_WIDTH, TILEMAP_HEIGHT, TILEMAP);
@@ -115,7 +122,7 @@ void ecranTitre()
     waitpad(J_START|J_A|J_B);
 }
 
-UBYTE getkj()
+UBYTE getkj(void)
 {
 	UBYTE c=0,j=0;
 	int pad;
@@ -205,7 +212,7 @@ UBYTE afficherMenu(UBYTE n)
 		for( i=0; i<2; i++)
 		{
 			gotogxy(0,++l);
-	         gprint(gJoueur[i]);
+	         gprintConst(gJoueur[i]);
 			gprint(gProfondeur);
 			k = 1;
 			do
@@ -297,14 +304,14 @@ BOOLEAN afficherResultats(UBYTE k1, UBYTE k2)
 	color(WHITE, DKGREY, SOLID);
 	if( k1>k2 )
 	{
-	   gprint(gJoueur[0]);
+	   gprintConst(gJoueur[0]);
 	   gprint(gVainqueur);
 	}
 	else if( k1==k2 )
 	   gprint(gEgalite);
 	else
 	{
-	   gprint(gJoueur[1]);
+	   gprintConst(gJoueur[1]);
 	   gprint(gVainqueur);
 	}
 	revers(FALSE);
@@ -321,7 +328,7 @@ BOOLEAN afficherResultats(UBYTE k1, UBYTE k2)
 	return(TRUE);
 }
 
-void afficherPosEval()
+void afficherPosEval(void)
 {
 	gotogxy(10,0);
 	revers(FALSE);
@@ -362,7 +369,7 @@ BOOLEAN afficherAttente(UBYTE joueur, UBYTE casejouee)
 	return(FALSE);	// option menu / abandonner / quitter à faire pour GB
 }
 
-void effacerAttente()
+void effacerAttente(void)
 {
 	effaceLigne(gAttenteY);
 	effaceLigne(gAttenteY+1);
@@ -377,7 +384,7 @@ UBYTE choixJoueur(UBYTE joueur)
 	
 	revers(FALSE);
 	gotogxy(0,gChoixJoueurY);
-	gprint(gJoueur[joueur]);
+	gprintConst(gJoueur[joueur]);
 	gotogxy(0,gChoixJoueurY+1);
 	gprint(gQuelleCase); 
 //	effaceLigne(2);
@@ -454,7 +461,7 @@ void dbgprint(STRPTR s)
 	waitpadup();
 }
 
-void afficherRegles()
+void afficherRegles(void)
 {
 	clrscr();
 	gotogxy(0,1);

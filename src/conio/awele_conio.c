@@ -69,10 +69,10 @@ void cputixy(UBYTE x, UBYTE y, BOOLEAN rv, UBYTE grains)
 	revers(rv);
 	gotoxy(x,y);
 	#ifndef __ATMOS__
-	textcolor(cpeekcolor());
+	(void)textcolor(cpeekcolor());
 	#endif
 	cprintf("%2d",grains);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	revers(FALSE);
 }
 
@@ -120,14 +120,14 @@ void ecranTitre()
 	POKE(0xbb80+y*40+x-2,2);
 	POKE(0xbb80+y*40+x-1,10);
 	#endif
-	textcolor(2);
+	(void)textcolor(2);
 	gotoxy(x,y++);
 	for(i=0;i<strlen(gTitre);i++)
 	{
-		textcolor((i%2)?COLOR_RED:COLOR_GREEN);
+		(void)textcolor((i%2)?COLOR_RED:COLOR_GREEN);
 		cputc(gTitre[i]);
 	}
-	textcolor(1);
+	(void)textcolor(1);
 
 	cputsxy(gScreenX/2-strlen(gTitreCredits)/2,y++,gTitreCredits);
 	afficherPlateau(jeu);
@@ -168,11 +168,11 @@ void afficherPlateau(UBYTE *p)
 		
 	
 	y = gPlateauY;
-	textcolor(COLOR_RED);
+	(void)textcolor(COLOR_RED);
 	cputsxy(gScreenX/2-strlen(gJ[j[0]+j[1]][1])/2,y++,gJ[j[0]+j[1]][1]);
 
 	gotoxy(gPlateauX+7,y++);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	for( i=2*gNbCases; i>gNbCases; i--)
 	{
 		cprintf("%2d ", i);
@@ -188,18 +188,18 @@ void afficherPlateau(UBYTE *p)
 	cputsxy(gPlateauX,y++,sKalahUpLeft);
 	for( i=2*gNbCases; i>gNbCases+1; i--)
 	{
-		textcolor(COLOR_CYAN);cprintf("%2d", p[i]);textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
+		(void)textcolor(COLOR_CYAN);cprintf("%2d", p[i]);(void)textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
 	}
-	textcolor(COLOR_CYAN);
+	(void)textcolor(COLOR_CYAN);
 	cprintf("%2d", p[i]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	cputs(sKalahUpRight);
 	
 	gotoxy(gPlateauX,y++);
 	cprintf("%2d%c",KALAH2,MYCH_VLINE);
-	textcolor(COLOR_CYAN);
+	(void)textcolor(COLOR_CYAN);
 	cprintf("%2d ",p[KALAH2]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	#ifdef __ATMOS__
 	POKE(0xbb58+y*40+gPlateauX+5,7); 
 	#endif
@@ -208,9 +208,9 @@ void afficherPlateau(UBYTE *p)
 		cputs(sLineMid);
 	cputs(sLine);
 	cputc(MYCH_RTEE);
-	textcolor(COLOR_YELLOW);
+	(void)textcolor(COLOR_YELLOW);
 	cprintf(" %2d",p[KALAH1]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	#ifdef __ATMOS__
 	POKE(0xbb58+y*40+gPlateauX+7+3*gNbCases,3); 
 	#endif
@@ -219,12 +219,12 @@ void afficherPlateau(UBYTE *p)
 	cputsxy(gPlateauX,y++,sKalahDownLeft);
 	for( i=0; i<gNbCases-1; i++)
 	{
-		textcolor(COLOR_YELLOW);cprintf("%2d", p[i]);textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
+		(void)textcolor(COLOR_YELLOW);cprintf("%2d", p[i]);(void)textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
 	  //cprintf("%2d%c", p[i],MYCH_VLINE);
 	}
-	textcolor(COLOR_YELLOW);
+	(void)textcolor(COLOR_YELLOW);
 	cprintf("%2d", p[i]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 
 	cputs(sKalahDownRight);
 
@@ -239,9 +239,9 @@ void afficherPlateau(UBYTE *p)
 	{
 	  cprintf("%2d ", i);
 	}
-	textcolor(COLOR_GREEN);
+	(void)textcolor(COLOR_GREEN);
 	cputsxy(gScreenX/2-strlen(gJ[j[0]+j[1]][1])/2,y++,gJ[j[0]+j[1]][0]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	cputs("      ");
 
 }
@@ -331,7 +331,7 @@ BOOLEAN afficherResultats(UBYTE k1, UBYTE k2)
 	return((BOOLEAN)i);
 }
 
-BOOLEAN afficherPopUpOuiNon(char *ligne1, char* ligne2)
+BOOLEAN afficherPopUpOuiNon(const char *ligne1, const char* ligne2)
 {
 	UBYTE l1,l2,lmax,x,y,i,k;
 	
@@ -850,7 +850,7 @@ UBYTE afficherMenu(UBYTE n)
 		#ifdef __ATMOS__
 		POKE(0xbb80+40,7);
 		#endif
-		textcolor(COLOR_WHITE);
+		(void)textcolor(COLOR_WHITE);
 
 		//for(k=7;k>0;k--) cclearxy(0,gScreenY-k,38);
 		for(k=1;k<6;k++) cclearxy(0,gMenuY+k,gScreenX);
@@ -1111,9 +1111,9 @@ void afficherRegles()
 
 	
 		// titre = centr� !
-	textcolor(COLOR_RED);
+	(void)textcolor(COLOR_RED);
 	cputsxy(gScreenX/2-strlen(gReglesTitre)/2,0,gReglesTitre);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	y=2;
 	s=strtok(lRegles,"\n");
 	// on d�coupe par ligne sur LF tant qu'on n'a pas tout afficher
@@ -1126,14 +1126,14 @@ void afficherRegles()
 			#ifdef __ATMOS__
 				cputs("\x02");
 			#endif
-			textcolor(COLOR_GREEN);
+			(void)textcolor(COLOR_GREEN);
 			cputs("<RETURN> pour continuer");
-			textcolor(COLOR_WHITE);
+			(void)textcolor(COLOR_WHITE);
 			do k = getkj(); while(k != KEY_RETURN);
 			clrscr();
-			textcolor(COLOR_RED);
+			(void)textcolor(COLOR_RED);
 			cputsxy(gScreenX/2-strlen(gReglesTitre)/2,0,gReglesTitre);
-			textcolor(COLOR_WHITE);
+			(void)textcolor(COLOR_WHITE);
 			y=2;
 			
 		}
@@ -1164,10 +1164,10 @@ void afficherRegles()
 	#ifdef __ATMOS__
 		cputs("\x02");
 	#endif
-	textcolor(COLOR_GREEN);
+	(void)textcolor(COLOR_GREEN);
 	cputs("<RETURN> pour continuer");
 	do k = getkj(); while(k != KEY_RETURN);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 
 	free(lRegles);
 	
