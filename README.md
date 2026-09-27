@@ -20,6 +20,7 @@ _2021_
 - Ajout d'options pour les variantes des règles, avec mise à jour des règles affichées selon les choix.
 - Ajout des versions Apple II et Apple II enhanced, qui utilisent aussi l'interface `conio`.
 - Ajout d'un écran titre sur une suggestion de `@didier_v` du [CEO Oric](https://ceo.oric.org).
+
 _2026_
 - Reprise du projet pour optimisation
 - Utilisation de l'IA (Codex) pour optimisation du code : 2x plus rapide à la fin des optimisations
