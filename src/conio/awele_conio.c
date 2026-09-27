@@ -49,8 +49,8 @@ char sLine[3]={MYCH_HLINE,MYCH_HLINE,0};
 
 
 /**
- *	Affichage d'un caractère sans avancement de position du curseur
- *	@param	c	: caractère à afficher
+ *	Affichage d'un caractÃ¨re sans avancement de position du curseur
+ *	@param	c	: caractÃ¨re Ã  afficher
  */
 void cplotc(char c)
 {
@@ -59,20 +59,20 @@ void cplotc(char c)
 }
 
 /**
- *	Affichage d'un entier au coordonnées fournies
- *	@param x,y	: coordonnées dans l'écran
- *	@param rv	: Booléen indiquant si inverse video ?
- *	@param grains : nombres de grains à afficher
+ *	Affichage d'un entier aux coordonnÃ©es fournies
+ *	@param x,y	: coordonnÃ©es dans l'Ã©cran
+ *	@param rv	: BoolÃ©en indiquant si inverse video ?
+ *	@param grains : nombre de grains Ã  afficher
  */
 void cputixy(UBYTE x, UBYTE y, BOOLEAN rv, UBYTE grains)
 {
 	revers(rv);
 	gotoxy(x,y);
 	#ifndef __ATMOS__
-	textcolor(cpeekcolor());
+	(void)textcolor(cpeekcolor());
 	#endif
 	cprintf("%2d",grains);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	revers(FALSE);
 }
 
@@ -96,7 +96,7 @@ void init()
 
 void ecranTitre()
 {
-	//// eéran titre à la demande de didier_v
+	//// Ã©cran titre Ã  la demande de didier_v
 	UBYTE x,y,i;
 	char s[]=__DATE__;
 	
@@ -116,18 +116,18 @@ void ecranTitre()
 
 	POKE(0xbb80+y*40+x-2,1);	// rouge
 	POKE(0xbb80+y*40+x-1,10);	// double hauteur
-	cputsxy(x,y++,gTitre);		// donc on double l'écriture
+	cputsxy(x,y++,gTitre);		// donc on double l'Ã©criture
 	POKE(0xbb80+y*40+x-2,2);
 	POKE(0xbb80+y*40+x-1,10);
 	#endif
-	textcolor(2);
+	(void)textcolor(2);
 	gotoxy(x,y++);
 	for(i=0;i<strlen(gTitre);i++)
 	{
-		textcolor((i%2)?COLOR_RED:COLOR_GREEN);
+		(void)textcolor((i%2)?COLOR_RED:COLOR_GREEN);
 		cputc(gTitre[i]);
 	}
-	textcolor(1);
+	(void)textcolor(1);
 
 	cputsxy(gScreenX/2-strlen(gTitreCredits)/2,y++,gTitreCredits);
 	afficherPlateau(jeu);
@@ -140,7 +140,7 @@ void ecranTitre()
 
 /**
  *	Affichage du plateau de jeu
- *	@param p	: pointeur vers le tableau contenant le plateau à afficher
+ *	@param p	: pointeur vers le tableau contenant le plateau Ã  afficher
  */
 void afficherPlateau(UBYTE *p)
 {
@@ -168,11 +168,11 @@ void afficherPlateau(UBYTE *p)
 		
 	
 	y = gPlateauY;
-	textcolor(COLOR_RED);
+	(void)textcolor(COLOR_RED);
 	cputsxy(gScreenX/2-strlen(gJ[j[0]+j[1]][1])/2,y++,gJ[j[0]+j[1]][1]);
 
 	gotoxy(gPlateauX+7,y++);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	for( i=2*gNbCases; i>gNbCases; i--)
 	{
 		cprintf("%2d ", i);
@@ -188,18 +188,18 @@ void afficherPlateau(UBYTE *p)
 	cputsxy(gPlateauX,y++,sKalahUpLeft);
 	for( i=2*gNbCases; i>gNbCases+1; i--)
 	{
-		textcolor(COLOR_CYAN);cprintf("%2d", p[i]);textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
+		(void)textcolor(COLOR_CYAN);cprintf("%2d", p[i]);(void)textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
 	}
-	textcolor(COLOR_CYAN);
+	(void)textcolor(COLOR_CYAN);
 	cprintf("%2d", p[i]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	cputs(sKalahUpRight);
 	
 	gotoxy(gPlateauX,y++);
 	cprintf("%2d%c",KALAH2,MYCH_VLINE);
-	textcolor(COLOR_CYAN);
+	(void)textcolor(COLOR_CYAN);
 	cprintf("%2d ",p[KALAH2]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	#ifdef __ATMOS__
 	POKE(0xbb58+y*40+gPlateauX+5,7); 
 	#endif
@@ -208,9 +208,9 @@ void afficherPlateau(UBYTE *p)
 		cputs(sLineMid);
 	cputs(sLine);
 	cputc(MYCH_RTEE);
-	textcolor(COLOR_YELLOW);
+	(void)textcolor(COLOR_YELLOW);
 	cprintf(" %2d",p[KALAH1]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	#ifdef __ATMOS__
 	POKE(0xbb58+y*40+gPlateauX+7+3*gNbCases,3); 
 	#endif
@@ -219,12 +219,12 @@ void afficherPlateau(UBYTE *p)
 	cputsxy(gPlateauX,y++,sKalahDownLeft);
 	for( i=0; i<gNbCases-1; i++)
 	{
-		textcolor(COLOR_YELLOW);cprintf("%2d", p[i]);textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
+		(void)textcolor(COLOR_YELLOW);cprintf("%2d", p[i]);(void)textcolor(COLOR_WHITE);cputc(MYCH_VLINE);
 	  //cprintf("%2d%c", p[i],MYCH_VLINE);
 	}
-	textcolor(COLOR_YELLOW);
+	(void)textcolor(COLOR_YELLOW);
 	cprintf("%2d", p[i]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 
 	cputs(sKalahDownRight);
 
@@ -239,19 +239,19 @@ void afficherPlateau(UBYTE *p)
 	{
 	  cprintf("%2d ", i);
 	}
-	textcolor(COLOR_GREEN);
+	(void)textcolor(COLOR_GREEN);
 	cputsxy(gScreenX/2-strlen(gJ[j[0]+j[1]][1])/2,y++,gJ[j[0]+j[1]][0]);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	cputs("      ");
 
 }
 
 /**
- *	Affichage du résultat de la partie
+ *	Affichage du rÃ©sultat de la partie
  *	et question si l'utilisateur veut rejouer ou non
  *	@param k1	: Nombre de grains dans le kalah du joueur 1
  *	@param k2	: Nombre de grains dans le kalah du joueur 2
- *	@return	boolén si l'utilisateur veut rejouer ou non
+ *	@return	boolÃ©en si l'utilisateur veut rejouer ou non
  */
 BOOLEAN afficherResultats(UBYTE k1, UBYTE k2)
 {
@@ -312,7 +312,7 @@ BOOLEAN afficherResultats(UBYTE k1, UBYTE k2)
 	cputc(MYCH_LRCORNER);
 	
 	l-=2;
-	i=TRUE;	// par défaut on rejoue
+	i=TRUE;	// par dÃ©faut on rejoue
 	do
 	{
 		revers(i);
@@ -331,7 +331,7 @@ BOOLEAN afficherResultats(UBYTE k1, UBYTE k2)
 	return((BOOLEAN)i);
 }
 
-BOOLEAN afficherPopUpOuiNon(char *ligne1, char* ligne2)
+BOOLEAN afficherPopUpOuiNon(const char *ligne1, const char* ligne2)
 {
 	UBYTE l1,l2,lmax,x,y,i,k;
 	
@@ -389,9 +389,9 @@ BOOLEAN afficherPopUpOuiNon(char *ligne1, char* ligne2)
 	return((BOOLEAN)i);	
 }
 /**
- *	Affichage du nombre de positions évaluées
- *	à la position prévue pour cela sur l'écran
- *	posEval est une varialbe globale
+ *	Affichage du nombre de positions Ã©valuÃ©es
+ *	Ã  la position prÃ©vue pour cela sur l'Ã©cran
+ *	gPosEval est une variable globale
  */
 void afficherPosEval()
 {
@@ -403,8 +403,8 @@ void afficherPosEval()
  *	Affichage du message d'attente lors d'un coup de l'ordinateur
  *	et attente de l'appui sur la touche RETURN (= le bouton de feu si joystick)
   *	@see effacerAttente
- *	@param joueur	: numéro du joueur (1 ou 2)
- *	@param casejouee	: case jouée par le joueur
+ *	@param joueur	: numÃ©ro du joueur (1 ou 2)
+ *	@param casejouee	: case jouÃ©e par le joueur
  */
 BOOLEAN afficherAttente(UBYTE joueur, UBYTE casejouee)
 {
@@ -444,11 +444,11 @@ void effacerAttente()
 }
 
 /**
- *	Fonction de selection d'un coup par le joueur en cours
- *	permet aussi l'accès au menu principal en cours de partie
+ *	Fonction de sÃ©lection d'un coup par le joueur en cours
+ *	permet aussi l'accÃ¨s au menu principal en cours de partie
   *	@see effacerAttente
- *	@param joueur	: numéro du joueur (1 ou 2)
- *	@return	: case jouée par le joueur
+ *	@param joueur	: numÃ©ro du joueur (1 ou 2)
+ *	@return	: case jouÃ©e par le joueur
  */
 UBYTE choixJoueur(UBYTE joueur)
 {
@@ -505,10 +505,10 @@ UBYTE choixJoueur(UBYTE joueur)
 }
 
 /**
- *	Fonction locale d'affichage du détail du menu Joueurs
+ *	Fonction locale d'affichage du dÃ©tail du menu Joueurs
  *	@see afficherMenu
  *	@param choix 	: option choisie dans le menu joueur
- *	@param n 		: n=0 pour l'affichage en début de partie sinon numéro du joueur en cours
+ *	@param n 		: n=0 pour l'affichage en dÃ©but de partie sinon numÃ©ro du joueur en cours
  */
 void afficherMenuJoueur(UBYTE choix, signed char n)
 {
@@ -574,9 +574,9 @@ void afficherMenuJoueur(UBYTE choix, signed char n)
 }
 
 /**
- *	Fonction locale d'affichage du détail du menu Jeu (Règles, commencer, quitter...)
+ *	Fonction locale d'affichage du dÃ©tail du menu Jeu (RÃ¨gles, commencer, quitter...)
  *	@see afficherMenu
- *	@param n 		: n=0 pour l'affichage en début de partie sinon numéro du joueur en cours
+ *	@param n 		: n=0 pour l'affichage en dÃ©but de partie sinon numÃ©ro du joueur en cours
  */
 UBYTE afficherMenuJeu(signed char n)
 {
@@ -675,7 +675,7 @@ UBYTE afficherMenuJeu(signed char n)
 	return(1);
 }
 /**
- *	Fonction locale d'ffichage du détail du menu Options
+ *	Fonction locale d'affichage du dÃ©tail du menu Options
  *	@see afficherMenu
  */
 void afficherMenuOptions()
@@ -687,9 +687,9 @@ void afficherMenuOptions()
 	lmax=l1;
 	l2=strlen(gOptionNbGrains);
 	lmax=(l2>lmax)?l2:lmax;
-	l3=strlen(gOptionCompte);
+	l3=strlen(gOptionSauteKalah);
 	lmax=(l3>lmax)?l3:lmax;
-	l4=strlen(gOptionSauteKalah);
+	l4=strlen(gOptionCompte);
 	lmax=(l4>lmax)?l4:lmax;
 	
 // 	gotoxy(0,gScreenY-3);
@@ -830,12 +830,12 @@ void afficherMenuOptions()
 }
 /**
  *	Fonction de choix dans les menus de l'application
- *	- Affichage des règles du jeu
- *	- choix des options de jeu (0/1/2 joueurs huamains ou ordinateurs)
- *	- TODO : menu pour gérer des variantes
+ *	- Affichage des rÃ¨gles du jeu
+ *	- choix des options de jeu (0/1/2 joueurs humains ou ordinateurs)
+ *	- TODO : menu pour gÃ©rer des variantes
  *	@see choixJoueur
  *	@see main
- *	@param n 	: n=0 pour l'affichage en début de partie sinon numéro du joueur en cours
+ *	@param n 	: n=0 pour l'affichage en dÃ©but de partie sinon numÃ©ro du joueur en cours
  *	@return	: joueur qui commence
  */
 UBYTE afficherMenu(UBYTE n)
@@ -843,18 +843,18 @@ UBYTE afficherMenu(UBYTE n)
 	UBYTE c, i, choix,commence,k; //, l;
 	
 	choix=1;
-	i=(n!=0)?n:2; // choix joueurs/ordinateur : par défaut PvC
+	i=(n!=0)?n:2; // choix joueurs/ordinateur : par dÃ©faut PvC
 	commence = 0;
 	do
 	{
 		#ifdef __ATMOS__
 		POKE(0xbb80+40,7);
 		#endif
-		textcolor(COLOR_WHITE);
+		(void)textcolor(COLOR_WHITE);
 
 		//for(k=7;k>0;k--) cclearxy(0,gScreenY-k,38);
 		for(k=1;k<6;k++) cclearxy(0,gMenuY+k,gScreenX);
-		// Choix du du menu : Règles - Joueurs - OK => RàF: Quitter puis Variantes
+		// Choix du du menu : RÃ¨gles - Joueurs - OK => RÃ‰F: Quitter puis Variantes
 		revers(TRUE);
 		cclearxy(0,0,gScreenX);
 		do
@@ -873,7 +873,7 @@ UBYTE afficherMenu(UBYTE n)
 		revers(FALSE);
 		switch(choix)
 		{
-			case 1:	// Règles du jeu
+			case 1:	// RÃ¨gles du jeu
 				//afficherRegles();
 				//clrscr();
 				//afficherPlateau(jeu);
@@ -971,7 +971,7 @@ UBYTE afficherMenu(UBYTE n)
 								//cplotc((char)(i+48));
 								if(c==KEY_UP || c==KEY_RETURN) break; // du do/while
 						
-								// commence utile juste la première fois quand n=0
+								// commence utile juste la premiÃ¨re fois quand n=0
 								if(n==0)
 								{
 									i = commence;
@@ -1034,7 +1034,7 @@ UBYTE afficherMenu(UBYTE n)
 						}
 							break;
 						default:
-						// inutile maintenant mais souvenir de la première version de 89!
+						// inutile maintenant mais souvenir de la premiÃ¨re version de 89!
 							cputs("\n\r\t\tVous n'^tes pas en forme !..\n\r");
 							cputs("Revenez me voir quand vous irez mieux ....\n\r");
 							cputs("\n\r\n\r\t\t\t\tAtchao !\n\r\n\r");
@@ -1068,7 +1068,7 @@ UBYTE afficherMenu(UBYTE n)
 }
 
 /**
- *	Affichage des règles du jeu
+ *	Affichage des rÃ¨gles du jeu
  *	Si compilation pour Oric, affichage du message d'attente en vert
  */
 void afficherRegles()
@@ -1078,10 +1078,11 @@ void afficherRegles()
 	char *s;
 	UBYTE y;
 	
-	clrscr();
-	// gestion sur plusieurs pages si nécessaire
+	// gestion sur plusieurs pages si nÃ©cessaire
 	// remplacement des valeurs variables
-	lRegles = malloc(strlen(gRegles));
+	lRegles = malloc(strlen(gRegles)+1);
+	if(lRegles == NULL) return;
+	clrscr();
 	strcpy(lRegles,gRegles);
 	s=strchr(lRegles,'$');
 	// $ = > affichage du nombre de graines par trou
@@ -1110,13 +1111,13 @@ void afficherRegles()
 	}
 
 	
-		// titre = centré !
-	textcolor(COLOR_RED);
+		// titre = centrÃ© !
+	(void)textcolor(COLOR_RED);
 	cputsxy(gScreenX/2-strlen(gReglesTitre)/2,0,gReglesTitre);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 	y=2;
 	s=strtok(lRegles,"\n");
-	// on découpe par ligne sur LF tant qu'on n'a pas tout afficher
+	// on dÃ©coupe par ligne sur LF tant qu'on n'a pas tout afficher
 	while(s)
 	{
 		// page suivante => message d'attente frappe clavier ou joystick
@@ -1126,14 +1127,14 @@ void afficherRegles()
 			#ifdef __ATMOS__
 				cputs("\x02");
 			#endif
-			textcolor(COLOR_GREEN);
+			(void)textcolor(COLOR_GREEN);
 			cputs("<RETURN> pour continuer");
-			textcolor(COLOR_WHITE);
+			(void)textcolor(COLOR_WHITE);
 			do k = getkj(); while(k != KEY_RETURN);
 			clrscr();
-			textcolor(COLOR_RED);
+			(void)textcolor(COLOR_RED);
 			cputsxy(gScreenX/2-strlen(gReglesTitre)/2,0,gReglesTitre);
-			textcolor(COLOR_WHITE);
+			(void)textcolor(COLOR_WHITE);
 			y=2;
 			
 		}
@@ -1142,7 +1143,7 @@ void afficherRegles()
 		{
 			s++;
 			if(gCompte != 1)
-				*s='\f'; // => pour ne rien écrire de la ligne
+				*s='\f'; // => pour ne rien Ã©crire de la ligne
 
 		}
 		// +# => si gCompte->adversaire => affichage de la ligne sinon ligne suivante
@@ -1150,7 +1151,7 @@ void afficherRegles()
 		{
 			s++;
 			if(gCompte != 2)
-				*s='\f'; // => pour ne rien écrire de la ligne
+				*s='\f'; // => pour ne rien Ã©crire de la ligne
 
 		}
 	
@@ -1164,17 +1165,17 @@ void afficherRegles()
 	#ifdef __ATMOS__
 		cputs("\x02");
 	#endif
-	textcolor(COLOR_GREEN);
+	(void)textcolor(COLOR_GREEN);
 	cputs("<RETURN> pour continuer");
 	do k = getkj(); while(k != KEY_RETURN);
-	textcolor(COLOR_WHITE);
+	(void)textcolor(COLOR_WHITE);
 
 	free(lRegles);
 	
 }
 
 /**
- *	Affichage d'une chaîne pour déboggage
+ *	Affichage d'une chaÃ®ne pour dÃ©bogage
  */
 void dbgprint(STRPTR s)
 {

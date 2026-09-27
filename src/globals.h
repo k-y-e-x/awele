@@ -8,7 +8,7 @@
 
 /*-----------------------------------------------------------------------*/
 // Display labels
-GLOBAL char*	gTypeJoueurs[];
+GLOBAL const char*	gTypeJoueurs[];
 GLOBAL char	g2Joueurs[];
 GLOBAL char	g1Joueur[];
 GLOBAL char	g2Ordinateurs[];
@@ -19,7 +19,7 @@ GLOBAL char	gProfondeur[];
 GLOBAL char	gJoueursType[];
 GLOBAL char	gJ1[];
 GLOBAL char	gJ2[];
-GLOBAL char*	gJoueur[];
+GLOBAL char gJoueur[2][9];
 GLOBAL char	gPositionsEvaluees[];
 GLOBAL char	gQuelleCase[];
 GLOBAL char	gVainqueur[];
@@ -33,8 +33,8 @@ GLOBAL char	gO2[];
 GLOBAL char	gOptionNbCases[];
 GLOBAL char	gOptionNbGrains[];
 GLOBAL char	gOptionCompte[];
-GLOBAL char*	gComptes[];
-GLOBAL char*	gNonOui[];
+GLOBAL const char*	gComptes[];
+GLOBAL const char*	gNonOui[];
 GLOBAL char	gOptionSauteKalah[];
 
 GLOBAL char	gTitre[];
@@ -45,12 +45,12 @@ GLOBAL char	gRejouer[];
 GLOBAL char	gAppuyerReturn[];
 GLOBAL char	gEscMenu[];
 GLOBAL char	gJoueurJoueCase[];
-GLOBAL char*	gPopAbandonner[];
-GLOBAL char*	gPopQuitter[];
+GLOBAL const char*	gPopAbandonner[];
+GLOBAL const char*	gPopQuitter[];
 
 GLOBAL char	gReglesTitre[];
 GLOBAL char	gRegles[];
-GLOBAL char*	gJ[3][2];
+GLOBAL const char*	gJ[3][2];
 
 //GLOBAL char	gMenuRegles[];
 GLOBAL char	gMenuJoueurs[];

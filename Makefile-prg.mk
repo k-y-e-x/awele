@@ -1,3 +1,4 @@
+# Commodore 64 : fichier programme PRG pour chargement direct (build/awele-c64.prg).
 PRG = build/awele-c64.prg
 
 # Unix or Windows
@@ -7,7 +8,7 @@ else
 	CP = copy $(subst /,\,$1)
 endif
 
-REMOVES += $(PRG)
+c64_MEDIA += $(PRG)
 
 .PHONY: prg
 prg: $(PRG)

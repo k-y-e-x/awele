@@ -13,7 +13,10 @@
 **	    All Rights Reserved
 */
 
-
+/*  ajout des types spécifiques gameboy pour compatibilité GBDK 4.0 et 4.5 */
+#ifdef GB
+#include <gb/gb.h>
+#endif
 
 #define GLOBAL	extern	    /* the declaratory use of an external */
 #define IMPORT	extern	    /* reference to an external */

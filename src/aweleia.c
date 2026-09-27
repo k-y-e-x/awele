@@ -1,9 +1,9 @@
 /**
 * @file aweleia.c
-* SÈparation en plusieurs fichiers pour faciliter la maintenance et le multi systeme
-* 14/03/20121
-* source la version GB => mise ‡ jour des types dans mes_types.h
-* ce fichier est commun pour toutes les versions
+* S√©paration en plusieurs fichiers pour faciliter la maintenance et le multisyst√®me
+* 14/03/2021
+* Version GB : mise √† jour des types dans mes_types.h
+* Ce fichier est commun √† toutes les versions.
 */
 
 #include "mes_types.h"
@@ -11,107 +11,190 @@
 #include "awele.h"
 //#include <conio.h>
 /**
- * gPosEval : variable globale contenant le nombre de position ÈvaluÈes
+ * gPosEval : variable globale contenant le nombre de positions √©valu√©es
  */
 UWORD gPosEval = 0;
 
+static UBYTE gDebut[2], gFin[2], gKalah[2], gKalahAdverse[2], gOppose[LGPLAT];
+
+void initIA(void)
+{
+   UBYTE i;
+
+   gDebut[0] = 0;
+   gDebut[1] = gNbCases+1;
+   gFin[0] = gNbCases;
+   gFin[1] = 2*gNbCases+1;
+   gKalah[0] = gNbCases;
+   gKalah[1] = 2*gNbCases+1;
+   gKalahAdverse[0] = gKalah[1];
+   gKalahAdverse[1] = gKalah[0];
+
+   for(i=0; i<LGPLAT; ++i)
+      gOppose[i] = 2*gNbCases-i;
+}
+
 /**
  * jeuPoss : retourne Vrai si le joueur j peut jouer
- * ‡ partir du plateau p
+ * √† partir du plateau p
  * @param p pointeur vers le plateau de jeu
- * @param j numero du joueur (0 ou 1)
- * @return BoolÈen indiquant si le joueur j peut jouer
+ * @param j num√©ro du joueur (0 ou 1)
+ * @return Bool√©en indiquant si le joueur j peut jouer
  */
 BOOLEAN jeuPoss(UBYTE *p,UBYTE j)
 {
    register UBYTE i, b=FALSE;
 
-   for( i=j*(gNbCases+1); i<(j+1)*gNbCases+j; b|=p[i++] );
+   for( i=gDebut[j]; i<gFin[j]; b|=p[i++] );
 
    return(b);
 }
 
+static UBYTE caseArrivee(UBYTE c, UBYTE n, UBYTE j);
+static UBYTE semerEtArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j);
 
 /**
  * jouer : le plateau p est le plateau obtenu en jouant 
  * la case c sur le plateau initial pi
- * @param p pointeur vers le plateau de jeu rsÈultat
+ * @param p pointeur vers le plateau de jeu r√©sultat
  * @param pi pointeur vers le plateau de jeu initial
- * @param c case jouÈe
- * @param j numÈro du joueur (0 ou 1)
+ * @param c case jou√©e
+ * @param j num√©ro du joueur (0 ou 1)
  * @return Vrai si le joueur doit rejouer
  */
 BOOLEAN jouer(UBYTE *p,UBYTE *pi,UBYTE c,UBYTE j)
 {
-   register  UBYTE i, n,kalahAdverse,xi;
+   register  UBYTE i, n,xi;
    BOOLEAN x;
 /*   printf("jouer : %d par %d\n",c,j);
   */
 	n  = pi[c];
-	kalahAdverse = (2-j)*gNbCases+1-j;
 
 // 	xi = (c+n)%gLongueurPlateau;
 // 	gotoxy(0,24);
 // 	cprintf("%d %d %d - xi=%d,j=%d,lgp=%d,pixi=%d   ",(xi>=j*(gNbCases+1)),(xi<(j+1)*gNbCases+j),!pi[xi],xi,j,kalahAdverse,pi[xi]);
 	
-	// copie des cases avant la cases jouÈes
-	for( i=0; i<c; ++i )
+	// copie du plateau initial
+	for( i=0; i<gLongueurPlateau; ++i )
 		p[i]=pi[i];
 
-	p[c]=0;	// on vide la case jouÈe
+	p[c]=0;	// on vide la case jou√©e
 
-	// distribution des grains dans les cases suivante
-	for( i=c+1; i<=c+n; ++i )
-	{	
-		if(gSauteKalah && (i%gLongueurPlateau == kalahAdverse))
-			n++;
-		else
-			p[i%gLongueurPlateau]=pi[i%gLongueurPlateau]+1;
-	}
-	xi = (c+n)%gLongueurPlateau;
-	x = (xi>=j*(gNbCases+1)) && (xi<(j+1)*gNbCases+j) && (p[xi]==1);
+	xi = semerEtArrivee(p, c, n, j);
+	x = (xi>=gDebut[j]) && (xi<gFin[j]) && (p[xi]==1);
 // 	gotoxy(0,25);
 // 	cprintf("%d %d %d - xi=%d,j=%d,nbc=%d,pixi=%d,pxi=%d   ",(xi>=j*(gNbCases+1)),(xi<(j+1)*gNbCases+j),!pi[xi],xi,j,gNbCases,pi[xi],p[xi]);
 
-	// les cases suivantes non changÈes sont copiÈes 
-	for( i=c+n+1; i<gLongueurPlateau; ++i )
-		p[i]=pi[i];
-
-
-
 	if( x )
 	{
-		p[(j+1)*gNbCases+j] += p[2*gNbCases-xi]+1;
-		p[2*gNbCases-xi] = p[xi] = 0;
+		p[gKalah[j]] += p[gOppose[xi]]+1;
+		p[gOppose[xi]] = p[xi] = 0;
 	}
 
-   return( ((c+n)==((j+1)*gNbCases+j)) && jeuPoss(p,j) );
+   return( (xi==gKalah[j]) && jeuPoss(p,j) );
 
 }
 
+static UBYTE caseArrivee(UBYTE c, UBYTE n, UBYTE j)
+{
+   register UBYTE idx;
+
+   idx = c;
+   while(n)
+   {
+      ++idx;
+      if(idx==gLongueurPlateau) idx=0;
+      if(gSauteKalah && (idx == gKalahAdverse[j]))
+         continue;
+      --n;
+   }
+   return(idx);
+}
+
+static UBYTE semerEtArrivee(UBYTE *p, UBYTE c, UBYTE n, UBYTE j)
+{
+   register UBYTE idx;
+
+   idx = c;
+   while(n)
+   {
+      ++idx;
+      if(idx==gLongueurPlateau) idx=0;
+      if(gSauteKalah && (idx == gKalahAdverse[j]))
+         continue;
+      ++p[idx];
+      --n;
+   }
+   return(idx);
+}
+
+static UBYTE scoreCoup(UBYTE *p, UBYTE c, UBYTE j)
+{
+   UBYTE score, xi;
+
+   score = 0;
+   xi = caseArrivee(c, p[c], j);
+
+   if(xi == gKalah[j])
+      score += 8;
+   if((xi>=gDebut[j]) && (xi<gFin[j]) && !p[xi] && p[gOppose[xi]])
+      score += 4;
+   if(p[c] > gNbCases)
+      ++score;
+
+   return(score);
+}
+
+static UBYTE listeCoups(UBYTE *p, UBYTE j, UBYTE *coups)
+{
+   UBYTE scores[NCASES];
+   UBYTE i, k, n, score, coup;
+
+   n = 0;
+   for(i=gDebut[j]; i<gFin[j]; ++i)
+   {
+      if(p[i])
+      {
+         coup = i;
+         score = scoreCoup(p, coup, j);
+         k = n;
+         while(k && score > scores[k-1])
+         {
+            coups[k] = coups[k-1];
+            scores[k] = scores[k-1];
+            --k;
+         }
+         coups[k] = coup;
+         scores[k] = score;
+         ++n;
+      }
+   }
+   return(n);
+}
+
 /**
- * alphabeta : procedure d'Èlagage alpha-beta
+ * alphabeta : proc√©dure d'√©lagage alpha-b√™ta
  * @see minmax
  * @param p contient le plateau de jeu initial
  * @param alpha vaut moins l'infini au premier appel
  * @param beta vaut plus l'infini au premier appel
- * @param j est le n∞ du joueur utilisant cette procedure (0 ou 1)
+ * @param j est le n¬∞ du joueur utilisant cette proc√©dure (0 ou 1)
  * @param prf est la profondeur de recherche
- * @param n est le nombre de coups jouÈs
- * @param res est un tableau contenant les coups succesifs trouves
- * @return valeur de l'Èvaluation alphabeta
+ * @param n est le nombre de coups jou√©s
+ * @param res est un tableau contenant les coups successifs trouv√©s
+ * @return valeur de l'√©valuation alphabeta
  */
 WORD alphabeta(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf, UBYTE n, UBYTE *res)
 {
-   register UBYTE np[LGPLAT], i, jp;
+   register UBYTE np[LGPLAT], i;
+   UBYTE coups[NCASES], nbCoups, k;
    WORD a=0;
 
-	jp=0;
-   for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j) && (alpha<beta); i++)
+   nbCoups = listeCoups(p, j, coups);
+   for( k=0; (k<nbCoups) && (alpha<beta); ++k)
    {
-      jp |= p[i];
+      i = coups[k];
       
-      if(p[i])
       if(jouer(np, p, i, j))
       {
          a=alphabeta(np, alpha, beta, j, prf, n+1, res);
@@ -144,9 +227,9 @@ ou du simplement du compilateur
     color(BLACK, WHITE, SOLID);
 	gprintln(gPosEval, 10, UNSIGNED);
 */
-   if(!jp)
+   if(!nbCoups)
    {
-      res[n]=i;
+      res[n]=0;
       return( evalFin(p, j) );
    }
 // 	else
@@ -167,23 +250,24 @@ ou du simplement du compilateur
  * @param p plateau de jeu
  * @param alpha
  * @param beta
- * @param j n∞ du joueur (0 ou 1)
+ * @param j n¬∞ du joueur (0 ou 1)
  * @param prf profondeur de recherche max en cours
- * @return si on est sur un feuille ou plus de profondeur de recherche alors l'Èvaluation du plateau sino calcul du MIN
+ * @return Si la profondeur maximale est atteinte, √©valuation du plateau ; sinon, minimum des coups possibles.
  */
 WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 {
-   register UBYTE np[LGPLAT], i, jp=0, jo;
+   register UBYTE np[LGPLAT], i, jo;
+   UBYTE coups[NCASES], nbCoups, k;
    WORD  b;
    if(prf<=0)
       return( eval(p,j) );
 
-   jo=1-j; //jo = joueur opposÈ ‡ j
+   jo=1-j; //jo = joueur oppos√© √† j
 
-   for( i=jo*(gNbCases+1); (i<(jo+1)*gNbCases+jo) && (alpha<beta); i++)
+   nbCoups = listeCoups(p, jo, coups);
+   for( k=0; (k<nbCoups) && (alpha<beta); ++k)
    {
-      jp |= p[i];
-   if( p[i] )
+      i = coups[k];
       if( jouer(np, p, i, jo) )
       {
          b = minmax(np, alpha, beta, j, prf);
@@ -193,10 +277,10 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
       {
          b = maxmin(np, alpha, beta, j, prf-1);
          beta = MIN(b, beta);
-      }
-   }
+	      }
+	   }
 
-	if( !jp )
+	if( !nbCoups )
 	{
 		return( evalFin(p, j) );
 	}
@@ -218,21 +302,22 @@ WORD minmax(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
  * @param p plateau de jeu
  * @param alpha
  * @param beta
- * @param j n∞ du joueur (0 ou 1)
+ * @param j n¬∞ du joueur (0 ou 1)
  * @param prf profondeur de recherche max en cours
- * @return si on est sur un feuille ou plus de profondeur de recherche alors l'Èvaluation du plateau sino calcul du MAX
+ * @return Si la profondeur maximale est atteinte, √©valuation du plateau ; sinon, maximum des coups possibles.
  */
 WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 {
-   register UBYTE np[LGPLAT], i, jp=0;
+   register UBYTE np[LGPLAT], i;
+   UBYTE coups[NCASES], nbCoups, k;
    WORD a;
    if(prf<=0)
       return( eval(p,j) );
 
-   for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j) && (alpha<beta); i++)
+   nbCoups = listeCoups(p, j, coups);
+   for( k=0; (k<nbCoups) && (alpha<beta); ++k)
    {
-      jp |= p[i];
-   if( p[i] )
+      i = coups[k];
       if( jouer(np, p, i, j) )
       {
          a = maxmin(np, alpha, beta, j, prf);
@@ -242,10 +327,10 @@ WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
       {
          a = minmax(np, alpha, beta, j, prf-1);
          alpha = MAX(a, alpha);
-      }
-   }
+	      }
+	   }
 
-   if( !jp )
+   if( !nbCoups )
    {
       return( evalFin(p, j) );
     }
@@ -259,49 +344,48 @@ WORD maxmin(UBYTE *p, WORD alpha, WORD beta, UBYTE j, UBYTE prf)
 }
 
 /**
- * eval : calcul de la position onbtenue
+ * eval : calcul de la position obtenue
  * @param p plateau de jeu
- * @param j n∞ du joueur (0 ou 1) pour lequel on Èvalue le plateau
+ * @param j n¬∞ du joueur (0 ou 1) pour lequel on √©value le plateau
  */
 WORD eval(UBYTE *p, UBYTE j)
 {
 	 ++gPosEval; 
-	return( (1-2*j)*(p[KALAH1]-p[KALAH2]) );
+	return( (1-2*j)*(p[gKalah[0]]-p[gKalah[1]]) );
 }
 
 /**
- * evalFin : calcul d'une position de fin de partie (rangÈe vide)
+ * evalFin : calcul d'une position de fin de partie (rang√©e vide)
  * @param p plateau de jeu
- * @param j n∞ du joueur (0 ou 1) pour lequel on Èvalue le plateau
+ * @param j n¬∞ du joueur (0 ou 1) pour lequel on √©value le plateau
  */
 WORD evalFin(UBYTE *p, UBYTE j)
 {
 	WORD cpt=0;
 	UBYTE i;
 
-	if(p[(j+1)*gNbCases+j]>gNbCases*gNbGrains)
+	if(p[gKalah[j]]>gNbCases*gNbGrains)
 		return(99);
 	j=1-j;
-	if(p[(j+1)*gNbCases+j]>gNbCases*gNbGrains)
+	if(p[gKalah[j]]>gNbCases*gNbGrains)
 		return(-99);
 	j=1-j;
 	switch(gCompte)
 	{
-		case 0:		// aucun ajout
-			break;
-		case 1:		// ajout reste de ses grains
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt+=p[i];
-			j=1-j;
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt-=p[i];			
-			break;
-		case 2:		// ajout reste grains adversaire
-			j=1-j;
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt+=p[i];
-			j=1-j;
-			for( i=j*(gNbCases+1); (i<(j+1)*gNbCases+j); i++)	cpt-=p[i];
-			break;
+			case 0:		// aucun ajout
+				break;
+			case 1:		// ajout reste de ses grains
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt+=p[i];
+				j=1-j;
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt-=p[i];			
+				break;
+			case 2:		// ajout reste grains adversaire
+				j=1-j;
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt+=p[i];
+				j=1-j;
+				for( i=gDebut[j]; i<gFin[j]; i++)	cpt-=p[i];
+				break;
 	}
 	 ++gPosEval; 
-	return( (1-2*j)*(p[KALAH1]-p[KALAH2]) + cpt);
+	return( (1-2*j)*(p[gKalah[0]]-p[gKalah[1]]) + cpt);
 }
-

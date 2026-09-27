@@ -21,6 +21,7 @@ void initPartie(BOOLEAN tout)
 {
 	UBYTE i;
 	gPosEval = 0;
+	initIA();
 	for(i=0;i<gNbCases;i++)
 	  jeu[gNbCases+1+i] = jeu[i] = gNbGrains;
 	jeu[KALAH2] = jeu[KALAH1] = 0;
@@ -44,13 +45,14 @@ void main (void)
 	init();
 	gLongueurPlateau = (2*(gNbCases+1));
 	gPlateauX=(gScreenX/2)-(3*gNbCases/2+6);
-	gPosEval=gPlateauX;afficherPosEval();
+	//gPosEval=gPlateauX;afficherPosEval();
 	gPlateauY = gScreenY/2-4;
 	gChoixJoueurY=gScreenY/2+5;
 	gAttenteX = 0;
 	gAttenteY = gChoixJoueurY+1;
 
 	initJoystick();
+
 	initPlateau();
 	ecranTitre();
 	// boucle principale : jusqu'à ne plus rejouer
